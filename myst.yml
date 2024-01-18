@@ -1,0 +1,36 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+
+site:
+  template: book-theme
+  title: Wealth in the Utility Function
+  # options:
+  #   logo: site_logo.png
+  nav: []
+  actions:
+    - title: Econ-ARK
+      url: https://econ-ark.org
+  domains: []
+
+project:
+  title: Wealth in the Utility Function
+  # description:
+  keywords: []
+  authors:
+    - name: Christopher Carroll
+      corresponding: true
+      email: ccarroll@llorracc.org
+      url: https://www.econ2.jhu.edu/people/ccarroll
+      affiliations:
+        - id: jhu
+          institution: Johns Hopkins University
+          department: Department of Economics
+          url: https://econ.jhu.edu
+        - id: econ-ark
+          institution: Econ-ARK
+          url: https://econ-ark.org
+  github: https://github.com/alanlujan91/TRP-wealth-in-utility
+  # bibliography: []
+  license:
+    content: CC-BY-4.0
+    code: MIT
