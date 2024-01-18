@@ -2,8 +2,8 @@
 version: 1
 
 site:
-  template: book-theme
-  title: Wealth in the Utility Function
+  template: article-theme
+  # title: Wealth in the Utility Function
   # options:
   #   logo: site_logo.png
   nav: []

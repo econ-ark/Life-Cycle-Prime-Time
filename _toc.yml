@@ -16,6 +16,5 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: README
-chapters:
-  - file: content/report
+root: content/report
+chapters: []
