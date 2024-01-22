@@ -8,7 +8,7 @@ exports:
 
 +++ { "part": "abstract" }
 
-Anyone who has taken an economics class in high school or college will have heard of the \`life cycle model' of optimal saving for retirement.  They might suppose that a financial advisor's job is to just to tailor standardized optimal planning tools to their own particular circumstances.  What they are unlikely to know is that the advice dispensed by traditional life cycle models has long been understood to be deeply problematic -- for example, such models tend to imply that retiree with a pension should plan to run their wealth down to zero (if they live long enough) and then (optimally!) live pension-check to pension-check.  This paper makes the case that new developments in the economics literature, when combined with the kinds of feedback that advisors get from their clients, can finally generate advice that is both mathematically optimal and intuitively plausible.
+Anyone who has taken an economics class in high school or college will have heard of the \`life cycle model' of optimal saving for retirement.  When they hire a financial advisor, they might suppose that the advisor's job is to just to tailor standardized optimal planning tools to their own particular circumstances.  What they are unlikely to know is that the advice dispensed by traditional academic life cycle models has long been understood to be deeply problematic -- for example, such models tend to imply that retiree with a pension should plan to run their wealth down to zero (if they live long enough) and then (optimally!) live pension-check to pension-check.  This paper makes the case that new developments in the economics literature, when combined with the kinds of feedback that advisors get from their clients, can finally generate advice that is both mathematically optimal and intuitively plausible.
 
 +++
 
@@ -18,7 +18,7 @@ Franco Modigliani and Richard Brumberg (1954) were the first scholars to propose
 
 Three things have changed in the academic `life cycle mathematical optimization' literature that have jointly contributed to this success.
 
-The first is that the rapid advance of computational capacity has finally made it possible to construct credible answers to the question "what saving and portfolio choices are actually optimal?" in a real world that has vast complexity.  In paticular, the incorporation of realistic descriptions of the uncertainties people face (about their own income, stock returns, interest rates, health expenditures, and more) makes the problem astonishingly difficult.  Vastly harder, say, than the computation of optimal trajectories for spacecraft, and comparable perhaps to the difficulty of driving a car (another problem where realistic computational (AI) solutions have only recently become available).
+The first is that the rapid advance of computational capacity has finally made it possible to construct credible answers to the question "what saving and portfolio choices are actually optimal?" in a real world that has vast complexity.  In paticular, the incorporation of realistic descriptions of the uncertainties people face (about their own income, stock returns, interest rates, health expenditures, mortality, and more) makes the problem astonishingly difficult.  Vastly harder, say, than the computation of optimal trajectories for spacecraft, and comparable perhaps to the difficulty of driving a car (another problem where realistic computational (AI) solutions have only recently become available).
 
 A second development has been a new openness by academic economists to the proposition that people's beliefs can be measured by asking them what they believe. The traditional academic approach had been to attribute to the optimial decisionmaker beliefs based on economists' own perceptions of the relevant facts (like the rate of return on the stock market). It turns out that economists' beliefs differ substantially from the beliefs that most people actually hold, and it seems reasonable to suppose that the decisions people make reflect their own beliefs rather than the beliefs of economists. Specifically with respect to stock returns, Mateo Velaszquez-Giraldo (2024) has shown that even college-educated people systematically have expected stock market returns substantially lower than the returns the stock market has historically delivered, and that the market performance, and have expected the riskiness of investment in stocks to be greater than the historical riskiness.
 
@@ -67,7 +67,7 @@ In formal mathematical terms, the consumer's objective is to maximize present di
 
 We use standard calibrations for the household-size adjustment (from Cagetti (2003)) and mortality (taken from actuarial mortality tables like those used by the Social Security administration). The time preference factor is estimated by the `indirect inference' procedure described below.
 
-One of the fundamental discoveries of the past 30 years or so is the extent to which optimal choice is profoundly altered by the presence of uncertainty. Milton Friedman (1957) proposed a simple formulation that remains an excellent description of annual income shocks even today. Friedman proposed that there are two components to income: A \`permanent' component that is roughly what a person would expect to earn in a \`normal' year (say, their annual salary), and a \`transitory' component that reflects events like unemployment spells or lottery winnings; these make a given year's actual income deviate from its expected value.
+One of the fundamental discoveries of the past 30 years or so is the extent to which optimal choice is profoundly altered by the presence of uncertainty. Milton Friedman (1957) proposed a simple formulation that remains an excellent description of annual income shocks even today. Friedman said that there are two components to income: A \`permanent' component that is roughly what a person would expect to earn in a \`normal' year (say, their annual salary), and a \`transitory' component that reflects events like unemployment spells or lottery winnings; these make a given year's actual income deviate from its expected value.
 
 To meld Friedmanian uncertainty with a Modlglianian life cycle, we need one more definition, whose purpose is to capture the predictable patterns that (noncapital) income follows over the lifetime (income starts low, rises with age and experience, and falls at retirement to the level of any regular pension payments):
 \begin{align}
@@ -173,32 +173,32 @@ The consumer's new value function is therefore just
 % - childless save as much or more as those with heirs
 % - people do not list bequests as important (in SCF survey questions)
 % - typical household leaves only 2 percent of lifetime resources as bequests (Lutz Hendricks)
-% - Modigliani and Summers (1986) debate
+% - Modigliani versus Kotlikoff and Summers (1986) debate
 
 ## Wealth In the Utility Function (WIUF)
 
 ### Motivations
 
-Given these objections to the bequest motive, it seems natural to consider other modifications to the original Modigliani-Brumberg assumption that the only purpose of holding wealth is to enable future consumption. 
-
-% An alternative approach to explaining the \`drawdown failure' is that there is some reason people value ownership of wealth _per se_,  not just because it enables future consumption. 
-
 #### Why Do the Rich Save So Much?
-In the economics literature's new spirit of treating what people say about their motivations as another form of data (which, like all data, is potentially unreliable), \cite{carrollWhy} adduces a variety of evidence about saving behavior the very rich dating back to the 19th century, when Andrew Carnegie famously pledged to give away 99 percent of his wealth to charitable causes before his death (and proceeded to make good on his promise). Carnegie was explicit about his reasons: He had vastly more wealth than necessary to accommodate his wants (including his beloved Scottish castle); he thought a great deal of social good could be done by the charities he favored; and the expectation of receiving a colossal inheritance would `ruin' a child. Some other motivations mentioned either by the rich people themselves or those commenting about their behavior are perhaps less creditable, including the proposition that relative wealth confers relative status, that it gives the holder political and social power, and more. But what is striking in the extensive historical work of \cite{jaher:gilded} is the scarcity of evidence for bequest motives.
+Andrew Carnegie, then the richest man in the world, famously pledged to give away 90 percent of his wealth before his death (and made good on his promise). Carnegie was explicit: He had vastly more wealth than necessary to accommodate his wants (including maintenance of his beloved Scottish castle); he thought considerable social good could be accomplished by the charities he favored (especially libraries); and he felt that the expectation of receiving a colossal inheritance would `ruin' a child.\footnote{"I would as soon leave my son a curse as the almighty dollar." \cite{jaher:gildedage}.} The reason economists should be interested in extreme examples like Carnegie (or Bill Gates, or John D. Rockefeller) is the same reason physicists are interested in black holes: Stress tests of a theory can reveal its flaws (Einstein beats Newton only in such extreme cases). The historian Fredrick Cople \cite{jaher:gildedAge}'s chronicle of the behavior of the richest Americans since the 1800s (Carnegie is one of many examples) is striking in two ways. His book contains a feast of quotes, over a long time span, from the richest Americans articulating a host of motivations for wealth accumulation; and very few of these mention anything resembling the bequest motive as formulated in the academic life cycle literature.
 
-% - SCF rich people interviews 
-% - SCF questions about reasons for saving
+This is consonant with the views of Max Weber (1905), who argued that the 'spirit of capitalism' was that it was intrinsically virtuous to accumulate wealth. And also in line with survey data from the modern __Surveys of Consumer Finances__, which find that only 5 percent of respondents, and only 4 percent of respondents in the richest 1 percent, put 'leaving an inheritance' among __the top 5__ reasons for saving (\cite{WhyDoTheRich}).
+
+Financial advisors to 401(k) plans also report a strong allergy, on the part of corporate 401(k) fiduciaries, to any mention of leaving a bequest as a legitimate target of 401(k) saving advice. (Possibly this reflects the fact that pension plan sponsors owe a fiduciary duty to the plan participants, but not to their heirs.)
+% JT: Can I say this? Is there a citation I can use?
+
+Given these objections to the bequest motive, and given the problems of a model without a bequest motive, it seems natural to consider other modifications to the Modigliani-Brumberg assumption that the only purpose of holding wealth is to enable future consumption. 
 
 #### Paper provides a Host of Reasons -- 
-For our purposes, the takeaway from this paper is that it presents a context in which the neither the Modgliani-Brumberg assumption that wealth is held only to finance future consumption, nor the standard augmentation of that model to accommodate the desire to leave a bequest to heirs, seems to suffice for explaining behavior with respect to wealth.
+% For our purposes, the takeaway from this paper is that it presents a context in which the neither the Modgliani-Brumberg assumption that wealth is held only to finance future consumption, nor the standard augmentation of that model to accommodate the desire to leave a bequest to heirs, seems to suffice for explaining behavior with respect to wealth.
 
 The most general way we economists have of incorporating motivations into our models of behavior is simply to assume that the decisionmaker gets utility, directly, from something -- in this case, from holding wealth. The next question is how best to structure the utility function to study any particular question. The \cite{WhyDoTheRich} paper, for example, proposed a utility function specifically designed to capture behavior as wealth approached infinity, and accomplishing that goal required some mathematical structure that delivered the desired results but was unwieldy (and not obviously necessary for explaining the behavior of the bottom 99 percent, whose wealth does not approach infinity).\footnote{Specifically, a separable utility-from-wealth function was added to the maximizer's objective and with a coefficient of relative risk aversion smaller than that for the utility from consumption, which delivers the desired result.}
 
 #### Money in the Utility Function (Sidrauski; Rotermberg and Poterba)
-It turns out that there is a literature in macroeconomics pioneered by Miguel Sidrauski in his paper [Rational choice and 
+In fact, it turns out that there is a literature in macroeconomics, pioneered by Miguel Sidrauski in his paper [Rational choice and 
 Patterns of Growth in a Monetary Economy](), that has long included \`money' in the utility function of the representative agent in one form or another. 
 
-A prominent paper by [](doi:10.1086/261207) proposed a specific utility function designed to capture the stability of the ratio of money to GDP, and Rotemberg along with James Poterba estimated this model on U.S. data in [](doi:10.3386/w1796).
+A well-known paper by [](doi:10.1086/261207) proposed a specific utility function designed to capture the stability of the ratio of money to GDP, and Rotemberg along with James Poterba estimated this model on U.S. data in [](doi:10.3386/w1796).
 
 The structure of their utility function is
 \begin{align}
@@ -208,17 +208,17 @@ The structure of their utility function is
 \end{align}
 where $\ell$ captures the the liquidity services provided by money-holding. 
 
-To be clear, the aim of that literature was to explain the holding of dollar cash balances to study questions like the 'velocity' of money and the role of money supply and money demand in determining interest rates, not to explain saving behavior.
+To be clear, the aim of that literature was to explain the holding of dollar cash balances to study questions like the 'velocity' of money and the role of money supply and money demand in determining interest rates -- not to explain saving behavior.
 
-But for the saving question, Tzitzouris et al have proposed a mathematically very similar formulation,
+But for the question of how to incorporate wealth in the utility function, Tzitzouris et al have proposed a mathematically very similar formulation,
 \begin{align}
-\uFunc(\cNrm,\ell) & = \frac{\left(
+\uFunc(\cNrm,\aNrm) & = \frac{\left(
     \cNrm^{\delta}\aNrm^{1-\delta}
     \right)^{1-\CRRA}}{1-\CRRA}
 \end{align}
-where $\aNrm$ takes the place of $\ell$.\footnote{If we assume, reasonably enough, that liquidity services are directly proportional to the holdings of assets that provide those services, the two formulations are (mathematically) identical.}
+where $\aNrm$ takes the place of $\ell$ in the Rotemberg-Poterba utility function.\footnote{If we assume, reasonably enough, that liquidity services are directly proportional to the holdings of the assets that provide those services, the two formulations become (mathematically) identical.}^{,}\footnote{The question of whether $\aNrm$ or $\mNrm$ should be in the utility function is not very consequential; here we prefer $\aNrm$ because assets after consumption are immune to considerations of whether the time period is a year, a quarter, a month, or a day.}
 
-The upshot is that if we credit the proposition that the mere ownership of assets yields utility, then there is good precedent for the functional form of utility proposed by Tzitsouris et al in the work of Rotemberg and Poterba.  Henceforth we will call this Cobb-Douglas formulation of the utility provided by asset holdings the Tzitzouris-Rotemberg-Poterba or 'TRP' utility function.
+The upshot is that if we credit the proposition that the ownership of assets yields utility, then there is good precedent for the functional form of utility proposed by Tzitsouris et al in the work of Rotemberg and Poterba.  Henceforth we will call this Cobb-Douglas formulation of the utility provided by asset holdings the Tzitzouris-Rotemberg-Poterba or 'TRP' utility function.
 
 % postulated a utility of wealth that implied that such ownership was a `luxury good' in the sense that the more lifetime resources a person had available, the larger was the proportion that would be devoted to the pleasures (whatever they may be) of wealth ownership _per se_. The model was constructed specifically to capture the fact that at the extreme upper reaches of the wealth distribution it seems likely that the amount of ordinary consumption expenditure the agent could accomplish during the span of a human lifetime becomes small.
 
