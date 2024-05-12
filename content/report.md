@@ -32,8 +32,6 @@ The thesis of this paper twofold. The first is that when all of these elements a
 
 # Literature Review
 
-[](doi:10.3982/ecta16409)
-
 [](doi:10.1257/000282802320189393)
 
 # Model
@@ -212,7 +210,7 @@ Financial advisors to 401(k) plans also report a strong allergy, on the part of 
 
 Given these objections to the bequest motive, and given the problems of a model without a bequest motive, it seems natural to consider other modifications to the Modigliani-Brumberg assumption that the only purpose of holding wealth is to enable future consumption.
 
-#### Paper provides a Host of Reasons --
+#### Paper provides a Host of Reasons ---
 
 % For our purposes, the takeaway from this paper is that it presents a context in which the neither the Modgliani-Brumberg assumption that wealth is held only to finance future consumption, nor the standard augmentation of that model to accommodate the desire to leave a bequest to heirs, seems to suffice for explaining behavior with respect to wealth.
 
@@ -220,7 +218,7 @@ The most general way we economists have of incorporating motivations into our mo
 
 [^f4]: Specifically, a separable utility-from-wealth function was added to the maximizer's objective and with a coefficient of relative risk aversion smaller than that for the utility from consumption, which delivers the desired result.
 
-#### Money in the Utility Function (Sidrauski; Rotermberg and Poterba)
+#### Money in the Utility Function (Tzitzouris; Rotermberg and Poterba)
 
 In fact, it turns out that there is a literature in macroeconomics, pioneered by Miguel Sidrauski in his paper [Rational choice and Patterns of Growth in a Monetary Economy](), that has long included 'money' in the utility function of the representative agent in one form or another.
 
@@ -238,7 +236,7 @@ where $\ell$ captures the the liquidity services provided by money-holding.
 
 To be clear, the aim of that literature was to explain the holding of dollar cash balances to study questions like the 'velocity' of money and the role of money supply and money demand in determining interest rates -- not to explain saving behavior.
 
-But for the question of how to incorporate wealth in the utility function, Tzitzouris et al have proposed a mathematically very similar formulation,
+But for the question of how to incorporate wealth in the utility function, [](doi:10.2139/ssrn.4693176) have proposed a mathematically very similar formulation,
 
 \begin{align}
     \uFunc(\cNrm,\aNrm) & = \frac{\left(
@@ -251,7 +249,7 @@ where $\aNrm$ takes the place of $\ell$ in the Rotemberg-Poterba utility functio
 [^f5]: If we assume, reasonably enough, that liquidity services are directly proportional to the holdings of the assets that provide those services, the two formulations become (mathematically) identical.
 [^f6]: The question of whether $\aNrm$ or $\mNrm$ should be in the utility function is not very consequential; here we prefer $\aNrm$ because assets after consumption are immune to considerations of whether the time period is a year, a quarter, a month, or a day.
 
-The upshot is that if we credit the proposition that the ownership of assets yields utility, then there is good precedent for the functional form of utility proposed by Tzitsouris et al in the work of Rotemberg and Poterba. Henceforth we will call this Cobb-Douglas formulation of the utility provided by asset holdings the Tzitzouris-Rotemberg-Poterba or 'TRP' utility function.
+The upshot is that if we credit the proposition that the ownership of assets yields utility, then there is good precedent for the functional form of utility proposed by [](doi:10.2139/ssrn.4693176) in the work of Rotemberg and Poterba. Henceforth we will call this Cobb-Douglas formulation of the utility provided by asset holdings the Tzitzouris-Rotemberg-Poterba or 'TRP' utility function.
 
 % postulated a utility of wealth that implied that such ownership was a 'luxury good' in the sense that the more lifetime resources a person had available, the larger was the proportion that would be devoted to the pleasures (whatever they may be) of wealth ownership _per se_. The model was constructed specifically to capture the fact that at the extreme upper reaches of the wealth distribution it seems likely that the amount of ordinary consumption expenditure the agent could accomplish during the span of a human lifetime becomes small.
 
@@ -314,6 +312,24 @@ Where that leaves us (or at least leaves me) is with the view that the role of f
 % AL: What I'm going to want here is a comparison of the three models in these two dimensions.
 % Probably it will be sufficient just to show the trajectory of median wealth and of median portfolio share
 % for each model, and the corresponding trajectories in the SCF data.
+
+#### The Method of Simulated Moments
+
+The method of simulated moments consists of finding the parameters that make the model's simulated moments, like the median wealth and the median portfolio share, match the corresponding empirical moments as closely as possible. Consider a real moment $y_i$ where $i \in [1, N]$ and the corresponding simulated moment $\hat{y}_i(\theta)$, where $\theta$ is the vector of parameters that we are interested in estimating. By solving and simulating our structural model with different $\theta$ parameters, we can calculate the simulated moments $\hat{y}_i(\theta)$ for each parameter set. The method of simulated moments then consists of finding the parameter set $\theta$ that minimizes the distance between the simulated moments and the real moments. This is done by minimizing the following objective function:
+
+\begin{equation}
+    \min_{\theta} \sum_{i=1}^{N}  \left( \omega_i [y_i - \hat{y}_i(\theta) ] \right)^2
+\end{equation}
+
+where $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process. For example, we might be more interested in matching the median wealth than the median portfolio share, so we would assign a higher weight to the former.
+
+For our exercise, we are interested in matching the median wealth to income ratios throughout the life-cycle, and the median portfolio share of risky assets after retirement. Because aggregate age data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias. Starting at age 25, we calculate the median wealth to income ratio as follows: Wealth is defined as the sum of all assets and liabilities, including financial assets, housing, vehicles, and debt. For income, we use the sum of all wages, salaries, social security, and retirement income, excluding capital gains and other non-recurring income. We then calculate the wealth to income ratio of every household in the age bin and remove households with an income of zero. The median wealth to income ratio is calculated from the remaining households. An important point is that in our structural model we hard-code retirement at age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70. Therefore, we avoid the data for ages 60 to 70 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees. Similarly, we calculate the median portfolio share of risky assets after retirement for ages 70 and above given by @Aboagye2024.
+
+Considering the selection of moments we have chosen, it is clear that there is an inbalance between the wealth to income moments and the portfolio share moments. There are more wealth to income moments than portfolio share moments, (12 to 5), and the portfolio share moments lie between 0 and 1, whereas the wealth to income ratios can be much larger. To account for this, we set the weights to normalize the wealth to income ratios by the highest ratio in the data, making them all lie between 0 and 1, and set the weights for the portfolio share moments to multiply by 12/5, so that the two sets of moments are equally weighted in the estimation process. This ensures that our estimation process puts even weight on the two sets of moments, despite the difference in scale and number of moments.
+
+Having pinned down the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our vaious models. We use the `Econ-ARK` project's `HARK` package to solve and estimate the models, and `estimagic` (@Gabler2022) to perform the estimation process. Our exercise consists of estimating 1 parameter (the constant relative risk aversion (CRRA) parameter for the Simple Portfolio Choice Model) up to 3 parameters (CRRA, the wealth-share of utility parameter, and the wealth-shifter of utility parameter for the `TRP` model), so we develop a robust and efficient estimation process that can handle a varying number of parameters. We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.
+
+Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times. Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numerical differentiation and clever optimization algorithms to find the optimal parameter set. We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise ro- bust QUadratIc or Linear approximation Optimizer, to find the optimal parameter set. The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM. 
 
 # Conclusion
 

@@ -29,8 +29,13 @@ project:
         - id: econ-ark
           institution: Econ-ARK
           url: https://econ-ark.org
+    - name: Alan Lujan
+      email: alujan@jhu.edu
+      affiliations:
+        - jhu
+        - econ-ark
   github: https://github.com/alanlujan91/TRP-wealth-in-utility
-  # bibliography: []
+  bibliography: content/references.bib
   license:
     content: CC-BY-4.0
     code: MIT

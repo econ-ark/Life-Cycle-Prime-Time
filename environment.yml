@@ -1,8 +1,8 @@
-name: mystery
+name: trp-wiuf
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.10
+  - python
   - nodejs
   - mystmd
