@@ -79,6 +79,7 @@ project:
     '\MPCFunc': '\pmb{\kappa}'
     '\DFunc': '\mathrm{D}'
     '\dFunc': '\mathrm{d}'
+    '\bqstNrm': 'e'
     '\bEndFunc': '\mathfrak{b}'
     '\CEndFunc': '\mathfrak{C}'
     '\cEndFunc': '\mathfrak{c}'
@@ -723,7 +724,7 @@ project:
     '\Wtot': "O"
     '\wtot': "o"
     '\vOpt': '\tilde{\mathfrak{v}}'
-    '\Rport': '\mathbb{R}'
+    '\Rport': '\mathcal{R}'
     '\rport': '\mathbb{r}'
     '\FDist': '\mathcal{F}'
     '\fDist': '\mathcal{f}'
@@ -849,3 +850,5 @@ project:
     '\Seniority': '\mathsf{X}'
     '\seniority': '\mathsf{x}'
     '\wealthShare': '\delta'
+    '\lqdt' : '\ell'
+    
