@@ -1,5 +1,5 @@
 ---
-title: We Finally Have a Believable Life Cycle Model
+title: Life Cycle Modeling is Finally Ready for Prime Time
 exports:
     - format: tex+pdf
       template: arxiv_nips
@@ -12,17 +12,16 @@ The 'life cycle model' of optimal saving for retirement is familiar to anyone wh
 
 +++
 
-# Introduction
+# New Developments in the Academic Literature
 
 % Delete bullet 
-## Modigliani-Brumberg (1954)
+% ## Modigliani-Brumberg (1954)
 
 Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose that it might be possible understand consumer financial choices as reflecting optimal responses to the realities of the path of income and of spending needs over the lifetime. An enormous academic literature has followed their pioneering work, but it has proven quite difficult to build rational optimizing models that give sensible advice about both life cycle saving choices and about investment decisions like how much of one's retirement savings should be invested in the stock market.
 
 [^modigliani_brumberg]: @10.7551/mitpress/1923.003.0004
 
 % Delete bullet
-## New Developments in Academic Literature
 
 Recently, the academic literature has recent developed in ways that together offer the prospect that we may now finally be able to build models whose advice is not obviously wrong.
 
@@ -42,9 +41,9 @@ The 'Liquidity' component of this answer suggests the possibility that precautio
 
 %%% AL: Need to import Mateo's medical expense shocks (and need to make them a default option in the life cycle models in HARK)
 
-### Models 
+### Model Specification and Estimation 
 
-In the 'Models' section of the paper, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the standard Life Cycle Portfolio model (which calculates optimal saving and optimal portfolio shares over the life cycle). We will find, in the ['Estimation'](#Estimation) section of the paper that even with a calibration of medical and other expenditure shocks that aims to reasonably capture the measurable shocks that households face, the model implies a rapid drawdown of wealth after retirement that we simply do not see.  We turn next to a model with a bequest motive, because the literature has explored whether such a motive could explain the drawdown failure.  But in the ['Estimation'] section we confirm the consensus in the literature that the bequest motive does not seem to have much force for the median household.
+In the 'Models' section of the paper, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the standard Life Cycle Portfolio model (which calculates optimal saving and optimal portfolio shares over the life cycle).  We will find, in the ['Estimation'](#Estimation) section of the paper, that even with a calibration of medical and other expenditure shocks that aims to reasonably capture the measurable shocks that households face, the model implies a rapid drawdown of wealth after retirement that we simply do not see.  We turn next to a model with a bequest motive, because the literature has explored whether such a motive could explain the drawdown failure.  But in the ['Estimation'] section we confirm the consensus in the literature that the bequest motive does not seem to have much force for the median household.
 
 This leads us into more speculative territory.  If what consumers care most about is to hold wealth for 'Liquidity/The Future' but that wealth is not explainable by a precautionary motive, a potential interpretation is that consumers value the ownership of wealth in and of itself.  After fleshing out this idea a bit, we propose a final model that puts wealth in the utility function directly -- and in the 'Estimation' section we show that this final model does a much better job jointly matching the data on wealth profiles and portfolio choice than either of the other models.
 
@@ -85,6 +84,18 @@ The failure of retired households to draw down their wealth substantially as the
 Lit on portfolio choice requiring huge RRA
 
 # Models
+
+The academic literature on life cycle modeling is extraordinarily rich, and we cannot hope to do justice to it here. What we have done instead is to construct a 'toy model' that captures some key points and ideas. We think of this as a starting point for what we hope will be a new literature that aims to integrate insights from many different kinds of evidence into a plausible framework for thinking rigorously and realistically about life cycle financial choice.
+
+One kind of further evidence that we view as vital to incorporate in future models is the experience of financial advisors themselves in interactions with their clients. We have been told,[^nodrawdown] for example, that advice that clients should run their wealth down to zero then live pension-check to pension-check would be so unwelcome that a financial advisor who provided that advice would be fired.  
+
+[^nodrawdown]: Personal communication, James Tzitzouris with Christopher Carroll, 2024-05-15.
+
+Note too that the kinds of models we are examining here are well suited to the task of crafting systematic advice for clients like employers who need to hire 401(k) plan providers. It is not hard to imagine that such clients might be attracted to a 401(k) provider whose advice is justified by, and can be explained using the logic of, a rigorously specified model of optimal choice.  That might be more persuasive than 'trust us, we know what we are doing.'
+
+For purposes like 401(k) or other pension plan design, the optimization problem can be constrained to one that satisfies the legal obligations the employers have to their employees. For example, the employer's contract is with the employee, not with that person's heirs. The employee's duty is to craft a plan that is expected to permit the employee to have adequate resources for their own expenditures during retirement. These legal considerations effectively prohibit the advisor from including a bequest motive in its optimization objective.[^planprovideradvantage]
+
+[^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless employees. This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
 
 ## The Baseline Academic Models
 
@@ -146,7 +157,7 @@ The transitory shock to income has two modes. In unemployment spells, the consum
     \end{cases}
 \end{align}
 
-[^betterunemp] It is straightforward to extend the model to allow for a more realistic treatment of unemployment, for example by taking account of the existence of an unemployment insurance system; such an adjustment does not change the substantive conclusions we are interested in.
+[^betterunemp]: It is straightforward to extend the model to allow for a more realistic treatment of unemployment, for example by taking account of the existence of an unemployment insurance system; such an adjustment does not change the substantive conclusions we are interested in.
 
 It is conventional to assume that shocks to permanent income and to the transitory income of the employed are lognormally distributed:
 \begin{align}
@@ -284,7 +295,7 @@ If bequests were really a primary motivation for saving for most (college-educat
  
 Given these (and other) objections to the bequest motive, and given the problems of the model without a bequest motive, it seems natural to consider alternative modifications to the framework.
 
-### Mathematical Specification 
+### Wealth in the Utility Function
 
 % For our purposes, the takeaway from that it presents a context in which the neither the Modgliani-Brumberg assumption that wealth is held only to finance future consumption, nor the standard augmentation of that model to accommodate the desire to leave a bequest to heirs, seems to suffice for explaining behavior with respect to wealth.
 
@@ -375,7 +386,7 @@ A tricky question remains. If, as economists who are deeply versed in the histor
 
 A helpful analogy might ease our concerns on this score. In very many domains of life, people put their trust in experts who know the relevant facts to make decisions. For example, even someone building their own new home, who feels quite capable of deciding questions about the orientation of the house or the size of the garage is expected to comply with the regulations of the electrical wiring code of their house. They are not expected to master the complexity behind the question of how wiring should be done to trade off safety and convenience in provision of electricity to the different parts of the house. The extent to which people feel the need to consult financial advisors (or to abide by pension and 401(k) rules devised by such advisors), the natural interpretation would seem to be that they think of questions like how much to save for retirement or how much to invest in stocks versus bonds as questions that should be answered by experts. Indeed, if financial advisors did not know any relevant facts that the household did know, and did not have any expertise about what to do with those facts to make a prudent saving and investment plan, why would the (enormous) financial consulting industry exist at all?
 
- Where that leaves us (or at least leaves me) is with the view that the role of financial advisors (and the role of rigorous mathematical/computational life cycle modeling) is to provide people with the answers that they would themselves choose if they had the requisite knowledge and experience.
+ Where that leaves us is with the view that the role of financial advisors (and the role of rigorous mathematical/computational life cycle modeling) is to provide people with the answers that they would themselves choose if they had the requisite knowledge and experience.
 
 
 --> 
@@ -401,7 +412,6 @@ Having pinned down the moments we are interested in matching and their respectiv
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times. Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numerical differentiation and clever optimization algorithms to find the optimal parameter set. We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set. The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 
 ### Indirect Inference Results
-
 
 # Conclusion
 
