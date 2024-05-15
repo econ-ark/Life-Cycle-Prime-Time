@@ -8,29 +8,64 @@ exports:
 
 +++ { "part": "abstract" }
 
-The 'life cycle model' of optimal saving for retirement is familiar to anyone who has taken an introductory economics class. When hiring a financial advisor, it is plausible to imagine that people interpret the advisor's job as being just to tailor optimal life-cycle-model choices to their particular circumstances. But academics and financial industry experts have long known that the advice about both saving and portfolio choice provided by rigorous academic life-cycle models is deeply problematic -- for example, such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check (at least approximately). This paper makes the case that recent developments in the economics literature, when combined with the kinds of feedback that advisors get from their clients, can finally generate advice that is both mathematically optimal and intuitively plausible.
+The 'life cycle model' of optimal saving for retirement is familiar to anyone who has taken an introductory economics class. When hiring a financial advisor, people probably think of the advisor's job as being just to tailor optimal life-cycle-model choices to their particular circumstances. But academics and financial advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check (at least approximately). This paper makes the case that recent developments in the economics literature have finally given us the tools we need to construct rigorous models whose advice is sensible. One example of such a model is provided.
 
 +++
 
 # Introduction
 
-Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose that it might be possible understand consumer financial choices as reflecting optimal responses to the realities of the path of income and of spending needs over the lifetime. An enormous academic literature has followed their pioneering work, but only very recently have academic models of mathematically optimal behavior gotten within spitting range of matching either the choices that real people actually make, or the choices that financial advisors recommend to them.
+% Delete bullet 
+## Modigliani-Brumberg (1954)
+
+Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose that it might be possible understand consumer financial choices as reflecting optimal responses to the realities of the path of income and of spending needs over the lifetime. An enormous academic literature has followed their pioneering work, but it has proven quite difficult to build rational optimizing models that give sensible advice about both life cycle saving choices and about investment decisions like how much of one's retirement savings should be invested in the stock market.
+
 [^modigliani_brumberg]: @10.7551/mitpress/1923.003.0004
 
-Over the past couple of decades, three things have changed in the academic literature that have all contributed to making the models' predictions more believable.
+% Delete bullet
+## New Developments in Academic Literature
 
-The first is that the rapid advance of computational capacity has finally made it possible to construct credible answers to the question "what saving and portfolio choices are actually optimal?" in a real world that is extremely complex. In particular, the incorporation of realistic descriptions of the uncertainties people face (about their own income, stock returns, interest rates, health expenditures, mortality, and more) makes computation of the optimal solution of the problem astonishingly difficult. Much harder, say, than the computation of optimal trajectories for spacecraft; comparable perhaps to the computational difficulty of figuring out how to drive a car roughly as well as a human (another problem where realistic computational solutions have only recently become available).
+Recently, the academic literature has recent developed in ways that together offer the prospect that we may now finally be able to build models whose advice is not obviously wrong.
 
-A second development has been a new openness by academic economists to the idea that people's beliefs and preferences can be probed by *asking them* about their beliefs and preferences. The traditional academic approach had been to attribute to the optimal decisionmaker beliefs based on economists' perceptions of the relevant facts (like the rate of return, and riskiness, of the stock market). It turns out that economists' beliefs differ substantially from the beliefs that most people actually hold, and it seems reasonable to suppose that the decisions people make reflect their own beliefs rather than the beliefs of economists. Specifically with respect to stock returns, Mateo @velasquez-giraldoJMP has shown that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to the returns the market has historically delivered. He argues that this explains why, historically, people have been less eager to invest in stocks than models calibrated with economists' more optimistic expectations. He argues that the behavior of college-educated people over most of their lives is reasonably consistent with rational decisionmaking (given their beliefs).
+% Delete bullet
+### Computation/Uncertainty/Complexity 
 
-<!-- new evidence: financial advisors -→
-Finally, economists have also become more receptive to new kinds of evidence that go beyond the usual measurements of life cycle trajectories of wealth and income from traditional sources like the Federal Reserve's [**Survey of Consumer Finances**](https://www.federalreserve.gov/econres/scfindex.htm) ('SCF' henceforth). One particularly relevant example is feedback from the direct experience of financial advisors: It seems that advisees react negatively to the idea that it is a good plan for retirees to run their wealth down to zero and then live pension-check to pension-check.<!-- JT: Need something specific to cite -->
+The first change is that the rapid advance of computational capacity has finally made it possible to dispense with doubtful simplifications and to construct credible answers to the question "what saving and portfolio choices are mathematically optimal" in a real world that is extremely complex. In particular, the incorporation of realistic descriptions of the uncertainties people face (about their own income, stock returns, interest rates, health expenditures, mortality, and more) makes computation of the optimal solution of the problem astonishingly difficult. Much harder, say, than the computation of optimal trajectories for spacecraft; comparable perhaps to the computational difficulty of figuring out how to drive a car roughly as well as a human (another problem where adequate computational solutions have only recently become available).
 
-In fact, the failure of retired households to draw down their wealth substantially as they age -- the 'drawdown failure' -- has been a challenge to the life cycle model for many years (cf. @hurd1987savings for an early statement).  The most common attempt to explain this in the academic literature has been to postulate a 'bequest motive,' typically interpreted as a desire to leave a legacy to one's heirs. But our analysis below confirms the thrust of the existing literature which finds that a bequest motive does not seem to be important for the median college-educated household, for whom the drawdown failure is very substantial.  (We focus on college educated households partly because a growing body of literature -including @velasquez-giraldoJMP's work cited above -- finds that the behavior of the college-educated population comes much closer to matching the predications of optimizing models than the behavior of people with less education).<!-- AL+MVG: Any citation for such a claim? -->
+% Delete Bullet 
+### Taking Survey Data Seriously
 
-The model section of the paper examines a direct and simple solution, which is to assume that people have an intrinsic desire to hold wealth, which seems to be distinct from the consequences those wealth holdings have for their ability to consume in the future. The main substantive/mathematical point of this paper (in the "Model Results" section) is to show that a model with 'wealth in the utility function' explains observed post-retirement behavior of both wealth-holding and portfolio choice better than the standard model (with or without a bequest motive).
+A second academic development has been a new openness to the idea that people's beliefs and preferences can be probed by *asking them* about their beliefs and preferences.
 
-This provides an attractive resolution to the awkward fact that the financial industry's advice has, until now, had no rigorous underpinning but tradition. Our resolution takes the satisfying form that perhaps financial advisors had a better idea all along what constituted advice consistent with people's true preferences.
+In the context of motivations for saving, this leads us to want to take seriously the answers to a survey question about their 'most important' reason for saving that respondents to the Survey of Consumer Finances have been asked for many years. Among retirees, one answer dominates the rest: 'Liquidity/The Future.'  (See [the discussion below](#most-important-reason) for details).
+
+The 'Liquidity' component of this answer suggests the possibility that precautionary saving motives are of dominant importance to many households -- highlighting the importance of the computational advancements that now allow us to rigorously model the mathematically optimal precautionary response to measurable shocks. We therefore calibrate our optimal choice model to incorporate those measurable shocks as best we can.
+
+%%% AL: Need to import Mateo's medical expense shocks (and need to make them a default option in the life cycle models in HARK)
+
+### Models 
+
+In the 'Models' section of the paper, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the standard Life Cycle Portfolio model (which calculates optimal saving and optimal portfolio shares over the life cycle). We will find, in the ['Estimation'](#Estimation) section of the paper that even with a calibration of medical and other expenditure shocks that aims to reasonably capture the measurable shocks that households face, the model implies a rapid drawdown of wealth after retirement that we simply do not see.  We turn next to a model with a bequest motive, because the literature has explored whether such a motive could explain the drawdown failure.  But in the ['Estimation'] section we confirm the consensus in the literature that the bequest motive does not seem to have much force for the median household.
+
+This leads us into more speculative territory.  If what consumers care most about is to hold wealth for 'Liquidity/The Future' but that wealth is not explainable by a precautionary motive, a potential interpretation is that consumers value the ownership of wealth in and of itself.  After fleshing out this idea a bit, we propose a final model that puts wealth in the utility function directly -- and in the 'Estimation' section we show that this final model does a much better job jointly matching the data on wealth profiles and portfolio choice than either of the other models.
+
+% The traditional academic approach had been to attribute beliefs to the model's decisionmaker based on economists' perceptions of the relevant facts (like the rate of return, and riskiness, of the stock market). It turns out that economists' beliefs differ substantially from the beliefs that many people actually hold, and it seems reasonable to suppose that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they *should* believe and prefer.[^stocks]
+
+%[^stocks]: Specifically with respect to stock returns, Mateo @velasquez-giraldoJMP has shown that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to the returns the market has historically delivered. He argues that this explains why, historically, people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations. He argues that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with rational decisionmaking (given their beliefs).  Concretely, many people believe that investment in stocks is a lousy deal.  It's no mystery why such people do not invest.
+
+Finally, even aside from expectations data, economists have also become more receptive to new kinds of evidence that go beyond the usual measurements of life cycle trajectories of wealth.  If, for example, financial advisors report that their advisees will fire them if they tell the advisees to run their wealth down to zero, economists are more likely than they once were to treat that fact as a legitimate piece of evidence in constraining the kinds of models that are worth considering.
+
+%In a quantitative modeling section of the paper, we construct a traditional life cycle model with portfolio choice, and such a model augmented with a traditional bequest motive, and show that these models perform poorly when they are tasked with simultaneously matching the median college-educated consumer's age-wealth profile and a plausible target path of post-retirement portfolio investment in risky assets.
+
+
+%data from the Surveys of Consumer Finances since 1995 suggests two things: First, even among retirees, almost nobody mentions a bequest motive as a primary reason for saving.  Second, again among retirees, the most important motivation expressed for saving is for 'Liquidity/The Future.'
+
+%Both our Life Cycle Portfolio and our bequest model incorporate measures of the risks we are able to measure, yet both models predict a large drawdown of wealth that does not occur.  So the holdings of wealth for 'liquidity/the future' cannot be justified as springing from such risks.  The simplest interpretation is that people hold onto their wealth because they like holding onto wealth.  That is, wealth enters the utility function directly.
+
+The main substantive/mathematical point of this paper is to show that a model with 'wealth in the utility function' explains observed post-retirement behavior of both wealth-holding and portfolio choice of the median college-educated consumer better than the standard model (with or without a bequest motive).
+
+% (We focus on college educated households partly because a growing body of literature - including @velasquez-giraldoJMP's work cited above -- finds that the behavior of the college-educated population comes much closer to matching the predications of optimizing models than the behavior of people with less education).<!-- AL+MVG: Any citation for such a claim? -->
+
+% This provides an attractive resolution to the awkward fact that the financial industry's advice has, until now, had no rigorous underpinning but tradition. Our resolution takes that perhaps financial advisors had a better idea all along what constituted advice consistent with people's true preferences.
 
 # Literature Review
 
@@ -42,7 +77,8 @@ Literature finding traditional LC models work pretty well during working life
 
 ## 'Drawdown failure'
 
-Literature documenting failure to draw down wealth. Hurd (late 80s), etc
+The failure of retired households to draw down their wealth substantially as they age -- the 'drawdown failure' -- has been a challenge to the life cycle model for many years (cf. @hurd1987savings for an early statement).  % A common approach to attempting to explain this in the academic literature has been to postulate a 'bequest motive,' typically interpreted as a desire to leave a legacy to one's heirs. The idea is that the bequest motive is what deters drawdown.
+
 
 ## Portfolio Choice
 
@@ -50,11 +86,11 @@ Lit on portfolio choice requiring huge RRA
 
 # Models
 
-## The Baseline Academic Model
+## The Baseline Academic Models
 
 ### The Life Cycle Portfolio ('LCP') Model
 
-We begin by describing the consumer's optimal consumption/saving problem over the life cycle when they have no access to a risky asset (like the stock market) that earns a higher (expected) rate of return than the safe asset. After we have finished describing the plain life cycle model we will augment it to add optimal portfolio choice between safe and risky assets.
+We begin by describing the optimal consumption/saving problem over the life cycle for a consumer with no access to a risky asset (like the stock market) that earns a higher (expected) rate of return than the safe asset. After we have finished describing the plain life cycle model we will augment it to add optimal portfolio choice between safe and risky assets.
 
 In each period, a consumer's flow of utility depends on how much they consume. We assume that the utility function is of the standard Constant Relative Risk Aversion form:
 \begin{align}
@@ -164,9 +200,11 @@ and since $\aNrm$ measures available market resources that are unspent, this for
 
 [^normalization]: The normalization for value function involves more than just division by $\pLvl$; see @BufferStockTheory for details.
 
-We calibrate the model to include two kinds of uncertainty after retirement. First, we incorporate estimates from @Cagetti2003 of the size of shocks to medical expenditures for retirees; a perfectly rational reason not to run down your wealth, or not to run it down too far, is a fear of large medical expenses that you want to be able to meet.  Second, we assume that there are 'ordinary' expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from  @flExpShocks).
+We calibrate the model to include two kinds of uncertainty after retirement.
 
-Such uncertainty has the potential to deter the drawdown of wealth; see @Ameriks2020jpe for an argument that it is the principal explanation for the 'drawdown failure.'  While such effects are present in our model, our model estimation results below will find that the model still predicts much more drawdown of wealth than the data show.[^unknownunknown]
+First, we incorporate estimates from @Cagetti2003 of the size of shocks to medical expenditures for retirees; a perfectly rational reason not to run down your wealth, or not to run it down too far, is a fear of large medical expenses that you want to be able to meet.  Such uncertainty has the potential to deter the drawdown of wealth; see @Ameriks2020jpe for an argument that it is the principal explanation for the 'drawdown failure.'  While such effects are present in our model, our model estimation results below will find that the model still predicts much more drawdown of wealth than the data show.
+
+Second, we assume that there are 'ordinary' expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from  @flExpShocks).  Again, in principle, the presence of such shocks provides a precautionary motive to draw down wealth more slowly.
 
 ### The LCP model with 'Warm Glow' Bequests
 
@@ -220,14 +258,17 @@ where the $\CRRA$ coefficient is the same as in the utility function for consump
 
 ### Why Do the Rich Save So Much?
 
-The historian Fredrick Cople @jaherGilded's chronicle of the behavior of the richest Americans since the Revolution contains a feast of quotations from the richest Americans, articulating a host of motivations for wealth accumulation; very few of these mention anything resembling the bequest motive as formulated in the academic life cycle literature.  (Andrew Carnegie was most explicit: 'I would rather leave my son a curse than the almighty dollar.')  This is one of those places where economists' new openness to the idea of taking seriously what people say about their motivations has bite. While it is not unreasonable to be sceptical about taking such quotations at face value, @WhyDoTheRich shows that essentially all of the motivations articulated (wealth brings power; wealth allows philanthropy; wealth is a way of 'keeping score'; and more) can be captured in a mathematical formulation in which wealth enters the utility function directly.
+The historian Fredrick Cople @jaherGilded's chronicle of the behavior of the richest Americans since the Revolution contains a feast of direct quotations articulating a host of motivations for wealth accumulation; very few of these mention anything resembling the bequest motive as formulated in the academic life cycle literature.  (Andrew Carnegie was most explicit: 'I would rather leave my son a curse than the almighty dollar.')  This is one of those places where economists' new openness to the idea of taking seriously what people say about their motivations has bite. While it is not unreasonable to be sceptical about taking such quotations at face value, @WhyDoTheRich shows that essentially all of the motivations articulated (wealth brings power; wealth allows philanthropy; wealth is a way of 'keeping score'; and more) can be captured in a mathematical formulation in which wealth enters the utility function directly (as a luxury good).
 
 This perspective is also consonant with the views of Max @weberCapitalism, who argued that the 'spirit of capitalism' was a value system in which it was intrinsically virtuous to accumulate wealth.
 
 % [^fiduciary]?
 
-The [SCF](https://doi.org/10.17016/8799) has for many years asked respondents a question about their [motivations for saving](https://www.federalreserve.gov/econres/files/bulletin.macro.txt). While respondents' answers are fairly heterogeneous, the SCF has a suggested aggregation of the many different answers into categories that correspond approximately to some of the motivations that the academic literature has considered.  The category that best matches the 'bequest' motivation is 'Family' (which includes 'to help the kids out' and 'to leave an estate' but also includes saving for 'weddings and other cermonies' and  'to have children/a family.')
 
+As mentioned above, the [Survey of Consumer Finances](https://doi.org/10.17016/8799) has for many years asked respondents a question about their [motivations for saving](https://www.federalreserve.gov/econres/files/bulletin.macro.txt). While respondents' answers are fairly heterogeneous, the SCF has a suggested aggregation of the many different answers into categories that correspond approximately to some of the motivations that the academic literature has considered.  The category that best matches the 'bequest' motivation is 'Family' (which includes 'to help the kids out' and 'to leave an estate' but also includes saving for 'weddings and other cermonies' and  'to have children/a family.')
+
+(most-important-reason)=
+### Table: Most Important Reason for Saving 
 The table below presents the responses to this question for college-educated households older than age 70 from the 1995 to the 2022 waves of the SCF:
 
  | Reason | Proportion | Explanation |
@@ -241,7 +282,7 @@ The table below presents the responses to this question for college-educated hou
 
 If bequests were really a primary motivation for saving for most (college-educated) people, it would be surprising for them to mention this motivation so rarely.
  
-Given these (and other) objections to the bequest motive, and given the problems of a model without a bequest motive, it seems natural to consider alternative modifications to the framework.
+Given these (and other) objections to the bequest motive, and given the problems of the model without a bequest motive, it seems natural to consider alternative modifications to the framework.
 
 ### Mathematical Specification 
 
@@ -292,7 +333,7 @@ The methods of solution are essentially the same as those for the model with a b
 
 (We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.  In particular, the fact that in our SCF table above, 'Liquidity/The Future' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the things that retirees might worry about.  Maintaining a buffer stock of wealth to protect oneself against 'unknown unknowns' is quite possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of 'unknown unknowns.'  But if you knew those things, they would be, at best, 'known unknowns.')
 
-# Estimation and Calibration
+# Estimation
 
 ### Indirect Inference Described
 
@@ -337,7 +378,7 @@ A helpful analogy might ease our concerns on this score. In very many domains of
  Where that leaves us (or at least leaves me) is with the view that the role of financial advisors (and the role of rigorous mathematical/computational life cycle modeling) is to provide people with the answers that they would themselves choose if they had the requisite knowledge and experience.
 
 
- --> 
+--> 
 
 *The Method of Simulated Moments*
 
