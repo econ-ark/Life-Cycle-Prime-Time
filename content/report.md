@@ -413,6 +413,9 @@ Our estimation process is computationally expensive, requiring the solving and s
 
 ### Indirect Inference Results
 
+```{include} results.md
+```
+
 # Conclusion
 
 To thoughtful academics, it has long been disturbing that the financial advice industry has paid so little attention to our hard work in constructing and solving impressively sophisticated dynamic stochastic optimization models of financial behavior. Those of us with a bit of humility have always suspected that the failure has been on our side: If all we could offer was models that produced risible advice like 'everyone should spend down their wealth to zero and live pension-check to pension-check,' while financial analysts' real world experience told them that such advice would not be welcomed by their advisees, then it was reasonable to disregard the academic literature.

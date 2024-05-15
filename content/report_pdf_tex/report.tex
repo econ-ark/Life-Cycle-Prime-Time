@@ -57,7 +57,7 @@ urlcolor  = blue,
 citecolor = cyan,
 anchorcolor = black}
 
-\title{We Finally Have a Believable Life Cycle Model}
+\title{Life Cycle Modeling is Finally Ready for Prime Time}
 
 \newdate{articleDate}{15}{5}{2024}
 \date{\displaydate{articleDate}}
@@ -97,17 +97,14 @@ The `life cycle model' of optimal saving for retirement is familiar to anyone wh
 
 \keywords{}
 
-\section{Introduction}
+\section{New Developments in the Academic Literature}
 
 % Delete bullet
-
-\subsection{Modigliani-Brumberg (1954)}
+%  ## Modigliani-Brumberg (1954)
 
 Franco Modigliani and Richard Brumberg (1954)\footnote{\cite{2005}} were the first to propose that it might be possible understand consumer financial choices as reflecting optimal responses to the realities of the path of income and of spending needs over the lifetime. An enormous academic literature has followed their pioneering work, but it has proven quite difficult to build rational optimizing models that give sensible advice about both life cycle saving choices and about investment decisions like how much of one's retirement savings should be invested in the stock market.
 
 % Delete bullet
-
-\subsubsection{New Developments in Academic Literature}
 
 Recently, the academic literature has recent developed in ways that together offer the prospect that we may now finally be able to build models whose advice is not obviously wrong.
 
@@ -494,6 +491,18 @@ Having pinned down the moments we are interested in matching and their respectiv
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times. Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numerical differentiation and clever optimization algorithms to find the optimal parameter set. We use the \texttt{tranquilo} algorithm (\cite{Gabler2024}), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set. The \texttt{tranquilo} optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 
 \subsubsection{Indirect Inference Results}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{files/median_share-4914e6ae678815fe96333c65f71d7d38.pdf}
+\end{figure}
+
+Some text
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{files/median_wealth-54ebc582b1bc7f823c4d514c0977f5a6.pdf}
+\end{figure}
 
 \section{Conclusion}
 
