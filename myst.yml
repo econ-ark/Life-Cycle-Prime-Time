@@ -13,7 +13,7 @@ site:
   domains: []
 
 project:
-  title: Life Cycle Modeling is Finally Ready for Prime Time
+  title: The Life Cycle Model Is Ready for Prime Time
   # description:
   keywords: []
   authors:
@@ -79,7 +79,7 @@ project:
     '\MPCFunc': '\pmb{\kappa}'
     '\DFunc': '\mathrm{D}'
     '\dFunc': '\mathrm{d}'
-    '\bqstNrm': "e"
+    '\bqstNrm': 'e'
     '\bEndFunc': '\mathfrak{b}'
     '\CEndFunc': '\mathfrak{C}'
     '\cEndFunc': '\mathfrak{c}'
