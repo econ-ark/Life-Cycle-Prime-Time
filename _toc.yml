@@ -16,5 +16,5 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: content/report
+root: content/life-cycle-prime-time
 chapters: []

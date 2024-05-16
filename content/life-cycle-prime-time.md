@@ -3,7 +3,7 @@ title: Life Cycle Modeling is Ready for Prime Time
 exports:
     - format: tex+pdf
       template: arxiv_nips
-      output: report.pdf
+      output: life-cycle-prime-time.pdf
 ---
 
 +++ { "part": "abstract" }
@@ -307,6 +307,7 @@ It is a simple matter to solve the revised problem with wealth in the utility fu
 We refrain from a description of the methods of solution here because they are documented in the accompanying code archive which fully reproduces all our results.
 
 (We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.  In particular, the fact that in our SCF table above, 'Liquidity/The Future' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the matters retirees might worry about.  Maintaining a buffer stock of wealth to protect oneself against 'unknown unknowns' is possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of 'unknown unknowns.'  But if you knew those answers, they would be, at best, 'known unknowns.')
+
 
 # Estimation
 
