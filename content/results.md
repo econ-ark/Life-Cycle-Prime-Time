@@ -1,3 +1,7 @@
+```{include} parameters.tex
+```
+
+
 @medshare shows the median portfolio share for the agents in our simulation, along with the target share moments that come from @Aboagye2024. While the red line shows the whole life-cycle glidepath of optimal advise, here we only target those moments starting at age 70. As we can see, the TRP Portfolio model does a good job of matching the targeted portfolio shares post-retirement, while the Life-Cycle Portfolio and the Warm-Glow Portfolio models come close but persistently under-estimate the share of risky assets.
 
 ```{figure} figures/median_share
