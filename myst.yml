@@ -3,7 +3,7 @@ version: 1
 
 site:
   template: article-theme
-  # title: We Finally Have a Believable Life Cycle Model
+  # title: Life Cycle Modeling is Finally Ready for Prime Time
   # options:
   #   logo: site_logo.png
   nav: []
@@ -13,7 +13,7 @@ site:
   domains: []
 
 project:
-  title: We Finally Have a Believable Life Cycle Model
+  title: Life Cycle Modeling is Finally Ready for Prime Time
   # description:
   keywords: []
   authors:
@@ -79,7 +79,7 @@ project:
     '\MPCFunc': '\pmb{\kappa}'
     '\DFunc': '\mathrm{D}'
     '\dFunc': '\mathrm{d}'
-    '\bqstNrm': 'e'
+    '\bqstNrm': "e"
     '\bEndFunc': '\mathfrak{b}'
     '\CEndFunc': '\mathfrak{C}'
     '\cEndFunc': '\mathfrak{c}'
@@ -850,5 +850,4 @@ project:
     '\Seniority': '\mathsf{X}'
     '\seniority': '\mathsf{x}'
     '\wealthShare': '\delta'
-    '\lqdt' : '\ell'
-    
+    '\lqdt': '\ell'

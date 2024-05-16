@@ -308,6 +308,7 @@ We refrain from a description of the methods of solution here because they are d
 
 (We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.  In particular, the fact that in our SCF table above, 'Liquidity/The Future' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the matters retirees might worry about.  Maintaining a buffer stock of wealth to protect oneself against 'unknown unknowns' is possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of 'unknown unknowns.'  But if you knew those answers, they would be, at best, 'known unknowns.')
 
+(estimation)=
 # Estimation
 
 ### Indirect Inference Described
@@ -342,6 +343,9 @@ Having pinned down the moments we are interested in matching and their respectiv
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times. Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numerical differentiation and clever optimization algorithms to find the optimal parameter set. We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set. The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 
 ### Indirect Inference Results
+
+```{include} results.md
+```
 
 # Conclusion
 
