@@ -59,7 +59,7 @@ anchorcolor = black}
 
 \title{Life Cycle Modeling is Ready for Prime Time}
 
-\newdate{articleDate}{16}{5}{2024}
+\newdate{articleDate}{17}{5}{2024}
 \date{\displaydate{articleDate}}
 
 \makeatletter
@@ -125,7 +125,7 @@ But a point worth emphasizing is that it is their \textit{beliefs} about shocks,
 
 The traditional approach to calibrating such models has been for economists to try to construct their own measurements of the necessary inputs, and to assume that households believe whatever it is that the economist has measured. But among the things newly being measured in survey data are expectations of quantities that traditionally have been calibrated. It turns out that economists' beliefs differ substantially from the beliefs that many people really hold, and it seems reasonable to suppose that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they \textit{should} believe and prefer.\footnote{A particularly troubling possibility is raised by the work of \cite{gabaix2010age}, who point out that at least some elderly decisionmakers (say, those with dementia) may be beyond the `age of reason.' And, rather than being constant with age as economists typically assume, \cite{albert2012differences} provide evidence that risk aversion increases with age.}
 
-There is not yet a consensus about how these new findings should modify our default calibrations for life cycle models. But some early work suggests that taking these new calibrations into account could resolve some of the problems that have traditionally beset the life cycle modeling literature. For example, Mateo \cite{velasquez-giraldoJMP} has shown that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to the returns the market has historically delivered. He argues that this explains why, historically, people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations. He argues that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with rational decisionmaking (given their beliefs).  Concretely, many people think that investment in stocks is a lousy deal.  It's no mystery why such people do not invest.
+There is not yet a consensus about how these new findings should modify our default calibrations for life cycle models. But some early work suggests that taking these new calibrations into account could resolve some of the problems that have traditionally beset the life cycle modeling literature. For example, Mateo \cite{velasquezgiraldoJMP} has shown that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to the returns the market has historically delivered. He argues that this explains why, historically, people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations. He argues that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with rational decisionmaking (given their beliefs).  Concretely, many people think that investment in stocks is a lousy deal.  It's no mystery why such people do not invest.
 
 \subsubsection{Model Specification and Estimation}
 
@@ -133,7 +133,7 @@ In the Models section of the paper, we provide a formal description of the mathe
 
 This leads us into more speculative territory.  If what consumers care most about is to hold wealth for `Liquidity/The Future' but that wealth is not explainable by a precautionary motive, a potential interpretation is that consumers value the ownership of wealth in and of itself.  After fleshing out this idea a bit, we propose a final model that puts wealth in the utility function directly -- and in the Estimation section we show that this final model does a better job jointly matching the data on wealth profiles and portfolio choice than either of the other models.
 
-The main quantitative/mathematical result of this paper is to show that a model with `wealth in the utility function' can fit observed post-retirement behavior of both wealth-holding and portfolio choice better than the standard model (with or without a bequest motive).\footnote{We focus on college educated households partly because a growing body of literature - including \cite{velasquez-giraldoJMP}'s work cited above -- finds that the behavior of the college-educated population comes much closer to matching the predications of optimizing models than the behavior of people with less education).}
+The main quantitative/mathematical result of this paper is to show that a model with `wealth in the utility function' can fit observed post-retirement behavior of both wealth-holding and portfolio choice better than the standard model (with or without a bequest motive).\footnote{We focus on college educated households partly because a growing body of literature - including \cite{velasquezgiraldoJMP}'s work cited above -- finds that the behavior of the college-educated population comes much closer to matching the predications of optimizing models than the behavior of people with less education).}
 
 But the broader point is that, recently, our modeling and conceptual tools (including the concept that softer data like surveys should be taken seriously) have advanced to the point where it is finally possible to construct rational optimizing models of life cycle financial choice that can serve as a credible justification for normative advice.
 
@@ -263,7 +263,7 @@ $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ & probability a person alive at date $t$ 
 
 We calibrate the model to include two kinds of uncertainty after retirement.
 
-First, we incorporate estimates from \cite{velasquez-giraldoJMP} of the size of shocks to medical expenditures for retirees; a perfectly rational reason not to run down your wealth, or not to run it down too far, is a fear of large medical expenses that you want to be able to meet.  Such uncertainty has the potential to deter the drawdown of wealth; see \cite{ameriks2011joy} for an argument that it is the principal explanation for the `drawdown failure.'  While such effects are present in our model, our model estimation results below will find that the model still predicts much more drawdown of wealth than the data show.
+First, we incorporate estimates from \cite{velasquezgiraldoJMP} of the size of shocks to medical expenditures for retirees; a perfectly rational reason not to run down your wealth, or not to run it down too far, is a fear of large medical expenses that you want to be able to meet.  Such uncertainty has the potential to deter the drawdown of wealth; see \cite{ameriks2011joy} for an argument that it is the principal explanation for the `drawdown failure.'  While such effects are present in our model, our model estimation results below will find that the model still predicts much more drawdown of wealth than the data show.
 
 Second, we assume that there are `ordinary' expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from  \cite{flExpShocks}).  Again, in principle, the presence of such shocks provides a precautionary motive to draw down wealth more slowly.
 
@@ -411,7 +411,7 @@ Our estimation process is computationally expensive, requiring the solving and s
 
 \subsubsection{Indirect Inference Results}
 
-Table~\ref{parameters} shows the results of our estimation exercise. For the Standard Life-Cycle Portfolio Choice model, we estimate a CRRA $\CRRA$ coefficient of 8.810, which lines up with the literature on portfolio choice models requiring a higher $\CRRA$ to match wealth accumulation patterns. The Warm-Glow Portfolio Choice model estimates a CRRA $\CRRA$ coefficient of 8.765, a bequest factor $\alpha$ of 43.773, and a bequest shifter $\underline{a}$ of 26.256. As we will see in our later figures, although the bequest factor $\alpha$ is large, the estimated bequest shifter $\underline{a}$ is also large enough that it renders the bequest motive almost irrelevant, especially for the median household. This is consistent with previous findings in the literature such as those by \cite{deNardiBequest}. Finally, the TRP Portfolio Choice model estimates a CRRA $\CRRA$ coefficient of 3.472 and a wealth share of utility $\delta$ coefficient of 0.531. This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the Standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature. The addition of a non-separable utility of wealth factor $\delta$ allows the TRP Portfolio model to match the wealth accumulation patterns with a lower CRRA $\CRRA$ coefficient, which is more in line with the literature on risk aversion. Finally, we can observe the column labeled ``Criterion'', which represents the minimum value of the objective function attained for each model during the estimation process. The TRP Portfolio model has the lowest criterion value, indicating that it is the best-fitting model among the three.
+Table~\ref{parameters} shows the results of our estimation exercise. For the standard Life-Cycle-Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient that rounds to 8.8, which lines up with the literature finding that portfolio choice models requiring a very high $\CRRA$ in order to prevent agents from putting all their assets in the risky form. The Warm-Glow Portfolio Choice model estimates a CRRA $\CRRA$ coefficient of that also rounds to 8.8.  While it also estimates a bequest factor $\alpha$ of about 44, and a bequest shifter $\underline{a}$ of 26. The fact that the $\CRRA$ parameter is nearly unchanged is a clue to something that we will see in our figures:  Although the bequest factor $\alpha$ is large, the estimated bequest shifter $\underline{a}$ is also large enough that it renders the bequest motive almost irrelevant for the median college-educated household we are examining. This is consistent with previous findings in the literature such as those by \cite{deNardiBequest}, who finds that the bequest motive comes into play only for the richest households. Finally, the TRP Portfolio Choice model estimates a CRRA $\CRRA$ coefficient of 3.472 and a wealth share of utility $\delta$ coefficient of 0.531. This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the Standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature. The addition of a non-separable utility of wealth factor $\delta$ allows the TRP Portfolio model to match the wealth accumulation patterns with a lower CRRA $\CRRA$ coefficient, which is more in line with the literature on risk aversion. Finally, we can observe the column labeled ``Criterion'', which represents the minimum value of the objective function attained for each model during the estimation process. The TRP Portfolio model has the lowest criterion value, indicating that it is the best-fitting model among the three.
 
 \begin{table}
 \centering
@@ -421,8 +421,8 @@ Table~\ref{parameters} shows the results of our estimation exercise. For the Sta
 \toprule
 Name & Criterion & CRRA ($\CRRA$) & Wealth Share ($\delta$) & Bequest Factor ($\alpha$) & Bequest Shift ($\underline{a}$) \\
 Life-Cycle Portfolio & 0.594 & 8.810 &  &  &  \\
-Warm-Glow Portfolio & 0.594 & 8.765 &  & 43.773 & 26.256 \\
-TRP Portfolio & 0.397 & 3.472 & 0.531 &  &  \\
+Warm-Glow LC Portfolio & 0.594 & 8.765 &  & 43.773 & 26.256 \\
+TRP LC Portfolio & 0.397 & 3.472 & 0.531 &  &  \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -431,7 +431,7 @@ Figure~\ref{medshare} shows the median portfolio share for the agents in our sim
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.7\linewidth]{files/median_share-4914e6ae678815fe96333c65f71d7d38.pdf}
+\includegraphics[width=0.7\linewidth]{files/median_share-7bc7072478f0d82411669d2df5788c72.pdf}
 \caption[]{Median Portfolio Share for different portfolio models. The red line shows the target moments from \cite{Aboagye2024}.}
 \label{medshare}
 \end{figure}
@@ -440,7 +440,7 @@ Figure~\ref{medwealth} shows the median wealth to income ratio\footnote{Wealth i
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.7\linewidth]{files/median_wealth-54ebc582b1bc7f823c4d514c0977f5a6.pdf}
+\includegraphics[width=0.7\linewidth]{files/median_wealth-c5d96ad61b4952e18cc47de5e0c01e1c.pdf}
 \caption[]{Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for College educated households in the Survey of Consumer Finances. Wealth is \texttt{networth} and income consists of wages, social security, and retirement income.}
 \label{medwealth}
 \end{figure}
