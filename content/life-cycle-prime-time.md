@@ -1,48 +1,54 @@
 ---
-title: Life Cycle Modeling is Ready for Prime Time
+title: Life Cycle Modeling is (Almost) Ready for Prime Time
 exports:
     - format: tex+pdf
       template: arxiv_nips
       output: life-cycle-prime-time.pdf
 ---
 
+%% [ ] AL: Remind me - we are now incorporating aggregate productivity growth of 1.5 percent/yr?
+%% [ ] AL: Need to import Mateo's medical expense shocks (and need to make them a default option in the life cycle models in HARK)
+
+
 +++ { "part": "abstract" }
 
-The 'life cycle model' of optimal saving for retirement is familiar to anyone who has taken an introductory economics class. When hiring a financial advisor, people probably think of the advisor's job as being just to tailor optimal life-cycle-model choices to their particular circumstances. But academics and financial advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, most such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check (at least approximately). This paper makes the case that recent developments in the economics literature have finally given us the tools we need to construct rigorous life cycle models whose advice is sensible.  We provide one example of a simple model that can solve a number of problems by putting wealth in the utility function.
+The 'life cycle model' of optimal saving for retirement is familiar to anyone who has taken an introductory economics class. When hiring a financial advisor, people probably think the advisor's job is just to tailor optimal life-cycle-model choices to their particular circumstances. But academics and financial advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, most such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check (at least approximately). This paper makes the case that recent developments in the economics literature have finally given us the tools we need to construct rigorous life cycle models whose advice is sensible.  We provide one example of a simple model that can solve a number of problems by putting wealth in the utility function.
 
 +++
 
 # Introduction
 
-Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose that it might be possible understand consumer financial choices as reflecting optimal responses to the realities of the path of income and of spending needs over the lifetime. An enormous academic literature has followed their pioneering work, but it has proven difficult to build rational optimizing models that give sensible advice about both life cycle saving choices and about investment decisions like how much of one's retirement savings should be invested in the stock market.
+Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose trying to understand consumer financial choices as reflecting optimal responses to the realities of the path of income and of spending needs over the lifetime. An enormous academic literature has followed their pioneering work, but it has proven difficult to build rational optimizing models that give sensible advice about both life cycle saving choices and about investment decisions like how much of one's retirement savings should be invested in the stock market.
 
 [^modigliani_brumberg]: @10.7551/mitpress/1923.003.0004
 
 But in the last few years, the academic literature has developed in ways that offer the prospect that we may now finally be able to build rigorous optimizing life cycle models whose advice is not obviously wrong.
 
-% Delete bullet
 ### Computation/Uncertainty/Complexity 
 
-The first such development is that the rapid advance of computational capacity has made it possible to dispense with doubtful simplifications and to construct credible answers to the question "what saving and portfolio choices are mathematically optimal" in a real world whose key complexities can finally be handled appropriately. In particular, the incorporation of realistic descriptions of the uncertainties decisionmakers face (about their own income, stock returns, interest rates, health expenditures, mortality, and more) makes computation of the optimal solution astonishingly difficult. Much harder, say, than the computation of optimal trajectories for spacecraft; comparable perhaps to the computational difficulty of figuring out how to drive a car roughly as well as a human (another problem where adequate computational solutions have only recently become available).
+The first such development is the rapid advance of computational capacity, which has made it possible to dispense with inappropriate simplifications and to construct credible answers to the question "what saving and portfolio choices are truly mathematically optimal" in a real world whose key complexities can finally be handled appropriately. In particular, the incorporation of realistic descriptions of the uncertainties decisionmakers face (about their own income, stock returns, interest rates, health expenditures, mortality, and more) makes computation of the optimal solution astonishingly difficult. Much harder, say, than the computation of optimal trajectories for spacecraft; comparable perhaps to the computational difficulty of figuring out how to drive a car roughly as well as a human (another problem where adequate computational solutions have only recently become available).
 
-% Delete Bullet 
 ### Survey Data on Expectations and Preferences
 
 A second academic development has been a new openness to the idea that people's beliefs and preferences can be probed by *asking them* about their beliefs and preferences.
 
 In the context of motivations for saving, this leads us to want to take seriously the answers to a survey question about their 'most important' reason for saving that respondents to the Federal Reserve's [Survey of Consumer Finances (SCF)](https://www.federalreserve.gov/econres/scfindex.htm) have been asked for many years. Among retirees, one answer dominates the rest: 'Liquidity/The Future.'  (See [the discussion below](#most-important-reason) for details).
 
-The 'Liquidity' component of this answer suggests the possibility that precautionary saving motives matter for many households -- highlighting the need for the computational advancements that now allow us to properly model the mathematically optimal precautionary response to beliefs about shocks.
+The 'Liquidity' component of this answer suggests the possibility that precautionary saving motives matter for many households -- highlighting the need for the abovementioned computational advancements.
 
-%%% AL: Need to import Mateo's medical expense shocks (and need to make them a default option in the life cycle models in HARK)
+% this is said below But a point worth emphasizing is that it is their *own beliefs* about shocks, and their *own preferences* toward risk that presumably determine a person's behavior.
 
-But a point worth emphasizing is that it is their *beliefs* about shocks, and *preferences* toward risk that should determine a person's behavior.
+The traditional approach to calibrating such models has been for economists to try to construct objective measurements of the necessary inputs, and to assume that households believe whatever it is that the economist has measured. But among the information newly being collected in surveys are data on expectations; and it turns out that economists' constructed beliefs often differ substantially from the beliefs that many people actually hold, and it seems reasonable to suppose that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they *should* believe and prefer.[^ageofreason]
 
-The traditional approach to calibrating such models has been for economists to try to construct their own measurements of the necessary inputs, and to assume that households believe whatever it is that the economist has measured. But among the things newly being measured in survey data are expectations of quantities that traditionally have been calibrated. It turns out that economists' beliefs differ substantially from the beliefs that many people really hold, and it seems reasonable to suppose that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they *should* believe and prefer.[^ageofreason]
+[^ageofreason]: A particularly troubling possibility is raised by the work of @gabaix2010age, who point out that at least some elderly decisionmakers (say, those with dementia) may be beyond the 'age of reason.' 
 
-[^ageofreason]: A particularly troubling possibility is raised by the work of @gabaix2010age, who point out that at least some elderly decisionmakers (say, those with dementia) may be beyond the 'age of reason.' And, rather than being constant with age as economists typically assume, @albert2012differences provide evidence that risk aversion increases with age.
+% And, rather than being constant with age as economists typically assume, @albert2012differences provide evidence that risk aversion increases with age.
 
-There is not yet a consensus about how these new findings should modify our default calibrations for life cycle models. But some early work suggests that taking these new calibrations into account could resolve some of the problems that have traditionally beset the life cycle modeling literature. For example, Mateo @velasquezgiraldoJMP has shown that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to the returns the market has historically delivered. He argues that this explains why, historically, people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations. He argues that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with rational decisionmaking (given their beliefs).  Concretely, many people think that investment in stocks is a lousy deal.  It's no mystery why such people do not invest.
+Some early work suggests that taking these new calibrations into account could resolve some of the problems that have traditionally beset the life cycle modeling literature. For example, Mateo @velasquez-giraldoJMP has shown that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to the returns the market has historically delivered. He argues that this explains why, historically, people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations. He argues that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with rational decisionmaking (given their beliefs).  Concretely, many people think that investment in stocks is a lousy deal - low return and high risk.  It's no mystery why such people do not invest.
+
+It is not exactly shocking to discover that many people hold beliefs that differ from those of experts -- especially on subjects (like the returns and risk stock investments) whose mastery requires considerable domain-specific education. The existence of a large industry offering financial advice attests to the fact that many people are not confident that they understand everything necessary to make good financial financial choices on their own. 
+
+The provision of financial advice, however, is fraught with the potential for conflicts of interest. That is why the idea of justifying that advice with an explicit and transparent modeling framework is so attractive. If the advice is consistent with the model, and the model can be checked both for mathematical correctness and conceptual soundness (by outside experts), then it is reasonable for a client hiring an advisor to trust the advice given.
 
 ### Model Specification and Estimation 
 
@@ -56,21 +62,21 @@ The main quantitative/mathematical result of this paper is to show that a model 
 
 [^college]: We focus on college educated households partly because a growing body of literature - including @velasquezgiraldoJMP's work cited above -- finds that the behavior of the college-educated population comes much closer to matching the predications of optimizing models than the behavior of people with less education).
 
-But the broader point is that, recently, our modeling and conceptual tools (including the concept that softer data like surveys should be taken seriously) have advanced to the point where it is finally possible to construct rational optimizing models of life cycle financial choice that can serve as a credible justification for normative advice.
+But the broader point is that, recently, our modeling and conceptual tools (including the idea that softer data like surveys should be taken seriously) have advanced to the point where it is finally possible to construct rational optimizing models of life cycle financial choice that can serve as a credible justification for normative advice.
 
 # Models
 
 The academic literature on life cycle modeling is extraordinarily rich, and we cannot hope to do justice to it here. What we have done instead is to construct a 'toy model' that captures some key points and ideas. We think of this as a starting point for what we hope will be a new literature that aims to integrate insights from many different kinds of evidence into a plausible framework for thinking realistically about life cycle financial choice.
 
-One kind of further evidence that we view as vital to incorporate in future models is the experience of financial advisors themselves in interactions with their clients. We have been told,[^nodrawdown] for example, that advice that clients should run their wealth down to zero then live pension-check to pension-check would be so unwelcome that a financial advisor who provided that advice would be fired.  
+One kind of further evidence that we view as vital is the experience of financial advisors themselves in interactions with their clients. We have been told,[^nodrawdown] for example, that advice that clients should run their wealth down to zero then live pension-check to pension-check would be so unwelcome that a financial advisor who provided that advice would be fired.
 
 [^nodrawdown]: Personal communication, James Tzitzouris with Christopher Carroll, 2024-05-15.
 
-The kinds of models we are examining here are well suited to the task of crafting systematic advice for clients like employers who need to hire 401(k) plan providers. It is not hard to imagine that such clients might be attracted to a 401(k) provider whose advice is justified by, and can be explained using the logic of, a well-specified model of optimal choice.  That might be more persuasive than 'trust us, we know what we are doing.'
+The kinds of models we are examining here are well suited to the task of crafting systematic advice for clients like employers who need to hire 401(k) plan providers. It is not hard to imagine that such employers might be attracted to a 401(k) provider whose advice is justified by, and can be explained using the logic of, a well-specified model of optimal choice.  That might be more persuasive than 'trust us, we know what we are doing.'
 
-For purposes like 401(k) or other pension plan design, the optimization problem can be constrained to one that satisfies the legal obligations the employers have to their employees. For example, the employer's contract is with the employee, not with the employee's heirs. The employee's duty is to craft a plan that is expected to permit the employee to have adequate resources for their own expenditures during retirement. These legal considerations effectively prohibit the advisor from including a bequest motive in its optimization objective.[^planprovideradvantage]
+For purposes like 401(k) or other pension plan design, the optimization problem can be constrained to one that satisfies the legal obligations the employers have to their employees. For example, the employer's contract is with the employee, not with the employee's heirs. The employer's duty is to craft a plan that is expected to permit the employee to have adequate resources for their own expenditures during retirement. These legal considerations effectively prohibit the advisor from including a bequest motive in its optimization objective.[^planprovideradvantage]
 
-[^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless employees. This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
+[^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless people. This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
 
 ## The Baseline Academic Models
 
@@ -95,11 +101,10 @@ In formal mathematical terms, the consumer's objective is to maximize present di
 \end{equation}
 
 \begin{align}
-    \\ \Alive _{t}^{t+n} & : \text{probability to }\Alive\text{ive until age $t+n$ given you are alive at age $t$}
-    \\                   & {~~~}\bullet \text{$\Alive_{120}^{121} = 0.0$ says that a 120 year old has zero probability of living to 121}
-    \\                   & {~~~}\bullet \text{$\Alive_{80}^{90} = 0.3$ says that an 80 year old has a 30 percent chance of reaching 90}
-    % \\                 & {~~~}\bullet \text{$\Alive_{81}      = 0.9$ says that an 80 year old has a 90 percent chance of reaching 91}
-    \\ {\DiscFac}        & : \text{time discount factor (captures degree of present bias)}
+    \\ \Alive _{t}^{t+n} & : \text{probability to } \Alive \text{ive until age $t+n$ given you are alive at age $t$}
+    \\                   & {~~~}\bullet \Alive_{120}^{121} = 0.0 \text{ says that a 120 year old has zero probability of living to 121}
+    \\                   & {~~~}\bullet \Alive_{80\phantom{1}}^{90\phantom{1}} = 0.3 \text{ says that an 80 year old has a 30 percent chance of reaching 90}
+    \\ \DiscFac = 1        & : \text{time discount factor (captures degree of present bias)}
 \end{align}
 
 We use standard calibrations for mortality by age from actuarial mortality tables used by the Social Security administration. We set the 'pure' rate of time preference to $\beta=1$ because that means that the optimal choice is to care exactly as much your future self as much as your present self (conditional on surviving into the future). 
