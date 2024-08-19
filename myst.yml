@@ -2,7 +2,7 @@
 version: 1
 
 site:
-  template: article-theme
+  template: book-theme
   # title: Life Cycle Modeling is Finally Ready for Prime Time
   # options:
   #   logo: site_logo.png
@@ -79,7 +79,7 @@ project:
     '\MPCFunc': '\pmb{\kappa}'
     '\DFunc': '\mathrm{D}'
     '\dFunc': '\mathrm{d}'
-    '\bqstNrm': 'e'
+    '\bqstNrm': "e"
     '\bEndFunc': '\mathfrak{b}'
     '\CEndFunc': '\mathfrak{C}'
     '\cEndFunc': '\mathfrak{c}'
