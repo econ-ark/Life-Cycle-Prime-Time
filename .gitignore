@@ -472,3 +472,6 @@ TSWLatexianTemp*
 
 _build/
 myst-gitlens.code-workspace
+
+# MyST build outputs
+_build
