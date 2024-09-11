@@ -14,6 +14,8 @@ exports:
 
 +++ { "part": "abstract" }
 
+%% MNW: I'm not sure about this abstract framing. Is the lifecycle model frequently taught in "introductory economics class"? Even if it is, a "narrative style" isn't typical in an abstract. Tell the reader what the paper does, and get to it fast.
+
 The 'life cycle model' of optimal saving for retirement is familiar to anyone who has taken an introductory economics class.
 When hiring a financial advisor, such people probably think the advisor's job is just to tailor optimal life-cycle-model choices to their particular circumstances.
 But academics and advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, most such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check (at least approximately).
@@ -25,17 +27,20 @@ We provide one example of a simple model that can solve a number of problems by 
 # Introduction
 
 Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose trying to understand consumer financial choices as optimal responses to the realities of the paths of income and of spending needs over the lifetime.
-An enormous academic literature has followed their pioneering work (we cite some of that literature in our main text, and have included a more expansive summary of some relevant work in our [literature appendix](#lit-review)).
-But it has proven difficult to build rational optimizing models that give sensible advice about both life cycle saving choices and about investment decisions like how much of one's retirement savings should be invested in the stock market.
-(The subtitle of a recent paper by [](doi:10.3905/jor.2023.10.3.071) captures the current state of affairs nicely: "Why Practitioners Have Not Adopted the Lifecyle Model -- Yet"; see also [](doi:10.1146/annurev-economics-080315-015127)).
+An enormous academic literature has followed their pioneering work (see the [literature appendix](#lit-review) for an expansive summary),
+but it has proven difficult to build rational optimizing models that give sensible advice about both life-cycle saving choices and about investment decisions.
+That is, the models yield implausible answers to questions about how much wealth should be retained later in life, and how much of one's retirement savings should be invested in the stock market.
+Indeed, the subtitle of a recent paper by [](doi:10.3905/jor.2023.10.3.071) captures the current state of affairs nicely: "Why Practitioners Have Not Adopted the Lifecyle Model -- Yet"; see also [](doi:10.1146/annurev-economics-080315-015127).
 
 [^modigliani_brumberg]: @10.7551/mitpress/1923.003.0004
 
-The argument of this paper is that the elements are already available to construct a model that 'practitioners can adopt.'
-All that is necessary is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients.
+In this paper, we argue that the elements are already available to construct a model that 'practitioners can adopt,' and all that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients.
 Our paper's central contribution is to provide a small [open-source computational model](github.com/econ-ark/life-cycle-prime-time) that incorporates the features that make it possible to build rigorous optimizing life cycle models whose advice is not obviously wrong.
 
+%% MNW: I'm not sure that the first sentence describes what you actually do here. At most, you're including a calibration of medical expenses *in retirement*, treated as "negative income shocks". It doesn't include any of the other features you mention might be important, like housing, persistent medical needs / long term disability, etc. And I'm not sure the extent to which you're using "wisdom from practitioners' own experience", other than rejecting any model with a sharp wealth drawdown rate.
+
 We begin with a (very) brief literature synopsis, then present a set of illustrative models ending with our proposed solution, which involves a small twist to the old idea (@carrollWhyDoTheRich) of incorporating wealth directly in the utility function.
+
 
 ## Recent Developments in the Literature
 
@@ -45,8 +50,10 @@ Consumers face many uncertainties: about their own income, stock returns, intere
 Further complications arise because of liquidity constraints and other financial frictions.
 
 The incorporation of realistic descriptions of these complexities makes computation of the mathematically optimal solution to the consumer's astonishingly difficult.
-Much harder, say, than the calculation of optimal trajectories for spacecraft; comparable perhaps to the computational difficulty of figuring out how to drive a car roughly as well as a human (another problem where adequate computational solutions have only recently become available).
+It is more difficult than, say, the calculation of optimal trajectories for spacecraft, and perhaps comparable to the complexity of figuring out how to drive a car roughly as well as a human (another problem where adequate computational solutions have only recently become available).
 The remarkable advance of computational power has now finally made it possible to handle these complexities to compute a credible answer to the question "what saving and portfolio choices are truly mathematically optimal" in a context where the key complexities are properly represented.
+
+%% MNW: I can't overstate the extent to which I disagree with the above paragraph. Solving a lifecycle micro model with some combination of those features is *nowhere near* the level of complexity and computational burden as flying a spacecraft. I am sure of this because *I program those models on my own*, and get them done in quite finite time. NASA employs *large teams* of programmers to launch spacecraft, as do companies who develop automated driving systems. This comparison makes you sound non-credible.
 
 ### Survey Data on Expectations and Preferences
 
@@ -58,47 +65,63 @@ Among retirees, one answer dominates the rest: 'Liquidity/The Future.'  (See [th
 A natural interpretation of the importance consumers put on 'liquidity' is that precautionary saving motives matter for many households -- highlighting the need for the aforementioned computational advancements.
 
 The traditional approach to constructing such models has been for economists to try to measure the necessary inputs (income uncertainty, e.g.), and to assume that agent beliefs incorporate whatever it is that the economist has measured.
-But among the information newly being collected in surveys are data on expectations; and it turns out that economists' constructed beliefs often differ substantially from the beliefs that many people actually hold, and there is now considerable evidence that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they *should* believe and prefer.[^ageofreason]
+However, the newly collected survey data on consumer expectations show that the beliefs that many people \textit{actually} hold differ substantially from what economists postulate they `should' believe based on their empirical measurements.
+Moreover, there is now considerable evidence that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they *should* believe and prefer.[^ageofreason]
 
 [^ageofreason]: A particularly troubling possibility is raised by the work of @gabaix2010age, who point out that at least some elderly decisionmakers (say, those with dementia) may be beyond the 'age of reason.'
 
 % And, rather than being constant with age as economists typically assume, @albert2012differences provide evidence that risk aversion increases with age.
 
-Some early work suggests that taking beliefs data into account could resolve many of the problems that have long beset the life cycle modeling literature.
-For example, Mateo @velasquezgiraldoJMP has shown that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to the returns the market has historically delivered.
-He argues that this explains why, historically, people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations, and argues that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with rational decisionmaking (given their beliefs).
-Concretely, many people think that investment in stocks is a lousy deal - low return and high risk.  It's no mystery why such people do not invest.
+%% MNW: Leave that sentence commented out. It's mostly irrelevant, except to the extent that increasing CRRA with age would make the MPC go to zero as market resources go to infinity.
 
-It is not astonishing to discover that many people hold beliefs that differ from those of experts -- especially on subjects (like the returns and risk of stock investments) whose mastery requires considerable domain-specific education.
+Some recent work suggests that taking beliefs data into account could resolve many of the problems that have long beset the life cycle modeling literature.
+For example, @velasquezgiraldoJMP shows that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to what the market has historically delivered.
+He argues that this explains why people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations, and that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with *subjectively* rational decision-making (i.e. given their beliefs).
+Concretely, many people think that investment in stocks is a lousy deal, yielding a low return with high risk, so it's no mystery why such people do not invest.
+
+It is not astonishing to discover that many people hold beliefs that differ from those of experts, especially on subjects whose mastery requires considerable domain-specific education, like the returns and risk of stock investments.
 Indeed, the existence of a large industry offering financial advice is _prima facie_ evidence that many people are not confident that they understand everything necessary to make good financial financial choices on their own.
+
+%% MNW: That's correct, but it means that your estimation exercise strange logic. People know that they don't know how to make good decisions, so they ask experts for advice on what to do. Then economists observe what they do, and try to infer preferences and an "internal model" from actions *that might have been based on financial advisers' input. And then we turn around and *tell the financial advisers* what models to use based on that inference. It's circular.
 
 Financial advice, however, is fraught with potential conflicts of interest.
 That is one reason that justifying such advice with an explicit and transparent modeling framework is so attractive.
 If the advice is consistent with the model, and the model can be checked both for mathematical correctness and conceptual soundness (by outside experts), then it is reasonable for a client hiring an advisor to trust the advice.
 
+%% MNW: I don't think you should raise "conflicts of interest", especially not with the word "fraught", if you're trying to make TRP happy.
+
 
 ### Model Specification and Estimation
 
-In the [Models](#models) section of the paper, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the [Life Cycle Portfolio](#lcp-model) model (which calculates optimal saving and optimal portfolio shares over the life cycle).
-We will find, in the [Estimation](#estimation) section of the paper, that the model implies a rapid drawdown of wealth after retirement that we simply do not see, confirming a longstanding problem with life cycle models (see, e.g., @hurd1987savings, [](doi:10.1111/jofi.12828)).[^AmeriksCaveat]
-We will call this the 'drawdown failure,' which has been the subject of a large literature with both U.S. evidence (see, e.g., @10.2307/1913772, @DeNardi2016d, [](doi:10.1257/mac.6.3.29), [](doi:10.17310/ntj.2019.3.02), [](doi:10.1016/j.jpubeco.2018.04.008)) and international evidence (see, e.g., [](doi:10.3386/w29826), [](doi:10.1007/s11150-020-09486-y), [](doi:10.1016/j.jjie.2018.10.002)).
+In the [Models](#models) section of the paper, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the [Life Cycle Portfolio](#lcp-model) model, which calculates optimal saving and optimal portfolio shares over the life cycle.
+In the [Estimation](#estimation) section of the paper, we report that the model implies a rapid drawdown of wealth after retirement that we simply do not in empirical observations, confirming a longstanding problem with life cycle models (see, e.g., @hurd1987savings, [](doi:10.1111/jofi.12828)).[^AmeriksCaveat]
+We call this the 'drawdown failure,' which has been the subject of a large literature with both U.S. evidence (see, e.g., @10.2307/1913772, @DeNardi2016d, [](doi:10.1257/mac.6.3.29), [](doi:10.17310/ntj.2019.3.02), [](doi:10.1016/j.jpubeco.2018.04.008)) and international evidence (see, e.g., [](doi:10.3386/w29826), [](doi:10.1007/s11150-020-09486-y), [](doi:10.1016/j.jjie.2018.10.002)).
 
-[^AmeriksCaveat]: Some impressive recent work by Ameriks, Caplin, and coauthors (@ameriks2011joy, @Ameriks2020jpe) has argued that concerns about the possibility of extremely large medical costs -- for example for nursing home care -- may be behind the drawdown failure for some people (see [](doi:10.1146/annurev-economics-080315-015127)) for a survey).
-Although our model attempts to take medical expenditure shocks into account (see the model code for details), it is not calibrated directly with the @Ameriks2020jpe measurements of medical shocks in the US.
+[^AmeriksCaveat]: Some impressive recent work by Ameriks, Caplin, and coauthors (@ameriks2011joy, @Ameriks2020jpe) has argued that concerns about the possibility of extremely large medical costs (e.g. nursing home or other long term care) may be behind the drawdown failure for some people (see [](doi:10.1146/annurev-economics-080315-015127)) for a survey).
+Although our model attempts to take medical expenditure shocks into account, it is not calibrated directly with the @Ameriks2020jpe measurements of medical shocks in the US.
 It would be interesting to see how our results might change if we were to do so; but the inexorable logic behind the model's prediction of a rapid drawdown of wealth should still apply.
 Furthermore, the drawdown failure is also present in other countries whose social insurance systems are more generous than the U.S., so it seems unlikely that uninsurable medical risk is a sufficient explanation.
+
+%% MNW: Other countries have *more generous* public health coverage, but not *complete*. There are almost always private facilities that offer better quality care, or at least more amenities, than what's offered in public care. The idea of being forced into low quality public long term care can thus be the "threat" that makes moderately wealthy people hold a lot of wealth even late in life.
 
 We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure ([](@deNardi2004)],[](doi:10.1146/annurev-economics-080315-015127)).
 But in the [Estimation](#estimation) section we confirm the consensus in the literature that the bequest motive does not seem to have much force for most households.
 (Note that @10.2139/ssrn.304721 finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
 
+%% MNW: This feels contradictory. You're saying that people hold lots of wealth until the end of life... but also that these bequests are small relative to lifetime resources for most people. That would mean that wealth heterogeity (and heterogeneous wealth holding behavior) plays an important role... but that doesn't enter your model.
+
 This leads us into more speculative territory.
 If what consumers care most about is to hold wealth for 'Liquidity/The Future' but that wealth is not explainable by precautionary saving against against measurable shocks, a potential interpretation is that consumers value the ownership of wealth in and of itself.
-After fleshing out this idea a bit, we propose a final model that puts wealth in the utility function directly in a slightly different way than in the existing life cycle literature.
+After fleshing out this idea a bit, we propose a final model that makes wealth a direct input to the utility function in a slightly different way than in the existing life cycle literature.
 
-The main quantitative/mathematical result of this paper is to show -- in the [Estimation](#estimation) section -- that this final model does a better job jointly matching the data on wealth profiles and portfolio choice than either the Life Cycle Portfolio or the Bequest models.
+%% MNW: I disagree with this model as the "correct" approach, or productive for making normative recommendations to consumers/investors. It feels a lot like the "habit formation" literature, directly adjusting the utility function to explain why agents do what you see them do-- the "chicken crossing the road" problem. That is, macroeconomists saw aggregate consumption being "too smooth" and said "well, maybe people don't like changing their consumption" and put that in the model. Here, you've got people holding "more wealth than they should", and the modeler's response is "well, maybe they just like holding wealth". It's tautological and doesn't explain *why*.
 
-But the broader point is that, recently, our modeling and conceptual tools (including the idea that softer data like surveys should be taken seriously) have advanced to the point where it is finally possible to construct rational optimizing models of life cycle financial choice that can serve as a credible justification for normative advice.
+%% MNW: Earlier in the paper, you point to Mateo's results about people having wrong beliefs about the stock market, and making investing decisions based on those beliefs. Isn't the proper response to that to find out *more* about what people believe can happen to them in old age, and incorporate that into the model? Does your modeling exercise actually use Mateo's results?
+
+The main quantitative/mathematical result of this paper is to show that this final model does a better job jointly matching the data on wealth profiles and portfolio choice than either the Life Cycle Portfolio or the Bequest models.
+More broadly, our modeling and conceptual tools have recently advanced to the point where it is finally possible to construct rational optimizing models of life-cycle financial choice that can serve as a credible justification for normative advice.
+In particular, these conceptual advances include the idea that ``softer'' data like surveys on household expectations and beliefs should be taken seriously.
+
 
 # Models
 
