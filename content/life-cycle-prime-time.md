@@ -82,7 +82,7 @@ Concretely, many people think that investment in stocks is a lousy deal, yieldin
 It is not astonishing to discover that many people hold beliefs that differ from those of experts, especially on subjects whose mastery requires considerable domain-specific education, like the returns and risk of stock investments.
 Indeed, the existence of a large industry offering financial advice is _prima facie_ evidence that many people are not confident that they understand everything necessary to make good financial financial choices on their own.
 
-%% MNW: That's correct, but it means that your estimation exercise strange logic. People know that they don't know how to make good decisions, so they ask experts for advice on what to do. Then economists observe what they do, and try to infer preferences and an "internal model" from actions *that might have been based on financial advisers' input. And then we turn around and *tell the financial advisers* what models to use based on that inference. It's circular.
+%% MNW: That's correct, but it means that your estimation exercise has strange logic. People know that they don't know how to make good decisions, so they ask experts for advice on what to do. Then economists observe what they do, and try to infer preferences and an "internal model" from actions *that might have been based* on financial advisers' input. And then we turn around and *tell the financial advisers* what models to use based on that inference. It's circular.
 
 Financial advice, however, is fraught with potential conflicts of interest.
 That is one reason that justifying such advice with an explicit and transparent modeling framework is so attractive.
@@ -125,7 +125,7 @@ In particular, these conceptual advances include the idea that ``softer'' data l
 
 # Models
 
-The academic literature on life cycle modeling is vast, and we cannot hope to do it justice (even in the broader sampling in the [literature appendix](#lit-review)).
+The academic literature on life-cycle modeling is vast, and we cannot hope to do it justice (even in the broader sampling in the [literature appendix](#lit-review)).
 But the intrinsic nature of papers in any academic literature is to focus narrowly on one specific question at a time.
 Here, our goal is to examine the "big picture" question of what elements are needed to craft a model that can provide credible advice to retirees about spending and portfolio choices, while remaining reasonably consistent with the relevant well-established facts from the academic literature, as well as one new kind of further evidence that we view as vital: the experience of financial advisors themselves in interactions with their clients.
 We have been told,[^nodrawdown] for example, that a good way to get fired as a financial advisor is to recommend the LCP model's conclusion that it is optimal for retirees to plan to run their wealth down to zero then live pension-check to pension-check.
@@ -137,6 +137,8 @@ For example, the employer's contract is with the employee, not with the employee
 The employer's duty is to craft a plan that is expected to permit the employee to have adequate resources for their own expenditures during retirement.
 These legal considerations effectively prohibit the advisor from including a bequest motive in its optimization objective.[^planprovideradvantage]
 
+%% MNW: What's the point of this paragraph? I don't think employers usually *control the magnitude* of employee contributions to a 401(k). They can provide some match, but they can neither mandate participation nor cap contributions.
+
 [^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless people.
 This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
 
@@ -146,23 +148,27 @@ This might not be feasible with public datasets like the SCF because the sample 
 (lcp-model)=
 ### The Life Cycle Portfolio ('LCP') Model
 
-We begin by describing the optimal consumption/saving problem over the life cycle for a consumer with no access to a risky asset (like the stock market) that earns a higher (expected) rate of return than the safe asset.
-After we have finished describing the plain life cycle model we will augment it to add optimal portfolio choice between safe and risky assets.
+We begin by describing the optimal consumption/saving problem over the life cycle for a consumer with no access to only a single, risk-free asset.
+After we have finished describing the plain life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
-In each period, a consumer's flow of utility depends on how much they consume.
+In each period, a consumer's flow of utility depends on how much they consume from their available resources:
 We assume that the utility function is of the standard Constant Relative Risk Aversion form:
 \begin{align}
     \uFunc(c) & = \frac{c^{1-\CRRA}}{1-\CRRA}
 \end{align}
-but of course the consumer is smart enough to realize that preserving some resources for the future is a good idea; this is why all wealth is not consumed immediately.
 
-We follow a tradition dating back to @friedman1957 in assuming that a consumer's financial circumstances depend chiefly on two variables.
-$\pLvl_{t}$ is the consumer's permanent income (roughly, the income they would normally expect to receive in the absence of surprises like winning the lottery or a temporary layoff), while $\mLvl_{t}$ is total market resources (the sum of financial assets and current income -- think of this as the pool of resources that can be immediately spent; 'money' in the colloquial sense of 'how much money does grandma have?').
+One of the fundamental discoveries of the past 40 years or so is the extent to which optimal choice is profoundly altered by the presence of uncertainty.
+@friedman1957 proposed a simple formulation of the labor income process that remains an excellent description of annual income shocks even today, proffering that there are two components to income.
+The 'permanent' component is roughly what they would expect to earn in a 'normal' year (say, their annual salary), and the 'transitory' component reflects events like unemployment spells or lottery winnings, which make a given year's realized income deviate from its expected value.
+From a modeling perspective, the upshot is that a consumer's financial circumstances can be fully captured with two variables.
+First, the consumer's permanent income level $\pLvl_{t}$ is the non-capital income they would normally expect to receive.
+Second, total market resources $\mLvl_{t}$ represent the sum of financial assets and current income: the pool of resources that can be immediately spent, or 'money' in the colloquial sense of 'how much money does grandma have?'.
+The transitory component of income need not be tracked at all: as soon as this uncertainty is resolved, its information is fully incorporated by market resources $\mLvl_{t}$.
 
-The 'value' of having a given amount of market resources $\mLvl_{t}$ right now, and of knowing your current permanent income level to be $\pLvl_{t}$, is determined by the utility you will experience from consumption today, as well as the utility you expect to experience in the future.
-Any future period matters to you only to the extent that you expect to survive to that period.
+A consumer's 'value' of having a given amount of market resources $\mLvl_{t}$ right now, and of knowing their current permanent income level to be $\pLvl_{t}$, is the sum of consumption utility they will experience from today onward into the indefinite future.
+Potential future utility flows matter only to the extent that the agent expects to survive to that period, and might be further discounted due to placing more weight on the present than the future.
 
-In formal mathematical terms, the consumer's objective is to maximize present discounted utility from consumption over a life cycle that ends no later than date $T$ (often set to age 120):
+In formal mathematical terms, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than date $T$:
 
 \begin{equation}
     \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cFunc\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right] \label{eq:lifecyclemax}
@@ -175,20 +181,18 @@ In formal mathematical terms, the consumer's objective is to maximize present di
     \\ \DiscFac = 1        & : \text{time discount factor (captures degree of present bias)}
 \end{align}
 
-We use standard calibrations for mortality by age from actuarial mortality tables used by the Social Security administration.
-We set the 'pure' rate of time preference to $\beta=1$ because that means that the optimal choice is to care exactly as much your future self as much as your present self (conditional on surviving into the future).
+%% We use standard calibrations for mortality by age from actuarial mortality tables used by the Social Security administration.
+%% We set the 'pure' rate of time preference to $\beta=1$ because that means that the optimal choice is to care exactly as much your future self as much as your present self (conditional on surviving into the future).
 
-One of the fundamental discoveries of the past 40 years or so is the extent to which optimal choice is profoundly altered by the presence of uncertainty.
-@friedman1957 proposed a simple formulation that remains an excellent description of annual income shocks even today.
-Friedman said that there are two components to income: A 'permanent' component that is roughly what they would expect to earn in a 'normal' year (say, their annual salary), and a 'transitory' component that reflects events like unemployment spells or lottery winnings; these make a given year's realized income deviate from its expected value.
+%% MNW: I'm commenting those out because they're out-of-place here. This section is about the model, not about the calibration. Keep information well partitioned to maintain flow/narrative.
 
-To meld Friedmanian uncertainty with a Modlglianian life cycle, we need one more definition, whose purpose is to capture the predictable patterns that (noncapital) income follows over the lifetime (income starts low, rises with age and experience, and falls at retirement to the level of any regular pension payments):
+To capture the predictable patterns that non-capital income follows over the life cycle (i.e. rising with age and experience, and falling at retirement to the level of any regular pension payments), we define a sequence to characterize the Modiglianian life cycle:
 \begin{align}
     \permGroFac_{t+1} & : \text{typical life cycle permanent income growth factor by age}
 \end{align}
 
-The typical life cycle pattern is altered, in any particular consumer's case, by 'permanent shocks' which we represent with the variable $\permShk$.
-At any given age, permanent growth can deviate from the average experience of others of the same age in either a positive direction ($\psi>1$ would correspond to an unexpected promotion or a switch to a higher-paying job) or a negative direction ($\psi < 1$ might be the result of a failure to be promoted or a change to a lower paying job).
+For any particular consumer, deviations from the typical life cycle permanent income growth pattern arise from 'permanent shocks' that we represent with the variable $\permShk$.
+At any given age, such shocks could be positive ($\psi>1$), corresponding to an unexpected promotion or a switch to a higher-paying job, or negative ($\psi < 1$), possibly representing a failure to be promoted or a change to a lower paying job.
 
 This gives us the following description of the dynamics of permanent income $\pLvl$:
 \begin{align}
@@ -197,28 +201,35 @@ This gives us the following description of the dynamics of permanent income $\pL
 \end{align}
 where the second line follows from the first because the expected value of the permanent shock is $\Ex_{t}[\permShk]=1$.
 
-The transitory shock to income has two modes. In unemployment spells, the consumer earns no income; we assume that such spells occur with probability $\pZero$.
-If the consumer remains employed, we will assume that the income shocks are lognormally distributed:[^betterunemp]
+The transitory component $\tranShk$ of income has two modes.
+In unemployment spells, the consumer earns no income; we assume that such spells occur with probability $\pZero$ each period.
+Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (mean one) distribution, rescaled to preserve the unit mean of $\tranShk$:[^betterunemp]
 \begin{align}
     \tranShkEmp_{s} = &
     \begin{cases}
         0\phantom{/\pZero} & \text{with probability $\pZero>0$}
-        \\ \xi_{s}/\pZero & \text{with probability $(1-\pZero)$}
+        \\ \xi_{s}/(1-\pZero) & \text{with probability $(1-\pZero)$}
     \end{cases}
 \end{align}
 
+%% MNW: Fixed critical math typo here.
+
 [^betterunemp]: It is straightforward to extend the model to allow for a more realistic treatment of unemployment, for example by taking account of the existence of an unemployment insurance system; such an adjustment does not change the substantive conclusions we are interested in.
 
-It is conventional to assume that shocks to permanent income and to the transitory income of the employed are lognormally distributed:
+It is conventional to assume that shocks to permanent income and to the transitory income of the employed are (mean one) lognormally distributed:
 \begin{align}
     \log \permShk_{s} \thicksim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
     \\ \log \xi_{s}\thicksim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
 \end{align}
-which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
-(We use standard calibrations of both of these shock processes.)
+
+%% which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
+%% (We use standard calibrations of both of these shock processes.)
+%% MNW: Commenting these out because they're redundant or misplaced.
 
 Under the assumptions we have made about the structure of the utility function (homotheticity) and budget constraint (linearity and geometric returns), it is possible to recast the problem entirely in terms of *ratios* of the model variables to permanent income $\pLvl$.
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
+
+## MNW: Critical issue! You *have not stated* the budget constraint, nor how asset returns work. First sentence of paragraph above does not have foundation.
 
 Another way to make the problem easier to understand is to combine several of the multiplicative terms into portmanteau variables.
 Defining boldface $\pmb{\DiscFac}_{t+1}$ as
@@ -226,6 +237,8 @@ Defining boldface $\pmb{\DiscFac}_{t+1}$ as
      \pmb{\DiscFac}_{t+1} & ={\beta} (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA}
     %\\ \RNrm_{t+1} & = \left(\frac{\Rfree}{\permShk_{t+1}\permGroFac_{t+1}}\right)
 \end{align}
+
+## MNW: "Portmanteau variable" feels misused here. Putting two things together in one object doesn't make them a portmanteau; there needs to be some word or name that gets combined for it to make sense.
 
 %and simplifying the notation for the probability of survival to $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$
 
