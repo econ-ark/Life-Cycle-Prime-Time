@@ -181,11 +181,6 @@ In formal mathematical terms, the consumer's objective is to maximize expected p
     \\ \DiscFac = 1        & : \text{time discount factor (captures degree of present bias)}
 \end{align}
 
-%% We use standard calibrations for mortality by age from actuarial mortality tables used by the Social Security administration.
-%% We set the 'pure' rate of time preference to $\beta=1$ because that means that the optimal choice is to care exactly as much your future self as much as your present self (conditional on surviving into the future).
-
-%% MNW: I'm commenting those out because they're out-of-place here. This section is about the model, not about the calibration. Keep information well partitioned to maintain flow/narrative.
-
 To capture the predictable patterns that non-capital income follows over the life cycle (i.e. rising with age and experience, and falling at retirement to the level of any regular pension payments), we define a sequence to characterize the Modiglianian life cycle:
 \begin{align}
     \permGroFac_{t+1} & : \text{typical life cycle permanent income growth factor by age}
@@ -223,8 +218,7 @@ It is conventional to assume that shocks to permanent income and to the transito
 \end{align}
 
 %% which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
-%% (We use standard calibrations of both of these shock processes.)
-%% MNW: Commenting these out because they're redundant or misplaced.
+%% MNW: Commenting this out because it's redundant.
 
 Under the assumptions we have made about the structure of the utility function (homotheticity) and budget constraint (linearity and geometric returns), it is possible to recast the problem entirely in terms of *ratios* of the model variables to permanent income $\pLvl$.
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
@@ -242,16 +236,24 @@ Defining boldface $\pmb{\DiscFac}_{t+1}$ as
 
 %and simplifying the notation for the probability of survival to $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$
 
-Under the assumptions we have made, it turns out that the consumer's problem can be expressed more simply by realizing that it boils down to a 'now versus later' problem.
+Under the assumptions we have made, the consumer's problem can be expressed more simply by realizing that it boils down to a 'now versus later' problem.
 All the consumer needs to know about the future is summarized by the value they will expect as a consequence of ending the current period with a certain ratio of assets to permanent income, $\aNrm = \aLvl/\pLvl$.
 We can represent the value of ending the period with assets of $\aNrm$ using the Gothic variant of the letter $\vFunc$:
 \begin{align}
     \mathfrak{v}_{t}(\aNrm_{t}) & = \Ex_{t}[\pmb{\DiscFac}_{t+1}\vFunc_{t+1}(\mNrm_{t+1})]
 \end{align}
 
-Finally we are ready to add portfolio choice to the problem.
+%% MNW: Recommendation: Abandon gothic-v notation for this paper and just use w for continuation value. Also add a revised maximization problem to make the "now vs later" clear: v(m) = max_c u(c) + w(m-c).
+
+%% MNW: Note that you *still* have not told the reader about any risk free asset. You're about to "add portfolio choice", but there's no basic version.
+
+We are now ready to add portfolio choice to the problem.
 Suppose the consumer can invest in a risky asset that earns rate of return $\log \Risky \thicksim \mathcal{N}(\rfree + \eprem - \sigma^{2}/2, \sigma^{2})$.
-That is, we make the conventional assumption that the risky asset is distributed lognormally with an expected equity premium of $\eprem$.
+That is, we make the conventional assumption that returns are lognormally distributed with an expected equity premium of $\eprem$.
+
+%% MNW: \thicksim does not render properly here or elsewhere. Just use \sim if it works.
+
+%% MNW: \sigma^2 should have some subscript here, to be consistent with psi and xi shocks.
 
 The portfolio return the consumer earns will depend on the share of their assets they invest in the risky versus the safe asset.
 Calling the share $\varsigma$, the portfolio-weighted rate of return will be
@@ -260,12 +262,14 @@ Calling the share $\varsigma$, the portfolio-weighted rate of return will be
 \end{align}
 and the consumer is assumed to make the optimal choice of portfolio share:
 \begin{align}
-\mathfrak{v}_{t}(a) & = \max_{\varsigma}~~ \Ex_{t}[\pmb{\beta}_{t+1} \vFunc_{t+1}(\Rport_{t+1} a + \theta_{t+1})
+\mathfrak{v}_{t}(a) & = \max_{\varsigma}~~ \Ex_{t}\left[ \pmb{\beta}_{t+1} \vFunc_{t+1}(\Rport_{t+1} a + \theta_{t+1}) \right]
 \end{align}
+
+%% MNW: Now this is getting confusing, because you already defined gothic-v as a function of a above, and now you're changing the definition.
 
 The consumer's objective in the consumption stage of the problem can be expressed in Bellman form as:
 \begin{align}
-    {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\{\cNrm_{t}\}} ~ \uFunc(\cNrm_{t})+\Alive_{t+1} \mathfrak{v}_{t}(\aNrm_{t})
+    {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t})+\Alive_{t+1} \mathfrak{v}_{t}(\aNrm_{t})
     \\ & \text{s.t.} &
     \\ \aNrm_{t} & = {\mNrm}_{t}-\cNrm_{t}
     % \\ {\mNrm}_{t+1} & = \aNrm_{t}\RNrm_{t+1} + ~\tranShkEmp_{t+1}
@@ -277,19 +281,27 @@ The consumer's objective in the consumption stage of the problem can be expresse
 | -------------------------------------- |                      ------------------------------------------------------------------ |
 | $\mNrm, \cNrm, \aNrm$                  | market resources, consumption, and end-of-period assets, normalized by permanent income |
 | $\vFunc$                               | the normalized value function                                                           |
-| $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability a person alive at date $t$ survives to date $t+1$                           |
+| $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability that a person alive at age $t$ survives to age $t+1$                        |
 
 <br>
 
-{and} since $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
+Because $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
 
 [^normalization]: The normalization for value function involves more than just division by $\pLvl$; see @BufferStockTheory for details.
 
-We calibrate the model to include two kinds of uncertainty after retirement.
 
+%% MNW: I'm adding a new subsection here, moving a few short sentences from above. You need to fill in some small details.
+
+### Calibration
+
+Many of the parameters of the basic life-cycle consumption-saving model can be calibrated from well measured empirical data.
+For example, we use standard calibrations of both of the income shock processes during the working life, based on [INSERT REFERENCE], and
+survival probabilities by age are taken directly from actuarial mortality tables published by the Social Security Administration.
+We set the 'pure' rate of time preference to $\beta=1$, meaning that the optimal choice is to care exactly as much your future self as much as your present self (conditional on surviving into the future).
+
+Beyond those basic assumptions, we calibrate the model to include two kinds of uncertainty after retirement.
 First, to address the possibility that the drawdown failure reflects a fear of medical expenses, we incorporate estimates from @velasquezgiraldoJMP of the size of shocks to medical expenditures for retirees.
-Our model estimation results below will find that even when we include this calibration of medical shocks, the model still predicts much more drawdown of wealth than the data show.
-
+Our estimation results show that even when we include this calibration of medical shocks, the model still predicts much more drawdown of wealth than the data show.
 Second, we assume that there are 'ordinary' expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from  @flExpShocks).
 Again, in principle, the presence of such shocks provides a precautionary motive to draw down wealth more slowly.
 
