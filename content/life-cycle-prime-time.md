@@ -308,51 +308,64 @@ Again, in principle, the presence of such shocks provides a precautionary motive
 
 ### Alternative Preferences
 
-The specification of preferences in the LCP model is widely used: Time-separable Constant Relative Risk Aversion is the workhorse tool for intertemporal choice models, because it has a number of convenient mathematical properties and its implications satisfy some plausible economic desiderata (cf. @kimballStandardRA).
-But mathematical convenience provides no guarantee that the utility specification is _right_ in the sense of giving a just representation of what people's preferences really are.
+The specification of preferences in the LCP model is the standard assumption of time-separable Constant Relative Risk Aversion
+This is the workhorse tool for intertemporal choice models because it has a number of convenient mathematical properties and its implications satisfy some plausible economic desiderata (cf. @kimballStandardRA).
+However, mathematical convenience provides no guarantee that the utility specification is *right* in the sense of giving a proper representation of what people's preferences really are.
 
-Economists have explored a number of modifications to preferences in an attempt to make their models match various facts.
-One intuitive idea is that people care not only about the level of their consumption but also about how it compares to their past levels of consumption (they have 'habit formation' in their preferences). @10.1257/aer.90.3.341 show that a model with multiplicative habits can provide an explanation for otherwise puzzling patterns in the relation between saving and growth across countries.
-@10.2139/ssrn.302079 examine the implications of such a model for life cycle choices.
+Economists have explored a number of modifications to these standard preferences in an attempt to make their models' predictions match various facts.
+One intuitive idea is that people care not only about the current level of their consumption but also about how it compares to their past levels of consumption (they have 'habit formation' in their preferences).
+For example, @10.1257/aer.90.3.341 show that a model with multiplicative habits can provide an explanation for otherwise puzzling patterns in the relationship between saving and growth across countries, and
+@10.2139/ssrn.302079 examine the implications of such a model for life-cycle choices.
 
 A second common modification to preferences considered by a substantial literature is the use of @10.1086/261750 preferences, which allow agents to be extremely risk averse with respect to financial risk at a point of time, while simultaneously allowing the agents to be willing to be quite willing to tolerate changes in consumption over time.
-Such preferences have been proposed as a way to solve various puzzles related to the relatively high rate of return equity investments have exhibited over time.
+Such preferences have been proposed as a way to solve various puzzles related to the relatively high rate of return that equity investments have exhibited over time.
+
+%% MNW: Nothing to do with the paper, but the formatting of citations does not make me excited to use Markdown.
 
 Both of these formulations are motivated mostly by the goal of matching macroeconomic data.
-But in our view, they are both difficult to defend given some facts we can robustly observe in microeconomic data.
+In our view, however, they are both difficult to defend given some facts we can robustly observe in microeconomic data.
 In particular, both models would imply that microeconomic households would be extremely eager to buy insurance to smooth away almost any risk to their microeconomic circumstances.
 While people do typically have insurance against large risks (fire insurance for the home, auto insurance for the car), the parameter values in these models required to match the microeconomic facts would justify consumers in spending a large fraction of their income on insurance of all kinds.
 One particular example stands out: Households with either strong habits or a high Epstein-Zin instantaneous coefficient of relative risk aversion would be extremely eager to buy private unemployment insurance to supplement the default UI system provided by the state.
 And indeed, such private UI is available, and at prices such that a large fraction of households would be eager to buy it.
-Yet the fraction of households who participate in the private UI market is vanishingly small.  
+Yet the fraction of households who participate in the private UI market is vanishingly small.
+
+%% MNW: "...match the microeconomic facts..." Should that be "macroeconomic facts"? I.e. if you put in the preferences that lead to smooth aggregate consumption (macro fact), then *micro* agents would be willing to buy a ton of insurance.
+
+%% MNW: On the same point: aggregate consumption smoothness doesn't actually translate into micro consumption smoothness. "Habit formation" is a poor explanation because it doesn't show up in micro data. See Chris' AEJ:Macro paper from 2019.
 
 Our attention in this paper is therefore directed toward other modifications in preferences that seem to be plausible in both microeconomic and macroeconomic data.
 
+
 ### The LCP model augmented with 'Warm Glow' Bequests
 
-The LCP model sketched above assumes that the only reason to hold wealth is to spend it later -- which means that eventually an age must come at which the wealth starts being spent down.
+The LCP model sketched above assumes that the only reason to hold wealth is to spend it later, which means that eventually an age must come at which the wealth starts being spent down.
 As the literature has demonstrated, and as we will confirm below using data from SCF's from 1995 to 2022, the path of the median wealth ratio after retirement does not look anything like what that model predicts.
 
+%% MNW: This is the natural place to be clear about the source of the drawdown in theory, via the absolute patience factor PatFac. (DiscFac * LivPrb * Rfree)**(1/CRRA). The agent is choosing consumption so that E[c_{t+1} / c_t] = PatFac conditional on survival. As LivPrb goes down with age, so does PatFac, hence expected consumption growth falls further and further below 1. Thus an aging consumer increasingly wants to *spend it today*, planning to consume less in the future (if it arrives). This will quickly push them down to zero assets once mortality is high enough, and they will live pension check to pension check after that. And it's *optimal* because living that long is unexpected, and at least they didn't waste any resources by holding them through death-- you can't take it with you!
+
 Of course, the model can make no sense at all of the behavior of the very rich.
-Bill Gates, for example, has chosen to allocate a large portion of his lifetime wealth to the Bill and Melinda Gates foundation rather than spending it on himself; and even with the pittance that remains to him (\$153 billion, according to [Business Insider](https://www.businessinsider.com/how-bill-gates-spends-fortune)) he would need to spend about \$22 million a day to *avoid getting richer*.[^billgatesspend]
+Bill Gates, for example, has chosen to allocate a large portion of his lifetime wealth to the Bill and Melinda Gates foundation rather than spending it on himself; and even with the relative pittance that remains to him (\$153 billion, according to [Business Insider](https://www.businessinsider.com/how-bill-gates-spends-fortune)) he would need to spend about \$22 million a day to *avoid getting richer*.[^billgatesspend]
 (In fact, he has pledged to give away nearly all of his wealth before he dies).
+
+%% MNW: I don't think this is a particularly strong point. There aren't really any models that do well with the super rich. It's a very specialized niche of the literature, which tries to make specialized explanations.
 
 [^billgatesspend]: As of 2024-05-15, the Fed Funds rate is 5.3 percent at an annual rate.
 \$153b $\times$ 0.053/365 days $\approx$ \$22 million.
 At the current inflation rate of 3.4 percent, he would only have to spend a little over \$8 million a day to run down his real wealth -- assuming the Fed Funds rate is the highest rate of return he can earn.
 
 But the model also fails for people of much more modest means - the 'drawdown failure' articulated above.
-
-From the mathematical point of view, it is clear that some other motive for holding onto wealth must be added to the framework if it is to explain the broad facts (never mind Bill Gates).
+From a mathematical point of view, it is clear that some other motive for holding onto wealth must be added to the framework if it is to explain the broad facts, never mind Bill Gates.
 A natural candidate is a bequest motive: The idea that people take pleasure in the thought of leaving something to their heirs.
 
-This can be accommodated by adding another term to the sources of utility: the value the consumer places on the bequest, which we will denote as $\bqstNrm(\aNrm)$ (think of this as the utility they experience from the thought of leaving an $\bqstNrm$state).
-
+This idea can be incorporated by adding another term to the sources of utility: the value the consumer places on the bequest, which we will denote as $\bqstNrm(\aNrm)$, the utility they experience from the thought of leaving an $\bqstNrm$state.
 Defining the probability of passing away as the probability of not $\Alive$iving to the next period,
 \begin{align}
-    \cancel{\Alive} & =(1-\Alive)
+    \cancel{\Alive} & \equiv (1-\Alive)
 \end{align}
 the flow of utility that the consumer receives includes both their utility from consumption *and* the pleasure they take from the thought that, if they pass away before next period (which happens with probability $\cancel{\Alive}$), their assets will pass to their heirs.
+
+%% MNW: Cancel notation isn't rendering properly, so this shows up as L = (1-L).
 
 The consumer's new value function is therefore just
 \begin{align}
@@ -366,28 +379,27 @@ The literature has commonly used a 'warm glow utility from bequests' motive of t
 \end{align}
 where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., @deNardiBequest), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption.
 
+%% MNW: Need a sentence explaining \underline{a} and what it does.
 
-## Wealth in the Utility Function
 
-Our estimation below will find little evidence that a bequest motive of this kind is important for the median college-educated retiree.
+%% MNW: Moving this subsection label because it seems misapplied
+
+Our estimation finds little evidence that a bequest motive of this kind is important for the median college-educated retiree.
 It also seems unlikely to be important for much richer people, at least according to the evidence from the historian Fredrick Cople @jaherGilded's chronicle of the behavior of the richest Americans since the Revolution.
 Jaher presents a feast of quotations articulating a host of motivations for extreme wealth accumulation; but among their many explanations of their behavior, almost none of the tycoons under study mention anything resembling the bequest motive as formulated in the standard academic life cycle literature.
-(Andrew Carnegie was most explicit: 'I would rather leave my son a curse than the almighty dollar.')[^carnegie]
-This is one of those places where economists' new openness to the idea of taking seriously what people say about their motivations has bite.
-While it is not unreasonable to be sceptical about taking such quotations at face value, @WhyDoTheRich shows that essentially all of the motivations articulated (wealth brings power; wealth allows philanthropy; wealth is a way of 'keeping score'; and more) can be captured in a mathematical formulation in which wealth enters the utility function directly.
+Andrew Carnegie was most explicit: 'I would rather leave my son a curse than the almighty dollar.'[^carnegie]
 
 [^carnegie]: He made good on this: He gave away more than 90 percent of his wealth before he died, to the astonishment of many skeptics.
 
 As mentioned above, the [Survey of Consumer Finances](https://doi.org/10.17016/8799) has for many years asked respondents a question about their motivations for saving.[^whysave]
 While respondents' answers are fairly heterogeneous, the SCF has a suggested aggregation of the many different answers into categories that correspond approximately to some of the motivations that the academic literature has considered.
-The category that best matches the 'bequest' motivation is 'Family' (which includes 'to help the kids out' and 'to leave an estate' but also includes saving for 'weddings and other cermonies' and 'to have children/a family.')
+The category that best matches the 'bequest' motivation is 'Family' (which includes 'to help the kids out' and 'to leave an estate' but also includes saving for 'weddings and other ceremonies' and 'to have children/a family.')
 
 [^whysave]: See the material starting at line 848 in [the documentation](<https://www.federalreserve.gov/econres/files/bulletin.macro.txt>).
 
 An ambitious agenda would be to tabulate the answers to this survey question for people at different ages and then to construct a model that would imply the same age pattern of motivations as the data.
 For example, one might find that for people who have just entered the labor market (say, the 26-30 age group) the survey responses showed that saving for 'retirement' was not a priority, while saving for 'purchases' and 'liquidity' were important.
 In order for a model to be credible, its implications would need to comport with the survey data.
-
 Our aim here is to take a first step in that direction, by constructing a model that is at least consistent with the responses of retirees.
 
 
@@ -414,17 +426,22 @@ If bequests were a primary motivation for saving for most (college-educated) peo
 Given these (and other) objections to the bequest motive, and given the problems of the model without a bequest motive, it seems natural to consider alternative modifications to the framework.
 
 
-### Technical Details (functional form)
+## Wealth in the Utility Function
 
-The most general way we economists have of incorporating people's motivations into our models of behavior is simply to assume that the decisionmaker directly values something -- in this case, wealth.
-The next question is how best to incorporate the item in utility to study any particular question.
+Explaining the motivation to save is one of those places where economists' new openness to the idea of taking seriously what people say about their motivations has bite.
+While it is reasonable to be skeptical about taking quotations from @jaherGilded at face value, @WhyDoTheRich shows that essentially all of the motivations articulated (wealth brings power; wealth allows philanthropy; wealth is a way of 'keeping score'; and more) can be captured in a mathematical formulation in which wealth enters the utility function directly.
+
+### Functional Form
+
+The most general way that economists have for incorporating people's motivations into models of behavior is simply to assume that the decision-maker directly values something -- in this case, wealth.
+The question is how best to incorporate the item in the utility function to study any particular question.
 @WhyDoTheRich, for example, proposed a utility function specifically designed to capture saving behavior as wealth approached infinity, and accomplishing that goal required some mathematical structure that delivered the desired results but was unwieldy (and not obviously necessary for explaining the behavior of the bottom 99 percent, whose wealth does not approach infinity).[^richutility]
 
 [^richutility]: Specifically, a separable utility-from-wealth function was added to the maximizer's objective and with a coefficient of relative risk aversion smaller than that for the utility from consumption.
 
 *Money in the Utility Function*
 
-It turns out that there is a literature in macroeconomics, pioneered by Miguel @sidrauski1967rational, that has long included 'money' in the utility function of the representative agent in one form or another.
+There is a literature in macroeconomics, pioneered by Miguel @sidrauski1967rational, that has long included 'money' in the utility function of the representative agent in one form or another.
 
 A well-known paper by [](doi:10.1086/261207) proposed a specific utility function designed to capture the stability of the ratio of money to GDP, and Rotemberg along with James Poterba estimated this model on U.S. data in [](doi:10.3386/w1796).
 
@@ -440,82 +457,92 @@ To be clear, the aim of that literature was to explain the holding of $\lqdt$ de
 
 *Wealth In the Utility Function: Cobb-Douglas Form*
 
-But for the question of how to incorporate wealth in the utility function, [](doi:10.2139/ssrn.4693176) proposed a mathematically identical formulation,
-\begin{align}
-    \uFunc(\cNrm,\aNrm) & = \frac{\left(
-        \cNrm^{1-\delta}\aNrm^{\delta}
-        \right)^{1-\CRRA}}{1-\CRRA}
-\end{align}
-where $\aNrm$ takes the place of $\lqdt$ in the Rotemberg-Poterba utility function.[^mora]
-The Cobb-Douglas functional form for the TRP utility function is commonly used in other contexts, but does not seem to have been explored as a formulation for how to put a direct wealth-holding motive in the utility function.
+But for the question of how to incorporate wealth in the utility function, [](doi:10.2139/ssrn.4693176) proposed a mathematically identical formulation in which assets $\aNrm$ takes the place of $\lqdt$ in the Rotemberg-Poterba utility function.[^mora]
+The Cobb-Douglas functional form is commonly used in other contexts, but does not seem to have been explored as a formulation for how to put a direct wealth-holding motive in the utility function.
 
-[^mora]: The question of whether $\aNrm$ or $\mNrm$ should be in the utility function is of little importance; here we prefer $\aNrm$ because assets after consumption are immune to considerations of whether the time period is a year, a quarter, a month, or a day.
+[^mora]: The question of whether $\aNrm$ or $\mNrm$ should be in the utility function is of little importance; here we prefer $\aNrm$ because assets after consumption are immune to considerations of whether the time period is a year, a quarter, or a month.
+
+%% MNW: I actually don't understand the point in this footnote.
 
 The upshot is that if we credit the proposition that the ownership of wealth yields utility, then there is good precedent for the functional form of [](doi:10.2139/ssrn.4693176).
-% AL: Add citation to the 1998 paper you found
 Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or 'TRP' utility function.
 
-It is a simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised value function of the problem is:
+% AL: Add citation to the 1998 paper you found
+
+%% MNW: Okay, that's really clever.
+
+It is a relatively simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised value function of the problem is:
 \begin{align}
     {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t}, \aNrm_{t})+\Alive_{t+1}\mathfrak{v}_{t}(a_{t})
 \end{align}
 
+%% MNW: Whoa whoa, "simple matter"? This contradicts the prior "harder than rocket science" position. Also, efficiently solving it required a new technique.
+
 We refrain from a description of the methods of solution here because they are documented in the accompanying code archive which fully reproduces all our results.
 
-(We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.
+We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.
 In particular, the fact that in our SCF table above, 'Liquidity/The Future' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the matters retirees might worry about.
 Maintaining a buffer stock of wealth to protect oneself against 'unknown unknowns' is possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of 'unknown unknowns.'
-But if you knew those answers, they would be, at best, 'known unknowns.')
+Even if you knew those answers, they would be, at best, 'known unknowns.'
+
+%% MNW: I've removed the parentheses around this entire paragraph, as well as around a couple individual sentences. My take is that if it's really an "aside", it should be a footnote or not included. If it's important enough to be in the main text, then there's no point in "hiding" it inside parentheses.
 
 
 ## Comparisons to Other Models Familiar to Practitioners
 
-@10.3905/jor.2014.1.4.118, published in 2014 in "The Journal of Retirement," asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
-That paper aimed to introduce the key concepts of formal life cycle modeling to the audience of practitioners.
-Since its publication, there appears to have been considerable movement in the direction advocated by its authors.
-A number of leading financial institutions have made available partial descriptions of proprietary life cycle models that they are developing; but we made the decision here to describe only models that have been published in peer-reviewed journals and whose detailed characteristics are knowable.
+%% MNW: This is a broken citation
 
-[](doi:10.3905/jor.2023.10.3.071), cited above, looks at the post-retirement period and normalizes all variables by retirement income; but it does not incorporate risk to permanent income (as we do), nor does attempt to reconcile post-retirement with pre-retirement behavior.
-The model uses an additive utility of bequest which is a simple CRRA utility that affects households at every level of wealth, which has the implication that even income-poor households have a powerful bequest motive.
+@10.3905/jor.2014.1.4.118 asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
+That paper aimed to introduce the key concepts of formal life-cycle modeling to the audience of practitioners.
+Since its publication, there appears to have been considerable movement in the direction advocated by its authors.
+A number of leading financial institutions have made available partial descriptions of proprietary life cycle models that they are developing.
+For this report, we decided to describe only models that have been published in peer-reviewed journals and whose detailed characteristics are knowable.
+
+%% MNW: I don't understand what "permanent income risk" means in retirement. You mention that you have income risk similar to working-age values, but I don't get what this could represent.
+
+[](doi:10.3905/jor.2023.10.3.071) looks at the post-retirement period and normalizes all variables by retirement income, but it does not incorporate risk to permanent income (as we do), nor does it attempt to reconcile post-retirement with pre-retirement behavior.
+The model uses an additive utility of bequest with no shifter term, which has the implication that even income-poor households have a powerful bequest motive.
 The multigoal framework additionally disaggregates consumption expenses into different categories, each with the same CRRA coefficient.
 This reduces the effect of the diminishing marginal utility of consumption, such that the sum of utilities of consumption is greater than the utility of the sums of consumption.
-Moreover, each goal has an allocation coefficient (relative importance) that is set subjectively by the researchers. 
+Moreover, each goal has an allocation coefficient (relative importance) that is set subjectively by the researchers.
 
-[](doi:10.3905/jor.2015.2.4.030) incorporates an additively separable utilty of bequest like the bequest motive we explored above, and like our models it incorporates both permanent and transitory shocks to income.
-However, the model uses Epstein-Zin preferences (see our above objections to Epstein-Zin preferences).
-It also makes the assumption that there is no uncertainty (except for mortality) in the post-retirement period, because that assumption has the convenient implication that the post-retirement period is extremely simple; the portfolio share, in particular, should remain constant at the infinite-horizon Merton-Samuelson solution.
+%% MNW: Is that really what they do? That's... terrible and pointless. Multiple goods with the same CRRA coefficient is not going to do anything useful in the model.
 
-[](doi:10.3905/jpm.2022.1.337) uses a life-cycle consumption and portfolio choice model without any consideration of bequests like the one we consider above (although other aspects of the model are simpler than our specification). 
+[](doi:10.3905/jor.2015.2.4.030) incorporate an additively separable utilty of bequest like the bequest motive we explored above, and like our models it incorporates both permanent and transitory shocks to income.
+However, the model uses Epstein-Zin preferences (see our above objections to this feature).
+Their model also assumes that there is no uncertainty (except for mortality) in the post-retirement period, because that assumption has the convenient implication that the post-retirement period is extremely simple; the portfolio share, in particular, should remain constant at the infinite-horizon Merton-Samuelson solution.
+
+[](doi:10.3905/jpm.2022.1.337) uses a life-cycle consumption and portfolio choice model without any consideration of bequests like the one discussed above (although other aspects of the model are simpler than our specification).
+
+## MNW: Why "although"? Isn't this a "moreover" situation? Both things are going in the same direction: they have less stuff.
 
 There have also been publications that partake of the mathematical flavor of life cycle modeling but do not use the intertemporal choice framework. 
-
 [](doi:10.1080/0015198x.2023.2212581) uses a static model of portfolio optimization, where the objective is to maximize the mean-variance trade off of a portfolio position with additional features such as non-pecuniary benefits.
-Because this model is not intertemporal, it can not consider and/or anticipate risks such as future market volatility, changes in preferences over the life-cycle, mortality, and retirement horizon.
+Because this model is not dynamic, it can not consider and/or anticipate risks such as future market volatility, changes in preferences over the life cycle, mortality, and retirement horizon.
 
 
 # Estimation
 
-### Indirect Inference Described
+## Indirect Inference Described
 
-Even if you knew all the parameters of the model (the consumer's coefficient of relative risk aversion, etc), solving an optimization problem that includes the many real-world complications described above (especially those due to uncertainty) is such a formidable problem that it only became possible about 25 years ago (and solving the models took days).
+Even if one knew all the parameters of the model (the consumer's coefficient of relative risk aversion, etc), solving an optimization problem that includes the many real-world complications described above (especially those due to uncertainty) is such a formidable problem that it only became possible about 25 years ago (and solving the models took days).
+
+%% MNW: I won't change it, but I think that should be *35* years. And taking "days" would depend on how many features were in the model. This feels vague.
 
 But of course we do not know the best values to choose for unobservable parameters like relative risk aversion and time preference rates.
-The solution to this problem that is becoming standard is the method of 'indirect inference.'
+The increasingly standard approach to this problem is the method of 'indirect inference.'
 Essentially, this means specifying the structure of your model except for the values of parameters that you cannot measure well (like time preference and risk aversion), and asking a numerical search algorithm to seek the values of those parameters that lets the model fit the data as well as it is capable of doing.
-This requires the computer to solve the problem perhaps thousands of times, which is why indirect inference has only begun to come into its own recently - as computer speeds have gotten fast enough to tackle the problem.
+This requires the computer to solve the problem perhaps thousands of times, which is why indirect inference has only begun to come into its own recently, as computer speeds have become fast enough to tackle the problem.
 
 
-### Indirect Inference Implemented
+## Indirect Inference Implemented: the Method of Simulated Moments
 
 We are particularly interested in finding the optimal post-retirement choices, both for the rate of spending and for portfolio allocation between safe and risky assets.
-
-*The Method of Simulated Moments*
-
 The method of simulated moments consists of finding the parameters that make the model's simulated moments (statistics), like the median wealth and the median portfolio share, match the corresponding empirical facts as closely as possible.
 
-Consider a real moment $y_i$ where $i \in [1, N]$ and the corresponding simulated moment $\hat{y}_i(\theta)$, where $\theta$ is the vector of parameters that we are interested in estimating.
+Consider an empirical moment $y_i$ where $i \in \{1,...,N\}$ and the corresponding simulated moment $\hat{y}_i(\theta)$, where $\theta$ is the vector of parameters that we are interested in estimating.
 By solving and simulating our structural model with different $\theta$ parameters, we can calculate the simulated moments $\hat{y}_i(\theta)$ for each parameter set.
-The method of simulated moments then consists of finding the parameter set $\theta$ that minimizes the distance between the simulated moments and the real moments.
+The method of simulated moments then consists of searching for the parameter set $\theta$ that minimizes the distance between the simulated versus empirical moments.
 This is done by minimizing the following objective function:
 
 \begin{equation}
@@ -525,29 +552,40 @@ This is done by minimizing the following objective function:
 where $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process.
 For example, we might be more interested in matching the median wealth than the median portfolio share, so we would assign a higher weight to the former.
 
+%% MNW: I do not understand what this means: "aggregate age data can be noisy and subject to selection bias and measurement error". That entire sentence is confusing. What's the source of selection bias?
+
 For our exercise, we are interested in matching the median wealth to income ratios throughout the life-cycle, and the median portfolio share of risky assets after retirement.
 Because aggregate age data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias.
-Starting at age 25, we calculate the median wealth to income ratio as follows: Wealth is defined as the sum of all assets and liabilities, including financial assets, housing, vehicles, and debt.
-For income, we use the sum of all wages, salaries, social security, and retirement income, excluding capital gains and other non-recurring income.
+Starting at age 25, we calculate the median wealth-to-income ratio as follows: Wealth is defined as the sum of all assets and liabilities, including financial assets, housing, vehicles, and debt.
+For income, we use the sum of all wages, salaries, Social Security, and retirement income, excluding capital gains and other non-recurring income.
 We then calculate the wealth to income ratio of every household in the age bin and remove households with an income of zero.
-The median wealth to income ratio is calculated from the remaining households.
-An important point is that in our structural model we hard-code retirement at age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
-Therefore, we avoid the data for ages 60 to 70 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
+The median wealth-to-income ratio is calculated from the remaining households.
+
+In our structural model, we hard-code retirement to occur at age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
+Therefore, we avoid the data for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
 Similarly, we calculate the median portfolio share of risky assets after retirement for ages 70 and above given by @Aboagye2024.
 
-Considering the selection of moments we have chosen, it is clear that there is an inbalance between the wealth to income moments and the portfolio share moments.
-There are more wealth to income moments than portfolio share moments, (12 to 5), and the portfolio share moments lie between 0 and 1, whereas the wealth to income ratios can be much larger.
-To account for this, we set the weights to normalize the wealth to income ratios by the highest ratio in the data, making them all lie between 0 and 1, and set the weights for the portfolio share moments to multiply by 12/5, so that the two sets of moments are equally weighted in the estimation process.
+%% MNW: I'm not sure "bias" is the right word here. Wealth-to-income ratio is noisy in this range because of the transition to retirement, and because you're not using a bootstrap weighting matrix, those noisy ages get just as much weight as other ages. So you're turning off moments manually as a "shortcut" to the idea that they're not great moments.
+
+Considering the selection of moments we have chosen, it is clear that there is an imbalance between the wealth-to-income moments and the portfolio share moments.
+There are more wealth to income moments than portfolio share moments (12 vs 5), and the portfolio share moments lie between 0 and 1, whereas the wealth to income ratios can be much larger.
+To account for this, we set the weights to normalize the wealth to income ratios by the highest ratio in the data, making them all lie between 0 and 1, and adjusr the weights for the portfolio share moments by a factor of 12/5, so that the two sets of moments are about equally weighted in the estimation process.
 This ensures that our estimation process puts even weight on the two sets of moments, despite the difference in scale and number of moments.
 
-Having pinned down the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our vaious models.
-We use the `Econ-ARK` project's `HARK` package to solve and estimate the models, and `estimagic` (@Gabler2022) to perform the estimation process.
-Our exercise consists of estimating 1 parameter (the constant coefficient of relative risk aversion (CRRA) parameter for the Life Cycle Portfolio Choice Model) up to 3 parameters (CRRA, the weight of the bequest motive, and the wealth-shifter of utility parameter for the `LCP+WarmGlow` model), so we develop a robust and efficient estimation process that can handle a varying number of parameters. <!-- % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.-->
+%% MNW: The *number* of moments of each type might warrant rescaling, if you want them to be "equally important". But calculating the covariance matrix of the empirical moments by bootstrapping will fix the issue with the scale of moments. And then reweighting for number of moments is just an artificial push away from the efficient weighting matrix.
+
+Having chosen the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our various models.
+We use the `Econ-ARK` project's `HARK` package to solve and estimate the models, and `optimagic` (@Gabler2022, former `estimagic`) to perform the estimation process.
+Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth-shifter of utility parameter) for the `LCP+WarmGlow` model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. <!-- % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.-->
+
+%% MNW: I'm not sure "handle a varying number of parameters" is worth mentioning.
 
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.
 Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numerical differentiation and clever optimization algorithms to find the optimal parameter set.
 We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
 The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
+
+%% MNW: With only 1-3 parameters to estimate, and each function evaluation requiring a few seconds at most (I'd guess 10-20 single threaded), I don't think this is computationally burdensome. I think it would take about 5-10 minutes to estimate each specification.
 
 
 ### Indirect Inference Results
