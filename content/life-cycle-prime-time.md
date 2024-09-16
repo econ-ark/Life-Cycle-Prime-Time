@@ -588,7 +588,7 @@ The `tranquilo` optimizer has many attractive features, such as being able to ev
 %% MNW: With only 1-3 parameters to estimate, and each function evaluation requiring a few seconds at most (I'd guess 10-20 single threaded), I don't think this is computationally burdensome. I think it would take about 5-10 minutes to estimate each specification.
 
 
-### Indirect Inference Results
+## Indirect Inference Results
 
 ```{include} results.md
 ```
@@ -599,7 +599,7 @@ The `tranquilo` optimizer has many attractive features, such as being able to ev
 To thoughtful academics, it has long been disturbing that the financial advice industry has paid so little attention to our hard work in constructing and solving impressively sophisticated dynamic stochastic optimization models of financial behavior.
 Those of us with a bit of humility have always suspected that the failure has been on our side: If all we could offer was models that produced risible advice like 'everyone should spend down their wealth to zero and live pension-check to pension-check,' while financial analysts' real world experience told them that such advice would get them fired, then it was reasonable to disregard the academic literature.
 
-The thesis of this paper, though, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life cycle optimization models can provide advice that makes sense -- if the model assumptions are also disciplined by survey data and the tacit knowledge of financial advisors.[^housing]
+The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life cycle optimization models can provide advice that makes sense -- if the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.[^housing]
 
 [^housing]: Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of nonfinancial (principally, housing) wealth for optimal financial choice.
 Because homeownership is such a complex phenomenon, the academic literature is only now reaching the point at which it may be possible to answer questions like "if I own a house, how should I modify my spending and portfolio plans to take that into account?"
