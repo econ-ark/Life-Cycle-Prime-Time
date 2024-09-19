@@ -223,7 +223,7 @@ It is conventional to assume that shocks to permanent income and to the transito
 Under the assumptions we have made about the structure of the utility function (homotheticity) and budget constraint (linearity and geometric returns), it is possible to recast the problem entirely in terms of *ratios* of the model variables to permanent income $\pLvl$.
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
 
-## MNW: Critical issue! You *have not stated* the budget constraint, nor how asset returns work. First sentence of paragraph above does not have foundation.
+%% MNW: Critical issue! You *have not stated* the budget constraint, nor how asset returns work. First sentence of paragraph above does not have foundation.
 
 Another way to make the problem easier to understand is to combine several of the multiplicative terms into portmanteau variables.
 Defining boldface $\pmb{\DiscFac}_{t+1}$ as
@@ -232,7 +232,7 @@ Defining boldface $\pmb{\DiscFac}_{t+1}$ as
     %\\ \RNrm_{t+1} & = \left(\frac{\Rfree}{\permShk_{t+1}\permGroFac_{t+1}}\right)
 \end{align}
 
-## MNW: "Portmanteau variable" feels misused here. Putting two things together in one object doesn't make them a portmanteau; there needs to be some word or name that gets combined for it to make sense.
+%% MNW: "Portmanteau variable" feels misused here. Putting two things together in one object doesn't make them a portmanteau; there needs to be some word or name that gets combined for it to make sense.
 
 %and simplifying the notation for the probability of survival to $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$
 
@@ -514,7 +514,7 @@ Their model also assumes that there is no uncertainty (except for mortality) in 
 
 [](doi:10.3905/jpm.2022.1.337) uses a life-cycle consumption and portfolio choice model without any consideration of bequests like the one discussed above (although other aspects of the model are simpler than our specification).
 
-## MNW: Why "although"? Isn't this a "moreover" situation? Both things are going in the same direction: they have less stuff.
+%% MNW: Why "although"? Isn't this a "moreover" situation? Both things are going in the same direction: they have less stuff.
 
 There have also been publications that partake of the mathematical flavor of life cycle modeling but do not use the intertemporal choice framework. 
 [](doi:10.1080/0015198x.2023.2212581) uses a static model of portfolio optimization, where the objective is to maximize the mean-variance trade off of a portfolio position with additional features such as non-pecuniary benefits.
