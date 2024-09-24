@@ -475,13 +475,13 @@ This requires the computer to solve the problem perhaps thousands of times, whic
 We are particularly interested in finding the optimal post-retirement choices, both for the rate of spending and for portfolio allocation between safe and risky assets.
 The method of simulated moments consists of finding the parameters that make the model's simulated moments (statistics), like the median wealth and the median portfolio share, match the corresponding empirical facts as closely as possible.
 
-Consider an empirical moment $y_i$ where $i \in \{1,...,N\}$ and the corresponding simulated moment $\hat{y}_i(\theta)$, where $\theta$ is the vector of parameters that we are interested in estimating.
-By solving and simulating our structural model with different $\theta$ parameters, we can calculate the simulated moments $\hat{y}_i(\theta)$ for each parameter set.
+Consider an empirical moment $q_i$ where $i \in \{1,...,N\}$ and the corresponding simulated moment $\hat{q}_i(\theta)$, where $\theta$ is the vector of parameters that we are interested in estimating.
+By solving and simulating our structural model with different $\theta$ parameters, we can calculate the simulated moments $\hat{q}_i(\theta)$ for each parameter set.
 The method of simulated moments then consists of searching for the parameter set $\theta$ that minimizes the distance between the simulated versus empirical moments.
 This is done by minimizing the following objective function:
 
 \begin{equation}
-    \min_{\theta} \sum_{i=1}^{N}  \left( \omega_i [y_i - \hat{y}_i(\theta) ] \right)^2
+    \min_{\theta} \sum_{i=1}^{N}  \left( \omega_i [q_i - \hat{q}_i(\theta) ] \right)^2
 \end{equation}
 
 where $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process.
@@ -505,10 +505,10 @@ This ensures that our estimation process puts even weight on the two sets of mom
 
 Having chosen the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our various models.
 We use the `Econ-ARK` project's `HARK` package to solve and estimate the models, and `optimagic` (@Gabler2022, former `estimagic`) to perform the estimation process.
-Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth-shifter of utility parameter) for the `LCP+WarmGlow` model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. <!-- % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.-->
+Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the `LCP+WarmGlow` model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. <!-- % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.-->
 
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.
-Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numerical differentiation and clever optimization algorithms to find the optimal parameter set.
+Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
 We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
 The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 
@@ -522,15 +522,15 @@ The `tranquilo` optimizer has many attractive features, such as being able to ev
 # Conclusion
 
 To thoughtful academics, it has long been disturbing that the financial advice industry has paid so little attention to our hard work in constructing and solving impressively sophisticated dynamic stochastic optimization models of financial behavior.
-Those of us with a bit of humility have always suspected that the failure has been on our side: If all we could offer was models that produced risible advice like 'everyone should spend down their wealth to zero and live pension-check to pension-check,' while financial analysts' real world experience told them that such advice would get them fired, then it was reasonable to disregard the academic literature.
+Those of us with a bit of humility have always suspected that the failure has been on our side: If all we could offer was models that produced risible advice like "everyone should spend down their wealth to zero and live pension-check to pension-check," while financial analysts' real world experience told them that such advice would get them fired, then it was reasonable to disregard the academic literature.
 
-The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life cycle optimization models can provide advice that makes sense -- if the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.[^housing]
+The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.[^housing]
 
 [^housing]: Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of nonfinancial (principally, housing) wealth for optimal financial choice.
 Because homeownership is such a complex phenomenon, the academic literature is only now reaching the point at which it may be possible to answer questions like "if I own a house, how should I modify my spending and portfolio plans to take that into account?"
 We do know the *direction* of the effect.
 @kimballStandardRA shows that the addition of a new uncontrollable risk reduces the optimal choice of exposure to controllable risks like the stock market.
-But *by how much* one's stock exposure should be reduced because of house-price risk can only be answererd by solving a quantitatively plausible model.
+But *by how much* one's stock exposure should be reduced because of house-price risk can only be answered by solving a quantitatively plausible model.
 
 It would be a better world if financial advice could be justified as reflecting the mathematically optimal solution to a well-defined problem.
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
