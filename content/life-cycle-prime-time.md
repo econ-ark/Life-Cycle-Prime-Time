@@ -139,11 +139,11 @@ Whatever the agent does not consume is retained as assets $\aLvl_t$, which accru
 We follow most of the literature and assume that the consumer faces a hard liquidity (or borrowing) constraint: they cannot end any period with negative assets.
 The intertemporal budget constraint can thus be expressed as:
 \begin{align}
-    \aLvl_t = \mLvl_t - \cLvl_t, & \text{remaining assets are market resources less consumption}
-    \aLvl_t \geq 0, & \text{consumer cannot borrow}
-    \bLvl_t = \Rport_{t+1} \aLvl_t, & \text{bank balances are assets after yielding interest}
-    \mLvl_{t+1} = \bLvl_{t+1} + \yLvl_{t+1}. & \text{future market resources are bank balances plus income}
-\end{\align}
+    \aLvl_t = \mLvl_t - \cLvl_t, & \text{~~~remaining assets are market resources less consumption} \\
+    \aLvl_t \geq 0, & \text{~~~consumer cannot borrow} \\
+    \bLvl_t = \Rport_{t+1} \aLvl_t, & \text{~~~bank balances are assets after yielding interest} \\
+    \mLvl_{t+1} = \bLvl_{t+1} + \yLvl_{t+1}. & \text{~~~future market resources are bank balances plus income} \\
+\end{align}
 
 One of the fundamental discoveries of the past 40 years or so is the extent to which optimal choice is profoundly altered by the presence of uncertainty.
 @friedman1957 proposed a simple formulation of the labor income process that remains an excellent description of annual income shocks even today, proffering that there are two components to income.
@@ -169,7 +169,7 @@ In formal mathematical terms, the consumer's objective is to maximize expected p
     \\ \DiscFac = 1        & : \text{time discount factor (captures degree of present bias)}
 \end{align}
 
-To capture the predictable patterns that non-capital income follows over the life cycle (i.e. rising with age and experience, and falling at retirement to the level of any regular pension payments), we define a sequence to characterize the Modiglianian life cycle:
+To capture the predictable patterns that non-capital income follows over the life cycle (i.e.\ rising with age and experience, and falling at retirement to the level of any regular pension payments), we define a sequence to characterize the Modiglianian life cycle:
 \begin{align}
     \permGroFac_{t+1} & : \text{typical life cycle permanent income growth factor by age}
 \end{align}
@@ -180,9 +180,9 @@ An individual is also subject to purely transitory shocks that affect only this 
 
 This gives us the following description of the dynamics of income:
 \begin{align}
-    \pLvl_{t+1} & = \pLvl_{t} \permGroFac_{t+1} \permShk_{t+1},
-    \yLvl_{t+1} & = \pLvl_{t+1} \tranShk_{t+1},
-    \\ \Ex_{t}[\pLvl_{t+1}] & = \pLvl_{t} \permGroFac_{t+1},
+    \pLvl_{t+1} & = \pLvl_{t} \permGroFac_{t+1} \permShk_{t+1}, \\
+    \yLvl_{t+1} & = \pLvl_{t+1} \tranShk_{t+1}, \\
+    \Ex_{t}[\pLvl_{t+1}] & = \pLvl_{t} \permGroFac_{t+1},
 \end{align}
 where the third line follows from the first because the expected value of the permanent shock is $\Ex_{t}[\permShk]=1$.
 
@@ -254,7 +254,6 @@ The consumer makes the optimal choice of portfolio share, so we redefine the "go
 \end{align}
 A split second before choosing the risky share, the consumer's objective in the consumption stage of the problem is exactly the same as the Bellman form above, but with the redefined continuation value that accounts for optimal portfolio choice.
 
-<br>
 
 | object                                 | meaning                                                                                 |
 | -------------------------------------- |                      ------------------------------------------------------------------ |
@@ -262,7 +261,6 @@ A split second before choosing the risky share, the consumer's objective in the 
 | $\vFunc$                               | the normalized value function                                                           |
 | $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability that a person alive at age $t$ survives to age $t+1$                        |
 
-<br>
 
 
 ### Calibration
@@ -366,18 +364,16 @@ Given these (and other) objections to the bequest motive, and given the problems
 (most-important-reason)=
 ### Table: Most Important Reason for Saving
 
-<br>
 
  | Reason | Proportion | Explanation |
  | --- | --- | --- |
- | 'Family' | 0.06 | Bequests; weddings, etc |
+ | 'Family' | 0.06 | bequests; weddings, etc |
  | 'Retirement' | 0.27 |  |
  | 'Liquidity/The Future' | 0.40 | |
  | 'Purchases'  | 0.13 | cars, vacation homes, etc |
  | 'Cannot save' | 0.06 | |
  | Other | 0.08 | |
 
-<br>
 
 
 ## Wealth in the Utility Function
@@ -431,8 +427,6 @@ Maintaining a buffer stock of wealth to protect oneself against 'unknown unknown
 Even if you knew those answers, they would be, at best, 'known unknowns.'
 
 
-
-
 ## Comparisons to Other Models Familiar to Practitioners
 
 @10.3905/jor.2014.1.4.118 asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
@@ -479,15 +473,13 @@ Consider an empirical moment $q_i$ where $i \in \{1,...,N\}$ and the correspondi
 By solving and simulating our structural model with different $\theta$ parameters, we can calculate the simulated moments $\hat{q}_i(\theta)$ for each parameter set.
 The method of simulated moments then consists of searching for the parameter set $\theta$ that minimizes the distance between the simulated versus empirical moments.
 This is done by minimizing the following objective function:
-
 \begin{equation}
     \min_{\theta} \sum_{i=1}^{N}  \left( \omega_i [q_i - \hat{q}_i(\theta) ] \right)^2
 \end{equation}
-
 where $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process.
 For example, we might be more interested in matching the median wealth than the median portfolio share, so we would assign a higher weight to the former.
 
-For our exercise, we are interested in matching the median wealth to income ratios throughout the life-cycle, and the median portfolio share of risky assets after retirement.
+For our exercise, we are interested in matching the median wealth to income ratios throughout the life cycle, and the median portfolio share of risky assets after retirement.
 Because aggregate age data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias.
 Starting at age 25, we calculate the median wealth-to-income ratio as follows: Wealth is defined as the sum of all assets and liabilities, including financial assets, housing, vehicles, and debt.
 For income, we use the sum of all wages, salaries, Social Security, and retirement income, excluding capital gains and other non-recurring income.
@@ -500,7 +492,7 @@ Similarly, we calculate the median portfolio share of risky assets after retirem
 
 Considering the selection of moments we have chosen, it is clear that there is an imbalance between the wealth-to-income moments and the portfolio share moments.
 There are more wealth to income moments than portfolio share moments (12 vs 5), and the portfolio share moments lie between 0 and 1, whereas the wealth to income ratios can be much larger.
-To account for this, we set the weights to normalize the wealth to income ratios by the highest ratio in the data, making them all lie between 0 and 1, and adjusr the weights for the portfolio share moments by a factor of 12/5, so that the two sets of moments are about equally weighted in the estimation process.
+To account for this, we set the weights to normalize the wealth to income ratios by the highest ratio in the data, making them all lie between 0 and 1, and adjust the weights for the portfolio share moments by a factor of 12/5, so that the two sets of moments are about equally weighted in the estimation process.
 This ensures that our estimation process puts even weight on the two sets of moments, despite the difference in scale and number of moments.
 
 Having chosen the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our various models.
@@ -526,7 +518,7 @@ Those of us with a bit of humility have always suspected that the failure has be
 
 The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.[^housing]
 
-[^housing]: Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of nonfinancial (principally, housing) wealth for optimal financial choice.
+Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of nonfinancial (principally, housing) wealth for optimal financial choice.
 Because homeownership is such a complex phenomenon, the academic literature is only now reaching the point at which it may be possible to answer questions like "if I own a house, how should I modify my spending and portfolio plans to take that into account?"
 We do know the *direction* of the effect.
 @kimballStandardRA shows that the addition of a new uncontrollable risk reduces the optimal choice of exposure to controllable risks like the stock market.
