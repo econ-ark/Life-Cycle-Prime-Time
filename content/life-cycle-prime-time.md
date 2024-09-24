@@ -1,5 +1,5 @@
 ---
-title: Life Cycle Modeling is (Almost) Ready for Prime Time
+title: Life Cycle Modeling is (Almost) \\ Ready for Prime Time
 exports:
     - format: tex+pdf
       template: arxiv_nips
@@ -19,6 +19,31 @@ When hiring a financial advisor, such people probably think the advisor's job is
 But academics and advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, most such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check (at least approximately).
 This paper makes the case that recent developments in the economics literature have finally given us the tools and insights required to construct rigorous life cycle models whose advice is sensible.
 We provide one example of a simple model that can solve a number of problems by putting wealth in the utility function.
+
++++
+
+
+
+# Synopsis {-}
+
+The retirement planning landscape is evolving rapidly due to shifting demographics, longer life expectancy, and greater market volatility. As individuals live longer, the need for pension plans and retirement funds to provide flexible, rigorous, and sustainable investment advice has become increasingly urgent.
+
+Traditional economic models, however, have struggled to keep pace with the demands of the financial advice industry, particularly in accurately capturing how individuals manage their portfolios and decumulate wealth post-retirement. For example, the "life cycle model" of optimal saving for retirement is familiar to anyone who has taken an introductory economics class. When hiring a financial advisor, clients likely expect the advisor's job is to tailor these life-cycle model choices to their particular circumstances. However, academics and advisors know that most life-cycle models provide unrealistic guidance—suggesting retirees should run their wealth down to zero and live pension-check to pension-check. This example highlights that the significant shortcomings in economic modeling have so far limited fund managers' ability to translate sound economic principles into actionable insights for their clients.
+
+Recent advancements in theory and computation, however, have given economists new tools—structural models—that bridge the gap between theoretical modeling and real-world data. In this report, we argue that these mathematical and computational innovations enable the creation of portfolio models that can offer advice that is not only data-driven but also sensible, transparent, and customizable for individual clients.
+
+This report presents a model that leverages advances in structural economic modeling, developed using the Econ-ARK platform. Rather than relying on ad hoc theoretical assumptions, we utilize **XYZ data** to guide the theoretical structure and parameter values, ensuring greater accuracy and relevance to how people actually behave. 
+
+## Key Insights from the Model {-}
+
+- **Dynamic Asset Allocation**: Our model provides an improved estimate of consumer risk preferences. This allows the glidepath to incorporate more realistic growth asset allocations that balance the need for portfolio growth with the requirement of securing income in retirement.
+- **Wealth Preservation Post-Retirement**: Using **XYZ** (e.g., the TRP wealth in the utility function?), we precisely estimate the value retirees place on wealth. Unlike traditional models, this approach reflects the reality that retirees tend to preserve wealth longer, resulting in more sustainable retirement plans that align with observed behaviors.
+
+## Practical Applications {-}
+
+This model serves as a proof of concept for applying cutting-edge structural economic modeling to financial advice. The open-source tools presented with this report can generate customized scenarios based on participant preferences and be adapted to new fund and survey data.
+
+The model tools developed here also allow for ongoing refinement. The modelling can be enriched with more granular investment strategies and client preferences, and ultimately integrated into existing financial workflows to accommodate factors like risk tolerance, investment goals, and demographics.
 
 +++
 
@@ -121,12 +146,12 @@ These legal considerations effectively prohibit the advisor from including a beq
 This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
 
 
-## The Baseline Academic Models
+## The Baseline Academic Model
+
+We begin by describing the optimal consumption-saving problem over the life cycle for a consumer, focusing on the dynamics of their income while ignoring how returns to saving work.
+After we have finished describing the basic life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
 ### Basic Life Cycle Consumption-Saving Model
-
-We begin by describing the optimal consumption-saving problem over the life cycle for a consumer, focusing on the dynamics of their income while (temporarily) ignoring how asset returns work.
-After we have finished describing the basic life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
 In each discrete time period (indexed by $t$), a consumer's flow of utility depends on how much they consume from their available resources:
 We assume that the utility function is of the standard Constant Relative Risk Aversion form:
@@ -159,17 +184,16 @@ Potential future utility flows matter only to the extent that the agent expects 
 In formal mathematical terms, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than date $T$:
 
 \begin{equation}
-    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cFunc\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right] \label{eq:lifecyclemax}
+    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cFunc\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right]. \label{eq:lifecyclemax}
 \end{equation}
-
-\begin{align}
-    \\ \Alive _{t}^{t+n} & : \text{probability to } \Alive \text{ive until age $t+n$ given you are alive at age $t$}
+\begin{align*}
+    \Alive _{t}^{t+n} & : \text{probability to } \Alive \text{ive until age $t+n$ given you are alive at age $t$}
     \\                   & {~~~}\bullet \Alive_{120}^{121} = 0.0 \text{ says that a 120 year old has zero probability of living to 121}
     \\                   & {~~~}\bullet \Alive_{80\phantom{1}}^{90\phantom{1}} = 0.3 \text{ says that an 80 year old has a 30 percent chance of reaching 90}
     \\ \DiscFac = 1        & : \text{time discount factor (captures degree of present bias)}
-\end{align}
+\end{align*}
 
-To capture the predictable patterns that non-capital income follows over the life cycle (i.e.\ rising with age and experience, and falling at retirement to the level of any regular pension payments), we define a sequence to characterize the Modiglianian life cycle:
+To capture the predictable patterns that non-capital income follows over the life cycle (i.e. rising with age and experience, and falling at retirement to the level of any regular pension payments), we define a sequence to characterize the Modiglianian life cycle:
 \begin{align}
     \permGroFac_{t+1} & : \text{typical life cycle permanent income growth factor by age}
 \end{align}
@@ -184,7 +208,7 @@ This gives us the following description of the dynamics of income:
     \yLvl_{t+1} & = \pLvl_{t+1} \tranShk_{t+1}, \\
     \Ex_{t}[\pLvl_{t+1}] & = \pLvl_{t} \permGroFac_{t+1},
 \end{align}
-where the third line follows from the first because the expected value of the permanent shock is $\Ex_{t}[\permShk]=1$.
+where the third line follows because the expected value of the permanent shock is $\Ex_{t}[\permShk]=1$.
 
 The transitory component $\tranShk$ of income has two modes.
 In unemployment spells, the consumer earns no income; we assume that such spells occur with probability $\pZero$ each period.
@@ -201,8 +225,8 @@ Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (
 
 It is conventional to assume that shocks to permanent income and to the transitory income of the employed are (mean one) lognormally distributed:
 \begin{align}
-    \log \permShk_{s} \thicksim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
-    \\ \log \xi_{s}\thicksim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
+    \log \permShk_{s} \sim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
+    \\ \log \xi_{s} \sim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
 \end{align}
 
 %% which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
@@ -211,9 +235,9 @@ Under the assumptions we have made about the structure of the utility function (
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
 
 Another way to make the problem easier to understand is to combine several of the multiplicative terms into portmanteau variables.
-Defining boldface $\pmb{\DiscFac}_{t+1}$ as
+Particularly, define $\pmb{\DiscFac}_{t+1}$ as
 \begin{align}
-     \pmb{\DiscFac}_{t+1} & ={\beta} (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA}
+     \pmb{\DiscFac}_{t+1} & ={\beta} (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA}.
     %\\ \RNrm_{t+1} & = \left(\frac{\Rport_{t+1}}{\permShk_{t+1}\permGroFac_{t+1}}\right)
 \end{align}
 
@@ -223,7 +247,7 @@ The consumer's problem can be expressed more simply by realizing that it boils d
 All the consumer needs to know about the future is summarized by the value they will expect as a consequence of ending the current period with a certain ratio of assets to permanent income, $\aNrm = \aLvl/\pLvl$.
 We can represent the value of ending the period with assets of $\aNrm_t$ using the Gothic variant of the letter $\vFunc$:
 \begin{align}
-    \mathfrak{v}_{t}(\aNrm_{t}) & = \Ex_{t}[\pmb{\DiscFac}_{t+1}\vFunc_{t+1}(\mNrm_{t+1})]
+    \mathfrak{v}_{t}(\aNrm_{t}) & = \Ex_{t}[\pmb{\DiscFac}_{t+1}\vFunc_{t+1}(\mNrm_{t+1})].
 \end{align}
 
 With this definition, the period $t$ choice problem can be summarized in Bellman form as simply:
@@ -239,7 +263,7 @@ Because $\aNrm_t$ measures available market resources that are unspent, this for
 ### The Life Cycle Portfolio ('LCP') Model
 
 We are now ready to add portfolio choice to the problem and discuss how the interest factor $\Rport_{t+1}$ is determined.
-Suppose the consumer can invest their assets in a risk-free asset with return factor $\Rfree$, and in a risky asset with returns $\log \Risky_{t+1} \thicksim \mathcal{N}(\rfree + \eprem - \sigma^{2}/2, \sigma^{2})$, where $\rfree = \log(\Rfree)$.
+Suppose the consumer can invest their assets in a risk-free asset with return factor $\Rfree$, and in a risky asset with returns $\log \Risky_{t+1} \sim \mathcal{N}(\rfree + \eprem - \sigma^{2}/2, \sigma^{2})$, where $\rfree = \log(\Rfree)$.
 That is, we make the conventional assumption that risky returns are lognormally distributed with an expected equity premium of $\eprem$.
 The portfolio return the consumer earns will depend on the *share* $\varsigma_t$ of their assets that they invest in the risky asset:
 \begin{align}
@@ -309,8 +333,8 @@ The LCP model sketched above assumes that the only reason to hold wealth is to s
 As the literature has demonstrated, and as we will confirm below using data from SCF's from 1995 to 2022, the path of the median wealth ratio after retirement does not look anything like what that model predicts.
 
 Of course, the model can make no sense at all of the behavior of the very rich.
-Bill Gates, for example, has chosen to allocate a large portion of his lifetime wealth to the Bill and Melinda Gates foundation rather than spending it on himself; and even with the relative pittance that remains to him (\$153 billion, according to [Business Insider](https://www.businessinsider.com/how-bill-gates-spends-fortune)) he would need to spend about \$22 million per day to *avoid getting richer*.[^billgatesspend]
-(In fact, he has pledged to give away nearly all of his wealth before he dies).
+Bill Gates, for example, has chosen to allocate a large portion of his lifetime wealth to the Bill and Melinda Gates foundation rather than spending it on himself; and even with the relative pittance that remains to him (\$153 billion, per [Business Insider](https://www.businessinsider.com/how-bill-gates-spends-fortune)) he would need to spend about \$22 million per day to *avoid getting richer*.[^billgatesspend]
+In fact, he has pledged to give away nearly all of his wealth before he dies.
 
 [^billgatesspend]: As of 2024-05-15, the Fed Funds rate is 5.3 percent at an annual rate.
 \$153b $\times$ 0.053/365 days $\approx$ \$22 million.
@@ -321,15 +345,11 @@ From a mathematical point of view, it is clear that some other motive for holdin
 A natural candidate is a bequest motive: The idea that people take pleasure in the thought of leaving something to their heirs.
 
 This idea can be incorporated by adding another term to the sources of utility: the value the consumer places on the bequest, which we will denote as $\bqstNrm(\aNrm)$, the utility they experience from the thought of leaving an $\bqstNrm$state.
-Defining the probability of passing away as the probability of not $\Alive$iving to the next period,
-\begin{align}
-    \cancel{\Alive} & \equiv (1-\Alive)
-\end{align}
-the flow of utility that the consumer receives includes both their utility from consumption *and* the pleasure they take from the thought that, if they pass away before next period (which happens with probability $\cancel{\Alive}$), their assets will pass to their heirs.
+The flow of utility that the consumer receives includes both their utility from consumption *and* the pleasure they take from the thought that, if they pass away before next period (which happens with probability $1-\Alive$), their assets will pass to their heirs.
 
-The consumer's new value function is therefore just
+The consumer's new value function is therefore:
 \begin{align}
-    {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \overbrace{\uFunc(\cNrm_{t})}^{\text{present}}+\overbrace{\underbrace{\Alive_{t+1}\mathfrak{v}(\aNrm_{t})}_{\text{live}} + \underbrace{\cancel{\Alive}_{t+1}\bqstNrm({\aNrm}_{t})}_{\text{die}}
+    {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \overbrace{\uFunc(\cNrm_{t})}^{\text{present}}+\overbrace{\underbrace{\Alive_{t+1}\mathfrak{v}(\aNrm_{t})}_{\text{live}} + \underbrace{(1-\Alive_{t+1})\bqstNrm({\aNrm}_{t})}_{\text{die}}
     }^{\text{future}}.
 \end{align}
 
@@ -359,7 +379,7 @@ Our aim here is to take a first step in that direction, by constructing a model 
 
 The table below presents the responses to this question for college-educated households older than age 70 from the 1995 to the 2022 waves of the SCF.
 If bequests were a primary motivation for saving for most (college-educated) people, it would be surprising for them to mention this motivation so rarely.
-Given these (and other) objections to the bequest motive, and given the problems of the model without a bequest motive, it seems natural to consider alternative modifications to the framework.
+Given these (and other) objections to the bequest motive, as well as the problems of the model without a bequest motive, it is natural to consider alternative modifications to the framework.
 
 (most-important-reason)=
 ### Table: Most Important Reason for Saving
@@ -373,7 +393,6 @@ Given these (and other) objections to the bequest motive, and given the problems
  | 'Purchases'  | 0.13 | cars, vacation homes, etc |
  | 'Cannot save' | 0.06 | |
  | Other | 0.08 | |
-
 
 
 ## Wealth in the Utility Function
@@ -409,14 +428,14 @@ The Cobb-Douglas functional form is commonly used in other contexts, but does no
 
 [^mora]: The question of whether $\aNrm$ or $\mNrm$ should be in the utility function is of little importance; here we prefer $\aNrm$ because assets after consumption are immune to considerations of whether the time period is a year, a quarter, or a month.
 
-The upshot is that if we credit the proposition that the ownership of wealth yields utility, then there is good precedent for the functional form of [](doi:10.2139/ssrn.4693176).
-Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or 'TRP' utility function.
-
 % AL: Add citation to the 1998 paper you found
 
-It is a relatively simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised value function of the problem is:
+The upshot is that if we credit the proposition that the ownership of wealth yields utility, then there is good precedent for the functional form of [](doi:10.2139/ssrn.4693176).
+Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or 'TRP' utility function.
+It is a relatively simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised utility and value functions of the problem are:
 \begin{align}
-    {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t}, \aNrm_{t})+\Alive_{t+1}\mathfrak{v}_{t}(a_{t})
+    \uFunc_t(\cNrm_t, \aNrm_t) & = \frac{\left(\cNrm_t^{1-\delta}\aNrm_t^{\delta}\right)^{1-\CRRA}}{1-\CRRA}, \\
+    {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t}, \aNrm_{t})+\Alive_{t+1}\mathfrak{v}_{t}(a_{t}).
 \end{align}
 
 %% We refrain from a description of the solution methods here because they are documented in the accompanying code archive which fully reproduces all our results.
@@ -476,8 +495,8 @@ This is done by minimizing the following objective function:
 \begin{equation}
     \min_{\theta} \sum_{i=1}^{N}  \left( \omega_i [q_i - \hat{q}_i(\theta) ] \right)^2
 \end{equation}
-where $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process.
-For example, we might be more interested in matching the median wealth than the median portfolio share, so we would assign a higher weight to the former.
+Here, $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process.
+For example, we might be more interested in matching the median wealth than the median portfolio share, and thus assign a higher weight to the former.
 
 For our exercise, we are interested in matching the median wealth to income ratios throughout the life cycle, and the median portfolio share of risky assets after retirement.
 Because aggregate age data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias.
@@ -532,5 +551,5 @@ The time seems ripe for a much closer collaboration between academia and the fin
 
 [^thankstrp]: We are grateful to the Sloan Foundation and to T Rowe Price for generous funding of the toolkit.
 
-:::{include} lit_review.md
-:::
+%:::{include} lit_review.md
+%:::
