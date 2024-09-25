@@ -22,7 +22,6 @@ We provide one example of a simple model that can solve a number of problems by 
 
 +++
 
-
 # Introduction
 
 Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose trying to understand consumer financial choices as optimal responses to the realities of the paths of income and of spending needs over the lifetime.
@@ -54,8 +53,10 @@ The remarkable advance of computational power has now finally made it possible t
 ### Survey Data on Expectations and Preferences
 
 Another academic development has been a new openness to the idea that people's beliefs and preferences can be probed by *asking them* about their beliefs and preferences.
+
 In the context of motivations for saving, this leads us to take seriously the answers to a survey question about their 'most important' reason for saving that respondents to the Federal Reserve's [Survey of Consumer Finances (SCF)](https://www.federalreserve.gov/econres/scfindex.htm) have been asked for many years.
 Among retirees, one answer dominates the rest: 'Liquidity/The Future.'  (See [the discussion below](#most-important-reason) for details).
+
 A natural interpretation of the importance consumers put on 'liquidity' is that precautionary saving motives matter for many households -- highlighting the need for the aforementioned computational advancements.
 
 The traditional approach to constructing such models has been for economists to try to measure the necessary inputs (income uncertainty, e.g.), and to assume that agent beliefs incorporate whatever it is that the economist has measured.
@@ -77,7 +78,6 @@ Indeed, the existence of a large industry offering financial advice is _prima fa
 Financial advice, however, is fraught with potential conflicts of interest.
 That is one reason that justifying such advice with an explicit and transparent modeling framework is so attractive.
 If the advice is consistent with the model, and the model can be checked both for mathematical correctness and conceptual soundness (by outside experts), then it is reasonable for a client hiring an advisor to trust the advice.
-
 
 
 ### Model Specification and Estimation
@@ -103,6 +103,7 @@ The main quantitative result of this paper is to show that this final model does
 More broadly, our modeling and conceptual tools have recently advanced to the point where it is finally possible to construct rational optimizing models of life-cycle financial choice that can serve as a credible justification for normative advice.
 In particular, these conceptual advances include the idea that ``softer'' data like surveys on household expectations and beliefs should be taken seriously.
 
+But the broader point is that, recently, our modeling and conceptual tools (including the idea that softer data like surveys should be taken seriously) have advanced to the point where it is finally possible to construct rational optimizing models of life cycle financial choice that can serve as a credible justification for normative advice.
 
 # Models
 
@@ -122,23 +123,25 @@ These legal considerations effectively prohibit the advisor from including a beq
 This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
 
 
-## The Baseline Academic Model
+## The Baseline Academic Models
+
+(lcp-model)=
+### The Life Cycle Portfolio ('LCP') Model
 
 We begin by describing the optimal consumption-saving problem over the life cycle for a consumer, focusing on the dynamics of their income while ignoring how returns to saving work.
 After we have finished describing the basic life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
-### Basic Life Cycle Consumption-Saving Model
-
-In each discrete time period (indexed by $t$), a consumer's flow of utility depends on how much they consume from their available resources:
+In each year (indexed by $t$), a consumer's flow of utility depends on how much they consume from their available resources.
 We assume that the utility function is of the standard Constant Relative Risk Aversion form:
 \begin{align}
     \uFunc(\cLvl) & = \frac{\cLvl^{1-\CRRA}}{1-\CRRA}
 \end{align}
+but of course the consumer is smart enough to realize that preserving some resources for the future is a good idea; this is why all wealth is not consumed immediately.
 
 At the time they choose how much to consume, the consumer has total market resources of $\mLvl_t$, representing their previously owned resources (bank balances) and current income flow $\yLvl_t$.
-Whatever the agent does not consume is retained as assets $\aLvl_t$, which accrue interest by factor $\Rport_{t+1}$ between period $t$ and period $t+1$.
+Whatever the agent does not consume constitutes assets $\aLvl_t$, which accrue interest by factor $\Rport_{t+1}$ between period $t$ and period $t+1$.
 We follow most of the literature and assume that the consumer faces a hard liquidity (or borrowing) constraint: they cannot end any period with negative assets.
-The intertemporal budget constraint can thus be expressed as:
+These assumptions are expressed as:
 \begin{align}
     \aLvl_t = \mLvl_t - \cLvl_t, & \text{~~~remaining assets are market resources less consumption} \\
     \aLvl_t \geq 0, & \text{~~~consumer cannot borrow} \\
@@ -147,8 +150,8 @@ The intertemporal budget constraint can thus be expressed as:
 \end{align}
 
 One of the fundamental discoveries of the past 40 years or so is the extent to which optimal choice is profoundly altered by the presence of uncertainty.
-@friedman1957 proposed a simple formulation of the labor income process that remains an excellent description of annual income shocks even today, proffering that there are two components to income.
-The 'permanent' component is roughly what they would expect to earn in a 'normal' year (say, their annual salary), and the 'transitory' component reflects events like unemployment spells or lottery winnings, which make a given year's realized income deviate from its expected value.
+@friedman1957 proposed a simple formulation of the labor income process that remains an excellent description of annual income shocks even today.  According to Friedman, there are two components to income.
+The 'permanent' component is roughly what the consumer would expect to earn in a 'normal' year (say, their annual salary), and a 'transitory' component reflects events like unemployment spells or lottery winnings, which make a given year's realized income deviate from its expected value.
 From a modeling perspective, the upshot is that a consumer's financial circumstances can be fully captured with two variables.
 First, the consumer's permanent income level $\pLvl_{t}$ is the non-capital income they would normally expect to receive.
 Second, total market resources $\mLvl_{t}$ represent the sum of financial assets and current income: the pool of resources that can be immediately spent, or 'money' in the colloquial sense of 'how much money does grandma have?'.
@@ -157,7 +160,7 @@ The transitory component of income need not be tracked at all: as soon as this u
 A consumer's 'value' of having a given amount of market resources $\mLvl_{t}$ right now, and of knowing their current permanent income level to be $\pLvl_{t}$, is the sum of consumption utility they will experience from today onward into the indefinite future, assuming that they make optimal choices in all periods.
 Potential future utility flows matter only to the extent that the agent expects to survive to that period, and might be further discounted due to placing more weight on the present than the future.
 
-In formal mathematical terms, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than date $T$:
+In formal mathematical terms, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than some terminal period $T$:
 
 \begin{equation}
     \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cFunc\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right]. \label{eq:lifecyclemax}
@@ -174,9 +177,8 @@ To capture the predictable patterns that non-capital income follows over the lif
     \permGroFac_{t+1} & : \text{typical life cycle permanent income growth factor by age}
 \end{align}
 
-For any particular consumer, deviations from the typical life cycle permanent income growth pattern arise from "permanent income shocks" that we represent with the variable $\permShk$.
-At any given age, such shocks could be positive ($\psi>1$), corresponding to an unexpected promotion or a switch to a higher-paying job, or negative ($\psi < 1$), possibly representing a failure to be promoted or a change to a lower paying job.
-An individual is also subject to purely transitory shocks that affect only this period's income(e.g.\ an unexpected absence or bonus), represented by $\tranShk$.
+The typical life cycle pattern is altered, in any particular consumer's case, by 'permanent shocks' which we represent with the variable $\permShk$.
+At any given age, permanent growth can deviate from the average experience of others of the same age in either a positive direction ($\psi>1$ would correspond to an unexpected promotion or a switch to a higher-paying job) or a negative direction ($\psi < 1$ might be the result of a failure to be promoted or a change to a lower paying job).
 
 This gives us the following description of the dynamics of income:
 \begin{align}
@@ -204,8 +206,8 @@ It is conventional to assume that shocks to permanent income and to the transito
     \log \permShk_{s} \sim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
     \\ \log \xi_{s} \sim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
 \end{align}
-
-%% which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
+which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
+(We use standard calibrations of both of these shock processes.)
 
 Under the assumptions we have made about the structure of the utility function (homotheticity), budget constraint (linearity and geometric returns), and income process (permanent and transitory shocks) it is possible to recast the problem entirely in terms of *ratios* of the model variables to permanent income $\pLvl$.
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
@@ -239,7 +241,7 @@ Because $\aNrm_t$ measures available market resources that are unspent, this for
 ### The Life Cycle Portfolio ('LCP') Model
 
 We are now ready to add portfolio choice to the problem and discuss how the interest factor $\Rport_{t+1}$ is determined.
-Suppose the consumer can invest their assets in a risk-free asset with return factor $\Rfree$, and in a risky asset with returns $\log \Risky_{t+1} \sim \mathcal{N}(\rfree + \eprem - \sigma^{2}/2, \sigma^{2})$, where $\rfree = \log(\Rfree)$.
+Suppose the consumer can invest their assets in a risk-free asset with return factor $\Rfree$, and in a risky asset with returns $\log \Risky_{t+1} \sim \mathcal{N}(\rfree + \eprem - \sigma^{2}_{\risky}/2, \sigma_{\risky}^{2})$, where $\rfree = \log(\Rfree)$.
 That is, we make the conventional assumption that risky returns are lognormally distributed with an expected equity premium of $\eprem$.
 The portfolio return the consumer earns will depend on the *share* $\varsigma_t$ of their assets that they invest in the risky asset:
 \begin{align}
@@ -262,11 +264,12 @@ A split second before choosing the risky share, the consumer's objective in the 
 | $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability that a person alive at age $t$ survives to age $t+1$                        |
 
 
+{and} since $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
 
 ### Calibration
 
 Many of the parameters of the basic life-cycle consumption-saving model can be calibrated from well measured empirical data.
-For example, we use standard calibrations of both of the income shock processes during the working life, based on [INSERT REFERENCE], and
+For example, we use standard calibrations of both of the income shock processes during the working life, based on @Cagetti2003, and
 survival probabilities by age are taken directly from actuarial mortality tables published by the Social Security Administration.
 We set the 'pure' rate of time preference to $\beta=1$, meaning that the optimal choice is to care exactly as much your future self as much as your present self (conditional on surviving into the future).
 
@@ -279,7 +282,7 @@ Again, in principle, the presence of such shocks provides a precautionary motive
 
 ## Alternative Preferences
 
-The specification of preferences in the LCP model is the standard assumption of time-separable Constant Relative Risk Aversion
+The specification of preferences in the LCP model is the standard assumption of time-separable Constant Relative Risk Aversion.
 This is the workhorse tool for intertemporal choice models because it has a number of convenient mathematical properties and its implications satisfy some plausible economic desiderata (cf. @kimballStandardRA).
 However, mathematical convenience provides no guarantee that the utility specification is *right* in the sense of giving a proper representation of what people's preferences really are.
 Economists have explored a number of modifications to these standard preferences in an attempt to make their models' predictions match various facts.
@@ -424,7 +427,7 @@ Even if you knew those answers, they would be, at best, 'known unknowns.'
 
 ## Comparisons to Other Models Familiar to Practitioners
 
-@10.3905/jor.2014.1.4.118 asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
+@10.3905/jor.2014.1.4.118 in "The Journal of Retirement," asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
 That paper aimed to introduce the key concepts of formal life-cycle modeling to the audience of practitioners.
 Since its publication, there appears to have been considerable movement in the direction advocated by its authors.
 A number of leading financial institutions have made available partial descriptions of proprietary life cycle models that they are developing.
@@ -491,11 +494,12 @@ To account for this, we set the weights to normalize the wealth to income ratios
 This ensures that our estimation process puts even weight on the two sets of moments, despite the difference in scale and number of moments.
 
 Having chosen the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our various models.
-We use the `Econ-ARK` project's `HARK` package to solve and estimate the models, and `optimagic` (@Gabler2022, former `estimagic`) to perform the estimation process.
+We use the `Econ-ARK` project's `HARK` package to solve and estimate the models, and `optimagic` (@Gabler2022, formerly `estimagic`) to perform the estimation process.
 Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the `LCP+WarmGlow` model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. <!-- % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.-->
 
-Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.
-Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
+Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.[^estim]
+
+[^estim]: Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
 We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
 The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 
@@ -527,5 +531,5 @@ The time seems ripe for a much closer collaboration between academia and the fin
 
 [^thankstrp]: We are grateful to the Sloan Foundation and to T Rowe Price for generous funding of the toolkit.
 
-%:::{include} lit_review.md
-%:::
+:::{include} lit_review.md
+:::
