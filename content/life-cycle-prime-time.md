@@ -487,6 +487,8 @@ Starting at age 25, we calculate the median wealth-to-income ratio as follows: W
 For income, we use the sum of all wages, salaries, Social Security, and retirement income, excluding capital gains and other non-recurring income.
 We then calculate the wealth to income ratio of every household in the age bin and remove households with an income of zero.
 The median wealth-to-income ratio is calculated from the remaining households.
+Because the SCF data is increasingly sparse at older ages, the raw empirical moments show a "zig-zag" pattern above age 75 due to the small sample size.
+We smooth this out by holding the wealth-to-income ratio at 10.0 in the top three age brackets, the approximate mean among them.
 
 In our structural model, we hard-code retirement to occur at age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
 Therefore, we avoid the data for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
@@ -503,7 +505,7 @@ Our exercise consists of estimating one parameter (the coefficient of relative r
 
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.[^estim]
 
-[^estim]: Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
+[^estim]: Because our simulated moments indeed require simulation, our moment generating functions $\hat{q}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
 We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
 The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 

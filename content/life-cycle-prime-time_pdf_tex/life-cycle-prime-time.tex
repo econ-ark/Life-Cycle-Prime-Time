@@ -197,19 +197,23 @@ The employer's duty is to craft a plan that is expected to permit the employee t
 These legal considerations effectively prohibit the advisor from including a bequest motive in its optimization objective.\footnote{One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless people.
 This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.}
 
+% % MNW: I undid the section labeling here because the edits generated a duplicate label. A single model is presented in this subsection, introducting the basic lifecycle first, then adding portfolio choice to close the model.
+
 \subsection{The Baseline Academic Model}
 
 We begin by describing the optimal consumption-saving problem over the life cycle for a consumer, focusing on the dynamics of their income while ignoring how returns to saving work.
 After we have finished describing the basic life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
-\subsubsection{The Basic Life-Cycle Consumption-Saving Model}\label{basic-cs}
+\subsubsection{Basic Life-Cycle Consumption-Saving}\label{basic-cs}
 
 In each year (indexed by $t$), a consumer's flow of utility depends on how much they consume from their available resources.
 We assume that the utility function is of the standard Constant Relative Risk Aversion form:
 \begin{align}
-    \uFunc(\cLvl) & = \frac{\cLvl^{1-\CRRA}}{1-\CRRA}
+    \uFunc(\cLvl) & = \frac{\cLvl^{1-\CRRA}}{1-\CRRA}.
 \end{align}
-but of course the consumer is smart enough to realize that preserving some resources for the future is a good idea; this is why all wealth is not consumed immediately.
+The consumer is smart enough to realize that preserving some resources for the future is a good idea: they do not consume all of their wealth immediately.
+
+% % MNW: Adjusted this sentence to make it complete.
 
 At the time they choose how much to consume, the consumer has total market resources of $\mLvl_t$, representing their previously owned resources (bank balances) and current income flow $\yLvl_t$.
 Whatever the agent does not consume constitutes assets $\aLvl_t$, which accrue interest by factor $\Rport_{t+1}$ between period $t$ and period $t+1$.
@@ -335,7 +339,9 @@ $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ & probability that a person alive at age 
 \bottomrule
 \end{tabular}
 
-\bigskip\{and\} since $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm -\cNrm$ for the future.\footnote{The normalization for value function involves more than just division by $\pLvl$; see \cite{BufferStockTheory} for details.}
+\bigskip
+% {and} since $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
+% % MNW: This deletion was mistakenly reversed, I think. This sentence was moved up to just before the subsubsection break.
 
 \subsubsection{Calibration}
 
@@ -541,6 +547,8 @@ Starting at age 25, we calculate the median wealth-to-income ratio as follows: W
 For income, we use the sum of all wages, salaries, Social Security, and retirement income, excluding capital gains and other non-recurring income.
 We then calculate the wealth to income ratio of every household in the age bin and remove households with an income of zero.
 The median wealth-to-income ratio is calculated from the remaining households.
+Because the SCF data is increasingly sparse at older ages, the raw empirical moments show a ``zig-zag'' pattern above age 75 due to the small sample size.
+We smooth this out by holding the wealth-to-income ratio at 10.0 in the top three age brackets, the approximate mean among them.
 
 In our structural model, we hard-code retirement to occur at age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
 Therefore, we avoid the data for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
@@ -556,42 +564,56 @@ We use the \texttt{Econ-ARK} project's \texttt{HARK} package to solve and estima
 Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the \texttt{LCP+WarmGlow} model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. 
 %  % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.
 
-Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.\footnote{Because our simulated moments indeed require simulation, our moment generating functions $\hat{y}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
+Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.\footnote{Because our simulated moments indeed require simulation, our moment generating functions $\hat{q}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
 We use the \texttt{tranquilo} algorithm (\cite{Gabler2024}), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
 The \texttt{tranquilo} optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.}
 
 \subsection{Indirect Inference Results}
 
-Table~\ref{parameters} shows the results of our estimation exercise.
-For the standard Life-Cycle-Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of about 8.8, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from putting all their assets in the risky form.
-The Warm-Glow Portfolio Choice model also estimates a $\CRRA$ coefficient that also rounds to 8.8.
-as well as a bequest factor $\alpha$ of about 44, and a bequest shifter $\underline{a}$ of 26.
-The fact that the $\CRRA$ parameter is nearly unchanged is a clue to something that we will see in our figures: Although the bequest factor $\alpha$ is large, the estimated bequest shifter $\underline{a}$ is also large enough that it renders the bequest motive almost irrelevant for the median college-educated household we are examining.
-This is consistent with previous findings in the literature such as those by \cite{deNardiBequest}, who finds that the bequest motive comes into play only for the richest households.
-Finally, the TRP Portfolio Choice model estimates a CRRA $\CRRA$ coefficient of 3.472 and a wealth share of utility $\delta$ coefficient of 0.531.
-This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the Standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature.
-The addition of a non-separable utility of wealth factor $\delta$ allows the TRP Portfolio model to match the wealth accumulation patterns with a lower CRRA $\CRRA$ coefficient, which is more in line with the literature on risk aversion.
-Finally, we can observe the column labeled ``Criterion'', which represents the minimum value of the objective function attained for each model during the estimation process.
-The TRP Portfolio model has the lowest criterion value, indicating that it is the best-fitting model among the three.
+Table~\ref{parameters} shows the results of our estimation exercise, and the fit of the three estimated models is plotted below, in Figure~\ref{medwealth} and Figure~\ref{medshare}.
 
 \begin{table}
 \centering
-\caption[]{Estimated parameter values for the life-cycle, warm-glow, and TRP portfolios.}
+\caption[]{Estimated parameter values for the life-cycle, warm-glow, and TRP / WIUF portfolio models.}
 \label{parameters}
 \begin{tabular}{p{\dimexpr 0.167\linewidth-2\tabcolsep}p{\dimexpr 0.167\linewidth-2\tabcolsep}p{\dimexpr 0.167\linewidth-2\tabcolsep}p{\dimexpr 0.167\linewidth-2\tabcolsep}p{\dimexpr 0.167\linewidth-2\tabcolsep}p{\dimexpr 0.167\linewidth-2\tabcolsep}}
 \toprule
-Name & Criterion & CRRA ($\CRRA$) & Wealth Share ($\delta$) & Bequest Factor ($\alpha$) & Bequest Shift ($\underline{a}$) \\
-Life-Cycle Portfolio & 0.594 & 8.810 &  &  &  \\
-Warm-Glow LC Portfolio & 0.594 & 8.765 &  & 43.773 & 26.256 \\
-TRP LC Portfolio & 0.397 & 3.472 & 0.531 &  &  \\
+Name & Criterion & CRRA ($\CRRA$) & Wealth Share ($\delta$) & Bequest Factor ($\alpha$) & Bequest Shifter ($\underline{a}$) \\
+Life-Cycle Portfolio & 0.821 & 8.039 &  &  &  \\
+Warm-Glow LC Portfolio & 0.044 & 4.649 &  & 8415.7 & 2.588 \\
+TRP / WIUF LC Portfolio & 0.250 & 4.883 & 0.159 &  &  \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Figure~\ref{medshare} shows the median portfolio share for the agents in our simulation, along with the target share moments that come from \cite{Aboagye2024}.
-That paper presents the typical glide-path of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
-While the red line shows the whole life-cycle glidepath of optimal advice, here we only target those moments starting at age 70.
-As we can see, the TRP Portfolio model does a good job of matching the targeted portfolio shares post-retirement, while the Life-Cycle Portfolio and the Warm-Glow Portfolio models come close but persistently under-estimate the share of risky assets.
+For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of about 8, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from putting all their assets in the risky form.
+For context, ``typical'' values for the CRRA coefficient (from experimental evidence and other contexts) are considered to be between 1 and 5.
+The ``criterion'' column of Table~\ref{parameters} lists the minimum value that the objective function achieves for each model-- the smallest weighted squared distance between simulated moments and empirical moments.
+The LCP model performs poorly by this measure, as illustrated in the figures.
+LCP consumers want to quickly run down their wealth at older ages, as the probability of death increases with age and they know that they ``can't take it with them''.
+To try to match the observed empirical wealth trend (red dashed line in Figure~\ref{medwealth}), which holds steady at a high wealth-to-income ratio at older ages, the LCP model (solid blue line) exceeds observed wealth accumulation through the working life.
+Even then, the wealth drawdown is so rapid that the best the LCP model can achieve is to significantly overshoot wealth before age 65, and then vastly undershoot it in retirement.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{files/median_wealth-9642ec8cf12f2cc1fb7301752a15257b.pdf}
+\caption[]{Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for College educated households in the Survey of Consumer Finances. Wealth is \texttt{networth} and income consists of wages, social security, and retirement income.}
+\label{medwealth}
+\end{figure}
+
+As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
+The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA = 4.65$.
+With a strong bequest motive ($\alpha \approx 8400$), the Warm-Glow model is able to match the high levels of wealth observed deep into retirement.
+That is, these consumers do not quickly draw down their assets because they take great pleasure in passing their estate on to their heirs.
+The bequest motive magnitude $\alpha$ and shifter term $\underline{a}$ are somewhat complicated to interpret, but the upshot is that the bequest motive applies for essentially \textit{everyone}.
+In contrast, the literature has generally found (e.g. \cite{deNardiBequest}) that the bequest motive comes into play only for relatively wealthy households, and is mostly inoperative around median wealth.
+This discrepancy might arise because of the simplified approach we have used here, matching \textit{only} the median wealth-to-income ratio by age, rather than wealth levels conditional on income.
+
+Digging deeper, the Warm-Glow model predicts that saving behavior \textit{when young} is strongly motivated by the bequest motive.
+Recall from the discussion of the \cite{2023} and \cite{jaherGilded} that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of \textit{40 year olds} driven by the urge to bequeath.
+Even if a model can \textit{mechanically} reproduce observed data features or hit empirical targets, that does not make it ``right'' or ``true'', especially if its underlying logic is implausible and contradictory to qualitative evidence.
+And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty \textit{to the client}.
+We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are \textit{multiple ways} for life-cycle models to generate more realistic wealth trajectories in retirement.
 
 \begin{figure}[!htbp]
 \centering
@@ -600,19 +622,17 @@ As we can see, the TRP Portfolio model does a good job of matching the targeted 
 \label{medshare}
 \end{figure}
 
-Figure~\ref{medwealth} shows the median wealth to income ratio\footnote{Wealth is \texttt{networth} and income consists of wages, social security, and retirement income as defined by the Survey of Consumer Finances.} for achieved during the simulation.
-Again, the red line represents the target wealth to income ratios, or the empirical moments of our simulation, that come from the Survey of Consumer Finances.
-One might be concerned about the presence of a ``zig-zag'' in the aggregate empirical data, but this is likely due to selection/sampling bias and the reduction of participating households at higher ages due to death.
-The Life-Cycle and Warm-Glow Portfolio models overshoot the wealth accumulation over the life-cycle, but as expected, the agents in these simulations start to run down their wealth right after retirement.
-The TRP Portfolio model similarly overshoots wealth accumulation for working-age agents, but the agents in this simulation do not run down their wealth post-retirement.
-Overall, the TRP Portfolio model does a good job of matching the observed pattern post-retirement for the median household: peak of wealth to income accumulation post-retirement and a slow decline in the wealth to income ratio after that.
+Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
+The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 4.88 and a wealth share of utility $\delta$ coefficient of 0.16.
+This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the Standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature.
+As seen in Figure~\ref{medwealth}, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly.
+Compared to the Warm-Glow model, the TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity \textit{now}, rather than planning at age 35 to leave a large bequest at age 80.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.7\linewidth]{files/median_wealth-9642ec8cf12f2cc1fb7301752a15257b.pdf}
-\caption[]{Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for College educated households in the Survey of Consumer Finances. Wealth is \texttt{networth} and income consists of wages, social security, and retirement income.}
-\label{medwealth}
-\end{figure}
+Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can more accurately match the target risky assets share moments (red dashed line in Figure~\ref{medshare}), which come from \cite{Aboagye2024}.
+That paper presents the typical glide-path of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
+While the whole life-cycle glidepath is provided in \cite{Aboagye2024}, here we only target (and plot) those moments starting at age 70.
+The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.
+The basic LCP model, however, badly fits the risky asset share too low due to the high $\CRRA$ value needed in its attempt to match the life-cycle wealth pattern.
 
 \section{Conclusion}
 
