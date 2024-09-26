@@ -122,21 +122,24 @@ These legal considerations effectively prohibit the advisor from including a beq
 [^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless people.
 This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
 
+%% MNW: I undid the section labeling here because the edits generated a duplicate label. A single model is presented in this subsection, introducting the basic lifecycle first, then adding portfolio choice to close the model.
 
-## The Baseline Academic Models
-
-(lcp-model)=
-### The Life Cycle Portfolio ('LCP') Model
+## The Baseline Academic Model
 
 We begin by describing the optimal consumption-saving problem over the life cycle for a consumer, focusing on the dynamics of their income while ignoring how returns to saving work.
 After we have finished describing the basic life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
+(basic-cs)=
+### Basic Life-Cycle Consumption-Saving
+
 In each year (indexed by $t$), a consumer's flow of utility depends on how much they consume from their available resources.
 We assume that the utility function is of the standard Constant Relative Risk Aversion form:
 \begin{align}
-    \uFunc(\cLvl) & = \frac{\cLvl^{1-\CRRA}}{1-\CRRA}
+    \uFunc(\cLvl) & = \frac{\cLvl^{1-\CRRA}}{1-\CRRA}.
 \end{align}
-but of course the consumer is smart enough to realize that preserving some resources for the future is a good idea; this is why all wealth is not consumed immediately.
+The consumer is smart enough to realize that preserving some resources for the future is a good idea: they do not consume all of their wealth immediately.
+
+%% MNW: Adjusted this sentence to make it complete.
 
 At the time they choose how much to consume, the consumer has total market resources of $\mLvl_t$, representing their previously owned resources (bank balances) and current income flow $\yLvl_t$.
 Whatever the agent does not consume constitutes assets $\aLvl_t$, which accrue interest by factor $\Rport_{t+1}$ between period $t$ and period $t+1$.
@@ -264,7 +267,8 @@ A split second before choosing the risky share, the consumer's objective in the 
 | $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability that a person alive at age $t$ survives to age $t+1$                        |
 
 
-{and} since $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
+%{and} since $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
+%% MNW: This deletion was mistakenly reversed, I think. This sentence was moved up to just before the subsubsection break.
 
 ### Calibration
 
