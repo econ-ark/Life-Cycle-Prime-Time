@@ -28,7 +28,7 @@ This discrepancy might arise because of the simplified approach we have used her
 
 Digging deeper, the Warm-Glow model predicts that saving behavior *when young* is strongly motivated by the bequest motive.
 Recall from the discussion of the [Survey of Consumer Finances](https://doi.org/10.17016/8799) and @jaherGilded that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of *40 year olds* driven by the urge to bequeath.
-Even if a model can *mechanically* reproduce observed data features or hit empirical targets, that does not make it "right" or "true", especially if its underlying logic is implausible and contradictory to qualitative evidence.
+Even if a model can *mechanically* reproduce observed data features or hit empirical targets, that does not make it "right" or "true," especially if its underlying logic is implausible and contradictory to qualitative evidence.
 And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty *to the client*.
 We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are *multiple ways* for life-cycle models to generate more realistic wealth trajectories in retirement.
 
@@ -41,11 +41,11 @@ Median Portfolio Share for different portfolio models. The red line shows the ta
 
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
 The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 4.88 and a wealth share of utility $\delta$ coefficient of 0.16.
-This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the Standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature.
+This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature.
 As seen in @medwealth, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly.
-Compared to the Warm-Glow model, the TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity *now*, rather than planning at age 35 to leave a large bequest at age 80.
+Compared to the Warm-Glow model, the TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity *now*, rather than saving at age 35 to leave a large bequest at age 85.
 
-Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can more accurately match the target risky assets share moments (red dashed line in @medshare), which come from @Aboagye2024. 
+Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can better match the target risky assets share moments (red dashed line in @medshare), which come from @Aboagye2024. 
 That paper presents the typical glide-path of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
 While the whole life-cycle glidepath is provided in @Aboagye2024, here we only target (and plot) those moments starting at age 70.
 The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.

@@ -9,8 +9,17 @@ exports:
       output: life-cycle-prime-time.docx
 ---
 
-%% [ ] AL: Remind me - we are now incorporating aggregate productivity growth of 1.5 percent/yr? look at Caggetti and figure this out
-%% [ ] AL: Have we imported Mateo's medical expense risks yet? If so, delete this line, and make an "issue" in HARK that we should make that a default in our life cycle model indirect inference exercise (if we have not already done it)
+- [ ] MNW: careful readthrough for typos, etc
+- [ ] MNW: briefly describe the WGB model as per our discussions
+  - There is a value of $a$ at which the motive becomes 'active'
+  - Another value answers the question
+    - 'when my bequest motive is active and I get another dollar of income, how much do I spend vs how much do I direct toward my bequest'
+  - Instead of reporting $\alpha \approx 8000$, report the values of these objects instead
+- [ ] AL:Remove intercept from TRP WIUF
+  - we don't use it and it is confusing
+- [ ] AL: Make an "issue" in HARK that we should import Mateo's description of medical expenses
+  - unless it is so super-easy to do that we can get it done now
+- [ ] AL: Debug the autogeneration of the bibliography (Beshears is the canonical example of failure)
 
 +++ { "part": "abstract" }
 
@@ -24,7 +33,7 @@ We provide one example of a simple model that can solve a number of problems by 
 
 # Introduction
 
-Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose trying to understand consumer financial choices as optimal responses to the realities of the paths of income and of spending needs over the lifetime.
+Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose trying to understand consumer financial choices as optimal responses to the paths of income and of spending needs over the lifetime.
 An enormous academic literature has followed their pioneering work (see the [literature appendix](#lit-review) for an expansive summary),
 but it has proven difficult to build rational optimizing models that give sensible advice about both life-cycle saving choices and about investment decisions.
 That is, the models yield implausible answers to questions about how much wealth should be retained later in life, and how much of one's retirement savings should be invested in the stock market.
@@ -32,7 +41,7 @@ Indeed, the subtitle of a recent paper by [](doi:10.3905/jor.2023.10.3.071) capt
 
 [^modigliani_brumberg]: @10.7551/mitpress/1923.003.0004
 
-In this paper, we argue that the elements are already available to construct a model that 'practitioners can adopt,' and all that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients.
+In this paper, we argue that the elements are already available to construct a model that 'practitioners can adopt.'  All that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients.
 Our paper's central contribution is to provide a small [open-source computational model](github.com/econ-ark/life-cycle-prime-time) that incorporates some of the features that make it possible to build rigorous optimizing life cycle models whose advice is not obviously wrong.
 
 We begin with a (very) brief literature synopsis, then present a set of models that illustrate the difficulty of matching empirical facts with the life-cycle approach.
@@ -59,8 +68,8 @@ Among retirees, one answer dominates the rest: 'Liquidity/The Future.'  (See [th
 
 A natural interpretation of the importance consumers put on 'liquidity' is that precautionary saving motives matter for many households -- highlighting the need for the aforementioned computational advancements.
 
-The traditional approach to constructing such models has been for economists to try to measure the necessary inputs (income uncertainty, e.g.), and to assume that agent beliefs incorporate whatever it is that the economist has measured.
-However, the newly collected survey data on consumer expectations show that the beliefs that many people \textit{actually} hold differ substantially from what economists postulate they `should' believe based on their empirical measurements.
+The traditional approach to constructing such models has been for economists to try to measure the necessary inputs (income uncertainty, e.g.), and to assume that agents' beliefs incorporate whatever it is that the economist has measured.
+However, the newly collected survey data on consumer expectations show that the beliefs that many people _actually_ hold differ substantially from what economists postulate they 'should' believe based on their empirical measurements.
 Moreover, there is now considerable evidence that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they *should* believe and prefer.[^ageofreason]
 
 [^ageofreason]: A particularly troubling possibility is raised by the work of @gabaix2010age, who point out that at least some elderly decision-makers (say, those with dementia) may be beyond the 'age of reason.'
@@ -91,7 +100,7 @@ We call this the 'drawdown failure,' which has been the subject of a large liter
 It would be interesting to see how our results might change if we were to include such shocks, but the inexorable logic behind the model's prediction of a rapid drawdown of wealth should still apply as the threat of mortality grows with age.
 Furthermore, the drawdown failure is also present in other countries whose social insurance systems are much more generous than the U.S., so it seems unlikely that uninsurable medical risk is a sufficient explanation.
 
-We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure ([](@deNardi2004)],[](doi:10.1146/annurev-economics-080315-015127)).
+We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure (@deNardi2004),[](doi:10.1146/annurev-economics-080315-015127)).
 But in the [Estimation](#estimation) section we confirm the consensus in the literature that the bequest motive does not seem to have much force for most households.
 (Note that @10.2139/ssrn.304721 finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
 
@@ -260,11 +269,12 @@ The consumer makes the optimal choice of portfolio share, so we redefine the "go
 A split second before choosing the risky share, the consumer's objective in the consumption stage of the problem is exactly the same as the Bellman form above, but with the redefined continuation value that accounts for optimal portfolio choice.
 
 
-| object                                 | meaning                                                                                 |
-| -------------------------------------- |                      ------------------------------------------------------------------ |
-| $\mNrm, \cNrm, \aNrm$                  | market resources, consumption, and end-of-period assets, normalized by permanent income |
-| $\vFunc$                               | the normalized value function                                                           |
-| $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability that a person alive at age $t$ survives to age $t+1$                        |
+ | object                                 | meaning                                                                                 |
+ | -------------------------------------- |                      ------------------------------------------------------------------ |
+ | $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability that a person alive at age $t$ survives to age $t+1$                        |
+ | $\mNrm, \cNrm, \aNrm$                  | market resources, consumption, and end-of-period assets, normalized by permanent income |
+ | $\vFunc_{t}(\mNrm)$                    | the normalized value function when consumption decision is made                                                          |
+ | $\mathfrak{v}_{t}(\aNrm)$                  | the normalized value function when portfolio decision is made                                                          |
 
 
 %{and} since $\aNrm$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
@@ -295,7 +305,7 @@ Economists have explored a number of modifications to these standard preferences
 
 One intuitive idea is that people care not only about the current level of their consumption but also about how it compares to their past levels of consumption (they have "habit formation" in their preferences).
 For example, @10.1257/aer.90.3.341 show that a model with multiplicative habits can provide an explanation for otherwise puzzling patterns in the relationship between saving and growth across countries, and
-@10.2139/ssrn.302079 examine the implications of such a model for life-cycle choices.
+@10.2139/ssrn.302079 examines the implications of such a model for life-cycle choices.
 
 A second common modification to preferences considered by a substantial literature is the use of @10.1086/261750 preferences, which allow agents to be extremely risk averse with respect to financial risk at a point of time, while simultaneously allowing the agents to be willing to be quite willing to tolerate changes in consumption over time.
 Such preferences have been proposed as a way to solve various puzzles related to the relatively high rate of return that equity investments have exhibited over time.
@@ -305,7 +315,7 @@ In our view, however, they are both difficult to defend given some facts we can 
 In particular, both models would imply that microeconomic households would be extremely eager to buy insurance to smooth away almost any risk to their microeconomic circumstances.
 While people do typically have insurance against large risks (fire insurance for the home, auto insurance for the car), the parameter values in these models required to match the macroeconomic facts would justify consumers in spending a large fraction of their income on insurance of all kinds.
 One particular example stands out: Households with either strong habits or a high Epstein-Zin instantaneous coefficient of relative risk aversion would be extremely eager to buy private unemployment insurance to supplement the default UI system provided by the state.
-Indeed, such private UI is available-- and at prices such that a large fraction of households would be eager to buy it if they had such preferences-- yet the fraction of households who participate in the private UI market is vanishingly small.
+Such private UI is available -- and at prices such that a large fraction of households would be eager to buy it if they had such preferences -- yet the fraction of households who participate in the private UI market is vanishingly small.
 
 Our attention in this paper is therefore directed toward other modifications in preferences that seem to be plausible in both microeconomic and macroeconomic data.
 
@@ -316,7 +326,7 @@ The LCP model sketched above assumes that the only reason to hold wealth is to s
 As the literature has demonstrated, and as we will confirm below using data from SCF's from 1995 to 2022, the path of the median wealth ratio after retirement does not look anything like what that model predicts.
 
 Of course, the model can make no sense at all of the behavior of the very rich.
-Bill Gates, for example, has chosen to allocate a large portion of his lifetime wealth to the Bill and Melinda Gates foundation rather than spending it on himself; and even with the relative pittance that remains to him (\$153 billion, per [Business Insider](https://www.businessinsider.com/how-bill-gates-spends-fortune)) he would need to spend about \$22 million per day to *avoid getting richer*.[^billgatesspend]
+Bill Gates, for example, has chosen to allocate a large portion of his lifetime wealth to the Bill and Melinda Gates foundation rather than spending it on himself; and even with the relative pittance that remains to him today (\$153 billion, per [Business Insider](https://www.businessinsider.com/how-bill-gates-spends-fortune)) he would need to spend about \$22 million per day to *avoid getting richer*.[^billgatesspend]
 In fact, he has pledged to give away nearly all of his wealth before he dies.
 
 [^billgatesspend]: As of 2024-05-15, the Fed Funds rate is 5.3 percent at an annual rate.
@@ -407,7 +417,7 @@ To be clear, the aim of that literature was to explain the holding of $\lqdt$ de
 ### Wealth In the Utility Function: Cobb-Douglas Form
 
 But for the question of how to incorporate wealth in the utility function, [](doi:10.2139/ssrn.4693176) proposed a mathematically identical formulation in which assets $\aNrm$ takes the place of $\lqdt$ in the Rotemberg-Poterba utility function.[^mora]
-The Cobb-Douglas functional form is commonly used in other contexts, but does not seem to have been explored as a formulation for how to put a direct wealth-holding motive in the utility function.
+The Cobb-Douglas functional form is commonly used in other contexts, but does not seem to have been previously explored as a formulation for how to put a direct wealth-holding motive in the utility function.
 
 [^mora]: The question of whether $\aNrm$ or $\mNrm$ should be in the utility function is of little importance; here we prefer $\aNrm$ because assets after consumption are immune to considerations of whether the time period is a year, a quarter, or a month.
 
@@ -424,7 +434,7 @@ It is a relatively simple matter to solve the revised problem with wealth in the
 %% We refrain from a description of the solution methods here because they are documented in the accompanying code archive which fully reproduces all our results.
 
 We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.
-In particular, the fact that in our SCF table above, 'Liquidity/The Future' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the matters retirees might worry about.
+In particular, the fact that in our SCF table above, 'Liquidity/The Future' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the risks retirees might worry about.
 Maintaining a buffer stock of wealth to protect oneself against 'unknown unknowns' is possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of 'unknown unknowns.'
 Even if you knew those answers, they would be, at best, 'known unknowns.'
 
@@ -451,16 +461,16 @@ Their model also assumes that there is no uncertainty (except for mortality) in 
 
 There have also been publications that partake of the mathematical flavor of life cycle modeling but do not use the intertemporal choice framework. 
 [](doi:10.1080/0015198x.2023.2212581) uses a static model of portfolio optimization, where the objective is to maximize the mean-variance trade off of a portfolio position with additional features such as non-pecuniary benefits.
-Because this model is not dynamic, it can not consider and/or anticipate risks such as future market volatility, changes in preferences over the life cycle, mortality, and retirement horizon.
+Because this model is not dynamic, it can not examine questions like the role of increasing health and mortality risk with age, the degree of uncertainty in expenses, or any other question whose answer depends on changes in the consumer's circumstances as they age.
 
 
 # Estimation
 
 ## Indirect Inference Described
 
-Even if one knew all the parameters of the model (the consumer's coefficient of relative risk aversion, etc), solving an optimization problem that includes the many real-world complications described above (especially those due to uncertainty) is such a formidable problem that it only became possible about 25 years ago (and solving the models took days).
+Even if one knew all the parameters of the model (the consumer's coefficient of relative risk aversion, etc), solving an optimization problem that includes the many real-world complications described above (especially those due to uncertainty) is such a formidable problem that it only became possible about 25 years ago (when solving such models took days).
 
-But of course we do not know the best values to choose for unobservable parameters like relative risk aversion and time preference rates.
+But of course we do not know the best values to choose for unobservable parameters like relative risk aversion.
 The increasingly standard approach to this problem is the method of 'indirect inference.'
 Essentially, this means specifying the structure of your model except for the values of parameters that you cannot measure well (like time preference and risk aversion), and asking a numerical search algorithm to seek the values of those parameters that lets the model fit the data as well as it is capable of doing.
 This requires the computer to solve the problem perhaps thousands of times, which is why indirect inference has only begun to come into its own recently, as computer speeds have become fast enough to tackle the problem.
@@ -521,7 +531,7 @@ The `tranquilo` optimizer has many attractive features, such as being able to ev
 To thoughtful academics, it has long been disturbing that the financial advice industry has paid so little attention to our hard work in constructing and solving impressively sophisticated dynamic stochastic optimization models of financial behavior.
 Those of us with a bit of humility have always suspected that the failure has been on our side: If all we could offer was models that produced risible advice like "everyone should spend down their wealth to zero and live pension-check to pension-check," while financial analysts' real world experience told them that such advice would get them fired, then it was reasonable to disregard the academic literature.
 
-The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.[^housing]
+The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.
 
 Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of nonfinancial (principally, housing) wealth for optimal financial choice.
 Because homeownership is such a complex phenomenon, the academic literature is only now reaching the point at which it may be possible to answer questions like "if I own a house, how should I modify my spending and portfolio plans to take that into account?"
