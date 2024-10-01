@@ -17,6 +17,7 @@ exports:
   - Another value answers the question
     - 'when my bequest motive is active and I get another dollar of income, how much do I consume vs how much do I direct toward my bequest'
     - Do not mention the value of $\alpha$ in the text at all
+- [ ] MNW: Try to set up the necessary apparatus so the code can run via a binder link
 - [ ] AL:Remove intercept from TRP WIUF
   - we don't use it and it is confusing
 - [ ] AL: Make an "issue" in HARK that we should import Mateo's description of medical expenses
