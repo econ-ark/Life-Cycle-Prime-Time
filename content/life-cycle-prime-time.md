@@ -10,14 +10,6 @@ exports:
 ---
 
 - [ ] MNW: careful readthrough for typos, etc
-      - Note that %% is not a valid marker for a comment in markdown. 
-	  - Either remove any such items or replace them as proper markdown comments
-- [ ] MNW: in the results section, describe the WGB results as per our discussions:
-  - There is a value of $a$ at which the motive becomes 'active'
-  - Another value answers the question
-    - 'when my bequest motive is active and I get another dollar of income, how much do I consume vs how much do I direct toward my bequest'
-    - Do not mention the value of $\alpha$ in the text at all
-- [ ] MNW: Try to set up the necessary apparatus so the code can run via a binder link
 - [ ] AL:Remove intercept from TRP WIUF
   - we don't use it and it is confusing
 - [ ] AL: Make an "issue" in HARK that we should import Mateo's description of medical expenses
@@ -105,7 +97,6 @@ In the [Estimation](#estimation), we report that the model implies a rapid drawd
 We call this the 'drawdown failure,' which has been the subject of a large literature with both U.S. evidence (see, e.g., @10.2307/1913772, @DeNardi2016d, [](doi:10.1257/mac.6.3.29), [](doi:10.17310/ntj.2019.3.02), [](doi:10.1016/j.jpubeco.2018.04.008)) and international evidence (see, e.g., [](doi:10.3386/w29826), [](doi:10.1007/s11150-020-09486-y), [](doi:10.1016/j.jjie.2018.10.002)).
 
 [^AmeriksCaveat]: Some impressive recent work by Ameriks, Caplin, and coauthors (@ameriks2011joy, @Ameriks2020jpe) has argued that concerns about the possibility of extremely large medical costs (e.g. nursing home or other long term care) may be behind the drawdown failure for some people (see [](doi:10.1146/annurev-economics-080315-015127)) for a survey).
-%% Although our model attempts to take medical expenditure shocks into account, it is not calibrated directly with the @Ameriks2020jpe measurements of medical shocks in the US.
 It would be interesting to see how our results might change if we were to include such shocks, but the inexorable logic behind the model's prediction of a rapid drawdown of wealth should still apply as the threat of mortality grows with age.
 Furthermore, the drawdown failure is also present in other countries whose social insurance systems are much more generous than the U.S., so it seems unlikely that uninsurable medical risk is a sufficient explanation.
 
@@ -139,8 +130,6 @@ These legal considerations effectively prohibit the advisor from including a beq
 
 [^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless people.
 This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
-
-%% MNW: I undid the section labeling here because the edits generated a duplicate label. A single model is presented in this subsection, introducting the basic lifecycle first, then adding portfolio choice to close the model.
 
 ## The Baseline Academic Model
 
@@ -434,8 +423,6 @@ It is a relatively simple matter to solve the revised problem with wealth in the
     {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t}, \aNrm_{t})+\Alive_{t+1}\mathfrak{v}_{t}(a_{t}).
 \end{align}
 
-%% We refrain from a description of the solution methods here because they are documented in the accompanying code archive which fully reproduces all our results.
-
 We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.
 In particular, the fact that in our SCF table above, 'Liquidity/The Future' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the risks retirees might worry about.
 Maintaining a buffer stock of wealth to protect oneself against 'unknown unknowns' is possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of 'unknown unknowns.'
@@ -518,7 +505,7 @@ Our exercise consists of estimating one parameter (the coefficient of relative r
 
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.[^estim]
 
-[^estim]: Because our simulated moments indeed require simulation, our moment generating functions $\hat{q}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
+[^estim]: Because our moments require simulation, our moment generating functions $\hat{q}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
 We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
 The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 
@@ -550,5 +537,5 @@ The time seems ripe for a much closer collaboration between academia and the fin
 
 [^thankstrp]: We are grateful to the Sloan Foundation and to T Rowe Price for generous funding of the toolkit.
 
-:::{include} lit_review.md
-:::
+%:::{include} lit_review.md
+%:::

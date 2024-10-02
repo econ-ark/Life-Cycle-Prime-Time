@@ -20,9 +20,14 @@ Median Wealth to Income Ratio for different portfolio models. The red line indic
 
 As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
 The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA = 4.65$.
-With a strong bequest motive ($\alpha \approx 8400$), the Warm-Glow model is able to match the high levels of wealth observed deep into retirement.
+With a strong bequest motive, the Warm-Glow model is able to match the high levels of wealth observed deep into retirement.
 That is, these consumers do not quickly draw down their assets because they take great pleasure in passing their estate on to their heirs.
-The bequest motive magnitude $\alpha$ and shifter term $\underline{a}$ are somewhat complicated to interpret, but the upshot is that the bequest motive applies for essentially *everyone*.
+The bequest motive magnitude $\alpha$ and shifter term $\underline{a}$ cannot be *directly* interpreted in human terms, instead requiring an indirect interpretation used in @DeNardi2010 (see their Appendix D).
+Consider the extreme case of a model consumer who is *so old* that they can't possibly survive to the next period-- age 120, in our calibration.
+Facing certain imminent death, how much should this person consume versus allocate to their bequest?
+The form of the warm-glow bequest motive dictates that the optimal mapping from cash-on-hand to consumption is piecewise linear with a single kink: below a certain threshold wealth-to-income ratio, they should *consume all resources*, and then allocate to their bequest a *constant fraction* of any wealth above the threshold.
+The estimated $\alpha$ and $\underline{a}$ can be mathematically transformed to find a *bequest threshold* of about 0.43 and the *marginal propensity to bequeathe* of 0.875; that is, a terminally old agent will allocate to their bequest 87.5\% of any wealth above 43\% of their permanent income.
+This strong bequest motive at the very end of life propagates backward to more reasonable ages (albeit not as readily quantifiable), and ultimately it applies for essentially *everyone*.
 In contrast, the literature has generally found (e.g. @deNardiBequest) that the bequest motive comes into play only for relatively wealthy households, and is mostly inoperative around median wealth.
 This discrepancy might arise because of the simplified approach we have used here, matching *only* the median wealth-to-income ratio by age, rather than wealth levels conditional on income.
 
