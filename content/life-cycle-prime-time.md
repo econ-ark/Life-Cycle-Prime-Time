@@ -79,8 +79,6 @@ Concretely, many people think that investment in stocks is a lousy deal, yieldin
 
 [^errors]: If the modeler is willing to assert that consumers have mistaken beliefs that cause them to make suboptimal choices, the advice the model gives will differ from the pattern of measured behavior. This could justify the model in recommending, for example, greater investment in risky assets than consumers tend to choose on their own. We compromise by adopting a believed equity premium of 0.03, which is lower than the historical average. Even lower beliefs would reduce the estimated risk aversion coefficient.
 
-% !! MNW: I think it would *increase* the estimated rho.
-
 It is not astonishing to discover that many people hold beliefs that differ from those of experts, especially on subjects whose mastery requires considerable domain-specific education, like the returns and risk of stock investments.
 Indeed, the existence of a large industry offering financial advice is *prima facie* evidence that many people are not confident that they understand everything necessary to make good financial financial choices on their own.
 
@@ -225,8 +223,6 @@ Particularly, define $\pmb{\DiscFac}_{t+1}$ as
      \pmb{\DiscFac}_{t+1} & ={\beta} (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA}.
     %\\ \RNrm_{t+1} & = \left(\frac{\Rport_{t+1}}{\permShk_{t+1}\permGroFac_{t+1}}\right)
 \end{align}
-
-%and simplifying the notation for the probability of survival to $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$
 
 The consumer's problem can be expressed more simply by realizing that it boils down to a "now versus later" problem.
 All the consumer needs to know about the future is summarized by the value they will expect as a consequence of ending the current period with a certain ratio of assets to permanent income, $\aNrm = \aLvl/\pLvl$.
@@ -479,7 +475,7 @@ Here, $\omega_i$ is the weight of each moment in the objective function, represe
 For example, we might be more interested in matching the median wealth than the median portfolio share, and thus assign a higher weight to the former.
 
 For our exercise, we are interested in matching the median wealth to income ratios throughout the life cycle, and the median portfolio share of risky assets after retirement.
-Because aggregate age data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias.
+Because age-aggregated data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias.
 Starting at age 25, we calculate the median wealth-to-income ratio as follows: Wealth is defined as the sum of all assets and liabilities, including financial assets, housing, vehicles, and debt.
 For income, we use the sum of all wages, salaries, Social Security, and retirement income, excluding capital gains and other non-recurring income.
 We then calculate the wealth to income ratio of every household in the age bin and remove households with an income of zero.
