@@ -9,14 +9,7 @@ exports:
       output: life-cycle-prime-time.docx
 ---
 
-- [ ] AL:Remove intercept from TRP WIUF
-  - we don't use it and it is confusing
-- [ ] AL: Make an "issue" in HARK that we should import Mateo's description of medical expenses
-  - unless it is so super-easy to do that we can get it done now
-- [ ] AL: Debug the autogeneration of the bibliography (Beshears is the canonical example of failure)
-  - we don't use it and it is confusing
-- [ ] AL: Let's put all our references in a references.bib file and replace the dois in the main text
-- [ ] AL: Migrate to econ-ark from alanlujan91
+
 
 +++ { "part": "abstract" }
 
@@ -111,6 +104,7 @@ This allows us to appeal to survey evidence in which respondents are asked direc
 
 But the broad purpose of our exercise is not to defend any particular modeling setup; instead, it is to call attention to the fact that modeling and conceptual tools (including the idea that softer data like surveys should be taken seriously) have advanced to the point where it is finally possible to construct rational optimizing models of life cycle financial choice that can serve as a credible justification for normative advice.
 
+(models)=
 # Models
 
 The academic literature on life-cycle modeling is vast, and we cannot hope to do it justice (even in the broader sampling in the [literature appendix](#lit-review)).
@@ -446,7 +440,7 @@ There have also been publications that partake of the mathematical flavor of lif
 [](doi:10.1080/0015198x.2023.2212581) uses a static model of portfolio optimization, where the objective is to maximize the mean-variance trade off of a portfolio position with additional features such as non-pecuniary benefits.
 Because this model is not dynamic, it can not examine questions like the role of increasing health and mortality risk with age, the degree of uncertainty in expenses, or any other question whose answer depends on changes in the consumer's circumstances as they age.
 
-
+(estimation)=
 # Estimation
 
 ## Indirect Inference Described
@@ -530,5 +524,3 @@ The time seems ripe for a much closer collaboration between academia and the fin
 
 [^thankstrp]: We are grateful to the Sloan Foundation and to T Rowe Price for generous funding of the toolkit.
 
-:::{include} lit_review.md
-:::

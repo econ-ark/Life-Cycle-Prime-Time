@@ -1,3 +1,13 @@
+---
+title: Literature Appendix
+exports:
+    - format: tex+pdf
+      template: arxiv_nips
+      output: lit_review.pdf
+    - format: docx
+      template: default
+      output: lit_review.docx
+---
 
 (lit-review)=
 # Literature Appendix
