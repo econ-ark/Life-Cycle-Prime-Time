@@ -14,7 +14,7 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 import numpy as np
 from HARK.Calibration.Income.IncomeTools import Cagetti_income, parse_income_spec
 from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
-from HARK.distribution import DiscreteDistribution
+from HARK.distributions import DiscreteDistribution
 
 # ---------------------------------------------------------------------------------
 # - Define all of the model parameters for EstimatingMicroDSOPs and ConsumerExamples -
