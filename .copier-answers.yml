@@ -1,0 +1,13 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 2024.08.19
+_src_path: gh:scientific-python/cookie
+backend: hatch
+email: alanlujan91@gmail.com
+full_name: Alan Lujan
+license: MIT
+org: econ-ark
+project_name: estimark
+project_short_description: Estimating Microeconomic Dynamic Stochastic Optimization
+    Problems
+url: https://github.com/econ-ark/EstimatingMicroDSOPs
+vcs: true

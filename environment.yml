@@ -3,6 +3,22 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python
+  - python=3.12
+  - estimagic=0.4.7
+  - jupyter
+  - statsmodels
+  - jupyterlab
+  - black
+  - ruff
+  - nbqa
+  - dask
+  - openpyxl
   - nodejs
   - mystmd
+  - pip
+  - pip:
+      - git+https://github.com/econ-ark/HARK@master
+      - DFO-LS
+      - tranquilo
+      - black[jupyter]
+      - -e .
