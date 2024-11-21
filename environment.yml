@@ -1,7 +1,6 @@
 name: life-cycle-prime-time
 channels:
   - conda-forge
-  - defaults
 dependencies:
   - python=3.12
   - estimagic=0.4.7
