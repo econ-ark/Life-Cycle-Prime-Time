@@ -1,4 +1,4 @@
-"""Specifies the full set of calibrated values required to estimate the EstimatingMicroDSOPs
+"""Specifies the full set of calibrated values required to estimate the Life-Cycle-Prime-Time
 model.  The empirical data is stored in a separate csv file and is loaded in setup_scf_data.
 """
 
@@ -17,7 +17,7 @@ from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
 from HARK.distributions import DiscreteDistribution
 
 # ---------------------------------------------------------------------------------
-# - Define all of the model parameters for EstimatingMicroDSOPs and ConsumerExamples -
+# - Define all of the model parameters for Life-Cycle-Prime-Time and ConsumerExamples -
 # ---------------------------------------------------------------------------------
 
 # Assets grid

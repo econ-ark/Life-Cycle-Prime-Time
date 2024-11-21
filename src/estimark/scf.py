@@ -1,4 +1,4 @@
-"""Sets up the SCF data for use in the EstimatingMicroDSOPs estimation."""
+"""Sets up the SCF data for use in the Life-Cycle-Prime-Time estimation."""
 
 from __future__ import annotations
 

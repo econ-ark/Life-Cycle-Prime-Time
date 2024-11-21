@@ -51,10 +51,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/econ-ark/EstimatingMicroDSOPs"
-"Bug Tracker" = "https://github.com/econ-ark/EstimatingMicroDSOPs/issues"
-Discussions = "https://github.com/econ-ark/EstimatingMicroDSOPs/discussions"
-Changelog = "https://github.com/econ-ark/EstimatingMicroDSOPs/releases"
+Homepage = "https://github.com/econ-ark/Life-Cycle-Prime-Time"
+"Bug Tracker" = "https://github.com/econ-ark/Life-Cycle-Prime-Time/issues"
+Discussions = "https://github.com/econ-ark/Life-Cycle-Prime-Time/discussions"
+Changelog = "https://github.com/econ-ark/Life-Cycle-Prime-Time/releases"
 
 
 [tool.hatch]

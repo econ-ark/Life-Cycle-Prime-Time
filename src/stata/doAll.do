@@ -3,7 +3,7 @@
 set linesize 200
 
 * make paths
-global basePath  "/Volumes/Data/Notes/NumericalMethods/EstimatingMicroDSOPs/Latest"
+global basePath  "/Volumes/Data/Notes/NumericalMethods/Life-Cycle-Prime-Time/Latest"
 global stataPath "Code/Stata"
 global logPath   "Code/Stata"
 

@@ -7,8 +7,8 @@ if ! command -v conda >/dev/null 2>&1; then
 fi
 
 # Check if the environment exists
-if conda env list | grep -q 'estimatingmicrodsops'; then
-    echo "Environment 'estimatingmicrodsops' already exists. Updating it..."
+if conda env list | grep -q 'life-cycle-prime-time'; then
+    echo "Environment 'life-cycle-prime-time' already exists. Updating it..."
     conda env update -q -f environment.yml
 else
     echo "Creating environment using conda..."
@@ -16,7 +16,7 @@ else
 fi
 
 # Activate the environment
-conda activate estimatingmicrodsops
+conda activate life-cycle-prime-time
 
 # Execute script to reproduce figures
 ipython src/run_all.py

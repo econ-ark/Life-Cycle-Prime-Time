@@ -1,4 +1,4 @@
-"""Run all of the plots and tables in EstimatingMicroDSOPs.
+"""Run all of the plots and tables in Life-Cycle-Prime-Time.
 
 To execute, do the following on the Python command line:
 
@@ -12,14 +12,14 @@ More Details
 ------------
 
 This example script allows the user to create all of the figures and tables
-modules for EstimatingMicroDSOPs.StructuralEstimation.
+modules for Life-Cycle-Prime-Time.StructuralEstimation.
 
 This is example is kept as simple and minimal as possible to illustrate the
 format of a "replication archive."
 
 The file structure is as follows:
 
-./EstimatingMicroDSOPs/
+./Life-Cycle-Prime-Time/
     calibration/        # Directory that contain the necessary code and data to parameterize the model
     code/               # The main estimation code, in this case StructuralEstimation.py
     figures/            # Any figures created by the main code
