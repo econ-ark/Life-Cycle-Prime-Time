@@ -38,7 +38,6 @@ Our paper's central contribution is to provide a small [open-source computationa
 We begin with a (very) brief literature synopsis, then present a set of models that illustrate the difficulty of matching empirical facts with the life-cycle approach.
 We end with our proposed solution, which involves a small twist to the old idea (@carrollWhyDoTheRich) of incorporating wealth directly in the utility function.
 
-
 ## Recent Developments in the Literature
 
 ### Computation/Uncertainty/Complexity
@@ -46,7 +45,7 @@ We end with our proposed solution, which involves a small twist to the old idea 
 Consumers face many uncertainties: about their own income, stock returns, interest rates, health expenditures, mortality, and much more.
 Further complications arise because of liquidity constraints and other financial frictions.
 
-The incorporation of realistic descriptions of these complexities makes computation of the mathematically optimal solution to the consumer's astonishingly difficult.
+The incorporation of realistic descriptions of these complexities makes computation of the mathematically optimal solution to the consumer's problem is astonishingly difficult.
 It is more difficult than, say, the calculation of optimal trajectories for spacecraft, and perhaps comparable to the complexity of figuring out how to drive a car roughly as well as a human (another problem where adequate computational solutions have only recently become available).
 The remarkable advance of computational power has now finally made it possible to compute a credible answer to the question "what saving and portfolio choices are truly mathematically optimal?" in a context in which the key complexities are properly represented.
 
@@ -79,7 +78,6 @@ Financial advice, however, is fraught with potential conflicts of interest.
 That is one reason that justifying such advice with an explicit and transparent modeling framework is so attractive.
 If the advice is consistent with the model, and the model can be checked both for mathematical correctness and conceptual soundness (by outside experts), then it is reasonable for a client hiring an advisor to trust the advice.
 
-
 ### Model Specification and Estimation
 
 In the [Models](#models) section below, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the [Life Cycle Portfolio](#lcp-model) model, which calculates optimal saving and optimal portfolio shares over the life cycle.
@@ -90,14 +88,14 @@ We call this the "drawdown failure," which has been the subject of a large liter
 It would be interesting to see how our results might change if we were to include such shocks, but the inexorable logic behind the model's prediction of a rapid drawdown of wealth should still apply as the threat of mortality grows with age.
 Furthermore, the drawdown failure is also present in other countries whose social insurance systems are much more generous than the U.S., so it seems unlikely that uninsurable medical risk is a sufficient explanation.
 
-We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure [](doi:10.1146/annurev-economics-080315-015127)).
+We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure [](doi:10.1146/annurev-economics-080315-015127).
 In the [Estimation](#estimation) section we find that in order for the bequest motive to explain the drawdown failure, the strength of that motive has to be extremely strong - so much so that even early in their working lives the primary motiviation for saving is for the accumulation of a bequest (rather than, say, to sustain one's own consumption in retirement). (Note that @10.2139/ssrn.304721 finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
 
 This leads us into more speculative territory.
-If what consumers care most about is to hold wealth for "Liquidity / The Future" but that wealth is not explainable by precautionary saving against measurable shocks, a potential interpretation is that consumers value the ownership of wealth *in and of itself*.
+If what consumers care most about is to hold wealth for "Liquidity / The Future," but that wealth is not explainable by precautionary saving against measurable shocks, a potential interpretation is that consumers value the ownership of wealth *in and of itself*.
 After fleshing out this idea a bit, we propose a final model that makes wealth a direct input to the utility function in a different way than in the existing literature.
 
-The main quantitative result of this paper is to show that this final model does a much better job of jointly matching the wealth profile and portfolio choices than does the Life Cycle Portfolio model. While it does not match the drawdown failure as well as the Warm Glow Bequest (WGB) model does, the WGB model fits the data only when we allow an implausibly intense bequest motive. 
+The main quantitative result of this paper is to show that this final model does a much better job of jointly matching the wealth profile and portfolio choices than does the Life Cycle Portfolio model. While it does not match the drawdown failure as well as the Warm Glow Bequest (WGB) model does, the WGB model fits the data only when we allow an implausibly intense bequest motive.
 
 Our ability to judge that such a strong bequest motive is implausible rests on another methodological shift: Economists have become much more receptive to the use of "softer" data like surveys on household expectations and beliefs.
 This allows us to appeal to survey evidence in which respondents are asked directly about their motivations for saving; providing for a bequest turns out to rank very low on the list of consumers' expressed priorities.
@@ -105,6 +103,7 @@ This allows us to appeal to survey evidence in which respondents are asked direc
 But the broad purpose of our exercise is not to defend any particular modeling setup; instead, it is to call attention to the fact that modeling and conceptual tools (including the idea that softer data like surveys should be taken seriously) have advanced to the point where it is finally possible to construct rational optimizing models of life cycle financial choice that can serve as a credible justification for normative advice.
 
 (models)=
+
 # Models
 
 The academic literature on life-cycle modeling is vast, and we cannot hope to do it justice (even in the broader sampling in the [literature appendix](#lit-review)).
@@ -120,7 +119,7 @@ The employer's duty is to craft a plan that is expected to permit the employee t
 These legal considerations effectively prohibit the advisor from including a bequest motive in its optimization objective.[^planprovideradvantage]
 
 [^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless people.
-This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to 401(k) providers it should be possible.
+This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to the IRS it should be possible.
 
 ## The Baseline Academic Model
 
@@ -128,6 +127,7 @@ We begin by describing the optimal consumption-saving problem over the life cycl
 After we have finished describing the basic life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
 (basic-cs)=
+
 ### Basic Life-Cycle Consumption-Saving
 
 In each year (indexed by $t$), a consumer's flow of utility depends on how much they consume from their available resources.
@@ -233,8 +233,8 @@ Because $\aNrm_t$ measures available market resources that are unspent, this for
 
 [^normalization]: The normalization for value function involves more than just division by $\pLvl$; see @BufferStockTheory for details.
 
-
 (lcp-model)=
+
 ### The Life Cycle Portfolio ('LCP') Model
 
 We are now ready to add portfolio choice to the problem and discuss how the interest factor $\Rport_{t+1}$ is determined.
@@ -253,7 +253,6 @@ The consumer makes the optimal choice of portfolio share, so we redefine the "Go
 \end{align}
 A split second before choosing the risky share, the consumer's objective in the consumption stage of the problem is exactly the same as the Bellman form above, but with the redefined continuation value that accounts for optimal portfolio choice.
 
-
  | object                                 | meaning                                                                                 |
  | -------------------------------------- |                      ------------------------------------------------------------------ |
  | $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ | probability that a person alive at age $t$ survives to age $t+1$                        |
@@ -266,13 +265,12 @@ A split second before choosing the risky share, the consumer's objective in the 
 Many of the parameters of the basic life-cycle consumption-saving model can be calibrated from well measured empirical data.
 For example, we use standard calibrations of both of the income shock processes during the working life, based on @Cagetti2003, and
 survival probabilities by age are taken directly from actuarial mortality tables published by the Social Security Administration.
-We set the "pure" rate of time preference to $\beta=1$, meaning that the optimal choice is to care exactly as much your future self as much as your present self (conditional on surviving into the future).
+We set the "pure" rate of time preference to $\beta=1$, meaning that the optimal choice is to care exactly as much about your future self as your present self (conditional on surviving into the future).
 
 Beyond those basic assumptions, we calibrate the model to include uncertainty after retirement.
 Specifically, we assume that there are "ordinary" expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from  @flExpShocks).
 In principle, the presence of such shocks provides a precautionary motive to draw down wealth more slowly.
 However, our estimation results show that even when we include this calibration of expense shocks, the model still predicts much more drawdown of wealth than the data show.
-
 
 ## Alternative Preferences
 
@@ -287,7 +285,7 @@ One intuitive idea is that people care not only about the current level of their
 For example, @10.1257/aer.90.3.341 show that a model with multiplicative habits can provide an explanation for otherwise puzzling patterns in the relationship between saving and growth across countries, and
 @10.2139/ssrn.302079 examines the implications of such a model for life-cycle choices.
 
-A second common modification to preferences considered by a substantial literature is the use of @10.1086/261750 preferences, which allow agents to be extremely risk averse with respect to financial risk at a point of time, while simultaneously allowing the agents to be willing to be quite willing to tolerate changes in consumption over time.
+A second common modification to preferences considered by a substantial literature is the use of @10.1086/261750 preferences, which allow agents to be extremely risk averse with respect to financial risk at a point of time, while simultaneously allowing the agents to be quite willing to tolerate changes in consumption over time.
 Such preferences have been proposed as a way to solve various puzzles related to the relatively high rate of return that equity investments have exhibited over time.
 
 Both of these formulations are motivated mostly by the goal of matching macroeconomic data.
@@ -298,7 +296,6 @@ One particular example stands out: Households with either strong habits or a hig
 Such private UI is available -- and at prices such that a large fraction of households would be eager to buy it if they had such preferences -- yet the fraction of households who participate in the private UI market is vanishingly small.
 
 Our attention in this paper is therefore directed toward other modifications in preferences that seem to be plausible in both microeconomic and macroeconomic data.
-
 
 ### The "Warm Glow" Bequest Motive
 
@@ -334,18 +331,18 @@ where the $\CRRA$ coefficient is the same as in the utility function for consump
 
 According to the evidence from historian Fredrick Cople @jaherGilded's chronicle of the behavior of the richest Americans since the Revolution, the bequest motive seems unlikely to be an important motivation, at least according to their own words.
 Jaher presents a feast of quotations articulating a host of motivations for extreme wealth accumulation; but among their many explanations of their behavior, almost none of the tycoons under study mention anything resembling the bequest motive as formulated in the standard academic life cycle literature.
-Andrew Carnegie was most explicit: 'I would rather leave my son a curse than the almighty dollar.'[^carnegie]
+Andrew Carnegie was most explicit: "I would rather leave my son a curse than the almighty dollar."[^carnegie]
 
 [^carnegie]: He made good on this: He gave away more than 90 percent of his wealth before he died, to the astonishment of many skeptics.
 
-As mentioned above, the [Survey of Consumer Finances](https://doi.org/10.17016/8799) has for many years asked respondents a question about their motivations for saving.[^whysave]
+As mentioned above, the [Survey of Consumer Finances](doi:10.17016/8799) has for many years asked respondents a question about their motivations for saving.[^whysave]
 While respondents' answers are fairly heterogeneous, the SCF has a suggested aggregation of the many different answers into categories that correspond approximately to some of the motivations that the academic literature has considered.
-The category that best matches the "bequest" motivation is "Family," which includes "to help the kids out" and "to leave an estate" but also includes saving for "weddings and other ceremonies" and "to have children / a family."
+The category that best matches the "bequest" motivation is "family," which includes "to help the kids out" and "to leave an estate" but also includes saving for "weddings and other ceremonies" and "to have children / a family."
 
 [^whysave]: See the material starting at line 848 in [the documentation](<https://www.federalreserve.gov/econres/files/bulletin.macro.txt>).
 
 An ambitious agenda would be to tabulate the answers to this survey question for people at different ages and then to construct a model that would imply the same age pattern of motivations as the data.
-For example, one might find that for people who have just entered the labor market (say, the 26-30 age group) the survey responses showed that saving for "Retirement" was not a priority, while saving for "Purchases" and "Liquidity" were important.
+For example, one might find that for people who have just entered the labor market (say, the 26-30 age group) the survey responses showed that saving for "retirement" was not a priority, while saving for "purchases" and "liquidity" were important.
 In order for a model to be credible, its implications would need to comport with the survey data.
 Our aim here is to take a first step in that direction, by constructing a model that is at least consistent with the responses of retirees.
 
@@ -354,8 +351,8 @@ If bequests were a primary motivation for saving for most (college-educated) peo
 Given these (and other) objections to the bequest motive, as well as the problems of the model without a bequest motive, it is natural to consider alternative modifications to the framework.
 
 (most-important-reason)=
-### Table: Most Important Reason for Saving
 
+### Table: Most Important Reason for Saving
 
  | Reason | Proportion | Explanation |
  | --- | --- | --- |
@@ -365,7 +362,6 @@ Given these (and other) objections to the bequest motive, as well as the problem
  | "Purchases"  | 0.13 | cars, vacation homes, etc |
  | "Cannot save" | 0.06 | |
  | Other | 0.08 | |
-
 
 ## Wealth in the Utility Function
 
@@ -415,7 +411,6 @@ In particular, the fact that in our SCF table above, "Liquidity / The Future" is
 Maintaining a buffer stock of wealth to protect oneself against "unknown unknowns" is possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of "unknown unknowns."
 Indeed, even if you knew those answers, they would be, at best, "known unknowns."
 
-
 ## Comparisons to Other Models Familiar to Practitioners
 
 @10.3905/jor.2014.1.4.118 in *The Journal of Retirement*, asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
@@ -436,11 +431,12 @@ Their model also assumes that there is no uncertainty (except for mortality) in 
 
 [](doi:10.3905/jpm.2022.1.337) uses a life-cycle consumption and portfolio choice model without any consideration of bequests like the one discussed above (although other aspects of the model are simpler than our specification).
 
-There have also been publications that partake of the mathematical flavor of life cycle modeling but do not use the intertemporal choice framework. 
+There have also been publications that partake of the mathematical flavor of life cycle modeling but do not use the intertemporal choice framework.
 [](doi:10.1080/0015198x.2023.2212581) uses a static model of portfolio optimization, where the objective is to maximize the mean-variance trade off of a portfolio position with additional features such as non-pecuniary benefits.
-Because this model is not dynamic, it can not examine questions like the role of increasing health and mortality risk with age, the degree of uncertainty in expenses, or any other question whose answer depends on changes in the consumer's circumstances as they age.
+Because this model is not dynamic, it cannot examine questions like the role of increasing health and mortality risk with age, the degree of uncertainty in expenses, or any other question whose answer depends on changes in the consumer's circumstances as they age.
 
 (estimation)=
+
 # Estimation
 
 ## Indirect Inference Described
@@ -451,7 +447,6 @@ But of course we do not know the best values to choose for unobservable paramete
 The increasingly standard approach to this problem is the method of "indirect inference."
 Essentially, this means specifying the structure of your model except for the values of parameters that you cannot measure well (like time preference and risk aversion), and asking a numerical search algorithm to seek the values of those parameters that lets the model fit the data as well as it is capable of doing.
 This requires the computer to solve the problem perhaps thousands of times, which is why indirect inference has only begun to come into its own recently, as computer speeds have become fast enough to tackle the problem.
-
 
 ## Indirect Inference Implemented: the Method of Simulated Moments
 
@@ -481,7 +476,7 @@ In our structural model, we assume retirement occurs at exactly age 65, whereas 
 Therefore, omit moments for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
 Similarly, we calculate the median portfolio share of risky assets after retirement for ages 70 and above given by @Aboagye2024.
 
-Considering the selection of moments we have chosen, it is clear that there is an imbalance: 
+Considering the selection of moments we have chosen, it is clear that there is an imbalance:
 There are more wealth to income moments than portfolio share moments (12 vs 5), and the portfolio share moments lie between 0 and 1, whereas the wealth to income ratios can be much larger.
 To account for this, we set the weights to normalize the wealth to income ratios by the highest ratio in the data, making them all lie between 0 and 1, and adjust the weights for the portfolio share moments by a factor of 12/5, so that the two sets of moments are about equally weighted in the estimation process.
 This ensures that our estimation process puts even weight on the two sets of moments, despite the difference in scale and number of moments.
@@ -496,12 +491,10 @@ Our estimation process is computationally expensive, requiring the solving and s
 We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
 The `tranquilo` optimizer has many attractive features, such as being able to evaluate the function in parallel and estimate even noisy objective functions with many parameters, as well as being especially designed for least squares problems, such as the MSM.
 
-
 ## Indirect Inference Results
 
 ```{include} results.md
 ```
-
 
 # Conclusion
 
@@ -523,4 +516,3 @@ Financial analysts could also sleep more soundly in the knowledge that the advic
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world.  This paper's open-source code, built with the associated open-source [Econ-ARK](https://econ-ark.org) project's tools, would be a good place to start.[^thankstrp]
 
 [^thankstrp]: We are grateful to the Sloan Foundation and to T Rowe Price for generous funding of the toolkit.
-

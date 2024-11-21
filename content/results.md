@@ -9,7 +9,7 @@ The "criterion" column of @parameters lists the minimum value that the objective
 The LCP model performs poorly by this measure, as illustrated in the figures.
 LCP consumers want to quickly run down their wealth at older ages, as the probability of death increases with age and they know that they "can't take it with them."
 To try to match the observed empirical wealth trend (red dashed line in @medwealth), which holds steady at a high wealth-to-income ratio at older ages, the LCP model (solid blue line) exceeds observed wealth accumulation through the working life.
-Even then, the wealth drawdown is so rapid that the best the LCP model can achieve is to significantly overshoot wealth before age 65, and then vastly undershoot it in retirement.
+Even then, the wealth drawdown is so rapid that the best the LCP model can achieve is to overshoot wealth significantly before age 65, and then vastly undershoot it in retirement.
 
 ```{figure} figures/median_wealth
 :label: medwealth
@@ -50,8 +50,8 @@ This result is significant because the CRRA $\CRRA$ coefficient required to matc
 As seen in @medwealth, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly.
 Compared to the Warm-Glow model, the WIUF / TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity *now*, rather than saving at age 35 to leave a large bequest at age 85.
 
-Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can better match the target risky assets share moments (red dashed line in @medshare), which come from @Aboagye2024. 
-That paper presents the typical glide-path of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
+Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can better match the target risky assets share moments (red dashed line in @medshare), which come from @Aboagye2024.
+That paper presents the typical glidepath of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
 While the whole life-cycle glidepath is provided in @Aboagye2024, here we only target (and plot) those moments starting at age 70.
 The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.
 The basic LCP model, however, badly fits the risky asset share too low due to the high $\CRRA$ value needed in its attempt to match the life-cycle wealth pattern.

@@ -1,8 +1,1 @@
-List of remaining tasks:
-
-- [ ] AS: Review CDC version of synopsis
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+# change direct doi references to bib references
