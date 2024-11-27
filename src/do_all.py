@@ -136,7 +136,7 @@ def run_replication():
     else:
         print("Invalid replication choice.")
         return
-    
+
     if subjective_markets == "":
         subjective_markets = "1"
     if int(subjective_markets) > 1:
@@ -153,7 +153,7 @@ def run_replication():
         agent_name += "Market"
 
     replication_specs["agent_name"] = agent_name
-    replication_specs["save_dir"] = "content/tables/min"
+    replication_specs["save_dir"] = "docs/tables/min"
 
     estimate(**replication_specs)
 
