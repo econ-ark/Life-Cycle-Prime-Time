@@ -87,6 +87,9 @@ def make_agent(agent_name):
     if "Portfolio" in agent_name:
         track_vars += ["Share"]
     agent.track_vars = track_vars
+    if "WarmGlow" in agent_name:
+        agent.BeqMPC = 1.0 # dummy value
+        agent.BeqInt = 1.0
 
     agent.name = agent_name
 
@@ -248,9 +251,13 @@ def simulate_moments(params, agent=None, emp_moments=None):
         agent.TranShkStd = init_subjective_labor["TranShkStd"]
         agent.PermShkStd = init_subjective_labor["PermShkStd"]
         agent.update_income_process()
-
+    
+    # Update parameters on the agent / construct them
     agent.update()
-
+    if "WarmGlow" in agent.name:
+        agent.BeqFac = agent.BeqMPC**(-agent.CRRA)
+        agent.BeqShift = agent.BeqInt / agent.BeqMPC
+    
     # Solve the model for these parameters, then simulate wealth data
     agent.solve()  # Solve the microeconomic model
 
@@ -881,8 +888,8 @@ def estimate(
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
-    local_agent_name = "WealthPortfolio"
-    local_params_to_estimate = ["CRRA", "WealthShare", "WealthShift"]
+    local_agent_name = "WarmGlowPortfolio"
+    local_params_to_estimate = ["CRRA", "BeqMPC", "BeqInt"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
     local_compute_se_bootstrap = False

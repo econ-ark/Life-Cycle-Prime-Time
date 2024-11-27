@@ -136,7 +136,9 @@ def run_replication():
     else:
         print("Invalid replication choice.")
         return
-
+    
+    if subjective_markets == "":
+        subjective_markets = "1"
     if int(subjective_markets) > 1:
         agent_name += "Sub"
 

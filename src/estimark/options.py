@@ -2,7 +2,7 @@
 # resource requirements:
 from __future__ import annotations
 
-params_to_estimate = ["CRRA", "BeqShift", "BeqFac", "WealthShare"]
+params_to_estimate = ["CRRA", "BeqMPC", "BeqInt", "WealthShare"]
 
 low_resource = {
     "estimate_model": True,

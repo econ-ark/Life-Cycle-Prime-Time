@@ -81,11 +81,11 @@ bounds_WealthShare = [0.01, 0.99]  # Bounds for the wealth share parameter
 init_WealthShift = 0.0  # Initial guess of the wealth shift parameter
 bounds_WealthShift = [0.0, 100.0]  # Bounds for the wealth shift parameter
 
-init_BeqFac = 1.0  # Initial guess of the bequest factor
-bounds_BeqFac = [0.0, 100.0]  # Bounds for the bequest factor
+init_BeqMPC = 0.1  # Initial guess of the pseudo MPC of the bequest motive
+bounds_BeqMPC = [0.0, 1.0]  # Bounds for the pseudo-MPC of the bequest motive
 
-init_BeqShift = 0.0  # Initial guess of the bequest shift parameter
-bounds_BeqShift = [0.0, 70.0]  # Bounds for the bequest shift parameter
+init_BeqInt = 1.0  # Initial guess of the pseudo intercept of the bequest motive
+bounds_BeqInt = [0.0, 10.0]  # Bounds for the pseudo intercept of the bequest motive
 
 ######################################################################
 # Constructed parameters
@@ -141,24 +141,24 @@ init_params_options = {
         "DiscFac": init_DiscFac,
         "WealthShare": init_WealthShare,
         "WealthShift": init_WealthShift,
-        "BeqFac": init_BeqFac,
-        "BeqShift": init_BeqShift,
+        "BeqMPC": init_BeqMPC,
+        "BeqInt": init_BeqInt,
     },
     "upper_bounds": {
         "CRRA": bounds_CRRA[1],
         "DiscFac": bounds_DiscFac[1],
         "WealthShare": bounds_WealthShare[1],
         "WealthShift": bounds_WealthShift[1],
-        "BeqFac": bounds_BeqFac[1],
-        "BeqShift": bounds_BeqShift[1],
+        "BeqMPC": bounds_BeqMPC[1],
+        "BeqInt": bounds_BeqInt[1],
     },
     "lower_bounds": {
         "CRRA": bounds_CRRA[0],
         "DiscFac": bounds_DiscFac[0],
         "WealthShare": bounds_WealthShare[0],
         "WealthShift": bounds_WealthShift[0],
-        "BeqFac": bounds_BeqFac[0],
-        "BeqShift": bounds_BeqShift[0],
+        "BeqMPC": bounds_BeqMPC[0],
+        "BeqInt": bounds_BeqInt[0],
     },
 }
 
