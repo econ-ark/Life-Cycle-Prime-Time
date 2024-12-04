@@ -3,7 +3,7 @@
 ```{include} parameters.tex
 ```
 
-For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of about 8, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from putting all their assets in the risky form.
+For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of about 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from putting all their assets in the risky form.
 In general, "typical" values for the CRRA coefficient (from experimental evidence and other contexts) are considered to be between 1 and 5.
 The "criterion" column of @parameters lists the minimum value that the objective function achieves for each model-- the smallest weighted squared distance between simulated moments and empirical moments.
 The LCP model performs poorly by this measure, as illustrated in the figures.
@@ -19,14 +19,11 @@ Median Wealth to Income Ratio for different portfolio models. The red line indic
 ```
 
 As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
-The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA = 4.65$.
+The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA = 4.57$.
 With a strong bequest motive, the Warm-Glow model is able to match the high levels of wealth observed deep into retirement.
 That is, these consumers do not quickly draw down their assets because they take great pleasure in passing their estate on to their heirs.
-The bequest motive magnitude $\alpha$ and shifter term $\underline{a}$ cannot be *directly* interpreted in human terms, instead requiring an indirect interpretation used in @DeNardi2010 (see their Appendix D).
-Consider the extreme case of a model consumer who is *so old* that they can't possibly survive to the next period-- age 120, in our calibration.
-Facing certain imminent death, how much should this person consume versus allocate to their bequest?
-The form of the warm-glow bequest motive dictates that the optimal mapping from cash-on-hand to consumption is piecewise linear with a single kink: below a certain threshold wealth-to-income ratio, they should *consume all resources*, and then allocate to their bequest a *constant fraction* of any wealth above the threshold.
-The estimated $\alpha$ and $\underline{a}$ can be mathematically transformed to find a "bequest threshold" of about 0.43 and a "marginal propensity to bequeath" of 0.875; that is, a terminally old agent will allocate to their bequest 87.5\% of any wealth above 43\% of their permanent income.
+Under our parameterization, we estimate that consumers act *as if* they will experience a final "consumption at death" of $\cNrm = 0.128 \aNrm + 0.43$;
+this implies that if they were faced with guaranteed, imminent death (at some very old age), consumers would allocate to their heirs 88.7\% of any resources in excess of 43\% of their permanent income-- most of their wealth.
 This strong bequest motive at the very end of life propagates backward to more reasonable ages (albeit not as readily quantifiable), and ultimately it applies for essentially *everyone*.
 In contrast, the literature has generally found (e.g. @deNardiBequest) that the bequest motive comes into play only for relatively wealthy households, and is mostly inoperative around median wealth.
 This discrepancy might arise because of the simplified approach we have used here, matching *only* the median wealth-to-income ratio by age, rather than wealth levels conditional on income.
@@ -45,7 +42,7 @@ Median Portfolio Share for different portfolio models. The red line shows the ta
 ```
 
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
-The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 4.88 and a wealth share of utility $\delta$ coefficient of 0.16.
+The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.34 and a wealth share of utility $\delta$ coefficient of 0.17.
 This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature.
 As seen in @medwealth, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly.
 Compared to the Warm-Glow model, the WIUF / TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity *now*, rather than saving at age 35 to leave a large bequest at age 85.

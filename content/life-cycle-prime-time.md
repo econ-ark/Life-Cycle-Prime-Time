@@ -330,7 +330,13 @@ The literature has commonly used a "warm glow utility from bequests" motive of t
 \begin{align}
     \bqstNrm(a) & = \alpha\frac{(a+\underline{a})^{1-\CRRA}}{1-\CRRA}
 \end{align}
-where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., @deNardiBequest), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption.
+where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., @deNardiBequest), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption. To aid in both estimating and interpreting these parameters, we use an alternative parameterization that preserves the form of the bequest motive, similar to CITE LOVE:
+\begin{align}
+    \gamma \equiv \alpha^{-1/\CRRA}, ~~~ \kappa \equiv \underline{a} \cdot \gamma ~~\Longleftrightarrow~~ \alpha \equiv \gamma^{-\CRRA}, ~~~ \underline{a} \equiv \kappa / \gamma.
+\end{align}
+Rather than scaling warm glow utility with $\alpha$, we instead can interpret $\gamma$ and $\kappa$ as describing the "consumption function at death": this person acts *as if* just after they die, they will consume one last time according to $\cNrm = \gamma \aNrm + \kappa$, and derive utility from it. Thus $\gamma $ can be labeled as the "bequest MPC" and $\kappa $ is the "bequest intercept".[^other_beq_param]
+
+[^other_beq_param]: There is another way to re-parameterize the bequest motive that provides a third interpretation: a characterization of the optimal consumption function when the agent is *guaranteed* to die at the end of the period. This function is defined by two values: the level of market resources $m$ below which this person would consume everything (i.e. the bequest motive does not bind) and the constant MPC above that level as they allocate a constant fraction of additional resources to their bequest. The "terminal MPC" from that parameterization is very closely related to the "bequest MPC" $\gamma $ that we have estimated, and the "terminal kink point" is identical to our estimated "bequest intercept" $\kappa $.
 
 According to the evidence from historian Fredrick Cople @jaherGilded's chronicle of the behavior of the richest Americans since the Revolution, the bequest motive seems unlikely to be an important motivation, at least according to their own words.
 Jaher presents a feast of quotations articulating a host of motivations for extreme wealth accumulation; but among their many explanations of their behavior, almost none of the tycoons under study mention anything resembling the bequest motive as formulated in the standard academic life cycle literature.
