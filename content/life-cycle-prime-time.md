@@ -330,7 +330,7 @@ The literature has commonly used a "warm glow utility from bequests" motive of t
 \begin{align}
     \bqstNrm(a) & = \alpha\frac{(a+\underline{a})^{1-\CRRA}}{1-\CRRA}
 \end{align}
-where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., @deNardiBequest), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption. To aid in both estimating and interpreting these parameters, we use an alternative parameterization that preserves the form of the bequest motive, similar to CITE LOVE:
+where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., @deNardiBequest), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption. To aid in both estimating and interpreting these parameters, we use an alternative parameterization that preserves the form of the bequest motive, similar to @Love2009:
 \begin{align}
     \gamma \equiv \alpha^{-1/\CRRA}, ~~~ \kappa \equiv \underline{a} \cdot \gamma ~~\Longleftrightarrow~~ \alpha \equiv \gamma^{-\CRRA}, ~~~ \underline{a} \equiv \kappa / \gamma.
 \end{align}
