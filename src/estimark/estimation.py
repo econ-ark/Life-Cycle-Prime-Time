@@ -885,6 +885,7 @@ def prepare_model(agent_name, params_to_estimate):
         ordered as the names in params_to_estimate, and makes two plots of the
         simulated vs empirical moment fit.
     """
+    # Make basic objects using previously defined functions
     estimation_agents = make_agent(agent_name)
     empirical_moments, weight_sum = get_empirical_moments(agent_name)
     moment_weights = calculate_weights(empirical_moments, weight_sum)
@@ -944,6 +945,7 @@ def prepare_model(agent_name, params_to_estimate):
     sim_moment_function = lambda x : temp_func(x, True, False)
     plot_moment_function = lambda x : temp_func(x, False, True)
     
+    # Return all of the useful things
     return estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function
 
 

@@ -82,7 +82,7 @@ init_WealthShift = 0.0  # Initial guess of the wealth shift parameter
 bounds_WealthShift = [0.0, 100.0]  # Bounds for the wealth shift parameter
 
 init_BeqMPC = 0.1  # Initial guess of the pseudo MPC of the bequest motive
-bounds_BeqMPC = [0.0, 1.0]  # Bounds for the pseudo-MPC of the bequest motive
+bounds_BeqMPC = [0.001, 1.0]  # Bounds for the pseudo-MPC of the bequest motive
 
 init_BeqInt = 1.0  # Initial guess of the pseudo intercept of the bequest motive
 bounds_BeqInt = [0.0, 10.0]  # Bounds for the pseudo intercept of the bequest motive
@@ -106,8 +106,7 @@ inc_calib = parse_income_spec(
     SabelhausSong=ss_variances,
 )
 
-inc_calib["PermGroFac"][retirement_age - initial_age] = 0.9389
-
+#inc_calib["PermGroFac"][retirement_age - initial_age] = 0.9389
 # use permgrofac = 0.9389 at retirement
 
 # Age groups for the estimation: calculate average wealth-to-permanent income ratio
