@@ -1,0 +1,57 @@
+TINY EDITS:
+
+- introductory class --> intermediate
+- strike "just" in abstract
+- add "at very old ages"
+- "one example" --> "an example"
+- see also review in DeNardi
+- change slashes to commas in heading
+- "confirming" --> change this word
+- motiviation spelling
+- "which" --> that just below
+- change Gamma subscript to t from t+1 in (5)
+- inconsistent subscripting with s vs t
+- "perfectly rational" --> "reasonable"
+- extra comma near Journal of Retirement
+- *we* omit
+- use HARK to solve and simulate, not estimate
+
+
+
+SMALL REVISIONS:
+
+- back off any language about economists and "should prefer"
+- bad citation of DeNardi 2016
+- beta calibration should not be in model section
+- portmanteau variable is weird
+- weighting is normally *outside* of the square, but fine
+
+
+
+NEEDS WRITING:
+
+- "even early in their working lives the primary motiviation for saving is for the accumulation of a bequest" --> need to check what I meant by this
+- need to provide more details in calibration; I don't know where everything comes from
+- add 1-2 sentences justifying beta=1 vs literature
+- need to expand on Aboagye and what their results are
+- need to expand on late life risks a bit more
+
+
+CODE / MODEL PROBLEMS:
+
+- where in the code is the expenditure shocks in retirement?
+- why doesn't the code hold the retirement moments constant at 10?
+
+NEED TO DISCUSS:
+
+- re-raise fight about spacecraft
+- "implausibly intense" bequest motive --> I really disagree
+- exponential discounting or geometric discounting?
+- wait, do we match median portfolio shares? or are we matching some recommendations?
+- age-aggregated data can be noisy --> what?
+- selection bias what?
+- what is this "bias in the estimation process"
+- do we actually want to hold wealth ratio constant at 10?
+- do we want to use subjective beliefs?
+- do we want time-varying beta adjusters?
+
