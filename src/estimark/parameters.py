@@ -106,7 +106,7 @@ inc_calib = parse_income_spec(
     SabelhausSong=ss_variances,
 )
 
-#inc_calib["PermGroFac"][retirement_age - initial_age] = 0.9389
+inc_calib["PermGroFac"][retirement_age - initial_age] = 0.9389
 # use permgrofac = 0.9389 at retirement
 
 # Age groups for the estimation: calculate average wealth-to-permanent income ratio
