@@ -13,11 +13,11 @@ exports:
 
 +++ { "part": "abstract" }
 
-The "life cycle model" of optimal saving for retirement is familiar to anyone who has taken an introductory economics class.
-When hiring a financial advisor, such people probably think the advisor's job is just to tailor optimal life-cycle-model choices to their particular circumstances.
-But academics and advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, most such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check (at least approximately).
+The "life cycle model" of optimal saving for retirement is familiar to anyone who has taken an intermediate economics class.
+When hiring a financial advisor, such people probably think the advisor's job is to tailor optimal life-cycle-model choices to their particular circumstances.
+But academics and advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, most such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check in their old age (at least approximately).
 This paper makes the case that recent developments in the economics literature have finally given us the tools and insights required to construct rigorous life cycle models whose advice is sensible.
-We provide one example of a simple model that can solve a number of problems by putting wealth in the utility function.
+We provide an example of a simple model that can solve a number of problems by putting wealth in the utility function.
 
 +++
 
@@ -27,7 +27,7 @@ Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the fir
 An enormous academic literature has followed their pioneering work (see the [literature appendix](#lit-review) for an expansive summary),
 but it has proven difficult to build rational optimizing models that give sensible advice about both life-cycle saving choices and about investment decisions.
 That is, the models yield implausible answers to questions about how much wealth should be retained later in life, and how much of one's retirement savings should be invested in the stock market.
-Indeed, the subtitle of a recent paper by [](doi:10.3905/jor.2023.10.3.071) captures the current state of affairs nicely: "Why Practitioners Have Not Adopted the Lifecyle Model -- Yet"; see also [](doi:10.1146/annurev-economics-080315-015127).
+Indeed, the subtitle of a recent paper by [](doi:10.3905/jor.2023.10.3.071) captures the current state of affairs nicely: "Why Practitioners Have Not Adopted the Lifecyle Model -- Yet"; see also the literature review in [](doi:10.1146/annurev-economics-080315-015127).
 
 [^modigliani_brumberg]: @10.7551/mitpress/1923.003.0004
 
@@ -40,7 +40,7 @@ We end with our proposed solution, which involves a small twist to the old idea 
 
 ## Recent Developments in the Literature
 
-### Computation/Uncertainty/Complexity
+### Computation, Complexity, and Uncertainty
 
 Consumers face many uncertainties: about their own income, stock returns, interest rates, health expenditures, mortality, and much more.
 Further complications arise because of liquidity constraints and other financial frictions.
@@ -60,7 +60,7 @@ A natural interpretation of the importance consumers put on "liquidity" is that 
 
 The traditional approach to constructing such models has been for economists to try to measure the necessary inputs (income uncertainty, e.g.), and to assume that agents' beliefs incorporate whatever it is that the economist has measured.
 However, the newly collected survey data on consumer expectations show that the beliefs that many people _actually_ hold differ substantially from what economists postulate they "should" believe based on empirical measurements.
-Moreover, there is now considerable evidence that the decisions people make reflect their actual beliefs and preferences rather than whatever it is that economists think they *should* believe and prefer.[^ageofreason]
+Moreover, there is now considerable evidence that the decisions people make reflect their actual beliefs rather than whatever it is that economists think they *should* believe.[^ageofreason]
 
 [^ageofreason]: A particularly troubling possibility is raised by the work of @gabaix2010age, who point out that at least some elderly decision-makers (say, those with dementia) may be beyond the "age of reason."
 
@@ -81,15 +81,15 @@ If the advice is consistent with the model, and the model can be checked both fo
 ### Model Specification and Estimation
 
 In the [Models](#models) section below, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the [Life Cycle Portfolio](#lcp-model) model, which calculates optimal saving and optimal portfolio shares over the life cycle.
-In the [Estimation](#estimation), we report that the model implies a rapid drawdown of wealth after retirement that is simply not observed in empirical observations, confirming a longstanding problem with life cycle models (see, e.g., @hurd1987savings, [](doi:10.1111/jofi.12828)).[^AmeriksCaveat]
+In the [Estimation](#estimation), we report that the model implies a rapid drawdown of wealth after retirement that is simply not observed in empirical observations, renewing attention to a longstanding problem with life cycle models (see, e.g., @hurd1987savings, [](doi:10.1111/jofi.12828)).[^AmeriksCaveat]
 We call this the "drawdown failure," which has been the subject of a large literature with both U.S. evidence (see, e.g., @10.2307/1913772, @DeNardi2016d, [](doi:10.1257/mac.6.3.29), [](doi:10.17310/ntj.2019.3.02), [](doi:10.1016/j.jpubeco.2018.04.008)) and international evidence (see, e.g., [](doi:10.3386/w29826), [](doi:10.1007/s11150-020-09486-y), [](doi:10.1016/j.jjie.2018.10.002)).
 
 [^AmeriksCaveat]: Some impressive recent work by Ameriks, Caplin, and coauthors (@ameriks2011joy, @Ameriks2020jpe) has argued that concerns about the possibility of extremely large medical costs (e.g. nursing home or other long term care) may be behind the drawdown failure for some people (see [](doi:10.1146/annurev-economics-080315-015127)) for a survey).
 It would be interesting to see how our results might change if we were to include such shocks, but the inexorable logic behind the model's prediction of a rapid drawdown of wealth should still apply as the threat of mortality grows with age.
 Furthermore, the drawdown failure is also present in other countries whose social insurance systems are much more generous than the U.S., so it seems unlikely that uninsurable medical risk is a sufficient explanation.
 
-We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure [](doi:10.1146/annurev-economics-080315-015127).
-In the [Estimation](#estimation) section we find that in order for the bequest motive to explain the drawdown failure, the strength of that motive has to be extremely strong - so much so that even early in their working lives the primary motiviation for saving is for the accumulation of a bequest (rather than, say, to sustain one's own consumption in retirement). (Note that @10.2139/ssrn.304721 finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
+We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure (again see [](doi:10.1146/annurev-economics-080315-015127)).
+In the [Estimation](#estimation) section we find that in order for the bequest motive to explain the drawdown failure, the strength of that motive has to be extremely strong - so much so that even early in their working lives the primary motivation for saving is for the accumulation of a bequest (rather than, say, to sustain one's own consumption in retirement). (Note that @10.2139/ssrn.304721 finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
 
 This leads us into more speculative territory.
 If what consumers care most about is to hold wealth for "Liquidity / The Future," but that wealth is not explainable by precautionary saving against measurable shocks, a potential interpretation is that consumers value the ownership of wealth *in and of itself*.
@@ -168,15 +168,14 @@ In formal mathematical terms, the consumer's objective is to maximize expected p
     \Alive _{t}^{t+n} & : \text{probability to } \Alive \text{ive until age $t+n$ given you are alive at age $t$}
     \\                   & {~~~}\bullet \Alive_{120}^{121} = 0.0 \text{ says that a 120 year old has zero probability of living to 121}
     \\                   & {~~~}\bullet \Alive_{80\phantom{1}}^{90\phantom{1}} = 0.3 \text{ says that an 80 year old has a 30 percent chance of reaching 90}
-    \\ \DiscFac = 1        & : \text{time discount factor (captures degree of present bias)}
-\end{align*}
+    \end{align*}
 
 To capture the predictable patterns that non-capital income follows over the life cycle (i.e. rising with age and experience, and falling at retirement to the level of any regular pension payments), we define a sequence to characterize the Modiglianian life cycle:
 \begin{align}
-    \permGroFac_{t+1} & : \text{typical life cycle permanent income growth factor by age}
+    \permGroFac_{t} & : \text{typical life cycle permanent income growth factor by age}
 \end{align}
 
-The typical life cycle pattern is altered, in any particular consumer's case, by "permanent income shocks" which we represent with the variable $\permShk$.
+The typical life cycle pattern is altered, in any particular consumer's case, by "permanent income shocks" that we represent with the variable $\permShk$.
 At any given age, permanent income growth can deviate from the average experience of others of the same age in either a positive direction ($\psi>1$ would correspond to an unexpected promotion or a switch to a higher-paying job) or a negative direction ($\psi < 1$ might be the result of a failure to be promoted or a change to a lower paying job).
 
 This gives us the following description of the dynamics of income:
@@ -191,10 +190,10 @@ The transitory component $\tranShk$ of income has two modes.
 In unemployment spells, the consumer earns no income; we assume that such spells occur with probability $\pZero$ each period.
 Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (mean one) distribution, rescaled to preserve the unit mean of $\tranShk$:[^betterunemp]
 \begin{align}
-    \tranShkEmp_{s} = &
+    \tranShkEmp_{t} = &
     \begin{cases}
         0\phantom{/\pZero} & \text{with probability $\pZero>0$}
-        \\ \xi_{s}/(1-\pZero) & \text{with probability $(1-\pZero)$}
+        \\ \xi_{t}/(1-\pZero) & \text{with probability $(1-\pZero)$}
     \end{cases}
 \end{align}
 
@@ -202,8 +201,8 @@ Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (
 
 It is conventional to assume that shocks to permanent income and to the transitory income of the employed are (mean one) lognormally distributed:
 \begin{align}
-    \log \permShk_{s} \sim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
-    \\ \log \xi_{s} \sim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
+    \log \permShk_{t} \sim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
+    \\ \log \xi_{t} \sim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
 \end{align}
 which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
 (We use standard calibrations of both of these shock processes.)
@@ -211,7 +210,7 @@ which, together with the other assumptions, guarantee that the expected value of
 Under the assumptions we have made about the structure of the utility function (homotheticity), budget constraint (linearity and geometric returns), and income process (permanent and transitory shocks) it is possible to recast the problem entirely in terms of *ratios* of the model variables to permanent income $\pLvl$.
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
 
-Another way to make the problem easier to understand is to combine several of the multiplicative terms into portmanteau variables.
+To further reduce the (perceived) complexity of the model, we combine several of the multiplicative terms into a single factor for the realized intertemporal discount factor:
 Particularly, define $\pmb{\DiscFac}_{t+1}$ as
 \begin{align}
      \pmb{\DiscFac}_{t+1} & ={\beta} (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA}.
@@ -414,12 +413,13 @@ It is a relatively simple matter to solve the revised problem with wealth in the
 
 We are open to the possibility that wealth in the utility function is a reduced form for other motivations -- indeed, that was the thesis of @WhyDoTheRich.
 In particular, the fact that in our SCF table above, "Liquidity / The Future" is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the risks retirees might worry about.
-Maintaining a buffer stock of wealth to protect oneself against "unknown unknowns" is possibly perfectly rational, and also nearly impossible to calibrate in a quantitative model in which we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of "unknown unknowns."
+Maintaining a buffer stock of wealth to protect oneself against "unknown unknowns" is plainly reasonable, but also nearly impossible to calibrate in a quantitative model.
+That is, we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of "unknown unknowns".
 Indeed, even if you knew those answers, they would be, at best, "known unknowns."
 
 ## Comparisons to Other Models Familiar to Practitioners
 
-@10.3905/jor.2014.1.4.118 in *The Journal of Retirement*, asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
+In *The Journal of Retirement*, @10.3905/jor.2014.1.4.118  asserted that financial planning practitioners mostly used rules of thumb and heuristics to provide their advice.
 That paper aimed to introduce the key concepts of formal life-cycle modeling to the audience of practitioners.
 Since its publication, there appears to have been considerable movement in the direction advocated by its authors.
 A number of leading financial institutions have made available partial descriptions of proprietary life cycle models that they are developing.
@@ -479,7 +479,7 @@ Because the SCF data is increasingly sparse at older ages, the raw empirical mom
 We smooth this out by holding the wealth-to-income ratio at 10.0 in the top three age brackets, the approximate mean among them.
 
 In our structural model, we assume retirement occurs at exactly age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
-Therefore, omit moments for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
+Therefore, we omit moments for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
 Similarly, we calculate the median portfolio share of risky assets after retirement for ages 70 and above given by @Aboagye2024.
 
 Considering the selection of moments we have chosen, it is clear that there is an imbalance:
@@ -488,7 +488,7 @@ To account for this, we set the weights to normalize the wealth to income ratios
 This ensures that our estimation process puts even weight on the two sets of moments, despite the difference in scale and number of moments.
 
 Having chosen the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our various models.
-We use the `Econ-ARK` project's `HARK` package to solve and estimate the models, and `optimagic` (@Gabler2022, formerly `estimagic`) to perform the estimation process.
+We use the `Econ-ARK` project's `HARK` package to solve and simulate the models, and `optimagic` (@Gabler2022, formerly `estimagic`) to perform the estimation process.
 Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the `LCP+WarmGlow` model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. <!-- % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.-->
 
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.[^estim]
