@@ -106,7 +106,7 @@ inc_calib = parse_income_spec(
     SabelhausSong=ss_variances,
 )
 
-inc_calib["PermGroFac"][retirement_age - initial_age] = 0.9389
+#inc_calib["PermGroFac"][retirement_age - initial_age] = 0.9389
 # use permgrofac = 0.9389 at retirement
 
 # Age groups for the estimation: calculate average wealth-to-permanent income ratio
@@ -133,6 +133,10 @@ remove_ages_from_scf = np.arange(
 remove_ages_from_snp = np.arange(
     retirement_age + age_interval + 1,
 )  # only match ages 71 and older
+
+remove_ages_from_scf = np.arange(0)
+remove_ages_from_snp = np.arange(0)
+
 
 init_params_options = {
     "init_guess": {

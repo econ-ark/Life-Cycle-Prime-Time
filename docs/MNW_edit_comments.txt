@@ -1,19 +1,19 @@
 NEEDS WRITING:
 
-- "even early in their working lives the primary motivation for saving is for the accumulation of a bequest" --> need to check what I meant by this
-- need to provide more details in calibration; I don't know where everything comes from
-- add 1-2 sentences justifying beta=1 vs literature
-- need to expand on Aboagye and what their results are
-- need to expand on late life risks a bit more
+4) add 1-2 sentences justifying beta=1 vs literature
+5) "even early in their working lives the primary motivation for saving is for the accumulation of a bequest" --> need to check what I meant by this
 
 
-CODE / MODEL PROBLEMS:
+CODE / MODEL QUESTIONS:
 
+- what interest parameters do we want to use, and why?
+- why not match risky asset shares for entire lifecycle?
 - where in the code is the expenditure shocks in retirement?
 - why doesn't the code hold the retirement moments constant at 10?
 - do we actually want to hold wealth ratio constant at 10?
 - do we want to use subjective beliefs?
 - do we want age-varying beta adjusters?
+- where did PermGroFac = 0.9389 come from?
 - weighting is normally *outside* of the square, but fine
 
 
@@ -21,10 +21,16 @@ NEED TO DISCUSS:
 
 - re-raise fight about spacecraft
 - "implausibly intense" bequest motive --> I really disagree
-- exponential discounting or geometric discounting?
-- wait, do we match median portfolio shares? or are we matching some recommendations?
 - age-aggregated data can be noisy --> what?
 - selection bias what?
 - what is this "bias in the estimation process"
 
 
+
+blank: old weighting?
+X: new weighting
+Y: fix PermGroFac
+Z: add DiscFac, fix PermGroFac
+Q: fix PermGroFac, old weighting
+A: match all ages, old weighting, add DiscFac
+B: match all ages, new weighting, add DiscFac

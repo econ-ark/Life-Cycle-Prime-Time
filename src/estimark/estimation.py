@@ -77,9 +77,7 @@ def make_agent(agent_name):
         if "(Labor)" in agent_name:
             calibration.update(init_subjective_labor)
 
-    # Make a lifecycle consumer to be used for estimation, including simulated
-    # shocks (plus an initial distribution of wealth)
-    # Make a TempConsumerType for estimation
+    # Make a lifecycle consumer to be used for estimation
     agent = agent_type(**calibration)
     # Set the number of periods to simulate
     agent.T_sim = agent.T_cycle + 1
@@ -284,13 +282,11 @@ def simulate_moments(params, agent=None, emp_moments=None):
     max_sim_age = agent.T_cycle + 1
     # Initialize the simulation by clearing histories, resetting initial values
     agent.initialize_sim()
-    # agent.make_shock_history()
     agent.simulate(max_sim_age)  # Simulate histories of consumption and wealth
     # Take "wealth" to mean bank balances before receiving labor income
     sim_w_history = agent.history["bNrm"]
 
     # Find the distance between empirical data and simulated medians for each age group
-
     sim_moments = {
         key: np.median(sim_w_history[cohort_idx])
         for key, cohort_idx in sim_mapping.items()
@@ -322,7 +318,7 @@ def calculate_weights(emp_moments, weight_sum):
 
     # Using dictionary comprehension to create weights
     weights = {
-        k: (np.sqrt(weight_sum[k])/W_avg / max_w_stat if "_port" not in k else port_fac)
+        k: (np.sqrt((weight_sum[k])/W_avg)**1. / max_w_stat if "_port" not in k else port_fac)
         for k, v in emp_moments.items()
     }
 
@@ -953,8 +949,8 @@ def prepare_model(agent_name, params_to_estimate):
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
-    local_agent_name = "WarmGlowPortfolioZ"
-    local_params_to_estimate = ["CRRA", "DiscFac", "BeqMPC", "BeqInt"]
+    local_agent_name = "PortfolioB"
+    local_params_to_estimate = ["CRRA", "DiscFac"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
     local_compute_se_bootstrap = False
@@ -964,14 +960,14 @@ if __name__ == "__main__":
     local_make_contour_plot = False
     local_save_dir = "docs/tables/min"
     
-    estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
+    #estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
 
-    # estimate(
-    #     agent_name=local_agent_name,
-    #     params_to_estimate=local_params_to_estimate,
-    #     estimate_model=local_estimate_model,
-    #     compute_se_bootstrap=local_compute_se_bootstrap,
-    #     compute_sensitivity=local_compute_sensitivity,
-    #     make_contour_plot=local_make_contour_plot,
-    #     save_dir=local_save_dir,
-    # )
+    estimate(
+        agent_name=local_agent_name,
+        params_to_estimate=local_params_to_estimate,
+        estimate_model=local_estimate_model,
+        compute_se_bootstrap=local_compute_se_bootstrap,
+        compute_sensitivity=local_compute_sensitivity,
+        make_contour_plot=local_make_contour_plot,
+        save_dir=local_save_dir,
+    )

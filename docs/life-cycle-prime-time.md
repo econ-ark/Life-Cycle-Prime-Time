@@ -262,12 +262,16 @@ A split second before choosing the risky share, the consumer's objective in the 
 ### Calibration
 
 Many of the parameters of the basic life-cycle consumption-saving model can be calibrated from well measured empirical data.
-For example, we use standard calibrations of both of the income shock processes during the working life, based on @Cagetti2003, and
+For example, we use standard calibrations of both of expected income growth during the working life, based on @Cagetti2003, and
 survival probabilities by age are taken directly from actuarial mortality tables published by the Social Security Administration.
+We use estimates of the age trajectory of permanent and transitory income variance from @SabelhausSong to calibrate $\sigma_{[\permShk, t]}^{2}$ and $\sigma_{[\tranShk, t]}^{2}$, and set the unemployment probability to a fairly standard value of $\pZero = 5\%$.
+Model agents begin their "lifetime" at age 25 with no wealth.
+
 We set the "pure" rate of time preference to $\beta=1$, meaning that the optimal choice is to care exactly as much about your future self as your present self (conditional on surviving into the future).
 
 Beyond those basic assumptions, we calibrate the model to include uncertainty after retirement.
-Specifically, we assume that there are "ordinary" expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from  @flExpShocks).
+Specifically, we assume that there are "ordinary" expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from @flExpShocks), generating the possibility of periods with much lower *disposable* income than usual.
+This assumption acts as a kind of shorthand for other modeling assumptions that focus on modeling the dynamics of medical and nursing home expenses in old age, e.g. @ameriks2011joy and @DeNardi2010.
 In principle, the presence of such shocks provides a precautionary motive to draw down wealth more slowly.
 However, our estimation results show that even when we include this calibration of expense shocks, the model still predicts much more drawdown of wealth than the data show.
 
@@ -469,7 +473,8 @@ This is done by minimizing the following objective function:
 Here, $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process.
 For example, we might be more interested in matching the median wealth than the median portfolio share, and thus assign a higher weight to the former.
 
-For our exercise, we are interested in matching the median wealth to income ratios throughout the life cycle, and the median portfolio share of risky assets after retirement.
+For our exercise, we are interested in matching the median wealth to income ratios throughout the life cycle, as well as the share of wealth held in equities as given by S&P's target date fund (TDF) glidepath.
+As noted in @Aboagye2024, this age-dependent portfolio allocation is used by many individuals who make "default" decisions via their (former) employer's TDF plan.
 Because age-aggregated data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias.
 Starting at age 25, we calculate the median wealth-to-income ratio as follows: Wealth is defined as the sum of all assets and liabilities, including financial assets, housing, vehicles, and debt.
 For income, we use the sum of all wages, salaries, Social Security, and retirement income, excluding capital gains and other non-recurring income.
@@ -480,7 +485,6 @@ We smooth this out by holding the wealth-to-income ratio at 10.0 in the top thre
 
 In our structural model, we assume retirement occurs at exactly age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
 Therefore, we omit moments for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
-Similarly, we calculate the median portfolio share of risky assets after retirement for ages 70 and above given by @Aboagye2024.
 
 Considering the selection of moments we have chosen, it is clear that there is an imbalance:
 There are more wealth to income moments than portfolio share moments (12 vs 5), and the portfolio share moments lie between 0 and 1, whereas the wealth to income ratios can be much larger.
