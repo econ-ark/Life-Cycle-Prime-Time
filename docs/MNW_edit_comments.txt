@@ -11,6 +11,7 @@ CODE / MODEL QUESTIONS:
 - where in the code is the expenditure shocks in retirement?
 - why doesn't the code hold the retirement moments constant at 10?
 - do we actually want to hold wealth ratio constant at 10?
+- do we want to condition SCF on college?
 - do we want to use subjective beliefs?
 - do we want age-varying beta adjusters?
 - where did PermGroFac = 0.9389 come from?

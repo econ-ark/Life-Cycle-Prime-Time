@@ -64,7 +64,38 @@ agent_types = {
 
 
 def make_agent(agent_name):
-    #TODO: WRITE DOCSTRING
+    """
+    Construct an instance of an AgentType subclass that can be used in the structural
+    estimation. The specific class used, as well as some of the exogenously calibrated
+    parameters, depend on whether certain strings appear in the input to the function:
+    
+    NAME --> AgentType subclass
+    "IndShock" --> IndShkLifeCycleConsumerType
+    "Portfolio" --> PortfolioLifeCycleConsumerType
+    "WarmGlow" --> BequestWarmGlowLifeCycleConsumerType
+    "WarmGlowPortfolio" --> BequestWarmGlowLifeCyclePortfolioType
+    "WealthPortfolio" --> WealthPortfolioLifeCycleConsumerType
+    
+    If (Stock) appears in agent_name, then the agent will solve its problem using
+    parameters estimated from subjective beliefs about stock return (but simulate
+    using values from empirical observations).
+    
+    If (Labor) appears in agent_name, then the agent will solve its problem using
+    parameters estimated from subjective beliefs about labor income risk (but sim-
+    ulate using values from empirical observations).
+    
+    Parameters
+    ----------
+    agent_name : str
+        Name of the agent specification, which determines details of its type
+        and exogenous parameters.
+        
+    Returns
+    -------
+    agent : AgentType
+        Instance of some AgentType subclass, which can be used in the estimation.
+        It will have default parameters until set otherwise.
+    """
     for key, value in agent_types.items():
         if key in agent_name:
             agent_type = value
@@ -79,18 +110,13 @@ def make_agent(agent_name):
 
     # Make a lifecycle consumer to be used for estimation
     agent = agent_type(**calibration)
-    # Set the number of periods to simulate
-    agent.T_sim = agent.T_cycle + 1
-    # Choose to track bank balances as wealth
+    agent.name = agent_name
+    
+    # Choose to track bank balances as wealth, and track risky asset share if needed
     track_vars = ["bNrm"]
     if "Portfolio" in agent_name:
         track_vars += ["Share"]
     agent.track_vars = track_vars
-    if "WarmGlow" in agent_name:
-        agent.BeqMPC = 1.0  # dummy value
-        agent.BeqInt = 1.0
-
-    agent.name = agent_name
 
     return agent
 
@@ -111,12 +137,37 @@ def winsored_mean(values, weights, limits):
 
 def get_weighted_moments(
     data,
-    variable=None,
+    variable,
     weights=None,
     groups=None,
     mapping=None,
 ):
-    #TODO: WRITE DOCSTRING
+    """
+    Make a dictionary that maps from moment names to moments used in the SMM
+    objective function, generating medians of some variable conditional on
+    being within particular values for some data grouping.
+    
+    Parameters
+    ----------
+    data : dict ?
+        The dataset from which the moments are being extracted, with variable
+        names as keys and an array of data as values.
+    variable : str
+        Name of the variable for which conditional medians will be calculated.
+    weights : str or None
+        Name of the weighting variable in the dataset, if any.
+    groups : str or None
+        Name of the variable to condition the medians on.
+    mapping : iterable or None
+        List or dictionary of values that the variable named in groups can have.
+        
+    Returns
+    -------
+    emp_moments : dict
+        Dictionary mapping from keys of mapping input to conditional medians.
+    weight_sum : dict
+        Dictionary mapping from keys of mapping input to total weight of group.
+    """
     # Common variables that don't depend on whether weights are None or not
     data_variable = data[variable]
     data_groups = data[groups]
@@ -141,7 +192,7 @@ def get_weighted_moments(
                 )
         # else:
         #     print(f"Warning: Group {key} does not have any data.")
-
+    
     return emp_moments, weight_sum
 
 
@@ -180,7 +231,24 @@ def get_moments_cov(agent_name, emp_moments):
 
 
 def get_empirical_moments(agent_name):
-    #TODO: WRITE DOCSTRING
+    """
+    Construct a dictionary of empirical moments for this specification. This
+    always includes age-conditional median wealth values, and also includes
+    risky portfolio shares if the specification name includes "Portfolio".
+    
+    Parameters
+    ----------
+    agent_name : str
+        Name of the current specification.
+        
+    Returns
+    -------
+    emp_moments : dict
+        Dictionary with median wealth (and risky asset shares) empirical moments.
+    weight_sum : dict
+        Dictionary with median wealth (and risky asset shares) total empirical
+        weights from the dataset.
+    """
     emp_moments, weight_sum = get_weighted_moments(
         data=scf_data,
         variable="wealth_income_ratio",
@@ -209,7 +277,27 @@ def get_empirical_moments(agent_name):
 
 
 def get_initial_guess(agent, params_to_estimate, save_dir):
-    #TODO: WRITE DOCSTRING
+    """
+    Generate an initial guess of the parameters to be estimated by looking for
+    prior estimates of the same specification, or defaulting to values specified
+    in the parameters file.
+    
+    Parameters
+    ----------
+    agent : AgentType
+        Instance of some AgentType subclass that will be used in the estimation.
+        Used to verify that the parameters to be estimated actually exist.
+    params_to_estimate : [str]
+        List of strings naming variables to be estimated.
+    save_dir : str
+        Directory where estimation output will be stored, and maybe has already
+        been stored. Used to check whether this specification has already been run.
+        
+    Returns
+    -------
+    initial_guess : dict
+        Mapping from parameter names to initial guess values.
+    """
     agent_name = agent.name
 
     agent_params = []
@@ -236,9 +324,27 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     return initial_guess
 
 
-# Define the objective function for the simulated method of moments estimation
-def simulate_moments(params, agent=None, emp_moments=None):
-    #TODO: WRITE DOCSTRING
+# Define the function that generates simulated moments
+def simulate_moments(params, agent, emp_moments):
+    """
+    Generate simulated moments by solving and simulating the agents at the given
+    parameters. Returns a dictionary that corresponds to the empirical moments.
+
+    Parameters
+    ----------
+    params : dict
+        Mapping from parameters to be estimated to parameter values.
+    agent : AgentType
+        Instance of some AgentType subclass, representing the model to be solved
+        and simulated to generate moments.
+    emp_moments : dict
+        Mapping from moment names to empirical moments. Used for ????
+
+    Returns
+    -------
+    sim_moments : dict
+        Dictionary that maps from moment names to simulated moments.
+    """
     
     # Update the agent with new parameters
     agent.assign_parameters(**params)
@@ -306,19 +412,37 @@ def simulate_moments(params, agent=None, emp_moments=None):
 
 
 def calculate_weights(emp_moments, weight_sum):
-    #TODO: WRITE DOCSTRING
+    """
+    Generate a dictionary of all moment weights, loading both median wealth-to-
+    income ratios and risky asset shares into a single object.
+    
+    Parameters
+    ----------
+    emp_moments : dict
+        Mapping from moment names to empirical moments. Used to make the keys
+        for the weighting dictionary.
+    weight_sum: dict
+        Mapping from moment names to total empirical weight from the dataset.
+        This *can* be used to make weights using a different scheme.
+        
+    Returns
+    -------
+    weights : dict
+        Mapping from moment names to weights.
+    
+    """
     n_port_stats = np.sum([1 for k in emp_moments if "_port" in k])
     n_wealth_stats = len(emp_moments) - n_port_stats
     max_w_stat = float(max(emp_moments.values()))
     W_total = np.sum([np.sqrt(weight_sum[k]) for k in weight_sum if not "_port" in k])
     W_avg = W_total / n_wealth_stats
 
-    port_fac = n_wealth_stats / n_port_stats if n_port_stats != 0 else 1.0
+    port_fac = np.sqrt(n_wealth_stats / n_port_stats) if n_port_stats != 0 else 1.0
     #port_fac = 1.0
 
     # Using dictionary comprehension to create weights
     weights = {
-        k: (np.sqrt((weight_sum[k])/W_avg)**1. / max_w_stat if "_port" not in k else port_fac)
+        k: ((np.sqrt(weight_sum[k])/W_avg)**0. / max_w_stat if "_port" not in k else port_fac)
         for k, v in emp_moments.items()
     }
 
@@ -949,8 +1073,8 @@ def prepare_model(agent_name, params_to_estimate):
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
-    local_agent_name = "PortfolioB"
-    local_params_to_estimate = ["CRRA", "DiscFac"]
+    local_agent_name = "WealthPortfolioB"
+    local_params_to_estimate = ["CRRA", "DiscFac", "WealthShare"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
     local_compute_se_bootstrap = False
@@ -960,14 +1084,14 @@ if __name__ == "__main__":
     local_make_contour_plot = False
     local_save_dir = "docs/tables/min"
     
-    #estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
+    estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
 
-    estimate(
-        agent_name=local_agent_name,
-        params_to_estimate=local_params_to_estimate,
-        estimate_model=local_estimate_model,
-        compute_se_bootstrap=local_compute_se_bootstrap,
-        compute_sensitivity=local_compute_sensitivity,
-        make_contour_plot=local_make_contour_plot,
-        save_dir=local_save_dir,
-    )
+    # estimate(
+    #     agent_name=local_agent_name,
+    #     params_to_estimate=local_params_to_estimate,
+    #     estimate_model=local_estimate_model,
+    #     compute_se_bootstrap=local_compute_se_bootstrap,
+    #     compute_sensitivity=local_compute_sensitivity,
+    #     make_contour_plot=local_make_contour_plot,
+    #     save_dir=local_save_dir,
+    # )
