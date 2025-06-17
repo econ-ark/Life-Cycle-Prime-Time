@@ -12,7 +12,7 @@ import warnings
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 import numpy as np
-from HARK.Calibration.Income.IncomeTools import CGM_income, parse_income_spec
+from HARK.Calibration.Income.IncomeTools import Cagetti_income, CGM_income, parse_income_spec
 from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
 from HARK.distributions import DiscreteDistribution
 
@@ -105,6 +105,7 @@ inc_calib = parse_income_spec(
     **income_spec,
     SabelhausSong=ss_variances,
 )
+#inc_calib["PermGroFac"][retirement_age - initial_age] = 0.85
 
 # Age groups for the estimation: calculate average wealth-to-permanent income ratio
 # for consumers within each of these age groups, compare actual to simulated data
@@ -232,11 +233,13 @@ init_calibration = {
     "neutral_measure": True,  # Harmemberg
     "sim_common_Rrisky": False,  # idiosyncratic risky return
     "WealthShift": init_WealthShift,
+    "BeqMPC" : init_BeqMPC,
+    "BeqInt" : init_BeqInt,
     "ChiFromOmega_N": 501,  # Number of gridpoints in chi-from-omega function
     "ChiFromOmega_bound": 15,  # Highest gridpoint to use for it
 }
 
-Eq_prem = 0.025
+Eq_prem = 0.03
 RiskyStd = 0.20
 
 init_calibration["RiskyAvg"] = Rfree + Eq_prem
@@ -268,11 +271,12 @@ TrueElnR_real = TrueElnR_nom - logInflation
 # }
 
 init_subjective_stock = {
+    "Rfree": Rfree,
     "RiskyAvg": np.exp(ElnR_real + 0.5 * VlnR),
     "RiskyStd": np.sqrt(np.exp(2 * ElnR_real + VlnR) * (np.exp(VlnR) - 1)),
     "RiskyAvgTrue": init_calibration["RiskyAvg"],
     "RiskyStdTrue": init_calibration["RiskyStd"],
-    }
+}
 
 # from Tao's JMP
 init_subjective_labor = {

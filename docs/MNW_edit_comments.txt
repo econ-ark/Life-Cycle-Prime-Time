@@ -28,10 +28,8 @@ NEED TO DISCUSS:
 
 
 
-blank: old weighting?
-X: new weighting
-Y: fix PermGroFac
-Z: add DiscFac, fix PermGroFac
-Q: fix PermGroFac, old weighting
-A: match all ages, old weighting, add DiscFac
-B: match all ages, new weighting, add DiscFac
+C: CGM income, 2.5% EqPrem
+D: Cagetti income w/ 15% drop, 2.5% EqPrem
+E: Cagetti income w/ 15% drop, 3.0% EqPrem
+F: CGM income, 3,0% EqPrem
+
