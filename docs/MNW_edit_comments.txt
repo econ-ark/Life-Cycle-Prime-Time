@@ -28,8 +28,10 @@ NEED TO DISCUSS:
 
 
 
-C: CGM income, 2.5% EqPrem
+C: CGM income, 2.5% EqPrem (RELABELED to blank)
 D: Cagetti income w/ 15% drop, 2.5% EqPrem
 E: Cagetti income w/ 15% drop, 3.0% EqPrem
-F: CGM income, 3,0% EqPrem
+F: CGM income, 3.0% EqPrem
+X: CGM income, 2.5% EqPrem, DiscFac
+Y: Cagetti income, 2.5% EqPrem, DiscFac
 

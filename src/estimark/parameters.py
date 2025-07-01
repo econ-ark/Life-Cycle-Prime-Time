@@ -96,7 +96,7 @@ terminal_t = final_age - initial_age
 retirement_t = retirement_age - initial_age - 1
 
 # Income
-income_spec = CGM_income[education]
+income_spec = Cagetti_income[education]
 # Replace retirement age
 income_spec["age_ret"] = retirement_age
 inc_calib = parse_income_spec(
@@ -105,7 +105,7 @@ inc_calib = parse_income_spec(
     **income_spec,
     SabelhausSong=ss_variances,
 )
-#inc_calib["PermGroFac"][retirement_age - initial_age] = 0.85
+inc_calib["PermGroFac"][retirement_age - initial_age] = 0.85
 
 # Age groups for the estimation: calculate average wealth-to-permanent income ratio
 # for consumers within each of these age groups, compare actual to simulated data
@@ -239,7 +239,7 @@ init_calibration = {
     "ChiFromOmega_bound": 15,  # Highest gridpoint to use for it
 }
 
-Eq_prem = 0.03
+Eq_prem = 0.025
 RiskyStd = 0.20
 
 init_calibration["RiskyAvg"] = Rfree + Eq_prem

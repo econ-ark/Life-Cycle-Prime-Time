@@ -1073,8 +1073,8 @@ def prepare_model(agent_name, params_to_estimate):
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
-    local_agent_name = "WarmGlowPortfolioF"
-    local_params_to_estimate = ["CRRA", "BeqMPC","BeqInt"]
+    local_agent_name = "PortfolioY"
+    local_params_to_estimate = ["CRRA", "DiscFac"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
     local_compute_se_bootstrap = False
