@@ -45,9 +45,10 @@ We end with our proposed solution, which involves a small twist to the old idea 
 Consumers face many uncertainties: about their own income, stock returns, interest rates, health expenditures, mortality, and much more.
 Further complications arise because of liquidity constraints and other financial frictions.
 
-The incorporation of realistic descriptions of these complexities makes computation of the mathematically optimal solution to the consumer's problem is astonishingly difficult.
-It is more difficult than, say, the calculation of optimal trajectories for spacecraft, and perhaps comparable to the complexity of figuring out how to drive a car roughly as well as a human (another problem where adequate computational solutions have only recently become available).
-The remarkable advance of computational power has now finally made it possible to compute a credible answer to the question "what saving and portfolio choices are truly mathematically optimal?" in a context in which the key complexities are properly represented.
+The incorporation of realistic descriptions of these complexities makes computation of the mathematically optimal solution to the consumer's problem is surprisingly difficult.
+Each new aspect of risk introduced to the model increases the burden of computing expectations of the future, while each added dimension of agent choice or personal circumstances expands the problem size (literally) exponentially.
+Modelers thus face a difficult tradeoff in designing their framework to be sufficiently realistic to serve as a plausible representation of the problem actual people face, while maintaining a degree of tractability to stay within the bounds of computational feasibility.
+The remarkable advance of computational power has now finally made it possible to compute a credible answer to the question, "What saving and portfolio choices are truly mathematically optimal?" in a context in which the key complexities are properly represented.
 
 ### Survey Data on Expectations and Preferences
 
@@ -72,7 +73,7 @@ Concretely, many people think that investment in stocks is a lousy deal, yieldin
 [^errors]: If the modeler is willing to assert that consumers have mistaken beliefs that cause them to make suboptimal choices, the advice the model gives will differ from the pattern of measured behavior. This could justify the model in recommending, for example, greater investment in risky assets than consumers tend to choose on their own. We compromise by adopting a believed equity premium of 0.03, which is lower than the historical average. Even lower beliefs would reduce the estimated risk aversion coefficient.
 
 It is not astonishing to discover that many people hold beliefs that differ from those of experts, especially on subjects whose mastery requires considerable domain-specific education, like the returns and risk of stock investments.
-Indeed, the existence of a large industry offering financial advice is *prima facie* evidence that many people are not confident that they understand everything necessary to make good financial financial choices on their own.
+Indeed, the existence of a large industry offering financial advice is *prima facie* evidence that many people are not confident that they understand everything necessary to make good financial choices on their own.
 
 Financial advice, however, is fraught with potential conflicts of interest.
 That is one reason that justifying such advice with an explicit and transparent modeling framework is so attractive.
@@ -81,7 +82,7 @@ If the advice is consistent with the model, and the model can be checked both fo
 ### Model Specification and Estimation
 
 In the [Models](#models) section below, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the [Life Cycle Portfolio](#lcp-model) model, which calculates optimal saving and optimal portfolio shares over the life cycle.
-In the [Estimation](#estimation), we report that the model implies a rapid drawdown of wealth after retirement that is simply not observed in empirical observations, renewing attention to a longstanding problem with life cycle models (see, e.g., @hurd1987savings, [](doi:10.1111/jofi.12828)).[^AmeriksCaveat]
+In the [Estimation](#estimation) section, we report that the model implies a rapid drawdown of wealth after retirement that is simply not observed in empirical observations, renewing attention to a longstanding problem with life cycle models (see, e.g., @hurd1987savings, [](doi:10.1111/jofi.12828)).[^AmeriksCaveat]
 We call this the "drawdown failure," which has been the subject of a large literature with both U.S. evidence (see, e.g., @10.2307/1913772, @DeNardi2016d, [](doi:10.1257/mac.6.3.29), [](doi:10.17310/ntj.2019.3.02), [](doi:10.1016/j.jpubeco.2018.04.008)) and international evidence (see, e.g., [](doi:10.3386/w29826), [](doi:10.1007/s11150-020-09486-y), [](doi:10.1016/j.jjie.2018.10.002)).
 
 [^AmeriksCaveat]: Some impressive recent work by Ameriks, Caplin, and coauthors (@ameriks2011joy, @Ameriks2020jpe) has argued that concerns about the possibility of extremely large medical costs (e.g. nursing home or other long term care) may be behind the drawdown failure for some people (see [](doi:10.1146/annurev-economics-080315-015127)) for a survey).
@@ -123,7 +124,7 @@ This might not be feasible with public datasets like the SCF because the sample 
 
 ## The Baseline Academic Model
 
-We begin by describing the optimal consumption-saving problem over the life cycle for a consumer, focusing on the dynamics of their income while ignoring how returns to saving work.
+We begin by describing the optimal consumption-saving problem over the life cycle for a consumer, focusing on the dynamics of their income while temporarily setting aside how returns to saving work.
 After we have finished describing the basic life cycle model, we will augment it to add optimal portfolio choice between a safe asset and a risky asset (like the stock market) with a higher expected rate of return.
 
 (basic-cs)=
@@ -162,7 +163,7 @@ Potential future utility flows matter only to the extent that the agent expects 
 In formal mathematical terms, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than some terminal period $T$:
 
 \begin{equation}
-    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cFunc\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right]. \label{eq:lifecyclemax}
+    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\pmb{\cFunc}\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right]. \label{eq:lifecyclemax}
 \end{equation}
 \begin{align*}
     \Alive _{t}^{t+n} & : \text{probability to } \Alive \text{ive until age $t+n$ given you are alive at age $t$}
@@ -205,32 +206,39 @@ It is conventional to assume that shocks to permanent income and to the transito
     \\ \log \xi_{t} \sim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
 \end{align}
 which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
-(We use standard calibrations of both of these shock processes.)
+
+
+### Reducing Perceived Model Complexity
+
+Following the standard Bellman representation, if the agent assumes that they *will* act optimally in all future periods, then their future expectations of discounted utility flows in @eq:lifecyclemax are their value function one period ahead. Defining $\Alive_t \equiv \Alive_t^{t+1}$ to reduce notation, this is:
+
+\begin{equation}
+    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\pmb{\cFunc}_{t}} ~ \uFunc(\cLvl_{t}) + \Alive_t \DiscFac  \Ex_{t}\left[ \pmb{\vFunc}_{t+1}(\mLvl_{t+1},\pLvl_{t+1}) \right]. \label{eq:bellman}
+\end{equation}
 
 Under the assumptions we have made about the structure of the utility function (homotheticity), budget constraint (linearity and geometric returns), and income process (permanent and transitory shocks) it is possible to recast the problem entirely in terms of *ratios* of the model variables to permanent income $\pLvl$.
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
+This greatly simplifies the problem, as the solution will be homothetic with respect to permanent income level: $\pmb{\cFunc}_t(\mLvl_t, \pLvl_t) = \pLvl_t \cFunc_t(\mNrm_t)$.
+Normalizing the Bellman value function by $\pLvl_t$ requires dividing by $\pLvl^{1-\CRRA}$ (see @BufferStockTheory for details), yielding:
 
-To further reduce the (perceived) complexity of the model, we combine several of the multiplicative terms into a single factor for the realized intertemporal discount factor:
-Particularly, define $\pmb{\DiscFac}_{t+1}$ as
-\begin{align}
-     \pmb{\DiscFac}_{t+1} & ={\beta} (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA}.
-    %\\ \RNrm_{t+1} & = \left(\frac{\Rport_{t+1}}{\permShk_{t+1}\permGroFac_{t+1}}\right)
-\end{align}
+\begin{equation}
+    \vFunc_{t}(\mNrm_{t}) \equiv \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) / \pLvl_t^{1-\CRRA} = \max_{\cFunc_{t}} ~ \uFunc(\cNrm_{t}) + \Alive_t \DiscFac  \Ex_{t}\left[ (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA} \vFunc_{t+1}(\mNrm_{t+1}) \right]. \label{eq:normbellman}
+\end{equation}
 
-The consumer's problem can be expressed more simply by realizing that it boils down to a "now versus later" problem.
+The consumer's problem can be further simplified by realizing that it boils down to a "now versus later" problem.
 All the consumer needs to know about the future is summarized by the value they will expect as a consequence of ending the current period with a certain ratio of assets to permanent income, $\aNrm = \aLvl/\pLvl$.
-We can represent the value of ending the period with assets of $\aNrm_t$ using the Gothic variant of the letter $\vFunc$:
+Moreover, we combine several of the multiplicative terms into a single factor for the realized intertemporal discount factor $\pmb{\DiscFac}_{t+1}$.
+We represent the value of *ending* the period with assets of $\aNrm_t$ using the Gothic variant of the letter $\vFunc$:
 \begin{align}
-    \mathfrak{v}_{t}(\aNrm_{t}) & = \Ex_{t}[\pmb{\DiscFac}_{t+1}\vFunc_{t+1}(\mNrm_{t+1})].
+    \mathfrak{v}_{t}(\aNrm_{t}) & \equiv \Ex_{t}[\pmb{\DiscFac}_{t+1}\vFunc_{t+1}(\Rport_{t+1} \aNrm_{t+1} + \tranShk_{t+1})], ~~~ \pmb{\DiscFac}_{t+1} \equiv {\beta} (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA}.
 \end{align}
 
 With this definition, the period $t$ choice problem can be summarized in Bellman form as simply:
 \begin{equation}
-\vFunc_t(\mNrm_t) = \max_{\cLvl_t} \left\{ \uFunc(\cLvl_{t}) + \Alive_{t+1} \mathfrak{v}_{t}(\aNrm_{t}) \right\} = \max_{\cLvl_t} \left\{ \uFunc(\cLvl_{t}) + \Alive_{t+1} \mathfrak{v}_{t}(\mNrm_{t} - \cNrm_t) \right\}.
+\vFunc_t(\mNrm_t) = \max_{\cNrm_t} \left\{ \uFunc(\cNrm_{t}) + \Alive_{t+1} \mathfrak{v}_{t}(\aNrm_{t}) \right\} ~~\text{s.t.} ~~ a_t = m_t - c_t \geq 0.
 \end{equation}
-Because $\aNrm_t$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets $\aNrm=\mNrm-\cNrm$ for the future.[^normalization]
+Because $\aNrm_t$ measures available market resources that are unspent, this formulation makes it crystal clear that the consumer faces a tradeoff between the utility of consumption today and the expected value of preserving assets for the future.
 
-[^normalization]: The normalization for value function involves more than just division by $\pLvl$; see @BufferStockTheory for details.
 
 (lcp-model)=
 
@@ -267,7 +275,11 @@ survival probabilities by age are taken directly from actuarial mortality tables
 We use estimates of the age trajectory of permanent and transitory income variance from @SabelhausSong to calibrate $\sigma_{[\permShk, t]}^{2}$ and $\sigma_{[\tranShk, t]}^{2}$, and set the unemployment probability to a fairly standard value of $\pZero = 5\%$.
 Model agents begin their "lifetime" at age 25 with no wealth.
 
-We set the "pure" rate of time preference to $\beta=1$, meaning that the optimal choice is to care exactly as much about your future self as your present self (conditional on surviving into the future).
+We assume that annual returns on the risk free asset are $\Rfree = 1.01$, and that the equity premium is $\eqprem = 0.03$.
+These values are somewhat low compare to the economics literature (in which $\Rfree = 1.02$ and $\eqprem = 0.06$ are common), but from personal correspondence with financial planners, our understanding is that the profession tries to be conservative about projections of their clients' portfolio returns.
+
+While we do not believe that values of $\beta < 1$ are "ethically indefensible" as claimed in @Ramsey1928, we nevertheless set the "pure" rate of time preference to $\beta=1$, so that agents care exactly as much about their future self as their present self (conditional on surviving into the future).
+This also serves to constrain the model's ability to fit the data by declining to include an additional "free" parameter in the estimations.
 
 Beyond those basic assumptions, we calibrate the model to include uncertainty after retirement.
 Specifically, we assume that there are "ordinary" expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from @flExpShocks), generating the possibility of periods with much lower *disposable* income than usual.
@@ -336,7 +348,7 @@ where the $\CRRA$ coefficient is the same as in the utility function for consump
 \end{align}
 Rather than scaling warm glow utility with $\alpha$, we instead can interpret $\gamma$ and $\kappa$ as describing the "consumption function at death": this person acts *as if* just after they die, they will consume one last time according to $\cNrm = \gamma \aNrm + \kappa$, and derive utility from it. Thus $\gamma $ can be labeled as the "bequest MPC" and $\kappa $ is the "bequest intercept".[^other_beq_param]
 
-[^other_beq_param]: There is another way to re-parameterize the bequest motive that provides a third interpretation: a characterization of the optimal consumption function when the agent is *guaranteed* to die at the end of the period. This function is defined by two values: the level of market resources $m$ below which this person would consume everything (i.e. the bequest motive does not bind) and the constant MPC above that level as they allocate a constant fraction of additional resources to their bequest. The "terminal MPC" from that parameterization is very closely related to the "bequest MPC" $\gamma $ that we have estimated, and the "terminal kink point" is identical to our estimated "bequest intercept" $\kappa $.
+[^other_beq_param]: There is another way to re-parameterize the bequest motive that provides a third interpretation: a characterization of the optimal consumption function when the agent is *guaranteed* to die at the end of the period. This function is defined by two values: the level of market resources $m$ below which this person would consume everything (i.e. the bequest motive does not bind) and the constant MPC above that level as they allocate a constant fraction of additional resources to their bequest. The "terminal MPC" from that parameterization is very closely related to the "bequest MPC" $\gamma $ that we have estimated, and the "terminal kink point" is identical to our estimated "bequest intercept" $\kappa$.
 
 According to the evidence from historian Fredrick Cople @jaherGilded's chronicle of the behavior of the richest Americans since the Revolution, the bequest motive seems unlikely to be an important motivation, at least according to their own words.
 Jaher presents a feast of quotations articulating a host of motivations for extreme wealth accumulation; but among their many explanations of their behavior, almost none of the tycoons under study mention anything resembling the bequest motive as formulated in the standard academic life cycle literature.
@@ -386,7 +398,7 @@ The question is how best to incorporate the item in the utility function to stud
 ### Money in the Utility Function
 
 There is a literature in macroeconomics, pioneered by Miguel @sidrauski1967rational, that has long included "money" (in the monetary sense) in the utility function of the representative agent in one form or another.
-A well-known paper by [](doi:10.1086/261207) proposed a specific utility function designed to capture the stability of the ratio of money to GDP, and Rotemberg along with James Poterba estimated this model on U.S. data in [](doi:10.3386/w1796).
+A well-known paper by [](doi:10.1086/261207) proposed a specific utility function designed to capture the stability of the ratio of money to GDP, and the model was estimated on U.S. data in [](doi:10.3386/w1796).
 
 The structure of their utility function is
 \begin{align}
@@ -429,13 +441,13 @@ Since its publication, there appears to have been considerable movement in the d
 A number of leading financial institutions have made available partial descriptions of proprietary life cycle models that they are developing.
 For this report, we decided to describe only models that have been published in peer-reviewed journals and whose detailed characteristics are knowable.
 
-[](doi:10.3905/jor.2023.10.3.071) looks at the post-retirement period and normalizes all variables by retirement income, but it does not incorporate risk to permanent income (as we do), nor does it attempt to reconcile post-retirement with pre-retirement behavior.
+[](doi:10.3905/jor.2023.10.3.071) looks at the post-retirement period and normalizes all variables by retirement income, but it does not incorporate risk to permanent income, nor does it attempt to reconcile post-retirement with pre-retirement behavior.
 The model uses an additive utility of bequest with no shifter term, which has the implication that even income-poor households have a powerful bequest motive.
 The multigoal framework additionally disaggregates consumption expenses into different categories, each with the same CRRA coefficient.
 This reduces the effect of the diminishing marginal utility of consumption, such that the sum of utilities of consumption is greater than the utility of the sums of consumption.
 Moreover, each goal has an allocation coefficient (relative importance) that is set subjectively by the researchers.
 
-[](doi:10.3905/jor.2015.2.4.030) incorporate an additively separable utilty of bequest like the bequest motive we explored above, and like our models it incorporates both permanent and transitory shocks to income.
+[](doi:10.3905/jor.2015.2.4.030) incorporate an additively separable utilty of bequest like the one described above, and like our models it incorporates both permanent and transitory shocks to income.
 However, the model uses Epstein-Zin preferences (see our above objections to this feature).
 Their model also assumes that there is no uncertainty (except for mortality) in the post-retirement period, because that assumption has the convenient implication that the post-retirement period is extremely simple; the portfolio share, in particular, should remain constant at the infinite-horizon Merton-Samuelson solution.
 
@@ -460,7 +472,7 @@ This requires the computer to solve the problem perhaps thousands of times, whic
 
 ## Indirect Inference Implemented: the Method of Simulated Moments
 
-We are particularly interested in finding the optimal post-retirement choices, both for the rate of spending and for portfolio allocation between safe and risky assets.
+Because of this paper's focus on the drawdown failure, we are particularly interested in finding the optimal post-retirement choices, both for the rate of spending and for portfolio allocation between safe and risky assets.
 The "method of simulated moments" finds the parameters that make the model's simulated moments (statistics), like the median wealth and the median portfolio share, match the corresponding empirical facts as closely as possible.
 
 Consider an empirical moment $q_i$ where $i \in \{1,...,N\}$ and the corresponding simulated moment $\hat{q}_i(\theta)$, where $\theta $ is the vector of parameters that we are interested in estimating.
@@ -475,16 +487,15 @@ For example, we might be more interested in matching the median wealth than the 
 
 For our exercise, we are interested in matching the median wealth to income ratios throughout the life cycle, as well as the share of wealth held in equities as given by S&P's target date fund (TDF) glidepath.
 As noted in @Aboagye2024, this age-dependent portfolio allocation is used by many individuals who make "default" decisions via their (former) employer's TDF plan.
-Because age-aggregated data can be noisy and subject to selection bias and measurement error, we will aggregate the data into 5-year age bins to smooth out the noise and reduce the impact of selection bias.
+Because the SCF has relatively few observations of older households, we aggregate the data into 5-year age bins to smooth out the noise from the small samples.
 Starting at age 25, we calculate the median wealth-to-income ratio as follows: Wealth is defined as the sum of all assets and liabilities, including financial assets, housing, vehicles, and debt.
 For income, we use the sum of all wages, salaries, Social Security, and retirement income, excluding capital gains and other non-recurring income.
 We then calculate the wealth to income ratio of every household in the age bin and remove households with an income of zero.
 The median wealth-to-income ratio is calculated from the remaining households.
-Because the SCF data is increasingly sparse at older ages, the raw empirical moments show a "zig-zag" pattern above age 75 due to the small sample size.
-We smooth this out by holding the wealth-to-income ratio at 10.0 in the top three age brackets, the approximate mean among them.
+Because the SCF data is increasingly sparse at older ages, the raw empirical moments show a "zig-zag" pattern above age 75 due to the small sample size, even with 5-year-wide bins.
 
-In our structural model, we assume retirement occurs at exactly age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
-Therefore, we omit moments for ages 60 to 69 to prevent any bias in the estimation process, but keep the data for ages 70 and above to capture the behavior of retirees.
+In our structural model, we assume retirement occurs automatically at exactly age 65, whereas in the data we observe retirement at different ages, but predominantly between ages 60 and 70.
+Therefore, we omit moments for ages 60 to 69, where our (relatively parsimonious) model is known to deviate most strongly from empirical reality, but keep the data for ages 70 and above to capture the behavior of retirees.
 
 Considering the selection of moments we have chosen, it is clear that there is an imbalance:
 There are more wealth to income moments than portfolio share moments (12 vs 5), and the portfolio share moments lie between 0 and 1, whereas the wealth to income ratios can be much larger.
@@ -493,9 +504,8 @@ This ensures that our estimation process puts even weight on the two sets of mom
 
 Having chosen the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our various models.
 We use the `Econ-ARK` project's `HARK` package to solve and simulate the models, and `optimagic` (@Gabler2022, formerly `estimagic`) to perform the estimation process.
-Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the `LCP+WarmGlow` model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. <!-- % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.-->
-
-Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.[^estim]
+Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the `LCP+WarmGlow` model, so we develop a robust and efficient estimation process that can handle a varying number of parameters.
+The estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.[^estim]
 
 [^estim]: Because our moments require simulation, our moment generating functions $\hat{q}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.
 We use the `tranquilo` algorithm (@Gabler2024), which stands for TrustRegion Adaptive Noise robust QuadratIc or Linear approximation Optimizer, to find the optimal parameter set.
@@ -522,7 +532,5 @@ But *by how much* one's stock exposure should be reduced because of house-price 
 It would be a better world if financial advice could be justified as reflecting the mathematically optimal solution to a well-defined problem.
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving were what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
+The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world.
 
-The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world.  This paper's open-source code, built with the associated open-source [Econ-ARK](https://econ-ark.org) project's tools, would be a good place to start.[^thankstrp]
-
-[^thankstrp]: We are grateful to the Sloan Foundation and to T Rowe Price for generous funding of the toolkit.

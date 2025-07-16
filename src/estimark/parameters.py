@@ -26,9 +26,11 @@ aXtraMin = 0.001  # Minimum end-of-period "assets above minimum" value
 aXtraMax = 100  # Maximum end-of-period "assets above minimum" value
 aXtraCount = 20  # Number of points in the grid of "assets above minimum"
 
-# Artificial borrowing constraint
+# Financial parameters
 BoroCnstArt = 0.0  # imposed minimum level of end-of period assets
-Rfree = 1.02  # Interest factor on assets
+Rfree = 1.01  # Interest factor on risk free asset
+Eq_prem = 0.030  # Equity premium 
+RiskyStd = 0.20  # Standard deviation of log risky returns 
 
 # Use cubic spline interpolation when True, linear interpolation when False
 CubicBool = False
@@ -197,6 +199,11 @@ minimize_options = {
 # -- Set up the dictionary "container" for making a basic lifecycle type ------
 # -----------------------------------------------------------------------------
 
+retired_PermShkStd = 0.0
+retired_TranShkStd = 0.0
+#retired_PermShkStd = inc_calib["PermShkStd"][retirement_t]
+#retired_TranShkStd = inc_calib["TranShkStd"][retirement_t]
+
 # Dictionary that can be passed to ConsumerType to instantiate
 init_calibration = {
     "CRRA": init_CRRA,
@@ -206,16 +213,16 @@ init_calibration = {
     "PermGroFacAgg": 1.0,
     "BoroCnstArt": BoroCnstArt,
     "PermShkStd": inc_calib["PermShkStd"][: retirement_t + 1]
-    + [inc_calib["PermShkStd"][retirement_t]] * (terminal_t - retirement_t - 1),
+    + [retired_PermShkStd] * (terminal_t - retirement_t - 1),
     "PermShkCount": PermShkCount,
     "TranShkStd": inc_calib["TranShkStd"][: retirement_t + 1]
-    + [inc_calib["TranShkStd"][retirement_t]] * (terminal_t - retirement_t - 1),
+    + [retired_TranShkStd] * (terminal_t - retirement_t - 1),
     "TranShkCount": TranShkCount,
     "T_cycle": terminal_t,
     "T_sim": terminal_t+1,
     "UnempPrb": UnempPrb,
     "UnempPrbRet": UnempPrbRet,
-    "T_retire": retirement_t,
+    "T_retire": 0,#retirement_t,
     "T_age": terminal_t+1,
     "IncUnemp": IncUnemp,
     "IncUnempRet": IncUnempRet,
@@ -239,8 +246,6 @@ init_calibration = {
     "ChiFromOmega_bound": 15,  # Highest gridpoint to use for it
 }
 
-Eq_prem = 0.025
-RiskyStd = 0.20
 
 init_calibration["RiskyAvg"] = Rfree + Eq_prem
 init_calibration["RiskyStd"] = RiskyStd
