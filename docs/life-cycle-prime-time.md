@@ -23,13 +23,11 @@ We provide an example of a simple model that can solve a number of problems by p
 
 # Introduction
 
-Franco Modigliani and Richard Brumberg (1954)[^modigliani_brumberg] were the first to propose trying to understand consumer financial choices as optimal responses to the paths of income and of spending needs over the lifetime.
+@modigliani1954 were the first to propose trying to understand consumer financial choices as optimal responses to the paths of income and of spending needs over the lifetime.
 An enormous academic literature has followed their pioneering work (see the [literature appendix](#lit-review) for an expansive summary),
 but it has proven difficult to build rational optimizing models that give sensible advice about both life-cycle saving choices and about investment decisions.
 That is, the models yield implausible answers to questions about how much wealth should be retained later in life, and how much of one's retirement savings should be invested in the stock market.
 Indeed, the subtitle of a recent paper by [](doi:10.3905/jor.2023.10.3.071) captures the current state of affairs nicely: "Why Practitioners Have Not Adopted the Lifecyle Model -- Yet"; see also the literature review in [](doi:10.1146/annurev-economics-080315-015127).
-
-[^modigliani_brumberg]: @10.7551/mitpress/1923.003.0004
 
 In this paper, we argue that the elements are already available to construct a model that "practitioners can adopt."
 All that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients.
@@ -270,15 +268,15 @@ A split second before choosing the risky share, the consumer's objective in the 
 ### Calibration
 
 Many of the parameters of the basic life-cycle consumption-saving model can be calibrated from well measured empirical data.
-For example, we use standard calibrations of both of expected income growth during the working life, based on @Cagetti2003, and
-survival probabilities by age are taken directly from actuarial mortality tables published by the Social Security Administration.
-We use estimates of the age trajectory of permanent and transitory income variance from @SabelhausSong to calibrate $\sigma_{[\permShk, t]}^{2}$ and $\sigma_{[\tranShk, t]}^{2}$, and set the unemployment probability to a fairly standard value of $\pZero = 5\%$.
-Model agents begin their "lifetime" at age 25 with no wealth.
+For example, we use standard calibrations of both of expected income growth and income risk (the age trajectories of $\permGroFac_t$, $\sigma_{[\permShk, t]}^2$ and $\sigma_{[\tranShk, t]}^2$) during the working life based on @Cagetti2003.
+Survival probabilities by age are taken directly from actuarial mortality tables published by the Social Security Administration.
+We set the unemployment probability to a fairly standard value of $\pZero = 5\%$, and
+model agents begin their "lifetime" at age 25 with no wealth.
 
-We assume that annual returns on the risk free asset are $\Rfree = 1.01$, and that the equity premium is $\eqprem = 0.03$.
-These values are somewhat low compare to the economics literature (in which $\Rfree = 1.02$ and $\eqprem = 0.06$ are common), but from personal correspondence with financial planners, our understanding is that the profession tries to be conservative about projections of their clients' portfolio returns.
+We assume that annual returns on the risk free asset are $\Rfree = 1.01$, and that the equity premium is $\eprem = 0.03$.
+These values are somewhat low compare to the economics literature (in which $\Rfree = 1.02$ and $\eprem = 0.06$ are common), but from personal correspondence with financial planners, our understanding is that the profession tries to be conservative about projections of their clients' portfolio returns.
 
-While we do not believe that values of $\beta < 1$ are "ethically indefensible" as claimed in @Ramsey1928, we nevertheless set the "pure" rate of time preference to $\beta=1$, so that agents care exactly as much about their future self as their present self (conditional on surviving into the future).
+While we do not believe that values of $\DiscFac < 1$ are "ethically indefensible" as claimed in @Ramsey1928, we nevertheless set the "pure" rate of time preference to $\DiscFac=1$, so that agents care exactly as much about their future self as their present self (conditional on surviving into the future).
 This also serves to constrain the model's ability to fit the data by declining to include an additional "free" parameter in the estimations.
 
 Beyond those basic assumptions, we calibrate the model to include uncertainty after retirement.

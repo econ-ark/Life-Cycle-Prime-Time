@@ -283,6 +283,12 @@ init_subjective_stock = {
     "RiskyStdTrue": init_calibration["RiskyStd"],
 }
 
+true_stock_params = {
+    "Rfree": Rfree,
+    "RiskyAvg": init_calibration["RiskyAvg"],
+    "RiskyStd": init_calibration["RiskyStd"],
+    }
+
 # from Tao's JMP
 init_subjective_labor = {
     "TranShkStd": [0.03] * (retirement_t + 1)
