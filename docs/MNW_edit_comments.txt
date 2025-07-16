@@ -1,8 +1,3 @@
-NEEDS WRITING:
-
-5) "even early in their working lives the primary motivation for saving is for the accumulation of a bequest" --> need to check what I meant by this
-
-
 CODE / MODEL QUESTIONS:
 
 - what interest parameters do we want to use, and why? 2.5 or 3% EqPrem
@@ -15,11 +10,6 @@ CODE / MODEL QUESTIONS:
 - do we want age-varying beta adjusters? no
 - where did PermGroFac = 0.9389 come from? it's from CGM, use 15% instead
 - weighting is normally *outside* of the square, but fine
-
-
-NEED TO DISCUSS:
-
-- "implausibly intense" bequest motive --> I really disagree
 
 
 C: CGM income, 2.5% EqPrem
