@@ -579,6 +579,35 @@ That paper presents the typical glidepath of target-date funds (TDFs) which prov
 While the whole life-cycle glidepath is provided in @Aboagye2024, here we only target (and plot) those moments starting at age 70.
 The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.
 
+## The Role of Subjective Beliefs
+
+The results above depend on the standard modeling assumption that agents have rational expectations: they know and understand the true distribution of risks that they face.
+However, @velasquezgiraldoJMP reports that even college-educated people often have *subjective* beliefs about the distribution of stock returns that are pessimistic relative to observed historic returns-- they believe stocks are considerably riskier given their mean return.
+Our estimates of the coefficient of relative risk aversion for the two models that could fit the wealth and portfolio shares reasonably well were around $\CRRA \approx 5$, the top of the "normal" range for risk aversion.
+If people *actually* believe that stocks are much riskier, then they would not need to be so risk averse for the model to fit the targets risky portfolio share around 30-40% in retirement.
+That is, for any level of risk aversion, agents that subjectively believe that stocks are riskier will want to hold a lower share of risky assets, so risk aversion must decrease to raise risky asset holdings back to the empirical target.
+
+The analysis in @velasquezgiraldoJMP is quite rich and incorporates heterogeneous beliefs within and across demographic groups, but we need only perform a relatively straightforward exercise to illustrate our point.
+We repeat the estimation procedure from above, but have the agents *solve* their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08\%$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
+When the agents live out the model in simulation, the "true" stock return distribution is used ($\eprem = 0.03$ and $\sigma_\risky = 0.2$).
+To best fit the target moments, we estimate $\CRRA = 3.20$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.[^othersubjectiveestimates]
+
+[^othersubjectiveestimates]: The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,gamma)$ are comparable to their original values. The basic Life-Cycle Portfolio model even more poorly fits the target moments at its estimated $\CRRA$.
+
+```{figure} figures/StockBeliefsShare
+:label: subjbeliefs
+:align: center 
+
+Median Risky Asset Share under parameter estimates with incorrect subjective beliefs about stock returns. Solid lines show fitted portfolio shares if agents *believe* stocks are much riskier; dash-dot lines show portfolio shares with same estimated preferences but *correct* beliefs about stock returns. The red dashed line shows the target moments from @Aboagye2024.
+```
+
+If agents have incorrect subjective beliefs, it's reasonable to ask what the model predicts they would do if they knew the *true* distribution of stock returns.
+That is, use the preference parameters estimated under subjective stock returns, but give the agents correct beliefs as in the original estimation.
+Risky asset shares for both sets of beliefs are plotted on @subjbeliefs.
+Unsurprisingly, agents would want to hold a considerably greater share of their wealthy in risky assets if they learned that stock returns have much lower variance than they previously believed.
+The upshot is that if financial advisers want to use life-cycle models to provide normative advice to their clients for how "best" to allocate their wealth over time, and to inform those models with inferences about preferences from empirical observations, they must think carefully about the beliefs that generated the observed behavior.
+
+
 # Conclusion
 
 To thoughtful academics, it has long been disturbing that the financial advice industry has paid so little attention to our hard work in constructing and solving impressively sophisticated dynamic stochastic optimization models of financial behavior.
