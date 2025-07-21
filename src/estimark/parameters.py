@@ -12,7 +12,7 @@ import warnings
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 import numpy as np
-from HARK.Calibration.Income.IncomeTools import Cagetti_income, parse_income_spec
+from HARK.Calibration.Income.IncomeTools import Cagetti_income, CGM_income, parse_income_spec
 from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
 from HARK.distributions import DiscreteDistribution
 
@@ -26,9 +26,11 @@ aXtraMin = 0.001  # Minimum end-of-period "assets above minimum" value
 aXtraMax = 100  # Maximum end-of-period "assets above minimum" value
 aXtraCount = 20  # Number of points in the grid of "assets above minimum"
 
-# Artificial borrowing constraint
+# Financial parameters
 BoroCnstArt = 0.0  # imposed minimum level of end-of period assets
-Rfree = 1.03  # Interest factor on assets
+Rfree = 1.01  # Interest factor on risk free asset
+Eq_prem = 0.030  # Equity premium 
+RiskyStd = 0.20  # Standard deviation of log risky returns 
 
 # Use cubic spline interpolation when True, linear interpolation when False
 CubicBool = False
@@ -82,7 +84,7 @@ init_WealthShift = 0.0  # Initial guess of the wealth shift parameter
 bounds_WealthShift = [0.0, 100.0]  # Bounds for the wealth shift parameter
 
 init_BeqMPC = 0.1  # Initial guess of the pseudo MPC of the bequest motive
-bounds_BeqMPC = [0.0, 1.0]  # Bounds for the pseudo-MPC of the bequest motive
+bounds_BeqMPC = [0.001, 1.0]  # Bounds for the pseudo-MPC of the bequest motive
 
 init_BeqInt = 1.0  # Initial guess of the pseudo intercept of the bequest motive
 bounds_BeqInt = [0.0, 10.0]  # Bounds for the pseudo intercept of the bequest motive
@@ -105,10 +107,7 @@ inc_calib = parse_income_spec(
     **income_spec,
     SabelhausSong=ss_variances,
 )
-
-inc_calib["PermGroFac"][retirement_age - initial_age] = 0.9389
-
-# use permgrofac = 0.9389 at retirement
+inc_calib["PermGroFac"][retirement_age - initial_age] = 0.85
 
 # Age groups for the estimation: calculate average wealth-to-permanent income ratio
 # for consumers within each of these age groups, compare actual to simulated data
@@ -134,6 +133,7 @@ remove_ages_from_scf = np.arange(
 remove_ages_from_snp = np.arange(
     retirement_age + age_interval + 1,
 )  # only match ages 71 and older
+
 
 init_params_options = {
     "init_guess": {
@@ -199,6 +199,11 @@ minimize_options = {
 # -- Set up the dictionary "container" for making a basic lifecycle type ------
 # -----------------------------------------------------------------------------
 
+retired_PermShkStd = 0.0
+retired_TranShkStd = 0.0
+#retired_PermShkStd = inc_calib["PermShkStd"][retirement_t]
+#retired_TranShkStd = inc_calib["TranShkStd"][retirement_t]
+
 # Dictionary that can be passed to ConsumerType to instantiate
 init_calibration = {
     "CRRA": init_CRRA,
@@ -208,16 +213,17 @@ init_calibration = {
     "PermGroFacAgg": 1.0,
     "BoroCnstArt": BoroCnstArt,
     "PermShkStd": inc_calib["PermShkStd"][: retirement_t + 1]
-    + [inc_calib["PermShkStd"][retirement_t]] * (terminal_t - retirement_t - 1),
+    + [retired_PermShkStd] * (terminal_t - retirement_t - 1),
     "PermShkCount": PermShkCount,
     "TranShkStd": inc_calib["TranShkStd"][: retirement_t + 1]
-    + [inc_calib["TranShkStd"][retirement_t]] * (terminal_t - retirement_t - 1),
+    + [retired_TranShkStd] * (terminal_t - retirement_t - 1),
     "TranShkCount": TranShkCount,
     "T_cycle": terminal_t,
+    "T_sim": terminal_t+1,
     "UnempPrb": UnempPrb,
     "UnempPrbRet": UnempPrbRet,
-    "T_retire": retirement_t,
-    "T_age": terminal_t,
+    "T_retire": 0,#retirement_t,
+    "T_age": terminal_t+1,
     "IncUnemp": IncUnemp,
     "IncUnempRet": IncUnempRet,
     "aXtraMin": aXtraMin,
@@ -234,12 +240,12 @@ init_calibration = {
     "neutral_measure": True,  # Harmemberg
     "sim_common_Rrisky": False,  # idiosyncratic risky return
     "WealthShift": init_WealthShift,
+    "BeqMPC" : init_BeqMPC,
+    "BeqInt" : init_BeqInt,
     "ChiFromOmega_N": 501,  # Number of gridpoints in chi-from-omega function
     "ChiFromOmega_bound": 15,  # Highest gridpoint to use for it
 }
 
-Eq_prem = 0.03
-RiskyStd = 0.20
 
 init_calibration["RiskyAvg"] = Rfree + Eq_prem
 init_calibration["RiskyStd"] = RiskyStd
@@ -259,15 +265,29 @@ ElnR_real = ElnR_nom - logInflation
 TrueElnR_real = TrueElnR_nom - logInflation
 
 
+# init_subjective_stock = {
+#     "Rfree": Rfree_real,  # from Mateo's JMP
+#     "RiskyAvg": np.exp(ElnR_real + 0.5 * VlnR),
+#     "RiskyStd": np.sqrt(np.exp(2 * ElnR_real + VlnR) * (np.exp(VlnR) - 1)),
+#     "RiskyAvgTrue": np.exp(TrueElnR_real + 0.5 * TrueVlnR),
+#     "RiskyStdTrue": np.sqrt(
+#         np.exp(2 * TrueElnR_real + TrueVlnR) * (np.exp(TrueVlnR) - 1),
+#     ),
+# }
+
 init_subjective_stock = {
-    "Rfree": Rfree_real,  # from Mateo's JMP
+    "Rfree": Rfree,
     "RiskyAvg": np.exp(ElnR_real + 0.5 * VlnR),
     "RiskyStd": np.sqrt(np.exp(2 * ElnR_real + VlnR) * (np.exp(VlnR) - 1)),
-    "RiskyAvgTrue": np.exp(TrueElnR_real + 0.5 * TrueVlnR),
-    "RiskyStdTrue": np.sqrt(
-        np.exp(2 * TrueElnR_real + TrueVlnR) * (np.exp(TrueVlnR) - 1),
-    ),
+    "RiskyAvgTrue": init_calibration["RiskyAvg"],
+    "RiskyStdTrue": init_calibration["RiskyStd"],
 }
+
+true_stock_params = {
+    "Rfree": Rfree,
+    "RiskyAvg": init_calibration["RiskyAvg"],
+    "RiskyStd": init_calibration["RiskyStd"],
+    }
 
 # from Tao's JMP
 init_subjective_labor = {

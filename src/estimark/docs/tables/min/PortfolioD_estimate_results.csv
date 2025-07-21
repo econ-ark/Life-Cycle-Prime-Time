@@ -1,0 +1,1374 @@
+CRRA,8.575430180534365
+time_to_estimate,190.0122730731964
+params,{'CRRA': 8.575430180534365}
+fun,1.0503225793151993
+start_fun,7.140161679441496
+start_params,{'CRRA': 2.0}
+algorithm,multistart_tranquilo_ls
+direction,minimize
+n_free,1
+message,Absolute criterion change smaller than tolerance.
+success,
+n_fun_evals,
+n_jac_evals,
+n_hess_evals,
+n_iterations,
+status,
+jac,
+hess,
+hess_inv,
+max_constraint_violation,
+history,
+convergence_report,
+multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 8.915676098962384}, {'CRRA': 8.370794802467636}], local_optima=[Minimize with 1 free parameters terminated.
+
+The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 1 free parameters terminated.
+
+The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance.], exploration_sample=[{'CRRA': 8.915676098962384}, {'CRRA': 8.276155995511274}, {'CRRA': 8.954527721518849}, {'CRRA': 8.999558845133562}, {'CRRA': 9.075663984969825}, {'CRRA': 8.161466366199383}, {'CRRA': 9.090117027735724}, {'CRRA': 9.119433444765985}, {'CRRA': 9.160957394706806}, {'CRRA': 8.020870094918424}, {'CRRA': 7.93830346111864}, {'CRRA': 7.900390140401138}, {'CRRA': 7.857319926623925}, {'CRRA': 7.789155878278677}, {'CRRA': 9.741615624053354}, {'CRRA': 9.83731115895829}, {'CRRA': 10.060726541505522}, {'CRRA': 10.213985149292734}, {'CRRA': 7.253051529087061}, {'CRRA': 7.217406706495272}, {'CRRA': 10.360666981997026}, {'CRRA': 10.588086401305572}, {'CRRA': 10.804754192295986}, {'CRRA': 11.121398455440572}, {'CRRA': 11.357979878331637}, {'CRRA': 11.365760303955307}, {'CRRA': 11.442507049444787}, {'CRRA': 6.593982201576763}, {'CRRA': 11.822314552321533}, {'CRRA': 11.869877724041407}, {'CRRA': 6.407945507856649}, {'CRRA': 11.906104668831262}, {'CRRA': 11.96628297746846}, {'CRRA': 12.030885903103814}, {'CRRA': 12.084727798967528}, {'CRRA': 12.649813916266998}, {'CRRA': 12.694659318746544}, {'CRRA': 12.707633633629955}, {'CRRA': 12.875626677158559}, {'CRRA': 5.965971078287781}, {'CRRA': 13.04676521774145}, {'CRRA': 13.154027494158997}, {'CRRA': 13.52300518570754}, {'CRRA': 13.662654362652885}, {'CRRA': 13.916586804936738}, {'CRRA': 13.969435200630928}, {'CRRA': 13.999912432916654}, {'CRRA': 14.099618474013138}, {'CRRA': 5.551314814181167}, {'CRRA': 14.600591329959485}, {'CRRA': 14.621131186126204}, {'CRRA': 14.856478877040244}, {'CRRA': 15.030734604603639}, {'CRRA': 15.328402668462429}, {'CRRA': 5.220296903329489}, {'CRRA': 5.192653834646894}, {'CRRA': 15.815538012327064}, {'CRRA': 15.865571904357665}, {'CRRA': 16.18180283393937}, {'CRRA': 16.332955070017327}, {'CRRA': 16.415631681252517}, {'CRRA': 16.433779881723023}, {'CRRA': 16.696114966383046}, {'CRRA': 17.042681760344074}, {'CRRA': 17.256429877991817}, {'CRRA': 17.39553895892433}, {'CRRA': 17.522135059918327}, {'CRRA': 17.585352588541504}, {'CRRA': 18.762914559065365}, {'CRRA': 18.78542062748628}, {'CRRA': 18.965097799882543}, {'CRRA': 19.076786868534203}, {'CRRA': 19.10615937955598}, {'CRRA': 19.261504487595598}, {'CRRA': 4.497852091396892}, {'CRRA': 19.446959637634624}, {'CRRA': 19.54184448284269}, {'CRRA': 19.73450099337062}, {'CRRA': 19.818703808302445}, {'CRRA': 19.839629422212965}, {'CRRA': 19.86474365963151}, {'CRRA': 19.887186235753138}, {'CRRA': 4.412182818002664}, {'CRRA': 4.36144209201317}, {'CRRA': 4.326549150773801}, {'CRRA': 4.315826990979675}, {'CRRA': 4.308855004147264}, {'CRRA': 4.157103259623959}, {'CRRA': 4.137475115695441}, {'CRRA': 3.870357176019033}, {'CRRA': 3.8210271160815723}, {'CRRA': 3.108711760723117}, {'CRRA': 2.9571699735703776}, {'CRRA': 2.6837828635911354}, {'CRRA': 2.621166553261383}, {'CRRA': 1.2404611486613786}, {'CRRA': 1.4734154799923078}, {'CRRA': 2.05386924083792}, {'CRRA': 2.0}, {'CRRA': 1.9622979782986927}], exploration_results=array([1.05235886, 1.05268256, 1.05290362, 1.05363017, 1.05501537,
+       1.05519795, 1.05535884, 1.05594253, 1.05691202, 1.05891893,
+       1.06161171, 1.06288851, 1.06455613, 1.06746448, 1.07615011,
+       1.08007902, 1.09027954, 1.09809319, 1.10189101, 1.10516196,
+       1.10580479, 1.11941634, 1.13340128, 1.15544901, 1.17281153,
+       1.17340829, 1.17930587, 1.1826702 , 1.20975428, 1.2136927 ,
+       1.21519688, 1.21680616, 1.22186055, 1.22743323, 1.23203973,
+       1.28271039, 1.28679279, 1.28800075, 1.30417625, 1.31520358,
+       1.3207292 , 1.3311834 , 1.36822951, 1.38269477, 1.40921428,
+       1.41463395, 1.41790422, 1.42820914, 1.44468983, 1.48217626,
+       1.48436227, 1.51036505, 1.53001295, 1.56333511, 1.58382485,
+       1.59720344, 1.61950981, 1.62534813, 1.66246062, 1.68025871,
+       1.69003735, 1.69216329, 1.72306344, 1.76505331, 1.7907366 ,
+       1.80753612, 1.82289406, 1.83070952, 1.9749863 , 1.97774254,
+       2.00002218, 2.01399359, 2.01759259, 2.03732977, 2.05037178,
+       2.06007965, 2.07176986, 2.09563229, 2.10614298, 2.10871315,
+       2.11175969, 2.11450223, 2.12546105, 2.17333668, 2.20653267,
+       2.21683272, 2.22360257, 2.3827105 , 2.40438259, 2.73712918,
+       2.8072752 , 4.26679443, 4.73458415, 5.75496877, 5.99578903,
+       6.89954608, 6.97056125, 7.12396634, 7.14147746, 7.14628339]))"
+algorithm_output,"{'states': [State(trustregion=Region(center=array([8.9156761]), radius=0.8915676098962385, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=[0], model=ScalarModel(intercept=1.052358856844517, linear_terms=array([0.]), square_terms=array([[0.]]), scale=0.8915676098962385, shift=array([8.9156761])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=0, candidate_x=array([8.9156761]), index=0, x=array([8.9156761]), fval=1.052358856844517, rho=nan, accepted=True, new_indices=[0], old_indices_used=[], old_indices_discarded=[], step_length=None, relative_step_length=None, n_evals_per_point=None, n_evals_acceptance=None), State(trustregion=Region(center=array([8.9156761]), radius=0.8915676098962385, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), model=ScalarModel(intercept=1.045159667960429, linear_terms=array([0.01031979]), square_terms=array([[0.04866141]]), scale=0.8915676098962385, shift=array([8.9156761])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=13, candidate_x=array([8.72659831]), index=13, x=array([8.72659831]), fval=1.0509455576835522, rho=1.2915372036793833, accepted=True, new_indices=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12]), old_indices_used=array([0]), old_indices_discarded=array([], dtype=int32), step_length=0.18907779033545502, relative_step_length=0.21207341791775058, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.72659831]), radius=0.8915676098962385, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([ 0,  1,  7,  9, 11, 13]), model=ScalarModel(intercept=1.0498444618205545, linear_terms=array([0.01033723]), square_terms=array([[0.05543841]]), scale=0.8915676098962385, shift=array([8.72659831])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=14, candidate_x=array([8.56035363]), index=14, x=array([8.56035363]), fval=1.0504111553751572, rho=0.5544988761812472, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([ 0,  1,  7,  9, 11, 13]), old_indices_discarded=array([ 2,  3,  4,  5,  6,  8, 10, 12]), step_length=0.16624467464033899, relative_step_length=0.1864633402952881, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.56035363]), radius=0.8915676098962385, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([ 0,  1, 11, 13, 14, 15]), model=ScalarModel(intercept=1.0490457950991394, linear_terms=array([0.00291325]), square_terms=array([[0.05771451]]), scale=0.8915676098962385, shift=array([8.56035363])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=16, candidate_x=array([8.51535009]), index=14, x=array([8.56035363]), fval=1.0504111553751572, rho=-3.263448530623213, accepted=False, new_indices=array([15]), old_indices_used=array([ 0,  1, 11, 13, 14]), old_indices_discarded=array([ 2,  3,  4,  5,  6,  7,  8,  9, 10, 12]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.56035363]), radius=0.44578380494811926, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([ 0, 11, 13, 14, 16, 17]), model=ScalarModel(intercept=1.0495443474787507, linear_terms=array([6.28920838e-05]), square_terms=array([[0.01382252]]), scale=0.44578380494811926, shift=array([8.56035363])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=18, candidate_x=array([8.55832533]), index=14, x=array([8.56035363]), fval=1.0504111553751572, rho=-50.1095555479019, accepted=False, new_indices=array([17]), old_indices_used=array([ 0, 11, 13, 14, 16]), old_indices_discarded=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 12, 15]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.56035363]), radius=0.22289190247405963, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([ 0, 13, 14, 16, 17, 18]), model=ScalarModel(intercept=1.0498330921600927, linear_terms=array([-0.00021954]), square_terms=array([[0.00339422]]), scale=0.22289190247405963, shift=array([8.56035363])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=19, candidate_x=array([8.57477037]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=10.482818082902666, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([ 0, 13, 14, 16, 17, 18]), old_indices_discarded=array([ 1,  3,  4,  6,  7,  9, 11, 15]), step_length=0.014416740806197481, relative_step_length=0.06468041524243041, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.22289190247405963, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([ 0, 13, 14, 16, 18, 19]), model=ScalarModel(intercept=1.0503824229805478, linear_terms=array([-0.00097717]), square_terms=array([[0.00318398]]), scale=0.22289190247405963, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=20, candidate_x=array([8.64317653]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-1.1665290341242749, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([ 0, 13, 14, 16, 18, 19]), old_indices_discarded=array([ 1,  3,  4,  6,  7,  9, 11, 15, 17]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.11144595123702981, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([13, 14, 16, 18, 19, 20]), model=ScalarModel(intercept=1.0504013833201002, linear_terms=array([-0.00015]), square_terms=array([[0.00081474]]), scale=0.11144595123702981, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=21, candidate_x=array([8.5952885]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-12.567808174588885, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([13, 14, 16, 18, 19, 20]), old_indices_discarded=array([ 0,  1,  3,  4,  6,  7,  9, 11, 17]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.05572297561851491, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([14, 16, 18, 19, 20, 21]), model=ScalarModel(intercept=1.050422505682807, linear_terms=array([-5.56118088e-05]), square_terms=array([[0.00020642]]), scale=0.05572297561851491, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=22, candidate_x=array([8.58978299]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-21.322192994326063, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([14, 16, 18, 19, 20, 21]), old_indices_discarded=array([13]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.027861487809257453, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([14, 16, 18, 19, 21, 22]), model=ScalarModel(intercept=1.0504397078912957, linear_terms=array([-1.57798045e-05]), square_terms=array([[5.160378e-05]]), scale=0.027861487809257453, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=23, candidate_x=array([8.58329008]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-30.274301118178602, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([14, 16, 18, 19, 21, 22]), old_indices_discarded=array([20]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.013930743904628727, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([14, 18, 19, 21, 22, 23]), model=ScalarModel(intercept=1.050418586461517, linear_terms=array([3.39218616e-05]), square_terms=array([[1.26602034e-05]]), scale=0.013930743904628727, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=24, candidate_x=array([8.56083963]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-1.9734826020989136, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([14, 18, 19, 21, 22, 23]), old_indices_discarded=array([16, 20]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.006965371952314363, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([14, 18, 19, 22, 23, 24]), model=ScalarModel(intercept=1.0504113192532172, linear_terms=array([1.1718987e-05]), square_terms=array([[3.14586096e-06]]), scale=0.006965371952314363, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=25, candidate_x=array([8.567805]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-7.001493704556817, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([14, 18, 19, 22, 23, 24]), old_indices_discarded=array([21]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.0034826859761571817, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([14, 19, 22, 23, 24, 25]), model=ScalarModel(intercept=1.0504090281339424, linear_terms=array([7.50296304e-06]), square_terms=array([[7.86227415e-07]]), scale=0.0034826859761571817, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=26, candidate_x=array([8.57128769]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-7.055014734698472, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([14, 19, 22, 23, 24, 25]), old_indices_discarded=array([18]), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.0017413429880785908, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 23, 25, 26]), model=ScalarModel(intercept=1.0503843427147646, linear_terms=array([4.83558761e-07]), square_terms=array([[1.96159232e-07]]), scale=0.0017413429880785908, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=27, candidate_x=array([8.57302903]), index=19, x=array([8.57477037]), fval=1.0503367278212203, rho=-79.82614374631524, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([19, 23, 25, 26]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57477037]), radius=0.0008706714940392954, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 26, 27]), model=ScalarModel(intercept=1.0503386560857784, linear_terms=array([-1.24485442e-05]), square_terms=array([[4.55083935e-08]]), scale=0.0008706714940392954, shift=array([8.57477037])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=28, candidate_x=array([8.57564105]), index=28, x=array([8.57564105]), fval=1.0503248687961344, rho=0.9543880181660898, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([19, 26, 27]), old_indices_discarded=array([], dtype=int32), step_length=0.0008706714940398541, relative_step_length=1.0000000000006417, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57564105]), radius=0.0017413429880785908, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 23, 25, 26, 27, 28]), model=ScalarModel(intercept=1.0503713299039, linear_terms=array([-1.74743144e-07]), square_terms=array([[1.95657858e-07]]), scale=0.0017413429880785908, shift=array([8.57564105])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=29, candidate_x=array([8.57738239]), index=28, x=array([8.57564105]), fval=1.0503248687961344, rho=-364.78574491296865, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([19, 23, 25, 26, 27, 28]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57564105]), radius=0.0008706714940392954, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 27, 28, 29]), model=ScalarModel(intercept=1.0503438070297444, linear_terms=array([-3.23656709e-06]), square_terms=array([[4.5584875e-08]]), scale=0.0008706714940392954, shift=array([8.57564105])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=30, candidate_x=array([8.57651172]), index=28, x=array([8.57564105]), fval=1.0503248687961344, rho=-6.103683016199854, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([19, 27, 28, 29]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57564105]), radius=0.0004353357470196477, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 28, 29, 30]), model=ScalarModel(intercept=1.0503363177746217, linear_terms=array([3.3987072e-06]), square_terms=array([[1.17505537e-08]]), scale=0.0004353357470196477, shift=array([8.57564105])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=31, candidate_x=array([8.57520571]), index=28, x=array([8.57564105]), fval=1.0503248687961344, rho=-0.6267347834046645, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([19, 28, 29, 30]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57564105]), radius=0.00021766787350982386, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 28, 30, 31]), model=ScalarModel(intercept=1.0503338781403817, linear_terms=array([1.24455994e-06]), square_terms=array([[2.93175506e-09]]), scale=0.00021766787350982386, shift=array([8.57564105])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=32, candidate_x=array([8.57542338]), index=32, x=array([8.57542338]), fval=1.0503225935368603, rho=1.8303194714664133, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([19, 28, 30, 31]), old_indices_discarded=array([], dtype=int32), step_length=0.00021766787351040762, relative_step_length=1.0000000000026819, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57542338]), radius=0.0004353357470196477, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 28, 29, 30, 31, 32]), model=ScalarModel(intercept=1.0503308916255005, linear_terms=array([4.19514647e-06]), square_terms=array([[1.17958405e-08]]), scale=0.0004353357470196477, shift=array([8.57542338])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=33, candidate_x=array([8.57498804]), index=32, x=array([8.57542338]), fval=1.0503225935368603, rho=-2.309154127553486, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([19, 28, 29, 30, 31, 32]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57542338]), radius=0.00021766787350982386, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([19, 28, 31, 32, 33]), model=ScalarModel(intercept=1.0503253497880907, linear_terms=array([-3.33623606e-06]), square_terms=array([[2.97841755e-09]]), scale=0.00021766787350982386, shift=array([8.57542338])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=34, candidate_x=array([8.57564105]), index=32, x=array([8.57542338]), fval=1.0503225935368603, rho=-0.68228845399165, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([19, 28, 31, 32, 33]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57542338]), radius=0.00010883393675491193, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([28, 31, 32, 33, 34]), model=ScalarModel(intercept=1.050325861695884, linear_terms=array([-1.13710528e-06]), square_terms=array([[7.70424015e-10]]), scale=0.00010883393675491193, shift=array([8.57542338])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=35, candidate_x=array([8.57553221]), index=32, x=array([8.57542338]), fval=1.0503225935368603, rho=-0.8498109018260992, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([28, 31, 32, 33, 34]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57542338]), radius=5.4416968377455964e-05, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([28, 31, 32, 34, 35]), model=ScalarModel(intercept=1.050324827278619, linear_terms=array([-2.09267617e-07]), square_terms=array([[1.95097092e-10]]), scale=5.4416968377455964e-05, shift=array([8.57542338])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=36, candidate_x=array([8.5754778]), index=32, x=array([8.57542338]), fval=1.0503225935368603, rho=-1.964662911410293, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([28, 31, 32, 34, 35]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57542338]), radius=2.7208484188727982e-05, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([32, 35, 36]), model=ScalarModel(intercept=1.0503225695523768, linear_terms=array([2.41402991e-07]), square_terms=array([[4.81268229e-11]]), scale=2.7208484188727982e-05, shift=array([8.57542338])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=37, candidate_x=array([8.57539617]), index=32, x=array([8.57542338]), fval=1.0503225935368603, rho=-0.23765148657536256, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([32, 35, 36]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57542338]), radius=1.3604242094363991e-05, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([32, 36, 37]), model=ScalarModel(intercept=1.0503227061507805, linear_terms=array([6.51750649e-08]), square_terms=array([[1.2083168e-11]]), scale=1.3604242094363991e-05, shift=array([8.57542338])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=38, candidate_x=array([8.57540977]), index=32, x=array([8.57542338]), fval=1.0503225935368603, rho=-0.43657050882697773, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([32, 36, 37]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1), State(trustregion=Region(center=array([8.57542338]), radius=6.8021210471819955e-06, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=array([32, 37, 38]), model=ScalarModel(intercept=1.0503225934618552, linear_terms=array([-1.4334875e-08]), square_terms=array([[3.07013922e-12]]), scale=6.8021210471819955e-06, shift=array([8.57542338])), vector_model=VectorModel(intercepts=array([ 0.050142  ,  0.13145564,  0.15446638,  0.18843816,  0.20081067,
+        0.19441908,  0.17719641, -0.01948323, -0.20494978, -0.22079427,
+       -0.56944989, -0.56481727, -0.2056969 , -0.1572675 , -0.13819008,
+       -0.14073303, -0.15264528]), linear_terms=array([[0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.],
+       [0.]]), square_terms=array([[[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]],
+
+       [[0.]]]), scale=0.8915676098962385, shift=array([8.9156761])), candidate_index=39, candidate_x=array([8.57543018]), index=39, x=array([8.57543018]), fval=1.0503225793151993, rho=0.9922084378201168, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([32, 37, 38]), old_indices_discarded=array([], dtype=int32), step_length=6.8021210477553495e-06, relative_step_length=1.0000000000842906, n_evals_per_point=1, n_evals_acceptance=1)]}"
+logger,

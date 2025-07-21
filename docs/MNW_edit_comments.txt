@@ -1,0 +1,33 @@
+CODE / MODEL QUESTIONS:
+
+- what interest parameters do we want to use, and why? 2.5 or 3% EqPrem
+- why not match risky asset shares for entire lifecycle? it's about wealth drawdown
+- where in the code is the expenditure shocks in retirement? it was missing
+- why doesn't the code hold the retirement moments constant at 10? throw it out
+- do we actually want to hold wealth ratio constant at 10? no
+- do we want to condition SCF on college? yes
+- do we want to use subjective beliefs? sort of
+- do we want age-varying beta adjusters? no
+- where did PermGroFac = 0.9389 come from? it's from CGM, use 15% instead
+- weighting is normally *outside* of the square, but fine
+
+
+C: CGM income, 2.5% EqPrem
+D: Cagetti income w/ 15% drop, 2.5% EqPrem
+E: Cagetti income w/ 15% drop, 3.0% EqPrem
+F: CGM income, 3.0% EqPrem
+X: CGM income, 2.5% EqPrem, DiscFac
+Y: Cagetti income, 2.5% EqPrem, DiscFac
+Z: Cagetti income w/ 15% drop, 2.5% EqPrem, SabelhausSong
+Q: Cagetti income w/ 15% drop, 2.5% EqPrem, income risk in "retirement"
+R: Cagetti income w/ 15% drop, 2.5% EqPrem, income risk in "retirement", SabelhausSong
+S: Cagetti income w/ 15% drop, 2.5% EqPrem, 1% risk free rate
+T: Cagetti income w/ 15% drop, 3.0% EqPrem, 1% risk free rate, SabelhausSong
+U: CGM income, 3.0% EqPrem, 1% risk free rate, SabelhausSong
+V: Cagetti income w/ 15% drop, 3.0% EqPrem, 1% risk free rate, SabelhausSong, trans retired shocks
+W: Cagetti income w/ 15% drop, 3.0% EqPrem, 1% risk free rate
+
+
+
+
+

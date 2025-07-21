@@ -42,6 +42,7 @@ from estimark.parameters import (
     init_params_options,
     init_subjective_labor,
     init_subjective_stock,
+    true_stock_params,
     minimize_options,
     sim_mapping,
 )
@@ -64,6 +65,38 @@ agent_types = {
 
 
 def make_agent(agent_name):
+    """
+    Construct an instance of an AgentType subclass that can be used in the structural
+    estimation. The specific class used, as well as some of the exogenously calibrated
+    parameters, depend on whether certain strings appear in the input to the function:
+    
+    NAME --> AgentType subclass
+    "IndShock" --> IndShkLifeCycleConsumerType
+    "Portfolio" --> PortfolioLifeCycleConsumerType
+    "WarmGlow" --> BequestWarmGlowLifeCycleConsumerType
+    "WarmGlowPortfolio" --> BequestWarmGlowLifeCyclePortfolioType
+    "WealthPortfolio" --> WealthPortfolioLifeCycleConsumerType
+    
+    If (Stock) appears in agent_name, then the agent will solve its problem using
+    parameters estimated from subjective beliefs about stock return (but simulate
+    using values from empirical observations).
+    
+    If (Labor) appears in agent_name, then the agent will solve its problem using
+    parameters estimated from subjective beliefs about labor income risk (but sim-
+    ulate using values from empirical observations).
+    
+    Parameters
+    ----------
+    agent_name : str
+        Name of the agent specification, which determines details of its type
+        and exogenous parameters.
+        
+    Returns
+    -------
+    agent : AgentType
+        Instance of some AgentType subclass, which can be used in the estimation.
+        It will have default parameters until set otherwise.
+    """
     for key, value in agent_types.items():
         if key in agent_name:
             agent_type = value
@@ -76,22 +109,15 @@ def make_agent(agent_name):
         if "(Labor)" in agent_name:
             calibration.update(init_subjective_labor)
 
-    # Make a lifecycle consumer to be used for estimation, including simulated
-    # shocks (plus an initial distribution of wealth)
-    # Make a TempConsumerType for estimation
+    # Make a lifecycle consumer to be used for estimation
     agent = agent_type(**calibration)
-    # Set the number of periods to simulate
-    agent.T_sim = agent.T_cycle + 1
-    # Choose to track bank balances as wealth
+    agent.name = agent_name
+    
+    # Choose to track bank balances as wealth, and track risky asset share if needed
     track_vars = ["bNrm"]
     if "Portfolio" in agent_name:
         track_vars += ["Share"]
     agent.track_vars = track_vars
-    if "WarmGlow" in agent_name:
-        agent.BeqMPC = 1.0  # dummy value
-        agent.BeqInt = 1.0
-
-    agent.name = agent_name
 
     return agent
 
@@ -112,20 +138,49 @@ def winsored_mean(values, weights, limits):
 
 def get_weighted_moments(
     data,
-    variable=None,
+    variable,
     weights=None,
     groups=None,
     mapping=None,
 ):
+    """
+    Make a dictionary that maps from moment names to moments used in the SMM
+    objective function, generating medians of some variable conditional on
+    being within particular values for some data grouping.
+    
+    Parameters
+    ----------
+    data : dict ?
+        The dataset from which the moments are being extracted, with variable
+        names as keys and an array of data as values.
+    variable : str
+        Name of the variable for which conditional medians will be calculated.
+    weights : str or None
+        Name of the weighting variable in the dataset, if any.
+    groups : str or None
+        Name of the variable to condition the medians on.
+    mapping : iterable or None
+        List or dictionary of values that the variable named in groups can have.
+        
+    Returns
+    -------
+    emp_moments : dict
+        Dictionary mapping from keys of mapping input to conditional medians.
+    weight_sum : dict
+        Dictionary mapping from keys of mapping input to total weight of group.
+    """
     # Common variables that don't depend on whether weights are None or not
     data_variable = data[variable]
     data_groups = data[groups]
     data_weights = data[weights] if weights else None
 
     emp_moments = {}
+    weight_sum = {}
     for key in mapping:
         group_data = data_variable[data_groups == key]
         group_weights = data_weights[data_groups == key] if weights else None
+        W = np.sum(group_weights)
+        weight_sum[key] = W
 
         # Check if the group has any data
         if not group_data.empty:
@@ -138,11 +193,12 @@ def get_weighted_moments(
                 )
         # else:
         #     print(f"Warning: Group {key} does not have any data.")
-
-    return emp_moments
+    
+    return emp_moments, weight_sum
 
 
 def get_moments_cov(agent_name, emp_moments):
+    #TODO: WRITE DOCSTRING
     moments_cov = em.get_moments_cov(
         scf_data,
         get_weighted_moments,
@@ -176,18 +232,36 @@ def get_moments_cov(agent_name, emp_moments):
 
 
 def get_empirical_moments(agent_name):
-    emp_moments = get_weighted_moments(
+    """
+    Construct a dictionary of empirical moments for this specification. This
+    always includes age-conditional median wealth values, and also includes
+    risky portfolio shares if the specification name includes "Portfolio".
+    
+    Parameters
+    ----------
+    agent_name : str
+        Name of the current specification.
+        
+    Returns
+    -------
+    emp_moments : dict
+        Dictionary with median wealth (and risky asset shares) empirical moments.
+    weight_sum : dict
+        Dictionary with median wealth (and risky asset shares) total empirical
+        weights from the dataset.
+    """
+    emp_moments, weight_sum = get_weighted_moments(
         data=scf_data,
         variable="wealth_income_ratio",
         weights="weight",
         groups="age_group",
         mapping=age_mapping,
     )
+    emp_moments = {key: float(emp_moments[key]) for key in emp_moments}
 
     # Add share moments if agent is a portfolio type
-
     if "Portfolio" in agent_name:
-        share_moments = get_weighted_moments(
+        share_moments, share_weight_sum = get_weighted_moments(
             data=snp_data,
             variable="share",
             groups="age_group",
@@ -197,11 +271,34 @@ def get_empirical_moments(agent_name):
         suffix = "_port"
         for key, value in share_moments.items():
             emp_moments[key + suffix] = value
+        for key, value in share_weight_sum.items():
+            weight_sum[key + suffix] = value
 
-    return emp_moments
+    return emp_moments, weight_sum
 
 
 def get_initial_guess(agent, params_to_estimate, save_dir):
+    """
+    Generate an initial guess of the parameters to be estimated by looking for
+    prior estimates of the same specification, or defaulting to values specified
+    in the parameters file.
+    
+    Parameters
+    ----------
+    agent : AgentType
+        Instance of some AgentType subclass that will be used in the estimation.
+        Used to verify that the parameters to be estimated actually exist.
+    params_to_estimate : [str]
+        List of strings naming variables to be estimated.
+    save_dir : str
+        Directory where estimation output will be stored, and maybe has already
+        been stored. Used to check whether this specification has already been run.
+        
+    Returns
+    -------
+    initial_guess : dict
+        Mapping from parameter names to initial guess values.
+    """
     agent_name = agent.name
 
     agent_params = []
@@ -228,28 +325,39 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     return initial_guess
 
 
-# Define the objective function for the simulated method of moments estimation
-def simulate_moments(params, agent=None, emp_moments=None):
-    """A quick check to make sure that the parameter values are within bounds.
-    Far flung falues of DiscFac or CRRA might cause an error during solution or
-    simulation, so the objective function doesn't even bother with them.
+# Define the function that generates simulated moments
+def simulate_moments(params, agent, emp_moments):
     """
-    # Update the agent with a new path of DiscFac based on this DiscFac (and a new CRRA)
+    Generate simulated moments by solving and simulating the agents at the given
+    parameters. Returns a dictionary that corresponds to the empirical moments.
 
+    Parameters
+    ----------
+    params : dict
+        Mapping from parameters to be estimated to parameter values.
+    agent : AgentType
+        Instance of some AgentType subclass, representing the model to be solved
+        and simulated to generate moments.
+    emp_moments : dict
+        Mapping from moment names to empirical moments. Used for ????
+
+    Returns
+    -------
+    sim_moments : dict
+        Dictionary that maps from moment names to simulated moments.
+    """
+    
+    # Update the agent with new parameters
     agent.assign_parameters(**params)
-
     if hasattr(agent, "BeqCRRA"):
         agent.BeqCRRA = agent.CRRA
 
     # ensure subjective beliefs are used for solution
     if "(Stock)" in agent.name and "Portfolio" in agent.name:
-        agent.RiskyAvg = init_subjective_stock["RiskyAvg"]
-        agent.RiskyStd = init_subjective_stock["RiskyStd"]
-        agent.Rfree = init_subjective_stock["Rfree"]
+        agent.assign_parameters(**init_subjective_stock)
         agent.update_RiskyDstn()
     if "(Labor)" in agent.name:
-        agent.TranShkStd = init_subjective_labor["TranShkStd"]
-        agent.PermShkStd = init_subjective_labor["PermShkStd"]
+        agent.assign_parameters(**init_subjective_labor)
         agent.update_income_process()
 
     # Update parameters on the agent / construct them
@@ -263,9 +371,7 @@ def simulate_moments(params, agent=None, emp_moments=None):
 
     # simulate with true parameters (override subjective beliefs)
     if "(Stock)" in agent.name and "Portfolio" in agent.name:
-        agent.RiskyAvg = init_subjective_stock["RiskyAvgTrue"]
-        agent.RiskyStd = init_subjective_stock["RiskyStdTrue"]
-        agent.Rfree = init_subjective_stock["Rfree"]
+        agent.assign_parameters(**true_stock_params)
         agent.update_RiskyDstn()
     # for labor keep same process as subjective beliefs
     if "(Labor)" in agent.name:
@@ -278,13 +384,11 @@ def simulate_moments(params, agent=None, emp_moments=None):
     max_sim_age = agent.T_cycle + 1
     # Initialize the simulation by clearing histories, resetting initial values
     agent.initialize_sim()
-    # agent.make_shock_history()
     agent.simulate(max_sim_age)  # Simulate histories of consumption and wealth
     # Take "wealth" to mean bank balances before receiving labor income
     sim_w_history = agent.history["bNrm"]
 
     # Find the distance between empirical data and simulated medians for each age group
-
     sim_moments = {
         key: np.median(sim_w_history[cohort_idx])
         for key, cohort_idx in sim_mapping.items()
@@ -303,19 +407,38 @@ def simulate_moments(params, agent=None, emp_moments=None):
     return sim_moments
 
 
-def calculate_weights(emp_moments):
-    n_port_stats = sum(1 for k in emp_moments if "_port" in k)
-    max_w_stat = max(emp_moments.values())
+def calculate_weights(emp_moments, weight_sum):
+    """
+    Generate a dictionary of all moment weights, loading both median wealth-to-
+    income ratios and risky asset shares into a single object.
+    
+    Parameters
+    ----------
+    emp_moments : dict
+        Mapping from moment names to empirical moments. Used to make the keys
+        for the weighting dictionary.
+    weight_sum: dict
+        Mapping from moment names to total empirical weight from the dataset.
+        This *can* be used to make weights using a different scheme.
+        
+    Returns
+    -------
+    weights : dict
+        Mapping from moment names to weights.
+    
+    """
+    n_port_stats = np.sum([1 for k in emp_moments if "_port" in k])
+    n_wealth_stats = len(emp_moments) - n_port_stats
+    max_w_stat = float(max(emp_moments.values()))
+    W_total = np.sum([np.sqrt(weight_sum[k]) for k in weight_sum if not "_port" in k])
+    W_avg = W_total / n_wealth_stats
 
-    port_fac = (
-        (len(emp_moments) - n_port_stats) / n_port_stats if n_port_stats != 0 else 1.0
-    )
-
-    port_fac = 1.0
+    port_fac = np.sqrt(n_wealth_stats / n_port_stats) if n_port_stats != 0 else 1.0
+    #port_fac = 1.0
 
     # Using dictionary comprehension to create weights
     weights = {
-        k: (1 / max_w_stat if "_port" not in k else port_fac)
+        k: ((np.sqrt(weight_sum[k])/W_avg)**0. / max_w_stat if "_port" not in k else port_fac)
         for k, v in emp_moments.items()
     }
 
@@ -337,37 +460,11 @@ def msm_criterion(params, agent=None, emp_moments=None, weights=None):
 
     Parameters
     ----------
-    DiscFac : float
-        An adjustment factor to a given age-varying sequence of discount factors.
-        I.e. DiscFac[t] = DiscFac*timevary_DiscFac[t].
-    CRRA : float
-        Coefficient of relative risk aversion.
-    agent : ConsumerType
-        The consumer type to be used in the estimation, with all necessary para-
-        meters defined except the discount factor and CRRA.
-    bounds_DiscFac : (float,float)
-        Lower and upper bounds on DiscFac; if outside these bounds, the function
-        simply returns a "penalty value".
-    bounds_DiscFac : (float,float)
-        Lower and upper bounds on CRRA; if outside these bounds, the function
-        simply returns a "penalty value".
-    empirical_data : np.array
-        Array of wealth-to-permanent-income ratios in the data.
-    empirical_weights : np.array
-        Weights for each observation in empirical_data.
-    empirical_groups : np.array
-        Array of integers listing the age group for each observation in empirical_data.
-    mapping : [np.array]
-        List of arrays of "simulation ages" for each age grouping.  E.g. if the
-        0th element is [1,2,3,4,5], then these time indices from the simulation
-        correspond to the 0th empirical age group.
+    NEED TO WRITE CORRECT INPUTS
 
     Returns
     -------
-    distance_sum : float
-        Sum of distances between empirical data observations and the corresponding
-        median wealth-to-permanent-income ratio in the simulation.
-
+    NEED TO WRITE CORRECT OUTPUTS
     """
     emp_moments = emp_moments.copy()
     sim_moments = simulate_moments(params, agent, emp_moments)
@@ -399,27 +496,7 @@ def calculate_se_bootstrap(
     seed=0,
     verbose=False,
 ):
-    """Calculates standard errors by repeatedly re-estimating the model with datasets
-    resampled from the actual data.
-
-    Parameters
-    ----------
-    initial_estimate : [float,float]
-        The estimated [DiscFac,CRRA], for use as an initial guess for each
-        re-estimation in the bootstrap procedure.
-    N : int
-        Number of times to resample data and re-estimate the model.
-    seed : int
-        Seed for the random number generator.
-    verbose : boolean
-        Indicator for whether extra output should be printed for the user.
-
-    Returns
-    -------
-    standard_errors : [float,float]
-        Standard errors calculated by bootstrap: [DiscFac_std_error, CRRA_std_error].
-
-    """
+    #TODO: WRITE DOCSTRING
     t_0 = time()
 
     # Generate a list of seeds for generating bootstrap samples
@@ -435,7 +512,7 @@ def calculate_se_bootstrap(
         bootstrap_data = get_bootstrap_samples(data=scf_data, rng=RNG)
 
         # Find moments with bootstrapped sample
-        bootstrap_moments = get_weighted_moments(
+        bootstrap_moments, trash = get_weighted_moments(
             data=bootstrap_data,
             variable="wealth_income_ratio",
             weights="weight",
@@ -471,6 +548,8 @@ def calculate_se_bootstrap(
 # Done defining objects and functions.  Now run them (if desired).
 # =================================================================
 
+# TODO: What?! ^^ Is this in the wrong place?
+
 
 def do_estimate_model(
     agent,
@@ -482,6 +561,8 @@ def do_estimate_model(
     criterion_kwargs=None,
     save_dir=None,
 ):
+    #TODO: WRITE DOCSTRING
+    
     fmt_init_guess = [f"{key} = {value:.3f}" for key, value in initial_guess.items()]
     multistart_text = " with multistart" if minimize_options.get("multistart") else ""
     statement1 = f"Estimating model using {minimize_options['algorithm']}{multistart_text} from an initial guess of"
@@ -581,6 +662,8 @@ def do_compute_se_boostrap(
     seed=0,
     save_dir=None,
 ):
+    #TODO: WRITE DOCSTRING
+    
     # Estimate the model:
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print(
@@ -628,6 +711,8 @@ def do_compute_se_boostrap(
 
 
 def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
+    #TODO: WRITE DOCSTRING
+    
     print("``````````````````````````````````````````````````````````````````````")
     print("Computing sensitivity measure.")
     print("``````````````````````````````````````````````````````````````````````")
@@ -674,6 +759,8 @@ def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
 
 
 def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
+    #TODO: WRITE DOCSTRING
+    
     print("``````````````````````````````````````````````````````````````````````")
     print("Creating the contour plot.")
     print("``````````````````````````````````````````````````````````````````````")
@@ -726,6 +813,8 @@ def estimate_msm(
     simulate_moments_kwargs=None,
     estimagic_options=None,
 ):
+    #TODO: WRITE DOCSTRING
+    
     t0 = time()
 
     simulate_moments_kwargs = simulate_moments_kwargs or {}
@@ -756,6 +845,8 @@ def estimate_min(
     criterion_kwargs=None,
     estimagic_options=None,
 ):
+    #TODO: WRITE DOCSTRING
+    
     t0 = time()
 
     criterion_kwargs = criterion_kwargs or {}
@@ -791,19 +882,11 @@ def estimate(
 
     Parameters
     ----------
-    estimate_model : bool
-        Whether to estimate the model using Nelder-Mead. When True, this is a low-time, low-memory operation.
-
-    compute_standard_errors : bool
-        Whether to compute standard errors on the estiamtion of the model.
-
-    make_contour_plot : bool
-        Whether to make the contour plot associate with the estiamte.
+    NEED TO MAKE CORRECT INPUTS
 
     Returns
     -------
     None
-
     """
     save_dir = Path(save_dir).resolve() if save_dir is not None else Path.cwd()
     save_dir.mkdir(parents=True, exist_ok=True)
@@ -825,11 +908,11 @@ def estimate(
     ############################################################
 
     if emp_moments is None:
-        emp_moments = get_empirical_moments(agent_name)
+        emp_moments, weight_sum = get_empirical_moments(agent_name)
 
         print("Calculated empirical moments.")
 
-    weights = calculate_weights(emp_moments)
+    weights = calculate_weights(emp_moments, weight_sum)
 
     ############################################################
     # Get moments covariance matrix
@@ -883,13 +966,111 @@ def estimate(
             emp_moments,
             save_dir=save_dir,
         )
+        
+
+def prepare_model(agent_name, params_to_estimate):
+    """
+    Generate objects that can be used to estimate and explore the requested model.
+
+    Parameters
+    ----------
+    agent_name : str
+        Name of the specification that will be run, which is used to determine
+        which subclass of agents to use.
+    params_to_estimate : [str]
+        List of parameter names that will be used in the estimation.
+
+    Returns
+    -------
+    estimation_agents : AgentType
+        Instance of some AgentType subclass that will be used in the estimation.
+    empirical_moments : dict
+        Dictionary of keys naming moments and their empirical values.
+    moment_weights : dict
+        Dictionary of keys naming moments and their weights.
+    objective_function : Callable
+        Function that takes a single array of parameter values as an argument,
+        ordered as the names in params_to_estimate, and returns the value of the
+        MSM criterion at those parameters.
+    sim_moment_function: Callable
+        Function that takes a single array of parameter values as an argument,
+        ordered as the names in params_to_estimate, and returns a dictionary of
+        simulated moments at those parameters.
+    plot_moment_function: Callable
+        Function that takes a single array of parameter values as an argument,
+        ordered as the names in params_to_estimate, and makes two plots of the
+        simulated vs empirical moment fit.
+    """
+    # Make basic objects using previously defined functions
+    estimation_agents = make_agent(agent_name)
+    empirical_moments, weight_sum = get_empirical_moments(agent_name)
+    moment_weights = calculate_weights(empirical_moments, weight_sum)
+    
+    # Make a local function that can return the objective function value or the
+    # dictionary of simulated moments, or plot the moment fit
+    def temp_func(param_vec, return_moments=False, plot_moments=False):
+        params = {params_to_estimate[j] : param_vec[j] for j in range(len(params_to_estimate))}
+        emp_moments = empirical_moments.copy()
+        sim_moments = simulate_moments(params, estimation_agents, emp_moments)
+        
+        if plot_moments:
+            wealth_keys = [key for key in sim_moments if not "_port" in key]
+            port_keys = [key for key in sim_moments if "_port" in key]
+            wealth_emp = np.array([emp_moments[k] for k in wealth_keys])
+            wealth_sim = np.array([sim_moments[k] for k in wealth_keys])
+            port_emp = np.array([emp_moments[k] for k in port_keys])
+            port_sim = np.array([sim_moments[k] for k in port_keys])
+            wealth_labels = [x[1:3] for x in wealth_keys]
+            port_labels = [x[1:3] for x in port_keys]
+            
+            plt.plot(wealth_emp, '.k', ms=10)
+            plt.plot(wealth_sim, '-b')
+            plt.xticks(np.arange(wealth_emp.size), labels=wealth_labels)
+            plt.xlabel('Age group')
+            plt.ylabel('Wealth/income ratio')
+            plt.tight_layout()
+            plt.ylim(0.,14.)
+            plt.show()
+            
+            plt.plot(port_emp, '.k', ms=10)
+            plt.plot(port_sim, '-r')
+            plt.xticks(np.arange(port_emp.size), labels=port_labels)
+            plt.xlabel('Age group')
+            plt.ylabel('Risky asset share')
+            plt.ylim(0.,1.)
+            plt.tight_layout()
+            plt.show()
+            
+            return
+            
+        if return_moments:
+            return sim_moments
+
+        errors = np.array(
+            [
+                float(moment_weights[key] * (sim_moments[key] - empirical_moments[key]))
+                for key in empirical_moments
+            ],
+        )
+        sse = np.sum(errors**2)
+        return sse
+    
+    # Make two versions of that temporary function: one for the objective function
+    # and the other that just produces moments
+    objective_function = lambda x : temp_func(x, False, False)
+    sim_moment_function = lambda x : temp_func(x, True, False)
+    plot_moment_function = lambda x : temp_func(x, False, True)
+    
+    # Return all of the useful things
+    return estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function
+
 
 
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
-    local_agent_name = "WarmGlowPortfolio"
-    local_params_to_estimate = ["CRRA", "BeqMPC", "BeqInt"]
+    local_agent_name = "WealthPortfolioW(Stock)"
+    local_params_to_estimate = ["CRRA","WealthShare"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
     local_compute_se_bootstrap = False
@@ -898,6 +1079,8 @@ if __name__ == "__main__":
     # Whether to make a contour map of the objective function
     local_make_contour_plot = False
     local_save_dir = "docs/tables/min"
+    
+    estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
 
     estimate(
         agent_name=local_agent_name,
@@ -908,3 +1091,4 @@ if __name__ == "__main__":
         make_contour_plot=local_make_contour_plot,
         save_dir=local_save_dir,
     )
+    
