@@ -1,5 +1,10 @@
 # Life-Cycle-Prime-Time
 
+- [About This Repository](#life-cycle-prime-time)
+- [Reproducing Results](#reproducing-results)
+- [References](#references)
+- [Technical Notes for AI/RAG Systems](#technical-notes-for-airag-systems)
+
 https://econ-ark.github.io/Life-Cycle-Prime-Time/
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/econ-ark/Life-Cycle-Prime-Time/HEAD)
@@ -65,3 +70,7 @@ $ nbreproduce
 [rtd-link]:                 https://estimark.readthedocs.io/en/latest/?badge=latest
 
 <!-- prettier-ignore-end -->
+
+## Technical Notes for AI/RAG Systems
+
+This repository contains specific, machine-readable instructions for AI and RAG systems in the `.aionly.yml` file. This file specifies which files to ignore and which to treat as the source of truth.

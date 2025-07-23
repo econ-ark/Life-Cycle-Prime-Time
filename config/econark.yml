@@ -1,0 +1,36 @@
+project:
+  math:
+    \Alive: \mathcal{L
+    \CRRA: \rho
+    \DiscFac: \beta
+    \Ex: \mathbb{E
+    \RNrm: \mathcal{R
+    \Rfree: \mathsf{R
+    \Risky: \mathbf{R
+    \Rport: \mathcal{R
+    \aLvl: \mathbf{a
+    \aNrm: a
+    \bLvl: \mathbf{b
+    \bqstNrm: e
+    \cFunc: \mathrm{c
+    \cLvl: \mathbf{c
+    \cNrm: c
+    \eprem: \varphi
+    \h: h
+    \headeright: ''
+    \lqdt: \ell
+    \mLvl: \mathbf{m
+    \mNrm: m
+    \pLvl: \mathbf{p
+    \pZero: \wp
+    \permGroFac: \Gamma
+    \permShk: \psi
+    \rfree: \mathsf{r
+    \risky: \mathbf{r
+    \shorttitle: ''
+    \tranShk: \theta
+    \tranShkEmp: \xi
+    \uFunc: \mathrm{u
+    \undertitle: ''
+    \vFunc: \mathrm{v
+    \yLvl: \mathbf{y

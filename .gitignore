@@ -495,3 +495,5 @@ Thumbs.db
 
 # MyST build outputs
 _build
+
+prompts_local/
