@@ -402,7 +402,7 @@ wheels = [
 
 [[package]]
 name = "estimark"
-version = "0.1.dev103+g18ecc48.d20250724"
+version = "0.1.dev104+g774584e.d20250724"
 source = { editable = "." }
 dependencies = [
     { name = "econ-ark" },
@@ -412,7 +412,7 @@ dependencies = [
     { name = "tranquilo" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -435,18 +435,26 @@ test = [
 requires-dist = [
     { name = "econ-ark", git = "https://github.com/econ-ark/HARK?rev=master" },
     { name = "estimagic", specifier = "==0.4.7" },
-    { name = "furo", marker = "extra == 'docs'", specifier = ">=2023.8.17" },
-    { name = "myst-parser", marker = "extra == 'docs'", specifier = ">=0.13" },
     { name = "openpyxl", specifier = ">=3.1.5" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=6" },
-    { name = "pytest", marker = "extra == 'test'", specifier = ">=6" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=3" },
-    { name = "pytest-cov", marker = "extra == 'test'", specifier = ">=3" },
-    { name = "sphinx", marker = "extra == 'docs'", specifier = ">=7.0" },
-    { name = "sphinx-autodoc-typehints", marker = "extra == 'docs'" },
-    { name = "sphinx-copybutton", marker = "extra == 'docs'" },
     { name = "statsmodels", specifier = ">=0.14.5" },
     { name = "tranquilo", specifier = ">=0.0.5" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=6" },
+    { name = "pytest-cov", specifier = ">=3" },
+]
+docs = [
+    { name = "furo", specifier = ">=2023.8.17" },
+    { name = "myst-parser", specifier = ">=0.13" },
+    { name = "sphinx", specifier = ">=7.0" },
+    { name = "sphinx-autodoc-typehints" },
+    { name = "sphinx-copybutton" },
+]
+test = [
+    { name = "pytest", specifier = ">=6" },
+    { name = "pytest-cov", specifier = ">=3" },
 ]
 
 [[package]]
