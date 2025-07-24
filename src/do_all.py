@@ -47,6 +47,8 @@ still run.
 
 from __future__ import annotations
 
+import logging
+
 from estimark.estimation import estimate
 from estimark.options import (
     all_replications,
@@ -55,9 +57,12 @@ from estimark.options import (
     medium_resource,
 )
 
+# Configure logging to show INFO level messages
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
 
 # Ask the user which replication to run, and run it:
-def run_replication():
+def run_replication() -> None:
     which_model = input(
         """Which model would you like to run?
 
@@ -100,7 +105,7 @@ def run_replication():
 
     replication_specs = {}
 
-    if which_model == "1" or which_model == "":
+    if which_model in {"1", ""}:
         agent_name = "IndShock"
     elif which_model == "2":
         agent_name = "Portfolio"
@@ -111,30 +116,30 @@ def run_replication():
     elif which_model == "5":
         agent_name = "WealthPortfolio"
     else:
-        print("Invalid model choice.")
+        logging.error("Invalid model choice.")
         return
 
     if which_replication == "q":
         return
 
-    if which_replication == "1" or which_replication == "":
-        print("Running low-resource replication...")
+    if which_replication in {"1", ""}:
+        logging.info("Running low-resource replication...")
         replication_specs.update(**low_resource)
 
     elif which_replication == "2":
-        print("Running medium-resource replication...")
+        logging.info("Running medium-resource replication...")
         replication_specs.update(**medium_resource)
 
     elif which_replication == "3":
-        print("Running high-resource replication...")
+        logging.info("Running high-resource replication...")
         replication_specs.update(**high_resource)
 
     elif which_replication == "4":
-        print("Running all replications...")
+        logging.info("Running all replications...")
         replication_specs.update(**all_replications)
 
     else:
-        print("Invalid replication choice.")
+        logging.error("Invalid replication choice.")
         return
 
     if subjective_markets == "":
@@ -142,13 +147,13 @@ def run_replication():
     if int(subjective_markets) > 1:
         agent_name += "Sub"
 
-        if subjective_markets == "2" or subjective_markets == "4":
+        if subjective_markets in {"2", "4"}:
             agent_name += "(Stock)"
-            print("Adding subjective stock market beliefs...")
+            logging.info("Adding subjective stock market beliefs...")
 
-        if subjective_markets == "3" or subjective_markets == "4":
+        if subjective_markets in {"3", "4"}:
             agent_name += "(Labor)"
-            print("Adding subjective labor market beliefs...")
+            logging.info("Adding subjective labor market beliefs...")
 
         agent_name += "Market"
 

@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 import itertools
+import logging
 
 import dask
 from dask.distributed import Client
 
 from estimark.estimation import estimate, get_empirical_moments, get_moments_cov
 from estimark.options import low_resource
+
+# Configure logging to show INFO level messages
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 agent_names = [
     "IndShock",
@@ -17,7 +21,7 @@ agent_names = [
 ]
 
 
-def run_replication():
+def run_replication() -> None:
     inds_emp_moments = get_empirical_moments("IndShock")
     port_emp_moments = get_empirical_moments("Porfolio")
 
@@ -43,7 +47,7 @@ def run_replication():
             replication_specs["agent_name"] = temp_agent_name
             replication_specs["save_dir"] = "docs/tables/msm"
 
-            print("Model: ", replication_specs["agent_name"])
+            logging.info("Model: %s", replication_specs["agent_name"])
 
             if "Portfolio" in replication_specs["agent_name"]:
                 replication_specs["emp_moments"] = port_emp_moments

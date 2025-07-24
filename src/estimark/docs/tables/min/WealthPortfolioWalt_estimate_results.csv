@@ -1,27 +1,51 @@
-CRRA,5.258899711503213
-WealthShare,0.2713822653091562
-WealthShift,0.5166863828052352
-time_to_estimate,557.2201266288757
-params,"{'CRRA': 5.258899711503213, 'WealthShare': 0.2713822653091562, 'WealthShift': 0.5166863828052352}"
-fun,0.3012611188046735
-start_fun,7.026003976077511
-start_params,"{'CRRA': 2.0, 'WealthShare': 0.05, 'WealthShift': 0.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,3
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,
+CRRA,5.258899711503213
+
+WealthShare,0.2713822653091562
+
+WealthShift,0.5166863828052352
+
+time_to_estimate,557.2201266288757
+
+params,"{'CRRA': 5.258899711503213, 'WealthShare': 0.2713822653091562, 'WealthShift': 0.5166863828052352}"
+
+fun,0.3012611188046735
+
+start_fun,7.026003976077511
+
+start_params,"{'CRRA': 2.0, 'WealthShare': 0.05, 'WealthShift': 0.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,3
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 8.302069532681392, 'WealthShare': 0.2789925308663859, 'WealthShift': 7.443213674867099}, {'CRRA': 5.960015286127916, 'WealthShare': 0.2596614331206987, 'WealthShift': 8.454465306380662}, {'CRRA': 6.258831423959878, 'WealthShare': 0.359279301035921, 'WealthShift': 14.32080287929081}, {'CRRA': 8.548593253220181, 'WealthShare': 0.13920954213494327, 'WealthShift': 3.134806272685772}], local_optima=[Minimize with 3 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 3 free parameters terminated.
@@ -104,7 +128,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
        101.63979387, 112.534428  , 117.6932291 , 120.11168771,
        120.76754264, 126.05014659, 128.09717026, 130.55616043,
        136.80882235, 139.16366976, 144.64708696, 148.09073801,
-       150.50239102, 252.44232699, 286.93317571, 340.05068735]))"
+       150.50239102, 252.44232699, 286.93317571, 340.05068735]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([8.30206953, 0.27899253, 7.44321367]), radius=0.8302069532681392, bounds=Bounds(lower=array([1.1 , 0.01, 0.  ]), upper=array([ 20.  ,   0.99, 100.  ]))), model_indices=[0], model=ScalarModel(intercept=0.6814569478027438, linear_terms=array([0., 0., 0.]), square_terms=array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.]]), scale=0.8302069532681392, shift=array([8.30206953, 0.27899253, 7.44321367])), vector_model=VectorModel(intercepts=array([ 0.04802914,  0.13436091,  0.16856726,  0.2171221 ,  0.24874722,
@@ -4805,5 +4830,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([8.30206953,
 
        [[0., 0., 0.],
         [0., 0., 0.],
-        [0., 0., 0.]]]), scale=0.8302069532681392, shift=array([8.30206953, 0.27899253, 7.44321367])), candidate_index=89, candidate_x=array([5.25889971, 0.27138227, 0.51668638]), index=89, x=array([5.25889971, 0.27138227, 0.51668638]), fval=0.3012611188046735, rho=0.01449093757693785, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([63, 81, 82, 83, 84, 85, 86, 87, 88]), old_indices_discarded=array([], dtype=int32), step_length=0.00010433874525535208, relative_step_length=1.029554134384346, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0., 0.]]]), scale=0.8302069532681392, shift=array([8.30206953, 0.27899253, 7.44321367])), candidate_index=89, candidate_x=array([5.25889971, 0.27138227, 0.51668638]), index=89, x=array([5.25889971, 0.27138227, 0.51668638]), fval=0.3012611188046735, rho=0.01449093757693785, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([63, 81, 82, 83, 84, 85, 86, 87, 88]), old_indices_discarded=array([], dtype=int32), step_length=0.00010433874525535208, relative_step_length=1.029554134384346, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

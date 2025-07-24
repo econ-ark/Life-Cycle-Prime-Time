@@ -1,27 +1,51 @@
-CRRA,4.153683448950189
-BeqMPC,0.17599301315443508
-BeqInt,0.2770657816700526
-time_to_estimate,1643.1153905391693
-params,"{'CRRA': 4.153683448950189, 'BeqMPC': 0.17599301315443508, 'BeqInt': 0.2770657816700526}"
-fun,0.5286486659831265
-start_fun,5.326494835341329
-start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,3
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 2.797895286163862e-05, 'relative_params_change': 0.013090155848334931, 'absolute_criterion_change': 1.4791036105910038e-05, 'absolute_params_change': 0.0038454869246488162}, 'five_steps': {'relative_criterion_change': 0.00044245999945699777, 'relative_params_change': 0.05402021063134914, 'absolute_criterion_change': 0.00023390588846383675, 'absolute_params_change': 0.046898605699435415}}"
+CRRA,4.153683448950189
+
+BeqMPC,0.17599301315443508
+
+BeqInt,0.2770657816700526
+
+time_to_estimate,1643.1153905391693
+
+params,"{'CRRA': 4.153683448950189, 'BeqMPC': 0.17599301315443508, 'BeqInt': 0.2770657816700526}"
+
+fun,0.5286486659831265
+
+start_fun,5.326494835341329
+
+start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,3
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 2.797895286163862e-05, 'relative_params_change': 0.013090155848334931, 'absolute_criterion_change': 1.4791036105910038e-05, 'absolute_params_change': 0.0038454869246488162}, 'five_steps': {'relative_criterion_change': 0.00044245999945699777, 'relative_params_change': 0.05402021063134914, 'absolute_criterion_change': 0.00023390588846383675, 'absolute_params_change': 0.046898605699435415}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 3.7398295976632103, 'BeqMPC': 0.2202683965008571, 'BeqInt': 0.3025063788596283}, {'CRRA': 6.14974066886684, 'BeqMPC': 0.22743114196779476, 'BeqInt': 0.4338405568152664}, {'CRRA': 4.8117809841152255, 'BeqMPC': 0.13443332767179922, 'BeqInt': 0.8085854353816059}, {'CRRA': 5.986274892896871, 'BeqMPC': 0.18139461117252598, 'BeqInt': 0.1935545624413007}, {'CRRA': 5.829395610852298, 'BeqMPC': 0.23115254774741223, 'BeqInt': 0.935936343624417}, {'CRRA': 5.581424825062026, 'BeqMPC': 0.3176567573037098, 'BeqInt': 1.1453516382433437}, {'CRRA': 5.606604165914918, 'BeqMPC': 0.19675635754717902, 'BeqInt': 4.766743914332238}, {'CRRA': 5.490085715783871, 'BeqMPC': 0.3613702860501802, 'BeqInt': 4.208097242296132}, {'CRRA': 5.481280929944235, 'BeqMPC': 0.37091127993738215, 'BeqInt': 1.3911547466316372}, {'CRRA': 5.3974048538058135, 'BeqMPC': 0.5433437309598002, 'BeqInt': 3.3698431919217513}, {'CRRA': 5.178023806138308, 'BeqMPC': 0.41988250940342725, 'BeqInt': 3.3525792344767473}, {'CRRA': 5.253514675460991, 'BeqMPC': 0.2914286244400913, 'BeqInt': 2.794026954764711}, {'CRRA': 5.038723074609425, 'BeqMPC': 0.27926185067341425, 'BeqInt': 2.18244994071858}, {'CRRA': 5.11832903359772, 'BeqMPC': 0.2521292583479928, 'BeqInt': 2.8985813792561936}, {'CRRA': 5.051581121115406, 'BeqMPC': 0.421910297672101, 'BeqInt': 2.795597392799056}], local_optima=[Minimize with 3 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 3 free parameters terminated.
@@ -109,7 +133,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
         7.05561596,  7.07736304,  7.12642563,  7.13872057,  7.33131799,
         7.36284043,  7.37561549,  7.40548737,  7.51598664,  7.5171379 ,
         7.53689365,  7.54885793,  7.65886979,  7.68419789,  7.739101  ,
-        7.80537617,  7.86446955,  7.8706461 ,  7.94983149, 22.18704559]))"
+        7.80537617,  7.86446955,  7.8706461 ,  7.94983149, 22.18704559]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([5.05158112, 0.4219103 , 2.79559739]), radius=0.5051581121115406, bounds=Bounds(lower=array([1.1e+00, 1.0e-03, 0.0e+00]), upper=array([20.,  1., 10.]))), model_indices=[0], model=ScalarModel(intercept=1.4928992906847378, linear_terms=array([0., 0., 0.]), square_terms=array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.]]), scale=0.5051581121115406, shift=array([5.05158112, 0.4219103 , 2.79559739])), vector_model=VectorModel(intercepts=array([ 0.00339329,  0.0445486 ,  0.08053022,  0.16723451,  0.24199597,
@@ -7955,5 +7980,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([5.05158112,
 
        [[0., 0., 0.],
         [0., 0., 0.],
-        [0., 0., 0.]]]), scale=0.5051581121115406, shift=array([5.05158112, 0.4219103 , 2.79559739])), candidate_index=151, candidate_x=array([4.15368345, 0.17599301, 0.27706578]), index=151, x=array([4.15368345, 0.17599301, 0.27706578]), fval=0.5286486659831265, rho=0.08816132474744032, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([132, 137, 138, 139, 140, 141, 142, 144, 145, 146, 147, 150]), old_indices_discarded=array([143, 148, 149]), step_length=1.5416202151857905e-05, relative_step_length=1.0000000000010674, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0., 0.]]]), scale=0.5051581121115406, shift=array([5.05158112, 0.4219103 , 2.79559739])), candidate_index=151, candidate_x=array([4.15368345, 0.17599301, 0.27706578]), index=151, x=array([4.15368345, 0.17599301, 0.27706578]), fval=0.5286486659831265, rho=0.08816132474744032, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([132, 137, 138, 139, 140, 141, 142, 144, 145, 146, 147, 150]), old_indices_discarded=array([143, 148, 149]), step_length=1.5416202151857905e-05, relative_step_length=1.0000000000010674, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

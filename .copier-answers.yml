@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: 2024.08.19
+_commit: 2025.05.02-25-gc5e453d
 _src_path: gh:scientific-python/cookie
 backend: hatch
 email: alanlujan91@gmail.com
@@ -7,8 +7,7 @@ full_name: Alan Lujan
 license: MIT
 org: econ-ark
 project_name: estimark
-project_short_description:
-    Estimating Microeconomic Dynamic Stochastic Optimization
+project_short_description: Estimating Microeconomic Dynamic Stochastic Optimization
     Problems
 url: https://github.com/econ-ark/Life-Cycle-Prime-Time
 vcs: true

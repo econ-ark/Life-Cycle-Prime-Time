@@ -1,27 +1,51 @@
-CRRA,4.098996460811312
-BeqMPC,0.09737931457337938
-BeqInt,0.3570842628644089
-time_to_estimate,497.7446234226227
-params,"{'CRRA': 4.098996460811312, 'BeqMPC': 0.09737931457337938, 'BeqInt': 0.3570842628644089}"
-fun,0.06504855058686795
-start_fun,6.430000577553871
-start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,3
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,
+CRRA,4.098996460811312
+
+BeqMPC,0.09737931457337938
+
+BeqInt,0.3570842628644089
+
+time_to_estimate,497.7446234226227
+
+params,"{'CRRA': 4.098996460811312, 'BeqMPC': 0.09737931457337938, 'BeqInt': 0.3570842628644089}"
+
+fun,0.06504855058686795
+
+start_fun,6.430000577553871
+
+start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,3
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 3.4257834816942494, 'BeqMPC': 0.1503856957779156, 'BeqInt': 0.16182417422810347}, {'CRRA': 5.112334473712735, 'BeqMPC': 0.11939279457486432, 'BeqInt': 0.32549821741084156}], local_optima=[Minimize with 3 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 3 free parameters terminated.
@@ -85,7 +109,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
         6.89135981,  7.07922062,  7.1431628 ,  7.14753567,  7.15667147,
         7.24961543,  7.2915575 ,  7.31214981,  7.31734942,  7.32347104,
         7.34015345,  7.35891522,  7.41660103,  7.42813458,  7.45634814,
-        7.51709624,  7.62140241,  7.63120547,  7.67005277, 27.65265957]))"
+        7.51709624,  7.62140241,  7.63120547,  7.67005277, 27.65265957]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([3.42578348, 0.1503857 , 0.16182417]), radius=0.34257834816942495, bounds=Bounds(lower=array([1.1e+00, 1.0e-03, 0.0e+00]), upper=array([20.,  1., 10.]))), model_indices=[0], model=ScalarModel(intercept=0.1969376063981035, linear_terms=array([0., 0., 0.]), square_terms=array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.]]), scale=0.34257834816942495, shift=array([3.42578348, 0.1503857 , 0.16182417])), vector_model=VectorModel(intercepts=array([ 0.01727124,  0.03913444,  0.01634924,  0.01952296,  0.01614155,
@@ -4100,5 +4125,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([3.42578348,
 
        [[0., 0., 0.],
         [0., 0., 0.],
-        [0., 0., 0.]]]), scale=0.34257834816942495, shift=array([3.42578348, 0.1503857 , 0.16182417])), candidate_index=105, candidate_x=array([4.09899646, 0.09737931, 0.35708426]), index=105, x=array([4.09899646, 0.09737931, 0.35708426]), fval=0.06504855058686795, rho=0.7016047327272121, accepted=True, new_indices=array([ 93,  94,  95,  96,  97,  98,  99, 100, 101, 102, 103, 104]), old_indices_used=array([88, 91, 92]), old_indices_discarded=array([], dtype=int32), step_length=2.0909323008387503e-05, relative_step_length=0.999999999999988, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0., 0.]]]), scale=0.34257834816942495, shift=array([3.42578348, 0.1503857 , 0.16182417])), candidate_index=105, candidate_x=array([4.09899646, 0.09737931, 0.35708426]), index=105, x=array([4.09899646, 0.09737931, 0.35708426]), fval=0.06504855058686795, rho=0.7016047327272121, accepted=True, new_indices=array([ 93,  94,  95,  96,  97,  98,  99, 100, 101, 102, 103, 104]), old_indices_used=array([88, 91, 92]), old_indices_discarded=array([], dtype=int32), step_length=2.0909323008387503e-05, relative_step_length=0.999999999999988, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

@@ -4,7 +4,7 @@ import importlib.metadata
 from typing import Any
 
 project = "estimark"
-copyright = "2024, Alan Lujan"
+copyright = "2025, Alan Lujan"
 author = "Alan Lujan"
 version = release = importlib.metadata.version("estimark")
 

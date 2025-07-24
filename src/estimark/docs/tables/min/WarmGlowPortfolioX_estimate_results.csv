@@ -1,28 +1,53 @@
-CRRA,3.6689266717504583
-DiscFac,0.921316944616765
-BeqMPC,0.07884955196812231
-BeqInt,0.24273243769636904
-time_to_estimate,2361.159907102585
-params,"{'CRRA': 3.6689266717504583, 'DiscFac': 0.921316944616765, 'BeqMPC': 0.07884955196812231, 'BeqInt': 0.24273243769636904}"
-fun,0.03869572877317585
-start_fun,4.140708791765942
-start_params,"{'CRRA': 2.0, 'DiscFac': 1.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,4
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 6.142063794990771e-05, 'relative_params_change': 0.005370908843160271, 'absolute_criterion_change': 6.142063794990771e-06, 'absolute_params_change': 0.010782367250337566}, 'five_steps': {'relative_criterion_change': 6.142063794990771e-05, 'relative_params_change': 0.005370908843160271, 'absolute_criterion_change': 6.142063794990771e-06, 'absolute_params_change': 0.010782367250337566}}"
+CRRA,3.6689266717504583
+
+DiscFac,0.921316944616765
+
+BeqMPC,0.07884955196812231
+
+BeqInt,0.24273243769636904
+
+time_to_estimate,2361.159907102585
+
+params,"{'CRRA': 3.6689266717504583, 'DiscFac': 0.921316944616765, 'BeqMPC': 0.07884955196812231, 'BeqInt': 0.24273243769636904}"
+
+fun,0.03869572877317585
+
+start_fun,4.140708791765942
+
+start_params,"{'CRRA': 2.0, 'DiscFac': 1.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,4
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 6.142063794990771e-05, 'relative_params_change': 0.005370908843160271, 'absolute_criterion_change': 6.142063794990771e-06, 'absolute_params_change': 0.010782367250337566}, 'five_steps': {'relative_criterion_change': 6.142063794990771e-05, 'relative_params_change': 0.005370908843160271, 'absolute_criterion_change': 6.142063794990771e-06, 'absolute_params_change': 0.010782367250337566}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 4.07228904734218, 'DiscFac': 0.5379717265216727, 'BeqMPC': 0.08518731835726341, 'BeqInt': 0.06370258669602058}, {'CRRA': 14.362275211296843, 'DiscFac': 0.67910227736629, 'BeqMPC': 0.07451849326396119, 'BeqInt': 0.3881033286158767}, {'CRRA': 5.346220281198129, 'DiscFac': 0.9726253926724859, 'BeqMPC': 0.40927130843967463, 'BeqInt': 0.06036936240166305}, {'CRRA': 5.1297757575714, 'DiscFac': 0.9868560146257119, 'BeqMPC': 0.09039460903256596, 'BeqInt': 2.4389642186109315}, {'CRRA': 5.3316183050803545, 'DiscFac': 0.9761530255890426, 'BeqMPC': 0.3505419313419233, 'BeqInt': 4.307742014920352}, {'CRRA': 5.751213952161759, 'DiscFac': 0.9737696462982557, 'BeqMPC': 0.34248021241340937, 'BeqInt': 5.513108956606873}, {'CRRA': 5.606244926264679, 'DiscFac': 0.9680470034774782, 'BeqMPC': 0.22027458080687973, 'BeqInt': 4.7638297885663095}, {'CRRA': 5.4437399177809205, 'DiscFac': 0.9752419553149149, 'BeqMPC': 0.2517564155145012, 'BeqInt': 1.719935421576968}, {'CRRA': 5.521306515719298, 'DiscFac': 0.970530327219952, 'BeqMPC': 0.05817379671942259, 'BeqInt': 2.3631274978698404}, {'CRRA': 5.494065649004764, 'DiscFac': 0.9684601069074902, 'BeqMPC': 0.4230551609380908, 'BeqInt': 4.2708902047863955}, {'CRRA': 5.411733621589391, 'DiscFac': 0.9546886659235723, 'BeqMPC': 0.042641985829386046, 'BeqInt': 5.044366379216676}, {'CRRA': 5.500622601083132, 'DiscFac': 0.960490846388184, 'BeqMPC': 0.5144520643223516, 'BeqInt': 1.6899307837224011}, {'CRRA': 5.286510449468755, 'DiscFac': 0.9633110232218689, 'BeqMPC': 0.29007601409559725, 'BeqInt': 1.1693516584660688}, {'CRRA': 5.6117632487949205, 'DiscFac': 0.9493155186088912, 'BeqMPC': 0.205881077473325, 'BeqInt': 2.4090809814975858}, {'CRRA': 3.923090492461324, 'DiscFac': 0.9619254300720648, 'BeqMPC': 0.1327286286221615, 'BeqInt': 3.858250528425974}, {'CRRA': 4.297720338509042, 'DiscFac': 0.9496985401178372, 'BeqMPC': 0.11689213043335381, 'BeqInt': 3.9622122946792055}, {'CRRA': 5.223102608572567, 'DiscFac': 0.9355881084307385, 'BeqMPC': 0.3186209493337537, 'BeqInt': 0.9833961497323065}, {'CRRA': 3.851049395240035, 'DiscFac': 0.9520436928229101, 'BeqMPC': 0.266096619948686, 'BeqInt': 0.4879615582409699}], local_optima=[Minimize with 4 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 4 free parameters terminated.
@@ -134,7 +159,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
         7.49108955,  7.64809158,  7.719889  ,  7.94894725,  7.95777027,
         8.11101492,  8.55747797,  8.83233033,  9.11513254,  9.39798884,
        12.26444547, 12.76620812, 13.5092543 , 16.01943264, 16.04247366,
-       16.998558  , 18.79474716, 19.17392147, 19.34738934, 51.5968247 ]))"
+       16.998558  , 18.79474716, 19.17392147, 19.34738934, 51.5968247 ]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([3.8510494 , 0.95204369, 0.26609662, 0.48796156]), radius=0.38510493952400354, bounds=Bounds(lower=array([1.1e+00, 5.0e-01, 1.0e-03, 0.0e+00]), upper=array([20. ,  1.1,  1. , 10. ]))), model_indices=[0], model=ScalarModel(intercept=2.4836190298650234, linear_terms=array([0., 0., 0., 0.]), square_terms=array([[0., 0., 0., 0.],
        [0., 0., 0., 0.],
        [0., 0., 0., 0.],
@@ -5334,5 +5360,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([3.8510494 ,
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.]]]), scale=0.38510493952400354, shift=array([3.8510494 , 0.95204369, 0.26609662, 0.48796156])), candidate_index=143, candidate_x=array([3.66892667, 0.92131694, 0.07884955, 0.24273244]), index=143, x=array([3.66892667, 0.92131694, 0.07884955, 0.24273244]), fval=0.03869572877317585, rho=0.5574799847076293, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([126, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140,
-       141, 142]), old_indices_discarded=array([], dtype=int32), step_length=4.7015418927903695e-05, relative_step_length=1.0001178181028776, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+       141, 142]), old_indices_discarded=array([], dtype=int32), step_length=4.7015418927903695e-05, relative_step_length=1.0001178181028776, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

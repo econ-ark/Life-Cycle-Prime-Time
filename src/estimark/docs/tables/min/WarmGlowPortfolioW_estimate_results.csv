@@ -1,27 +1,51 @@
-CRRA,4.6137827187437095
-BeqMPC,0.11037621744378855
-BeqInt,0.3262346881753758
-time_to_estimate,927.588036775589
-params,"{'CRRA': 4.6137827187437095, 'BeqMPC': 0.11037621744378855, 'BeqInt': 0.3262346881753758}"
-fun,0.10382516496422318
-start_fun,6.118827641744736
-start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,3
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 0.00017661463417404324, 'relative_params_change': 0.009936917738617738, 'absolute_criterion_change': 1.8337043528215968e-05, 'absolute_params_change': 0.01753871211344655}, 'five_steps': {'relative_criterion_change': 0.00017661463417404324, 'relative_params_change': 0.009936917738617738, 'absolute_criterion_change': 1.8337043528215968e-05, 'absolute_params_change': 0.01753871211344655}}"
+CRRA,4.6137827187437095
+
+BeqMPC,0.11037621744378855
+
+BeqInt,0.3262346881753758
+
+time_to_estimate,927.588036775589
+
+params,"{'CRRA': 4.6137827187437095, 'BeqMPC': 0.11037621744378855, 'BeqInt': 0.3262346881753758}"
+
+fun,0.10382516496422318
+
+start_fun,6.118827641744736
+
+start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,3
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 0.00017661463417404324, 'relative_params_change': 0.009936917738617738, 'absolute_criterion_change': 1.8337043528215968e-05, 'absolute_params_change': 0.01753871211344655}, 'five_steps': {'relative_criterion_change': 0.00017661463417404324, 'relative_params_change': 0.009936917738617738, 'absolute_criterion_change': 1.8337043528215968e-05, 'absolute_params_change': 0.01753871211344655}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 5.736880259293951, 'BeqMPC': 0.1186830623387472, 'BeqInt': 0.23119945070950276}, {'CRRA': 7.147675776708044, 'BeqMPC': 0.07559809140869889, 'BeqInt': 0.5497824019661134}, {'CRRA': 6.937069946634306, 'BeqMPC': 0.1335187727191382, 'BeqInt': 0.5882849468210203}, {'CRRA': 8.567247143849713, 'BeqMPC': 0.05679716495161277, 'BeqInt': 1.1604839454321532}, {'CRRA': 6.529906454577278, 'BeqMPC': 0.6552854875024496, 'BeqInt': 0.17347237609475205}], local_optima=[Minimize with 3 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 3 free parameters terminated.
@@ -91,7 +115,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
         7.86281961,  7.87651528,  7.87949174,  7.8859031 ,  7.95590721,
         7.95599664,  7.96925679,  7.97210006,  7.97339471,  7.98260863,
         7.99439963,  7.99579509,  7.99931433,  8.00890383,  8.01022137,
-        8.0121881 ,  8.01397312,  8.0304897 ,  8.05119752, 11.55098238]))"
+        8.0121881 ,  8.01397312,  8.0304897 ,  8.05119752, 11.55098238]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([6.52990645, 0.65528549, 0.17347238]), radius=0.6529906454577278, bounds=Bounds(lower=array([1.1e+00, 1.0e-03, 0.0e+00]), upper=array([20.,  1., 10.]))), model_indices=[0], model=ScalarModel(intercept=1.1656005763318118, linear_terms=array([0., 0., 0.]), square_terms=array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.]]), scale=0.6529906454577278, shift=array([6.52990645, 0.65528549, 0.17347238])), vector_model=VectorModel(intercepts=array([ 0.028755  ,  0.0758219 ,  0.08315309,  0.11165545,  0.11650528,
@@ -7870,5 +7895,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([6.52990645,
 
        [[0., 0., 0.],
         [0., 0., 0.],
-        [0., 0., 0.]]]), scale=0.6529906454577278, shift=array([6.52990645, 0.65528549, 0.17347238])), candidate_index=172, candidate_x=array([4.61378272, 0.11037622, 0.32623469]), index=172, x=array([4.61378272, 0.11037622, 0.32623469]), fval=0.10382516496422318, rho=0.015464138888549446, accepted=True, new_indices=array([160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171]), old_indices_used=array([140, 158, 159]), old_indices_discarded=array([], dtype=int32), step_length=9.963846518821936e-06, relative_step_length=0.9999999999996733, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0., 0.]]]), scale=0.6529906454577278, shift=array([6.52990645, 0.65528549, 0.17347238])), candidate_index=172, candidate_x=array([4.61378272, 0.11037622, 0.32623469]), index=172, x=array([4.61378272, 0.11037622, 0.32623469]), fval=0.10382516496422318, rho=0.015464138888549446, accepted=True, new_indices=array([160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171]), old_indices_used=array([140, 158, 159]), old_indices_discarded=array([], dtype=int32), step_length=9.963846518821936e-06, relative_step_length=0.9999999999996733, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

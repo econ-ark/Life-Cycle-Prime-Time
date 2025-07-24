@@ -1,27 +1,51 @@
-CRRA,4.648741568640715
-BeqMPC,0.12080240753959963
-BeqInt,0.3867307779147752
-time_to_estimate,2333.607335805893
-params,"{'CRRA': 4.648741568640715, 'BeqMPC': 0.12080240753959963, 'BeqInt': 0.3867307779147752}"
-fun,0.09900874732603587
-start_fun,5.518174367282001
-start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,3
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 0.0003674770855183196, 'relative_params_change': 0.011901428858887994, 'absolute_criterion_change': 3.674770855183196e-05, 'absolute_params_change': 0.012948010839914332}, 'five_steps': {'relative_criterion_change': 0.0003674770855183196, 'relative_params_change': 0.011901428858887994, 'absolute_criterion_change': 3.674770855183196e-05, 'absolute_params_change': 0.012948010839914332}}"
+CRRA,4.648741568640715
+
+BeqMPC,0.12080240753959963
+
+BeqInt,0.3867307779147752
+
+time_to_estimate,2333.607335805893
+
+params,"{'CRRA': 4.648741568640715, 'BeqMPC': 0.12080240753959963, 'BeqInt': 0.3867307779147752}"
+
+fun,0.09900874732603587
+
+start_fun,5.518174367282001
+
+start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,3
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 0.0003674770855183196, 'relative_params_change': 0.011901428858887994, 'absolute_criterion_change': 3.674770855183196e-05, 'absolute_params_change': 0.012948010839914332}, 'five_steps': {'relative_criterion_change': 0.0003674770855183196, 'relative_params_change': 0.011901428858887994, 'absolute_criterion_change': 3.674770855183196e-05, 'absolute_params_change': 0.012948010839914332}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 7.79889028883975, 'BeqMPC': 0.09035089860727508, 'BeqInt': 0.4214592145671625}, {'CRRA': 7.230524429941777, 'BeqMPC': 0.45375447763951093, 'BeqInt': 0.4489429504270689}, {'CRRA': 7.682127947011861, 'BeqMPC': 0.7082478693160968, 'BeqInt': 4.448253829066716}, {'CRRA': 7.419495614689512, 'BeqMPC': 0.13879616354790003, 'BeqInt': 6.885947213130774}, {'CRRA': 7.233892831480683, 'BeqMPC': 0.4236415760730436, 'BeqInt': 4.727298843765459}, {'CRRA': 7.091660756115004, 'BeqMPC': 0.343102060790318, 'BeqInt': 4.154425530211373}, {'CRRA': 6.833477492782301, 'BeqMPC': 0.10009537695804485, 'BeqInt': 2.5258180046751066}, {'CRRA': 6.677986416079777, 'BeqMPC': 0.2744272315602882, 'BeqInt': 4.043511276579117}, {'CRRA': 6.71641434942539, 'BeqMPC': 0.5043296777437264, 'BeqInt': 3.2478855562873608}, {'CRRA': 6.60723480693806, 'BeqMPC': 0.4076407364967456, 'BeqInt': 1.3087778784556388}, {'CRRA': 6.484713940849003, 'BeqMPC': 0.10709138824290358, 'BeqInt': 2.532007879680733}, {'CRRA': 6.371511648264416, 'BeqMPC': 0.4506573116720533, 'BeqInt': 3.6597929658599058}, {'CRRA': 6.2620201922723755, 'BeqMPC': 0.21112929102928915, 'BeqInt': 2.286301994461523}, {'CRRA': 5.935105656979836, 'BeqMPC': 0.3325508994596382, 'BeqInt': 2.165710145596865}, {'CRRA': 6.076386392578738, 'BeqMPC': 0.1501430873405492, 'BeqInt': 1.963443747828483}, {'CRRA': 5.974580872244731, 'BeqMPC': 0.2137399601476585, 'BeqInt': 0.9949209625705937}, {'CRRA': 5.642097429727329, 'BeqMPC': 0.218205655930873, 'BeqInt': 2.2811426197129894}, {'CRRA': 5.820918962960841, 'BeqMPC': 0.1924965899032388, 'BeqInt': 0.4959761218146641}], local_optima=[Minimize with 3 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 3 free parameters terminated.
@@ -105,7 +129,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
         6.90979983,  6.91212135,  6.91384176,  6.92886322,  6.95666841,
         6.96544093,  6.97489737,  6.97694071,  7.02065843,  7.08474501,
         7.1172614 ,  7.12725167,  7.17817402,  7.20048873,  7.20700323,
-        7.22245687,  7.25232232,  7.2651318 , 28.36787514, 34.02194646]))"
+        7.22245687,  7.25232232,  7.2651318 , 28.36787514, 34.02194646]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([7.23052443, 0.45375448, 0.44894295]), radius=0.7230524429941778, bounds=Bounds(lower=array([1.1e+00, 1.0e-03, 0.0e+00]), upper=array([20.,  1., 10.]))), model_indices=[0], model=ScalarModel(intercept=0.901122644423677, linear_terms=array([0., 0., 0.]), square_terms=array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.]]), scale=0.7230524429941778, shift=array([7.23052443, 0.45375448, 0.44894295])), vector_model=VectorModel(intercepts=array([ 0.0333072 ,  0.09231432,  0.10600501,  0.13518632,  0.14336084,
@@ -8242,5 +8267,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([7.23052443,
 
        [[0., 0., 0.],
         [0., 0., 0.],
-        [0., 0., 0.]]]), scale=0.7230524429941778, shift=array([7.23052443, 0.45375448, 0.44894295])), candidate_index=164, candidate_x=array([4.64874157, 0.12080241, 0.38673078]), index=164, x=array([4.64874157, 0.12080241, 0.38673078]), fval=0.09900874732603587, rho=0.17767699886372712, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([144, 151, 152, 153, 154, 155, 156, 157, 158, 159, 161, 162]), old_indices_discarded=array([150, 160, 163]), step_length=2.2065809417384944e-05, relative_step_length=0.999999999992659, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0., 0.]]]), scale=0.7230524429941778, shift=array([7.23052443, 0.45375448, 0.44894295])), candidate_index=164, candidate_x=array([4.64874157, 0.12080241, 0.38673078]), index=164, x=array([4.64874157, 0.12080241, 0.38673078]), fval=0.09900874732603587, rho=0.17767699886372712, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([144, 151, 152, 153, 154, 155, 156, 157, 158, 159, 161, 162]), old_indices_discarded=array([150, 160, 163]), step_length=2.2065809417384944e-05, relative_step_length=0.999999999992659, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,
