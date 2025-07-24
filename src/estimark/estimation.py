@@ -57,7 +57,7 @@ from estimark.snp import snp_data
 root_logger = logging.getLogger()
 if root_logger.handlers:
     root_logger.handlers.clear()
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 root_logger.setLevel(logging.INFO)
 
 # =====================================================
@@ -74,8 +74,7 @@ agent_types = {
 
 
 def make_agent(agent_name):
-    """
-    Construct an instance of an AgentType subclass that can be used in the structural
+    """Construct an instance of an AgentType subclass that can be used in the structural
     estimation. The specific class used, as well as some of the exogenously calibrated
     parameters, depend on whether certain strings appear in the input to the function:
 
@@ -105,6 +104,7 @@ def make_agent(agent_name):
     agent : AgentType
         Instance of some AgentType subclass, which can be used in the estimation.
         It will have default parameters until set otherwise.
+
     """
     for key, value in agent_types.items():
         if key in agent_name:
@@ -152,8 +152,7 @@ def get_weighted_moments(
     groups=None,
     mapping=None,
 ):
-    """
-    Make a dictionary that maps from moment names to moments used in the SMM
+    """Make a dictionary that maps from moment names to moments used in the SMM
     objective function, generating medians of some variable conditional on
     being within particular values for some data grouping.
 
@@ -177,6 +176,7 @@ def get_weighted_moments(
         Dictionary mapping from keys of mapping input to conditional medians.
     weight_sum : dict
         Dictionary mapping from keys of mapping input to total weight of group.
+
     """
     # Common variables that don't depend on whether weights are None or not
     data_variable = data[variable]
@@ -241,8 +241,7 @@ def get_moments_cov(agent_name, emp_moments):
 
 
 def get_empirical_moments(agent_name):
-    """
-    Construct a dictionary of empirical moments for this specification. This
+    """Construct a dictionary of empirical moments for this specification. This
     always includes age-conditional median wealth values, and also includes
     risky portfolio shares if the specification name includes "Portfolio".
 
@@ -258,6 +257,7 @@ def get_empirical_moments(agent_name):
     weight_sum : dict
         Dictionary with median wealth (and risky asset shares) total empirical
         weights from the dataset.
+
     """
     emp_moments, weight_sum = get_weighted_moments(
         data=scf_data,
@@ -266,7 +266,14 @@ def get_empirical_moments(agent_name):
         groups="age_group",
         mapping=age_mapping,
     )
-    emp_moments = {key: float(emp_moments[key].item()) if hasattr(emp_moments[key], 'item') else float(emp_moments[key]) for key in emp_moments}
+    emp_moments = {
+        key: (
+            float(emp_moments[key].item())
+            if hasattr(emp_moments[key], "item")
+            else float(emp_moments[key])
+        )
+        for key in emp_moments
+    }
 
     # Add share moments if agent is a portfolio type
     if "Portfolio" in agent_name:
@@ -287,8 +294,7 @@ def get_empirical_moments(agent_name):
 
 
 def get_initial_guess(agent, params_to_estimate, save_dir):
-    """
-    Generate an initial guess of the parameters to be estimated by looking for
+    """Generate an initial guess of the parameters to be estimated by looking for
     prior estimates of the same specification, or defaulting to values specified
     in the parameters file.
 
@@ -307,6 +313,7 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     -------
     initial_guess : dict
         Mapping from parameter names to initial guess values.
+
     """
     agent_name = agent.name
 
@@ -315,7 +322,7 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
         if hasattr(agent, key):
             agent_params.append(key)
         else:
-            logging.warning(f"Agent {agent_name} does not have parameter: {key}")
+            logging.warning("Agent %s does not have parameter: %s", agent_name, key)
 
     # start from previous estimation results if available
     csv_file_path = save_dir / (agent_name + "_estimate_results.csv")
@@ -326,18 +333,15 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     except (FileNotFoundError, IndexError):
         temp_dict = init_params_options.get("init_guess", {})
 
-    initial_guess = {
+    return {
         key: float(temp_dict.get(key, init_params_options["init_guess"][key]))
         for key in agent_params
     }
 
-    return initial_guess
-
 
 # Define the function that generates simulated moments
 def simulate_moments(params, agent, emp_moments):
-    """
-    Generate simulated moments by solving and simulating the agents at the given
+    """Generate simulated moments by solving and simulating the agents at the given
     parameters. Returns a dictionary that corresponds to the empirical moments.
 
     Parameters
@@ -354,8 +358,8 @@ def simulate_moments(params, agent, emp_moments):
     -------
     sim_moments : dict
         Dictionary that maps from moment names to simulated moments.
-    """
 
+    """
     # Update the agent with new parameters
     agent.assign_parameters(**params)
     if hasattr(agent, "BeqCRRA"):
@@ -417,8 +421,7 @@ def simulate_moments(params, agent, emp_moments):
 
 
 def calculate_weights(emp_moments, weight_sum):
-    """
-    Generate a dictionary of all moment weights, loading both median wealth-to-
+    """Generate a dictionary of all moment weights, loading both median wealth-to-
     income ratios and risky asset shares into a single object.
 
     Parameters
@@ -446,7 +449,7 @@ def calculate_weights(emp_moments, weight_sum):
     # port_fac = 1.0
 
     # Using dictionary comprehension to create weights
-    weights = {
+    return {
         k: (
             (np.sqrt(weight_sum[k]) / W_avg) ** 0.0 / max_w_stat
             if "_port" not in k
@@ -454,8 +457,6 @@ def calculate_weights(emp_moments, weight_sum):
         )
         for k, v in emp_moments.items()
     }
-
-    return weights
 
 
 def msm_criterion(params, agent=None, emp_moments=None, weights=None):
@@ -478,6 +479,7 @@ def msm_criterion(params, agent=None, emp_moments=None, weights=None):
     Returns
     -------
     NEED TO WRITE CORRECT OUTPUTS
+
     """
     emp_moments = emp_moments.copy()
     sim_moments = simulate_moments(params, agent, emp_moments)
@@ -514,11 +516,11 @@ def calculate_se_bootstrap(
 
     # Generate a list of seeds for generating bootstrap samples
     RNG = np.random.default_rng(seed)
-    seed_list = RNG.integers(2**31 - 1, size=n_draws)
+    RNG.integers(2**31 - 1, size=n_draws)
 
     # Estimate the model N times, recording each set of estimated parameters
     estimate_list = []
-    for n in range(n_draws):
+    for _n in range(n_draws):
         t_start = time()
 
         # Bootstrap a new dataset by resampling from the original data
@@ -546,7 +548,11 @@ def calculate_se_bootstrap(
         # Report progress of the bootstrap
     if verbose:
         logging.info(
-            f"Finished bootstrap estimation #{n + 1} of {n_draws} in {t_now - t_start} seconds ({t_now - t_0} cumulative)",
+            "Finished bootstrap estimation #%d of %d in %s seconds (%s cumulative)",
+            _n + 1,
+            n_draws,
+            t_now - t_start,
+            t_now - t_0,
         )
 
     # Calculate the standard errors for each parameter
@@ -633,7 +639,8 @@ def do_estimate_model(
         model_estimate = res._params
 
     else:
-        raise ValueError(f"Invalid estimate_method: {estimate_method}")
+        msg = f"Invalid estimate_method: {estimate_method}"
+        raise ValueError(msg)
 
     # Calculate minutes and remaining seconds
     minutes, seconds = divmod(time_to_estimate, 60)
@@ -652,7 +659,7 @@ def do_estimate_model(
 
     keys_to_save = vars(res)
 
-    with open(estimate_results_file, "w") as f:
+    with estimate_results_file.open("w") as f:
         writer = csv.writer(f)
 
         for key in model_estimate:
@@ -674,19 +681,28 @@ def do_compute_se_boostrap(
     bootstrap_size=50,
     seed=0,
     save_dir=None,
-):
+) -> None:
     # TODO: WRITE DOCSTRING
 
     # Estimate the model:
-    logging.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     logging.info(
-        f"Computing standard errors using {bootstrap_size} bootstrap replications.",
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     )
-    logging.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    logging.info(
+        "Computing standard errors using %d bootstrap replications.",
+        bootstrap_size,
+    )
+    logging.info(
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    )
 
     t_bootstrap_guess = time_to_estimate * bootstrap_size
     minutes, seconds = divmod(t_bootstrap_guess, 60)
-    logging.info(f"This will take approximately {int(minutes)} min, {int(seconds)} sec.")
+    logging.info(
+        "This will take approximately %d min, %d sec.",
+        int(minutes),
+        int(seconds),
+    )
 
     t_start_bootstrap = time()
     std_errors = calculate_se_bootstrap(
@@ -701,14 +717,18 @@ def do_compute_se_boostrap(
 
     # Calculate minutes and remaining seconds
     minutes, seconds = divmod(time_to_bootstrap, 60)
-    logging.info(f"Time to bootstrap: {int(minutes)} min, {int(seconds)} sec.")
+    logging.info("Time to bootstrap: %d min, %d sec.", int(minutes), int(seconds))
 
-    logging.info(f"Standard errors: DiscFac--> {std_errors[0]}, CRRA--> {std_errors[1]}")
+    logging.info(
+        "Standard errors: DiscFac--> %s, CRRA--> %s",
+        std_errors[0],
+        std_errors[1],
+    )
 
     # Create the simple bootstrap table
     bootstrap_results_file = save_dir + agent.name + "_bootstrap_results.csv"
 
-    with open(bootstrap_results_file, "w") as f:
+    with Path(bootstrap_results_file).open("w") as f:
         writer = csv.writer(f)
         writer.writerow(
             [
@@ -723,12 +743,16 @@ def do_compute_se_boostrap(
         )
 
 
-def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
+def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None) -> None:
     # TODO: WRITE DOCSTRING
 
-    logging.info("``````````````````````````````````````````````````````````````````````")
+    logging.info(
+        "``````````````````````````````````````````````````````````````````````",
+    )
     logging.info("Computing sensitivity measure.")
-    logging.info("``````````````````````````````````````````````````````````````````````")
+    logging.info(
+        "``````````````````````````````````````````````````````````````````````",
+    )
 
     # Find the Jacobian of the function that simulates moments
 
@@ -737,7 +761,7 @@ def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
         [
             approx_fprime(
                 model_estimate,
-                lambda params: simulate_moments(params, agent=agent)[j],
+                lambda params, j=j: simulate_moments(params, agent=agent)[j],
                 epsilon=0.01,
             )
             for j in range(n_moments)
@@ -771,12 +795,16 @@ def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
     plt.show()
 
 
-def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
+def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None) -> None:
     # TODO: WRITE DOCSTRING
 
-    logging.info("``````````````````````````````````````````````````````````````````````")
+    logging.info(
+        "``````````````````````````````````````````````````````````````````````",
+    )
     logging.info("Creating the contour plot.")
-    logging.info("``````````````````````````````````````````````````````````````````````")
+    logging.info(
+        "``````````````````````````````````````````````````````````````````````",
+    )
     t_start_contour = time()
     DiscFac_star, CRRA_star = model_estimate
     grid_density = 20  # Number of parameter values in each dimension
@@ -804,7 +832,7 @@ def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
 
     # Calculate minutes and remaining seconds
     minutes, seconds = divmod(time_to_contour, 60)
-    logging.info(f"Time to contour: {int(minutes)} min, {int(seconds)} sec.")
+    logging.info("Time to contour: %d min, %d sec.", int(minutes), int(seconds))
 
     plt.colorbar(smm_contour)
     plt.plot(model_estimate[1], model_estimate[0], "*r", ms=15)
@@ -854,12 +882,14 @@ def estimate_min(
     criterion=None,
     initial_params=None,
     emp_moments=None,
-    minimize_options={},
+    minimize_options=None,
     criterion_kwargs=None,
     estimagic_options=None,
 ):
     # TODO: WRITE DOCSTRING
 
+    if minimize_options is None:
+        minimize_options = {}
     t0 = time()
 
     criterion_kwargs = criterion_kwargs or {}
@@ -890,7 +920,7 @@ def estimate(
     save_dir=None,
     emp_moments=None,
     moments_cov=None,
-):
+) -> None:
     """Run the main estimation procedure for Life-Cycle-Prime-Time.
 
     Parameters
@@ -900,6 +930,7 @@ def estimate(
     Returns
     -------
     None
+
     """
     save_dir = Path(save_dir).resolve() if save_dir is not None else Path.cwd()
     save_dir.mkdir(parents=True, exist_ok=True)
@@ -982,8 +1013,7 @@ def estimate(
 
 
 def prepare_model(agent_name, params_to_estimate):
-    """
-    Generate objects that can be used to estimate and explore the requested model.
+    """Generate objects that can be used to estimate and explore the requested model.
 
     Parameters
     ----------
@@ -1013,6 +1043,7 @@ def prepare_model(agent_name, params_to_estimate):
         Function that takes a single array of parameter values as an argument,
         ordered as the names in params_to_estimate, and makes two plots of the
         simulated vs empirical moment fit.
+
     """
     # Make basic objects using previously defined functions
     estimation_agents = make_agent(agent_name)
@@ -1067,14 +1098,18 @@ def prepare_model(agent_name, params_to_estimate):
                 for key in empirical_moments
             ],
         )
-        sse = np.sum(errors**2)
-        return sse
+        return np.sum(errors**2)
 
     # Make two versions of that temporary function: one for the objective function
     # and the other that just produces moments
-    objective_function = lambda x: temp_func(x, False, False)
-    sim_moment_function = lambda x: temp_func(x, True, False)
-    plot_moment_function = lambda x: temp_func(x, False, True)
+    def objective_function(x):
+        return temp_func(x, False, False)
+
+    def sim_moment_function(x):
+        return temp_func(x, True, False)
+
+    def plot_moment_function(x):
+        return temp_func(x, False, True)
 
     # Return all of the useful things
     return (
@@ -1089,7 +1124,7 @@ def prepare_model(agent_name, params_to_estimate):
 
 if __name__ == "__main__":
     logging.info("Starting estimation script...")
-    
+
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
     local_agent_name = "WealthPortfolioW"

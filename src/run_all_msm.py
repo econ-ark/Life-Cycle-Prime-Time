@@ -10,7 +10,7 @@ from estimark.estimation import estimate, get_empirical_moments, get_moments_cov
 from estimark.options import low_resource
 
 # Configure logging to show INFO level messages
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 agent_names = [
     "IndShock",
@@ -21,7 +21,7 @@ agent_names = [
 ]
 
 
-def run_replication():
+def run_replication() -> None:
     inds_emp_moments = get_empirical_moments("IndShock")
     port_emp_moments = get_empirical_moments("Porfolio")
 

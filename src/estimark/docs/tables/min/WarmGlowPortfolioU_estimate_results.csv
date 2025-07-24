@@ -1,27 +1,51 @@
-CRRA,3.6312894452672517
-BeqMPC,0.1648943265342319
-BeqInt,0.11675238518434149
-time_to_estimate,1910.7018151283264
-params,"{'CRRA': 3.6312894452672517, 'BeqMPC': 0.1648943265342319, 'BeqInt': 0.11675238518434149}"
-fun,0.6162444264359328
-start_fun,5.871793394977547
-start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,3
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 2.020392780400722e-06, 'relative_params_change': 0.005176314640626473, 'absolute_criterion_change': 1.2450557901333426e-06, 'absolute_params_change': 0.000624980213985772}, 'five_steps': {'relative_criterion_change': 0.0002574023732394006, 'relative_params_change': 0.045936171133257535, 'absolute_criterion_change': 0.00015862277786016232, 'absolute_params_change': 0.039598856411302355}}"
+CRRA,3.6312894452672517
+
+BeqMPC,0.1648943265342319
+
+BeqInt,0.11675238518434149
+
+time_to_estimate,1910.7018151283264
+
+params,"{'CRRA': 3.6312894452672517, 'BeqMPC': 0.1648943265342319, 'BeqInt': 0.11675238518434149}"
+
+fun,0.6162444264359328
+
+start_fun,5.871793394977547
+
+start_params,"{'CRRA': 2.0, 'BeqMPC': 0.1, 'BeqInt': 1.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,3
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 2.020392780400722e-06, 'relative_params_change': 0.005176314640626473, 'absolute_criterion_change': 1.2450557901333426e-06, 'absolute_params_change': 0.000624980213985772}, 'five_steps': {'relative_criterion_change': 0.0002574023732394006, 'relative_params_change': 0.045936171133257535, 'absolute_criterion_change': 0.00015862277786016232, 'absolute_params_change': 0.039598856411302355}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 6.368782137732147, 'BeqMPC': 0.3303729822970233, 'BeqInt': 0.12478852815667962}, {'CRRA': 6.021517854920189, 'BeqMPC': 0.13570412778608212, 'BeqInt': 1.0510858440029431}, {'CRRA': 5.480002827097616, 'BeqMPC': 0.5433821377395163, 'BeqInt': 0.39208561151659804}, {'CRRA': 5.6563877074142415, 'BeqMPC': 0.4925602896756999, 'BeqInt': 4.694738290864651}, {'CRRA': 5.5185963530129785, 'BeqMPC': 0.24289236765148686, 'BeqInt': 5.725932817916981}, {'CRRA': 5.448620720084183, 'BeqMPC': 0.5044023199251723, 'BeqInt': 3.6860040659881217}, {'CRRA': 5.328202463375998, 'BeqMPC': 0.3939318977653213, 'BeqInt': 2.6907918353993727}, {'CRRA': 5.105434828759714, 'BeqMPC': 0.38494456523025594, 'BeqInt': 1.7731827878046396}, {'CRRA': 4.989341512096736, 'BeqMPC': 0.4854703308391195, 'BeqInt': 1.6511310009691558}, {'CRRA': 5.063532798541104, 'BeqMPC': 0.4123120647492854, 'BeqInt': 3.8876135014898017}, {'CRRA': 4.790928452785167, 'BeqMPC': 0.4190285089965647, 'BeqInt': 2.712645635790574}, {'CRRA': 4.681567277592967, 'BeqMPC': 0.3996529880140215, 'BeqInt': 3.2921082947583753}, {'CRRA': 4.818202923036661, 'BeqMPC': 0.12378380968823952, 'BeqInt': 1.899951283662605}, {'CRRA': 4.756488767025496, 'BeqMPC': 0.44141419075356647, 'BeqInt': 1.5488140082620323}, {'CRRA': 4.680341559195694, 'BeqMPC': 0.2612154514138383, 'BeqInt': 3.0450698259967024}, {'CRRA': 4.39654799078183, 'BeqMPC': 0.2913503637873691, 'BeqInt': 1.477496344861289}, {'CRRA': 4.53319477538433, 'BeqMPC': 0.2389001139212003, 'BeqInt': 1.0814888137954581}, {'CRRA': 4.456740131270912, 'BeqMPC': 0.13293628865014367, 'BeqInt': 2.0324838445004545}], local_optima=[Minimize with 3 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 3 free parameters terminated.
@@ -117,7 +141,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
         7.18935547,  7.19781252,  7.20219732,  7.23935302,  7.25070065,
         7.28024888,  7.29065858,  7.40862164,  7.41587826,  7.42503219,
         7.44076326,  7.56252749,  7.56650645,  7.65096244,  7.6701351 ,
-        7.72978572,  7.74232141,  9.66092408, 16.30590659, 20.98204628]))"
+        7.72978572,  7.74232141,  9.66092408, 16.30590659, 20.98204628]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([4.45674013, 0.13293629, 2.03248384]), radius=0.44567401312709126, bounds=Bounds(lower=array([1.1e+00, 1.0e-03, 0.0e+00]), upper=array([20.,  1., 10.]))), model_indices=[0], model=ScalarModel(intercept=2.3885442534590076, linear_terms=array([0., 0., 0.]), square_terms=array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.]]), scale=0.44567401312709126, shift=array([4.45674013, 0.13293629, 2.03248384])), vector_model=VectorModel(intercepts=array([ 0.02830216,  0.0932428 ,  0.13306782,  0.21794243,  0.28917549,
@@ -8221,5 +8246,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([4.45674013,
 
        [[0., 0., 0.],
         [0., 0., 0.],
-        [0., 0., 0.]]]), scale=0.44567401312709126, shift=array([4.45674013, 0.13293629, 2.03248384])), candidate_index=168, candidate_x=array([3.63128945, 0.16489433, 0.11675239]), index=168, x=array([3.63128945, 0.16489433, 0.11675239]), fval=0.6162444264359328, rho=0.22163867507174542, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([153, 156, 157, 159, 160, 161, 162, 163, 164, 165, 166, 167]), old_indices_discarded=array([147, 148, 149, 150, 151, 152, 154, 155, 158]), step_length=5.6842837630858564e-05, relative_step_length=1.044836611865013, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0., 0.]]]), scale=0.44567401312709126, shift=array([4.45674013, 0.13293629, 2.03248384])), candidate_index=168, candidate_x=array([3.63128945, 0.16489433, 0.11675239]), index=168, x=array([3.63128945, 0.16489433, 0.11675239]), fval=0.6162444264359328, rho=0.22163867507174542, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([153, 156, 157, 159, 160, 161, 162, 163, 164, 165, 166, 167]), old_indices_discarded=array([147, 148, 149, 150, 151, 152, 154, 155, 158]), step_length=5.6842837630858564e-05, relative_step_length=1.044836611865013, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

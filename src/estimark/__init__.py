@@ -1,5 +1,4 @@
-"""
-Copyright (c) 2025 Alan Lujan. All rights reserved.
+"""Copyright (c) 2025 Alan Lujan. All rights reserved.
 
 estimark: Estimating Microeconomic Dynamic Stochastic Optimization Problems
 """

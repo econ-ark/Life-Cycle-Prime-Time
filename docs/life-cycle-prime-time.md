@@ -526,9 +526,9 @@ Even then, the wealth drawdown is so rapid that the best the LCP model can achie
 
 ```{figure} figures/WealthMomentFit
 :label: medwealth
-:align: center 
+:align: center
 
-Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for college-educated households in the Survey of Consumer Finances. Wealth is `networth` and income consists of wages, social security, and retirement income. 
+Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for college-educated households in the Survey of Consumer Finances. Wealth is `networth` and income consists of wages, social security, and retirement income.
 ```
 
 As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
@@ -548,9 +548,9 @@ This discrepancy might arise because of the simplified approach we have used her
 
 ```{figure} figures/StrongBequestMotive
 :label: nobequest
-:align: center 
+:align: center
 
-Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid orange) versus with the bequest motive turned off (dashed orange), as compared to college-educated households in the SCF (red). The bequest motive is (implausibly) a strong motivator of wealth accumulation among working age agents.  
+Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid orange) versus with the bequest motive turned off (dashed orange), as compared to college-educated households in the SCF (red). The bequest motive is (implausibly) a strong motivator of wealth accumulation among working age agents.
 ```
 
 Unsurprisingly, the drawdown failure returns in @nobequest because retirees have no incentive to retain wealth as the likelihood of mortality rises.
@@ -563,9 +563,9 @@ We include the Warm-Glow model in our presentation not to advocate for it, but m
 
 ```{figure} figures/ShareMomentFit
 :label: medshare
-:align: center 
+:align: center
 
-Median Portfolio Share for different portfolio models. The red line shows the target moments from @Aboagye2024. 
+Median Portfolio Share for different portfolio models. The red line shows the target moments from @Aboagye2024.
 ```
 
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
@@ -596,7 +596,7 @@ To best fit the target moments, we estimate $\CRRA = 3.20$ for the Warm-Glow Por
 
 ```{figure} figures/StockBeliefsShare
 :label: subjbeliefs
-:align: center 
+:align: center
 
 Median Risky Asset Share under parameter estimates with incorrect subjective beliefs about stock returns. Solid lines show fitted portfolio shares if agents *believe* stocks are much riskier; dash-dot lines show portfolio shares with same estimated preferences but *correct* beliefs about stock returns. The red dashed line shows the target moments from @Aboagye2024.
 ```
@@ -625,4 +625,3 @@ It would be a better world if financial advice could be justified as reflecting 
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving were what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world.
-

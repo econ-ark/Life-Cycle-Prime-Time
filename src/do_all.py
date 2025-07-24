@@ -58,11 +58,11 @@ from estimark.options import (
 )
 
 # Configure logging to show INFO level messages
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
 # Ask the user which replication to run, and run it:
-def run_replication():
+def run_replication() -> None:
     which_model = input(
         """Which model would you like to run?
 
@@ -105,7 +105,7 @@ def run_replication():
 
     replication_specs = {}
 
-    if which_model == "1" or which_model == "":
+    if which_model in {"1", ""}:
         agent_name = "IndShock"
     elif which_model == "2":
         agent_name = "Portfolio"
@@ -122,7 +122,7 @@ def run_replication():
     if which_replication == "q":
         return
 
-    if which_replication == "1" or which_replication == "":
+    if which_replication in {"1", ""}:
         logging.info("Running low-resource replication...")
         replication_specs.update(**low_resource)
 
@@ -147,11 +147,11 @@ def run_replication():
     if int(subjective_markets) > 1:
         agent_name += "Sub"
 
-        if subjective_markets == "2" or subjective_markets == "4":
+        if subjective_markets in {"2", "4"}:
             agent_name += "(Stock)"
             logging.info("Adding subjective stock market beliefs...")
 
-        if subjective_markets == "3" or subjective_markets == "4":
+        if subjective_markets in {"3", "4"}:
             agent_name += "(Labor)"
             logging.info("Adding subjective labor market beliefs...")
 

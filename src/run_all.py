@@ -6,7 +6,7 @@ from estimark.estimation import estimate
 from estimark.options import low_resource
 
 # Configure logging to show INFO level messages
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 agent_names = [
     "Portfolio",
@@ -16,7 +16,7 @@ agent_names = [
 
 
 # Ask the user which replication to run, and run it:
-def run_replication():
+def run_replication() -> None:
     for agent_name in agent_names:
         for sub_stock in [0]:
             temp_agent_name = agent_name

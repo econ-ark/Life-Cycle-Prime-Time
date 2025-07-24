@@ -2,14 +2,9 @@
 model.  The empirical data is stored in a separate csv file and is loaded in setup_scf_data.
 """
 
-# Discount Factor of 1.0 always
-# income uncertainty doubles at retirement
-# only estimate CRRA, Bequest params
 from __future__ import annotations
 
 import warnings
-
-warnings.simplefilter(action="ignore", category=FutureWarning)
 
 import numpy as np
 from HARK.Calibration.Income.IncomeTools import (
@@ -18,6 +13,13 @@ from HARK.Calibration.Income.IncomeTools import (
 )
 from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
 from HARK.distributions import DiscreteDistribution
+
+# This is required because of a HARK dependency on an older version of scipy
+warnings.simplefilter(action="ignore", category=FutureWarning)
+
+# Discount Factor of 1.0 always
+# income uncertainty doubles at retirement
+# only estimate CRRA, Bequest params
 
 # ---------------------------------------------------------------------------------
 # - Define all of the model parameters for Life-Cycle-Prime-Time and ConsumerExamples -
