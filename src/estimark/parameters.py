@@ -208,7 +208,7 @@ retired_TranShkStd = 0.0
 init_calibration = {
     "CRRA": init_CRRA,
     "DiscFac": init_DiscFac,
-    "Rfree": Rfree,
+    "Rfree": terminal_t*[Rfree],
     "PermGroFac": inc_calib["PermGroFac"],
     "PermGroFacAgg": 1.0,
     "BoroCnstArt": BoroCnstArt,
@@ -276,7 +276,7 @@ TrueElnR_real = TrueElnR_nom - logInflation
 # }
 
 init_subjective_stock = {
-    "Rfree": Rfree,
+    "Rfree": terminal_t*[Rfree],
     "RiskyAvg": np.exp(ElnR_real + 0.5 * VlnR),
     "RiskyStd": np.sqrt(np.exp(2 * ElnR_real + VlnR) * (np.exp(VlnR) - 1)),
     "RiskyAvgTrue": init_calibration["RiskyAvg"],
@@ -284,7 +284,7 @@ init_subjective_stock = {
 }
 
 true_stock_params = {
-    "Rfree": Rfree,
+    "Rfree": terminal_t*[Rfree],
     "RiskyAvg": init_calibration["RiskyAvg"],
     "RiskyStd": init_calibration["RiskyStd"],
     }
