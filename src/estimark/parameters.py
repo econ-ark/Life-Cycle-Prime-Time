@@ -12,7 +12,10 @@ import warnings
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 import numpy as np
-from HARK.Calibration.Income.IncomeTools import Cagetti_income, CGM_income, parse_income_spec
+from HARK.Calibration.Income.IncomeTools import (
+    Cagetti_income,
+    parse_income_spec,
+)
 from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
 from HARK.distributions import DiscreteDistribution
 
@@ -29,8 +32,8 @@ aXtraCount = 20  # Number of points in the grid of "assets above minimum"
 # Financial parameters
 BoroCnstArt = 0.0  # imposed minimum level of end-of period assets
 Rfree = 1.01  # Interest factor on risk free asset
-Eq_prem = 0.030  # Equity premium 
-RiskyStd = 0.20  # Standard deviation of log risky returns 
+Eq_prem = 0.030  # Equity premium
+RiskyStd = 0.20  # Standard deviation of log risky returns
 
 # Use cubic spline interpolation when True, linear interpolation when False
 CubicBool = False
@@ -118,12 +121,13 @@ age_groups = [
 ]
 
 # generate labels as (25,30], (30,35], ...
-age_labels = [f"({group[0]-1},{group[-1]}]" for group in age_groups]
+age_labels = [f"({group[0] - 1},{group[-1]}]" for group in age_groups]
 
 # Generate mappings between the real ages in the groups and the indices of simulated data
-age_mapping = dict(zip(age_labels, map(np.array, age_groups)))
+age_mapping = dict(zip(age_labels, map(np.array, age_groups), strict=False))
 sim_mapping = {
-    label: np.array(group) - initial_age for label, group in zip(age_labels, age_groups)
+    label: np.array(group) - initial_age
+    for label, group in zip(age_labels, age_groups, strict=False)
 }
 
 remove_ages_from_scf = np.arange(
@@ -201,14 +205,14 @@ minimize_options = {
 
 retired_PermShkStd = 0.0
 retired_TranShkStd = 0.0
-#retired_PermShkStd = inc_calib["PermShkStd"][retirement_t]
-#retired_TranShkStd = inc_calib["TranShkStd"][retirement_t]
+# retired_PermShkStd = inc_calib["PermShkStd"][retirement_t]
+# retired_TranShkStd = inc_calib["TranShkStd"][retirement_t]
 
 # Dictionary that can be passed to ConsumerType to instantiate
 init_calibration = {
     "CRRA": init_CRRA,
     "DiscFac": init_DiscFac,
-    "Rfree": terminal_t*[Rfree],
+    "Rfree": terminal_t * [Rfree],
     "PermGroFac": inc_calib["PermGroFac"],
     "PermGroFacAgg": 1.0,
     "BoroCnstArt": BoroCnstArt,
@@ -219,11 +223,11 @@ init_calibration = {
     + [retired_TranShkStd] * (terminal_t - retirement_t - 1),
     "TranShkCount": TranShkCount,
     "T_cycle": terminal_t,
-    "T_sim": terminal_t+1,
+    "T_sim": terminal_t + 1,
     "UnempPrb": UnempPrb,
     "UnempPrbRet": UnempPrbRet,
-    "T_retire": 0,#retirement_t,
-    "T_age": terminal_t+1,
+    "T_retire": 0,  # retirement_t,
+    "T_age": terminal_t + 1,
     "IncUnemp": IncUnemp,
     "IncUnempRet": IncUnempRet,
     "aXtraMin": aXtraMin,
@@ -240,8 +244,8 @@ init_calibration = {
     "neutral_measure": True,  # Harmemberg
     "sim_common_Rrisky": False,  # idiosyncratic risky return
     "WealthShift": init_WealthShift,
-    "BeqMPC" : init_BeqMPC,
-    "BeqInt" : init_BeqInt,
+    "BeqMPC": init_BeqMPC,
+    "BeqInt": init_BeqInt,
     "ChiFromOmega_N": 501,  # Number of gridpoints in chi-from-omega function
     "ChiFromOmega_bound": 15,  # Highest gridpoint to use for it
 }
@@ -276,7 +280,7 @@ TrueElnR_real = TrueElnR_nom - logInflation
 # }
 
 init_subjective_stock = {
-    "Rfree": terminal_t*[Rfree],
+    "Rfree": terminal_t * [Rfree],
     "RiskyAvg": np.exp(ElnR_real + 0.5 * VlnR),
     "RiskyStd": np.sqrt(np.exp(2 * ElnR_real + VlnR) * (np.exp(VlnR) - 1)),
     "RiskyAvgTrue": init_calibration["RiskyAvg"],
@@ -284,10 +288,10 @@ init_subjective_stock = {
 }
 
 true_stock_params = {
-    "Rfree": terminal_t*[Rfree],
+    "Rfree": terminal_t * [Rfree],
     "RiskyAvg": init_calibration["RiskyAvg"],
     "RiskyStd": init_calibration["RiskyStd"],
-    }
+}
 
 # from Tao's JMP
 init_subjective_labor = {
