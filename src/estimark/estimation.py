@@ -1082,13 +1082,13 @@ if __name__ == "__main__":
     
     estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
 
-    # estimate(
-    #     agent_name=local_agent_name,
-    #     params_to_estimate=local_params_to_estimate,
-    #     estimate_model=local_estimate_model,
-    #     compute_se_bootstrap=local_compute_se_bootstrap,
-    #     compute_sensitivity=local_compute_sensitivity,
-    #     make_contour_plot=local_make_contour_plot,
-    #     save_dir=local_save_dir,
-    # )
+    estimate(
+        agent_name=local_agent_name,
+        params_to_estimate=local_params_to_estimate,
+        estimate_model=local_estimate_model,
+        compute_se_bootstrap=local_compute_se_bootstrap,
+        compute_sensitivity=local_compute_sensitivity,
+        make_contour_plot=local_make_contour_plot,
+        save_dir=local_save_dir,
+    )
     
