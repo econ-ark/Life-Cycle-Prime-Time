@@ -402,7 +402,7 @@ wheels = [
 
 [[package]]
 name = "estimark"
-version = "0.1.dev104+g774584e.d20250724"
+version = "0.1.dev106+g8d82b62.d20250724"
 source = { editable = "." }
 dependencies = [
     { name = "econ-ark" },

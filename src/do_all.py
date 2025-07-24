@@ -47,6 +47,8 @@ still run.
 
 from __future__ import annotations
 
+import logging
+
 from estimark.estimation import estimate
 from estimark.options import (
     all_replications,
@@ -54,6 +56,9 @@ from estimark.options import (
     low_resource,
     medium_resource,
 )
+
+# Configure logging to show INFO level messages
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 
 # Ask the user which replication to run, and run it:
@@ -111,30 +116,30 @@ def run_replication():
     elif which_model == "5":
         agent_name = "WealthPortfolio"
     else:
-        print("Invalid model choice.")
+        logging.error("Invalid model choice.")
         return
 
     if which_replication == "q":
         return
 
     if which_replication == "1" or which_replication == "":
-        print("Running low-resource replication...")
+        logging.info("Running low-resource replication...")
         replication_specs.update(**low_resource)
 
     elif which_replication == "2":
-        print("Running medium-resource replication...")
+        logging.info("Running medium-resource replication...")
         replication_specs.update(**medium_resource)
 
     elif which_replication == "3":
-        print("Running high-resource replication...")
+        logging.info("Running high-resource replication...")
         replication_specs.update(**high_resource)
 
     elif which_replication == "4":
-        print("Running all replications...")
+        logging.info("Running all replications...")
         replication_specs.update(**all_replications)
 
     else:
-        print("Invalid replication choice.")
+        logging.error("Invalid replication choice.")
         return
 
     if subjective_markets == "":
@@ -144,11 +149,11 @@ def run_replication():
 
         if subjective_markets == "2" or subjective_markets == "4":
             agent_name += "(Stock)"
-            print("Adding subjective stock market beliefs...")
+            logging.info("Adding subjective stock market beliefs...")
 
         if subjective_markets == "3" or subjective_markets == "4":
             agent_name += "(Labor)"
-            print("Adding subjective labor market beliefs...")
+            logging.info("Adding subjective labor market beliefs...")
 
         agent_name += "Market"
 

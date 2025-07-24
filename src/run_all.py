@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+import logging
+
 from estimark.estimation import estimate
 from estimark.options import low_resource
+
+# Configure logging to show INFO level messages
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 agent_names = [
     "Portfolio",
@@ -22,11 +27,11 @@ def run_replication():
             replication_specs["agent_name"] = temp_agent_name
             replication_specs["save_dir"] = "docs/tables/TRP"
 
-            print("Model: ", replication_specs["agent_name"])
+            logging.info("Model: %s", replication_specs["agent_name"])
 
             estimate(**replication_specs)
 
-    print("All replications complete.")
+    logging.info("All replications complete.")
 
 
 if __name__ == "__main__":

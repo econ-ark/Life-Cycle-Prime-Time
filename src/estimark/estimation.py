@@ -11,6 +11,7 @@ income as defined in ConsIndShockModel.
 from __future__ import annotations
 
 import csv
+import logging
 from pathlib import Path
 from time import time
 
@@ -50,6 +51,14 @@ from estimark.parameters import (
 # SCF 2004 data on household wealth
 from estimark.scf import scf_data
 from estimark.snp import snp_data
+
+# Configure logging to show INFO level messages immediately
+# Force reconfiguration in case other modules already configured logging
+root_logger = logging.getLogger()
+if root_logger.handlers:
+    root_logger.handlers.clear()
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+root_logger.setLevel(logging.INFO)
 
 # =====================================================
 # Define objects and functions used for the estimation
@@ -257,7 +266,7 @@ def get_empirical_moments(agent_name):
         groups="age_group",
         mapping=age_mapping,
     )
-    emp_moments = {key: float(emp_moments[key]) for key in emp_moments}
+    emp_moments = {key: float(emp_moments[key].item()) if hasattr(emp_moments[key], 'item') else float(emp_moments[key]) for key in emp_moments}
 
     # Add share moments if agent is a portfolio type
     if "Portfolio" in agent_name:
@@ -306,7 +315,7 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
         if hasattr(agent, key):
             agent_params.append(key)
         else:
-            print(f"Agent {agent_name} does not have parameter: {key}")
+            logging.warning(f"Agent {agent_name} does not have parameter: {key}")
 
     # start from previous estimation results if available
     csv_file_path = save_dir / (agent_name + "_estimate_results.csv")
@@ -536,7 +545,7 @@ def calculate_se_bootstrap(
 
         # Report progress of the bootstrap
     if verbose:
-        print(
+        logging.info(
             f"Finished bootstrap estimation #{n + 1} of {n_draws} in {t_now - t_start} seconds ({t_now - t_0} cumulative)",
         )
 
@@ -578,10 +587,10 @@ def do_estimate_model(
     statement1 = f"{statement1:^{max_len}}"
     statement2 = f"{statement2:^{max_len}}"
 
-    print(dash_line)
-    print(statement1)
-    print(statement2)
-    print(dash_line)
+    logging.info(dash_line)
+    logging.info(statement1)
+    logging.info(statement2)
+    logging.info(dash_line)
 
     upper_bounds = {
         key: value
@@ -633,10 +642,10 @@ def do_estimate_model(
     estimates = [f"{key} = {value:.3f}" for key, value in model_estimate.items()]
     statement3 = "Estimated values: " + ", ".join(estimates)
     dash_len = max(len(statement1), len(statement2), len(statement3))
-    print(statement1)
-    print(statement2)
-    print(statement3)
-    print("-" * dash_len)
+    logging.info(statement1)
+    logging.info(statement2)
+    logging.info(statement3)
+    logging.info("-" * dash_len)
 
     # Create the simple estimate table
     estimate_results_file = save_dir / (agent.name + "_estimate_results.csv")
@@ -669,15 +678,15 @@ def do_compute_se_boostrap(
     # TODO: WRITE DOCSTRING
 
     # Estimate the model:
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print(
+    logging.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    logging.info(
         f"Computing standard errors using {bootstrap_size} bootstrap replications.",
     )
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    logging.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
     t_bootstrap_guess = time_to_estimate * bootstrap_size
     minutes, seconds = divmod(t_bootstrap_guess, 60)
-    print(f"This will take approximately {int(minutes)} min, {int(seconds)} sec.")
+    logging.info(f"This will take approximately {int(minutes)} min, {int(seconds)} sec.")
 
     t_start_bootstrap = time()
     std_errors = calculate_se_bootstrap(
@@ -692,9 +701,9 @@ def do_compute_se_boostrap(
 
     # Calculate minutes and remaining seconds
     minutes, seconds = divmod(time_to_bootstrap, 60)
-    print(f"Time to bootstrap: {int(minutes)} min, {int(seconds)} sec.")
+    logging.info(f"Time to bootstrap: {int(minutes)} min, {int(seconds)} sec.")
 
-    print(f"Standard errors: DiscFac--> {std_errors[0]}, CRRA--> {std_errors[1]}")
+    logging.info(f"Standard errors: DiscFac--> {std_errors[0]}, CRRA--> {std_errors[1]}")
 
     # Create the simple bootstrap table
     bootstrap_results_file = save_dir + agent.name + "_bootstrap_results.csv"
@@ -717,9 +726,9 @@ def do_compute_se_boostrap(
 def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
     # TODO: WRITE DOCSTRING
 
-    print("``````````````````````````````````````````````````````````````````````")
-    print("Computing sensitivity measure.")
-    print("``````````````````````````````````````````````````````````````````````")
+    logging.info("``````````````````````````````````````````````````````````````````````")
+    logging.info("Computing sensitivity measure.")
+    logging.info("``````````````````````````````````````````````````````````````````````")
 
     # Find the Jacobian of the function that simulates moments
 
@@ -765,9 +774,9 @@ def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
 def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
     # TODO: WRITE DOCSTRING
 
-    print("``````````````````````````````````````````````````````````````````````")
-    print("Creating the contour plot.")
-    print("``````````````````````````````````````````````````````````````````````")
+    logging.info("``````````````````````````````````````````````````````````````````````")
+    logging.info("Creating the contour plot.")
+    logging.info("``````````````````````````````````````````````````````````````````````")
     t_start_contour = time()
     DiscFac_star, CRRA_star = model_estimate
     grid_density = 20  # Number of parameter values in each dimension
@@ -795,7 +804,7 @@ def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
 
     # Calculate minutes and remaining seconds
     minutes, seconds = divmod(time_to_contour, 60)
-    print(f"Time to contour: {int(minutes)} min, {int(seconds)} sec.")
+    logging.info(f"Time to contour: {int(minutes)} min, {int(seconds)} sec.")
 
     plt.colorbar(smm_contour)
     plt.plot(model_estimate[1], model_estimate[0], "*r", ms=15)
@@ -914,7 +923,7 @@ def estimate(
     if emp_moments is None:
         emp_moments, weight_sum = get_empirical_moments(agent_name)
 
-        print("Calculated empirical moments.")
+        logging.info("Calculated empirical moments.")
 
     weights = calculate_weights(emp_moments, weight_sum)
 
@@ -925,7 +934,7 @@ def estimate(
     if moments_cov is None and estimate_method == "msm":
         moments_cov = get_moments_cov(agent_name, emp_moments)
 
-        print("Calculated moments covariance matrix.")
+        logging.info("Calculated moments covariance matrix.")
 
     ############################################################
     # Estimate model
@@ -1079,6 +1088,8 @@ def prepare_model(agent_name, params_to_estimate):
 
 
 if __name__ == "__main__":
+    logging.info("Starting estimation script...")
+    
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
     local_agent_name = "WealthPortfolioW"
