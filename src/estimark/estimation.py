@@ -355,7 +355,7 @@ def simulate_moments(params, agent, emp_moments):
     # ensure subjective beliefs are used for solution
     if "(Stock)" in agent.name and "Portfolio" in agent.name:
         agent.assign_parameters(**init_subjective_stock)
-        agent.update_RiskyDstn()
+        agent.construct('RiskyDstn','ShockDstn')
     if "(Labor)" in agent.name:
         agent.assign_parameters(**init_subjective_labor)
         agent.update_income_process()
@@ -372,7 +372,7 @@ def simulate_moments(params, agent, emp_moments):
     # simulate with true parameters (override subjective beliefs)
     if "(Stock)" in agent.name and "Portfolio" in agent.name:
         agent.assign_parameters(**true_stock_params)
-        agent.update_RiskyDstn()
+        agent.construct('RiskyDstn','ShockDstn')
     # for labor keep same process as subjective beliefs
     if "(Labor)" in agent.name:
         agent.TranShkStd = init_subjective_labor["TranShkStd"]
@@ -1069,7 +1069,7 @@ def prepare_model(agent_name, params_to_estimate):
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
-    local_agent_name = "WealthPortfolioW(Stock)"
+    local_agent_name = "WealthPortfolioW"
     local_params_to_estimate = ["CRRA","WealthShare"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
@@ -1082,13 +1082,13 @@ if __name__ == "__main__":
     
     estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
 
-    estimate(
-        agent_name=local_agent_name,
-        params_to_estimate=local_params_to_estimate,
-        estimate_model=local_estimate_model,
-        compute_se_bootstrap=local_compute_se_bootstrap,
-        compute_sensitivity=local_compute_sensitivity,
-        make_contour_plot=local_make_contour_plot,
-        save_dir=local_save_dir,
-    )
+    # estimate(
+    #     agent_name=local_agent_name,
+    #     params_to_estimate=local_params_to_estimate,
+    #     estimate_model=local_estimate_model,
+    #     compute_se_bootstrap=local_compute_se_bootstrap,
+    #     compute_sensitivity=local_compute_sensitivity,
+    #     make_contour_plot=local_make_contour_plot,
+    #     save_dir=local_save_dir,
+    # )
     
