@@ -411,14 +411,18 @@ To be clear, the aim of that literature was to explain the holding of $\lqdt$ de
 ### Wealth In the Utility Function: Cobb-Douglas Form
 
 But for the question of how to incorporate wealth in the utility function, [](doi:10.2139/ssrn.4693176) proposed a mathematically identical formulation in which assets $\aNrm$ takes the place of $\lqdt$ in the Rotemberg-Poterba utility function.[^mora]
-The Cobb-Douglas functional form is commonly used in other contexts, but does not seem to have been previously explored as a formulation for how to put a direct wealth-holding motive in the utility function.
+The Cobb-Douglas functional form is commonly used in other contexts, but does not seem to have been previously explored as a formulation for how to put a direct wealth-holding motive in the utility function. 
+
+# which allows us to normalize by permanent income
 
 [^mora]: The question of whether $\aNrm$ or $\mNrm$ should be in the utility function is of little importance; here we prefer $\aNrm$ because assets after consumption are immune to considerations of whether the time period is a year, a quarter, or a month.
 
 % AL: Add citation to the 1998 paper you found
 
 The upshot is that if we credit the proposition that the ownership of wealth yields utility, then there is good precedent for the functional form of [](doi:10.2139/ssrn.4693176).
-Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function.
+Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function; note that, unlike many other specifications for wealth in the utility function, the TRP utility function maintains the homotheticity that is so useful for the computational solution of such models.
+
+
 It is a relatively simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised utility and value functions of the problem are:
 \begin{align}
     \uFunc_t(\cNrm_t, \aNrm_t) & = \frac{\left(\cNrm_t^{1-\delta}\aNrm_t^{\delta}\right)^{1-\CRRA}}{1-\CRRA}, \\
