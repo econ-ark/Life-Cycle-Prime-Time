@@ -24,7 +24,6 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.13",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -51,6 +50,8 @@ test = [
 ]
 dev = [
   { include-group = "test" },
+  "group",
+  "pre-commit",
 ]
 docs = [
   "sphinx>=7.0",
@@ -58,6 +59,7 @@ docs = [
   "sphinx_copybutton",
   "sphinx_autodoc_typehints",
   "furo>=2023.08.17",
+  "mystmd>=1.6.0",
 ]
 
 
