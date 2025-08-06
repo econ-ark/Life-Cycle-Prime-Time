@@ -8,7 +8,7 @@ In this appendix, we provide additional details for how the intertemporal optimi
 Each of our models has two continuous control variables-- consumption $\cNrm_t$ and the risky asset share $\varsigma_t$-- that are chosen simultaneously, but we solve them as if they are chosen sequentially. The agent's state variable when they choose $\varsigma_t$ is thus their assets after buying consumption, $\aNrm_t = \mNrm_t - \cNrm_t$. The agent's problem at this point is:
 
 \begin{align}
-\mathfrak{v}_{t}(\aNrm_t) & = \max_{\varsigma_t \in [0,1]}~~ \Ex_{t}\left[ \pmb{\beta}_{t+1} \vFunc_{t+1}(\Rport_{t+1} \aNrm_t + \theta_{t+1}) \right] ~~ \text{s.t.} ~~ \Rport_{t+1} = \Rfree + (\Risky_{t+1 }-\Rfree)\varsigma.
+\mathfrak{v}_{t}(\aNrm_t) & = \max_{\varsigma \in [0,1]}~~ \Ex_{t}\left[ \pmb{\beta}_{t+1} \vFunc_{t+1}(\Rport_{t+1} \aNrm_t + \theta_{t+1}) \right] ~~ \text{s.t.} ~~ \Rport_{t+1} = \Rfree + (\Risky_{t+1 }-\Rfree)\varsigma.
 \end{align}
 
 Note that the survival probability $\Alive_{t+1}$ is *not* included in this problem because it is a constant scaling factor that cannot affect the optimal choice of $\varsigma_t$. Likewise, the warm-glow bequest motive $e(\aNrm_t)$ is also irrelevant because it is constant with respect to $\varsigma$.
@@ -25,7 +25,7 @@ The left-hand side is monotone in $\varsigma$ and thus the FOC has at most one i
 
 2. For each $\aNrm$ in that grid, evaluate the left-hand side of the FOC above. If it is less than or equal to zero, then $\varsigma = 1$ for that gridpoint. Otherwise, continue.
 
-3. Solve the FOC for $\varsigma$ using a standard numeric rootfinder (e.g.\ Brent's method), bounded above by 1 and below by the Samuelson risky asset share.
+3. Solve the FOC for $\varsigma$ using a standard numeric rootfinder (e.g., Brent's method), bounded above by 1 and below by the Samuelson risky asset share.
 
 @Samuelson1969 characterized the optimal risky asset share in the absence of labor income risk, which is also the lower limit of the risky asset share as $\aNrm$ becomes arbitrarily large (and thus labor income risk becomes increasingly irrelevant). This value can thus be used both to bound the search for an interior solution to the FOC, and in the extrapolation of the risky share policy function above the top gridpoint. Specifically, we construct the policy function as a linear interpolant over the $(\aNrm, \varsigma)$ gridpoints with an exponential decay extrapolation to the Samuelson limit above the top gridpoint.
 
@@ -135,7 +135,7 @@ The domain of the function we want to approximate is $\omega > 0$ or $\omega \in
 
 By construction, $f$ is an approximation of the mapping from $\omega$ to $\chi$ implicitly defined by @eq:FOC-WIU, by successively applying the logarithm to $\omega$, the interpolant from $\log(\omega)$ to $z$, and the logit transformation to recover $\chi$. The approximation is extremely accurate, even on the extrapolated region on $\omega$, because the underlying mapping from $\log(\omega)$ to $z$ approaches linearity on both ends. Conveniently, the $f$ function depends on only $\CRRA$ and $\delta$ and can be constructed once for all periods of the life-cycle.
 
-With the mapping $f : \omega \longrightarrow \chi$ in hand, we can now describe our algorithm for solving for optimal consumption under wealth-in-utility preferences:
+With the mapping $f : \omega \rightarrow \chi$ in hand, we can now describe our algorithm for solving for optimal consumption under wealth-in-utility preferences:
 
 1. Fix an exogenous grid of $\aNrm_t$ values from $0$ to a large value (say, a wealth-to-income ratio of 100); this can be the same or a different grid from above.
 
