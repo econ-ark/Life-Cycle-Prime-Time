@@ -1,5 +1,5 @@
 ---
-title: Life Cycle Modeling is (Almost) \\ Ready for Prime Time
+title: Life Cycle Modeling is \\ Ready for Prime Time
 exports:
     - format: tex+pdf
       template: arxiv_nips
@@ -17,7 +17,7 @@ The "life cycle model" of optimal saving for retirement is familiar to anyone wh
 When hiring a financial advisor, such people probably think the advisor's job is to tailor optimal life-cycle-model choices to their particular circumstances.
 But academics and advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic -- for example, most such models imply that retirees should plan to run their wealth down to zero or some small amount and then (optimally!) live pension-check to pension-check in their old age (at least approximately).
 This paper makes the case that recent developments in the economics literature have finally given us the tools and insights required to construct rigorous life cycle models whose advice is sensible.
-We provide an example of a simple model that can solve a number of problems by putting wealth in the utility function.
+We provide an example of a simple model that can solve a number of problems by putting wealth in the utility function, which captures the intuitive desire for liquidity and security that standard models often overlook.
 
 +++
 
@@ -30,7 +30,7 @@ That is, the models yield implausible answers to questions about how much wealth
 Indeed, the subtitle of a recent paper by [](doi:10.3905/jor.2023.10.3.071) captures the current state of affairs nicely: "Why Practitioners Have Not Adopted the Lifecyle Model -- Yet"; see also the literature review in [](doi:10.1146/annurev-economics-080315-015127).
 
 In this paper, we argue that the elements are already available to construct a model that "practitioners can adopt."
-All that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients.
+All that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients, particularly their understanding that clients often resist aggressive drawdowns of wealth late in life.
 Our paper's central contribution is to provide a small [open-source computational model](https://github.com/econ-ark/life-cycle-prime-time) that incorporates some of the features that make it possible to build rigorous optimizing life cycle models whose advice is not obviously wrong.
 
 We begin with a (very) brief literature synopsis, then present a set of models that illustrate the difficulty of matching empirical facts with the life-cycle approach.
@@ -88,10 +88,10 @@ It would be interesting to see how our results might change if we were to includ
 Furthermore, the drawdown failure is also present in other countries whose social insurance systems are much more generous than the U.S., so it seems unlikely that uninsurable medical risk is a sufficient explanation.
 
 We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure (again see [](doi:10.1146/annurev-economics-080315-015127)).
-In the [Estimation](#estimation) section we find that in order for the bequest motive to explain the drawdown failure, the strength of that motive has to be extremely strong - so much so that even early in their working lives the primary motivation for saving is for the accumulation of a bequest (rather than, say, to sustain one's own consumption in retirement). (Note that @10.2139/ssrn.304721 finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
+In the [Estimation](#estimation) section we find that in order for the bequest motive to explain the drawdown failure, the strength of that motive has to be extremely and implausibly strong - so much so that even early in their working lives the primary motivation for saving is for the accumulation of a bequest (rather than, say, to sustain one's own consumption in retirement). (Note that @10.2139/ssrn.304721 finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
 
 This leads us into more speculative territory.
-If what consumers care most about is to hold wealth for "Liquidity / The Future," but that wealth is not explainable by precautionary saving against measurable shocks, a potential interpretation is that consumers value the ownership of wealth *in and of itself*.
+If what consumers care most about is to hold wealth for "Liquidity / The Future," but that wealth is not explainable by precautionary saving against measurable shocks, a potential interpretation is that consumers value the ownership of wealth *in and of itself*. This interpretation has the advantage of being consistent with consumers' stated preferences for liquidity.
 After fleshing out this idea a bit, we propose a final model that makes wealth a direct input to the utility function in a different way than in the existing literature.
 
 The main quantitative result of this paper is to show that this final model does a much better job of jointly matching the wealth profile and portfolio choices than does the Life Cycle Portfolio model. While it does not match the drawdown failure as well as the Warm Glow Bequest (WGB) model does, the WGB model fits the data only when we allow an implausibly intense bequest motive.
@@ -107,7 +107,7 @@ But the broad purpose of our exercise is not to defend any particular modeling s
 
 The academic literature on life-cycle modeling is vast, and we cannot hope to do it justice (even in the broader sampling in the [literature appendix](#lit-review)).
 But the intrinsic nature of papers in any academic literature is to focus narrowly on one specific question at a time.
-Here, our goal is to examine the "big picture" question of what elements are needed to craft a model that can provide credible advice to retirees about spending and portfolio choices, while remaining reasonably consistent with the relevant well-established facts from the academic literature, as well as one new kind of further evidence that we view as vital: the experience of financial advisors themselves in interactions with their clients.
+Here, our goal is to examine the "big picture" question of what elements are needed to craft a model that can provide credible advice to retirees about spending and portfolio choices, while remaining reasonably consistent with the relevant well-established facts from the academic literature, as well as one new kind of further evidence that we view as vital: the experience of financial advisors themselves in interactions with their clients. This practitioner perspective helps ground the optimization problem in the realities of client preferences.
 We have been told,[^nodrawdown] for example, that a good way to get fired as a financial advisor is to recommend the LCP model's conclusion that it is optimal for retirees to plan to run their wealth down to zero and then live pension-check to pension-check.
 
 [^nodrawdown]: Personal communication, James Tzitzouris with Christopher Carroll, 2024-05-15.
@@ -115,7 +115,7 @@ We have been told,[^nodrawdown] for example, that a good way to get fired as a f
 For purposes like 401(k) or other pension plan design, the optimization problem should be constrained to be one that satisfies the legal obligations employers have to their employees.
 For example, the employer's contract is with the employee, not with the employee's heirs.
 The employer's duty is to craft a plan that is expected to permit the employee to have adequate resources for their own expenditures during retirement.
-These legal considerations effectively prohibit the advisor from including a bequest motive in its optimization objective.[^planprovideradvantage]
+These legal considerations often constrain the advisor from including a bequest motive in the plan's default optimization objective.[^planprovideradvantage]
 
 [^planprovideradvantage]: One way to accommodate this requirement would be to limit the empirical sample used to estimate the model to childless people.
 This might not be feasible with public datasets like the SCF because the sample sizes might be too small; but with large administrative data of the kind available to the IRS it should be possible.
@@ -215,7 +215,7 @@ Following the standard Bellman representation, if the agent assumes that they *w
 \end{equation}
 
 Under the assumptions we have made about the structure of the utility function (homotheticity), budget constraint (linearity and geometric returns), and income process (permanent and transitory shocks) it is possible to recast the problem entirely in terms of *ratios* of the model variables to permanent income $\pLvl$.
-So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
+So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math). This normalization is crucial because it reduces the complexity of the problem; instead of tracking both resources and income levels, we only need to track their ratio.
 This greatly simplifies the problem, as the solution will be homothetic with respect to permanent income level: $\pmb{\cFunc}_t(\mLvl_t, \pLvl_t) = \pLvl_t \cFunc_t(\mNrm_t)$.
 Normalizing the Bellman value function by $\pLvl_t$ requires dividing by $\pLvl^{1-\CRRA}$ (see @BufferStockTheory for details), yielding:
 
@@ -302,7 +302,7 @@ A second common modification to preferences considered by a substantial literatu
 Such preferences have been proposed as a way to solve various puzzles related to the relatively high rate of return that equity investments have exhibited over time.
 
 Both of these formulations are motivated mostly by the goal of matching macroeconomic data.
-In our view, however, they are both difficult to defend given some facts we can robustly observe in microeconomic data.
+In our view, however, they are both difficult to defend given some facts we can robustly observe in microeconomic data. The parameter values required to match macroeconomic puzzles often imply counterfactual behavior at the household level.
 In particular, both models would imply that households would be extremely eager to buy insurance to smooth away almost any risk to their microeconomic circumstances.
 While people do typically have insurance against large risks (fire insurance for the home, auto insurance for the car), the parameter values in these models required to match the macroeconomic facts would justify consumers in spending a large fraction of their income on insurance of all kinds.
 One particular example stands out: Households with either strong habits or a high Epstein-Zin instantaneous coefficient of relative risk aversion would be extremely eager to buy private unemployment insurance to supplement the default UI system provided by the state.
@@ -366,7 +366,7 @@ In order for a model to be credible, its implications would need to comport with
 Our aim here is to take a first step in that direction, by constructing a model that is at least consistent with the responses of retirees.
 
 The table below presents the responses to this question for college-educated households older than age 70 from the 1995 to the 2022 waves of the SCF.
-If bequests were a primary motivation for saving for most (college-educated) people, it would be surprising for them to mention this motivation so rarely.
+If bequests were a primary motivation for saving for most (college-educated) people, it would be surprising for them to mention this motivation so rarely. The "Family" motivation, which includes bequests, accounts for only 6% of responses.
 Given these (and other) objections to the bequest motive, as well as the problems of the model without a bequest motive, it is natural to consider alternative modifications to the framework.
 
 (most-important-reason)=
@@ -418,7 +418,7 @@ The Cobb-Douglas functional form is commonly used in other contexts, but does no
 % AL: Add citation to the 1998 paper you found
 
 The upshot is that if we credit the proposition that the ownership of wealth yields utility, then there is good precedent for the functional form of [](doi:10.2139/ssrn.4693176).
-Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function.
+Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function. This functional form is attractive because it maintains the homotheticity required for normalization and treats wealth and consumption as complements; the utility gained from holding wealth is greater when consumption is higher, and vice-versa, capturing a nuanced view of financial well-being.
 It is a relatively simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised utility and value functions of the problem are:
 \begin{align}
     \uFunc_t(\cNrm_t, \aNrm_t) & = \frac{\left(\cNrm_t^{1-\delta}\aNrm_t^{\delta}\right)^{1-\CRRA}}{1-\CRRA}, \\
@@ -429,7 +429,7 @@ We are open to the possibility that wealth in the utility function is a reduced 
 In particular, the fact that in our SCF table above, "Liquidity / The Future" is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the @Ameriks2020jpe calculations about nursing home expense risks -- constitute only a fraction of the risks retirees might worry about.
 Maintaining a buffer stock of wealth to protect oneself against "unknown unknowns" is plainly reasonable, but also nearly impossible to calibrate in a quantitative model.
 That is, we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of "unknown unknowns".
-Indeed, even if you knew those answers, they would be, at best, "known unknowns."
+Indeed, even if you knew those answers, they would be, at best, "known unknowns." Directly incorporating wealth into the utility function may serve as a tractable proxy for this profound uncertainty aversion.
 
 ## Comparisons to Other Models Familiar to Practitioners
 
@@ -516,7 +516,7 @@ The `tranquilo` optimizer has many attractive features, such as being able to ev
 ```{include} parameters.tex
 ```
 
-For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from putting all their assets in the risky form.
+For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from holding excessively risky portfolios (often 100% equities) early in life.
 In general, "typical" values for the CRRA coefficient (from experimental evidence and other contexts) are considered to be between 1 and 5.
 The "criterion" column of @parameters lists the minimum value that the objective function achieves for each model-- the smallest weighted squared distance between simulated moments and empirical moments.
 The LCP model performs poorly by this measure, as illustrated in the figures.
@@ -526,9 +526,9 @@ Even then, the wealth drawdown is so rapid that the best the LCP model can achie
 
 ```{figure} figures/WealthMomentFit
 :label: medwealth
-:align: center 
+:align: center
 
-Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for college-educated households in the Survey of Consumer Finances. Wealth is `networth` and income consists of wages, social security, and retirement income. 
+Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for college-educated households in the Survey of Consumer Finances. Wealth is `networth` and income consists of wages, social security, and retirement income.
 ```
 
 As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
@@ -548,30 +548,30 @@ This discrepancy might arise because of the simplified approach we have used her
 
 ```{figure} figures/StrongBequestMotive
 :label: nobequest
-:align: center 
+:align: center
 
-Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid orange) versus with the bequest motive turned off (dashed orange), as compared to college-educated households in the SCF (red). The bequest motive is (implausibly) a strong motivator of wealth accumulation among working age agents.  
+Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid orange) versus with the bequest motive turned off (dashed orange), as compared to college-educated households in the SCF (red). The bequest motive is (implausibly) a strong motivator of wealth accumulation among working age agents.
 ```
 
 Unsurprisingly, the drawdown failure returns in @nobequest because retirees have no incentive to retain wealth as the likelihood of mortality rises.
 However, agents *also* drastically reduce their saving behavior in their working years and don't build nearly as large a nest egg for retirement.
 This is what we mean by an "implausibly strong" bequest motive: it drives wealth accumulation even in middle age, not just among the elderly.
-Recall from the discussion of the [Survey of Consumer Finances](https://doi.org/10.17016/8799) and @jaherGilded that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of *40 year olds* driven by the urge to bequeath.
+Recall from the discussion of the [Survey of Consumer Finances](https://doi.org/10.17016/8799) and @jaherGilded that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of *40 year olds* driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown data, it does so for the wrong reasons.
 Even if a model can *mechanically* reproduce observed data features or hit empirical targets, that does not make it "right" or "true," especially if its underlying logic is implausible and contradictory to qualitative evidence.
 And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty *to the client*.
 We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are *multiple ways* for life-cycle models to generate more realistic wealth trajectories in retirement.
 
 ```{figure} figures/ShareMomentFit
 :label: medshare
-:align: center 
+:align: center
 
-Median Portfolio Share for different portfolio models. The red line shows the target moments from @Aboagye2024. 
+Median Portfolio Share for different portfolio models. The red line shows the target moments from @Aboagye2024.
 ```
 
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
 The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.18 and a wealth share of utility $\delta$ coefficient of 0.25.
-This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower than that of the standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature.
-As seen in @medwealth, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly.
+This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower, and thus more plausible, than that of the standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature. In the LCP model, high risk aversion is the primary tool to prevent excessive investment in risky assets. In the WIUF model, however, the direct utility from wealth provides an additional motive to hold safe assets (to ensure a minimum level of wealth utility), reducing the need for extreme risk aversion to match the observed portfolio shares.
+As seen in @medwealth, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly. While the WIUF model still predicts a faster drawdown in late retirement than observed in the SCF data, it represents a substantial improvement over the standard LCP model and avoids the behavioral implausibility required by the Warm-Glow model.
 Compared to the Warm-Glow model, the WIUF / TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity *now*, rather than saving at age 35 to leave a large bequest at age 85.
 
 Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can somewhat better match the target risky assets share moments (red dashed line in @medshare), which come from @Aboagye2024.
@@ -596,7 +596,7 @@ To best fit the target moments, we estimate $\CRRA = 3.20$ for the Warm-Glow Por
 
 ```{figure} figures/StockBeliefsShare
 :label: subjbeliefs
-:align: center 
+:align: center
 
 Median Risky Asset Share under parameter estimates with incorrect subjective beliefs about stock returns. Solid lines show fitted portfolio shares if agents *believe* stocks are much riskier; dash-dot lines show portfolio shares with same estimated preferences but *correct* beliefs about stock returns. The red dashed line shows the target moments from @Aboagye2024.
 ```
@@ -605,7 +605,7 @@ If agents have incorrect subjective beliefs, it's reasonable to ask what the mod
 That is, use the preference parameters estimated under subjective stock returns, but give the agents correct beliefs as in the original estimation.
 Risky asset shares for both sets of beliefs are plotted on @subjbeliefs.
 Unsurprisingly, agents would want to hold a considerably greater share of their wealthy in risky assets if they learned that stock returns have much lower variance than they previously believed.
-The upshot is that if financial advisers want to use life-cycle models to provide normative advice to their clients for how "best" to allocate their wealth over time, and to inform those models with inferences about preferences from empirical observations, they must think carefully about the beliefs that generated the observed behavior.
+The upshot is that if financial advisers want to use life-cycle models to provide normative advice to their clients for how "best" to allocate their wealth over time, and to inform those models with inferences about preferences from empirical observations, they must think carefully about the beliefs that generated the observed behavior. This suggests a crucial role for advisors not just in optimization, but also in educating clients about realistic market expectations, as optimal advice depends heavily on the client's beliefs about risk and return.
 
 
 # Conclusion
@@ -624,5 +624,4 @@ But *by how much* one's stock exposure should be reduced because of house-price 
 It would be a better world if financial advice could be justified as reflecting the mathematically optimal solution to a well-defined problem.
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving were what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
-The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world.
-
+The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world by combining computational rigor with practical insight.
