@@ -1,25 +1,47 @@
-CRRA,6.770797449679756
-time_to_estimate,191.27413392066956
-params,{'CRRA': 6.770797449679756}
-fun,1.2046603474009585
-start_fun,6.826223171709237
-start_params,{'CRRA': 2.0}
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,1
-message,Relative gradient norm smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 0.00027036735010708995, 'relative_params_change': 0.005480082805595775, 'absolute_criterion_change': 0.00032570082590588356, 'absolute_params_change': 0.03710453068416175}, 'five_steps': {'relative_criterion_change': 0.00027036735010708995, 'relative_params_change': 0.005480082805595775, 'absolute_criterion_change': 0.00032570082590588356, 'absolute_params_change': 0.03710453068416175}}"
+CRRA,6.770797449679756
+
+time_to_estimate,191.27413392066956
+
+params,{'CRRA': 6.770797449679756}
+
+fun,1.2046603474009585
+
+start_fun,6.826223171709237
+
+start_params,{'CRRA': 2.0}
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,1
+
+message,Relative gradient norm smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 0.00027036735010708995, 'relative_params_change': 0.005480082805595775, 'absolute_criterion_change': 0.00032570082590588356, 'absolute_params_change': 0.03710453068416175}, 'five_steps': {'relative_criterion_change': 0.00027036735010708995, 'relative_params_change': 0.005480082805595775, 'absolute_criterion_change': 0.00032570082590588356, 'absolute_params_change': 0.03710453068416175}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 6.811841819338822}, {'CRRA': 6.622559279956016}], local_optima=[Minimize with 1 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 1 free parameters terminated.
@@ -43,7 +65,8 @@ The tranquilo_ls algorithm reported: Relative gradient norm smaller than toleran
        3.35267649, 3.37014568, 3.42946148, 3.43365028, 3.46159318,
        3.530382  , 3.54213097, 3.54257533, 3.56190238, 3.64719977,
        3.66178418, 3.7231223 , 4.46433078, 6.54258492, 6.80225906,
-       6.81949855, 6.84326309, 6.84636372, 6.94224648, 7.26030386]))"
+       6.81949855, 6.84326309, 6.84636372, 6.94224648, 7.26030386]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([6.62255928]), radius=0.6622559279956016, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=[0], model=ScalarModel(intercept=1.2059443880313794, linear_terms=array([0.]), square_terms=array([[0.]]), scale=0.6622559279956016, shift=array([6.62255928])), vector_model=VectorModel(intercepts=array([ 0.01725062,  0.08474136,  0.14182011,  0.23311933,  0.31591965,
         0.38517934,  0.42452669,  0.12718645, -0.09456351, -0.15046235,
        -0.54576754, -0.58212952, -0.03965421,  0.01378438,  0.04432147,
@@ -2034,5 +2057,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([6.62255928]
 
        [[0.]],
 
-       [[0.]]]), scale=0.6622559279956016, shift=array([6.62255928])), candidate_index=55, candidate_x=array([6.77079745]), index=55, x=array([6.77079745]), fval=1.2046603474009585, rho=0.11279104368099684, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([46, 53, 54]), old_indices_discarded=array([], dtype=int32), step_length=1.000000000139778e-06, relative_step_length=1.000000000139778, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+       [[0.]]]), scale=0.6622559279956016, shift=array([6.62255928])), candidate_index=55, candidate_x=array([6.77079745]), index=55, x=array([6.77079745]), fval=1.2046603474009585, rho=0.11279104368099684, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([46, 53, 54]), old_indices_discarded=array([], dtype=int32), step_length=1.000000000139778e-06, relative_step_length=1.000000000139778, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

@@ -1,26 +1,49 @@
-CRRA,5.852329302190797
-DiscFac,1.0124294986150977
-time_to_estimate,556.3293361663818
-params,"{'CRRA': 5.852329302190797, 'DiscFac': 1.0124294986150977}"
-fun,1.2316612185957008
-start_fun,6.818558123019295
-start_params,"{'CRRA': 2.0, 'DiscFac': 1.0}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,2
-message,
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 4.0922514699756284e-06, 'relative_params_change': 3.65803414910893e-05, 'absolute_criterion_change': 5.04026743231023e-06, 'absolute_params_change': 0.000214043657681552}, 'five_steps': {'relative_criterion_change': 0.00031934278026587217, 'relative_params_change': 0.01655123345777691, 'absolute_criterion_change': 0.0003933221178920032, 'absolute_params_change': 0.09683508622157327}}"
+CRRA,5.852329302190797
+
+DiscFac,1.0124294986150977
+
+time_to_estimate,556.3293361663818
+
+params,"{'CRRA': 5.852329302190797, 'DiscFac': 1.0124294986150977}"
+
+fun,1.2316612185957008
+
+start_fun,6.818558123019295
+
+start_params,"{'CRRA': 2.0, 'DiscFac': 1.0}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,2
+
+message,
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 4.0922514699756284e-06, 'relative_params_change': 3.65803414910893e-05, 'absolute_criterion_change': 5.04026743231023e-06, 'absolute_params_change': 0.000214043657681552}, 'five_steps': {'relative_criterion_change': 0.00031934278026587217, 'relative_params_change': 0.01655123345777691, 'absolute_criterion_change': 0.0003933221178920032, 'absolute_params_change': 0.09683508622157327}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 6.014051727629246, 'DiscFac': 1.0075072726271295}, {'CRRA': 7.863001331427724, 'DiscFac': 1.006679476729474}, {'CRRA': 7.674667362388229, 'DiscFac': 0.9636820024192239}], local_optima=[Minimize with 2 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 2 free parameters terminated.
@@ -64,7 +87,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
         4.46976401,  4.59216533,  4.70443414,  4.74924058,  4.80025844,
         4.82135282,  4.89394801,  5.06245198,  5.16859446,  5.17445313,
         5.27068682,  5.44117923,  5.51953004,  5.58953241,  5.71160968,
-        6.14946478,  6.81102922, 13.3648944 , 25.42415763, 40.59804225]))"
+        6.14946478,  6.81102922, 13.3648944 , 25.42415763, 40.59804225]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([7.67466736, 0.963682  ]), radius=0.767466736238823, bounds=Bounds(lower=array([1.1, 0.5]), upper=array([20. ,  1.1]))), model_indices=[0], model=ScalarModel(intercept=1.4625969949091455, linear_terms=array([0., 0.]), square_terms=array([[0., 0.],
        [0., 0.]]), scale=0.767466736238823, shift=array([7.67466736, 0.963682  ])), vector_model=VectorModel(intercepts=array([ 0.01554444,  0.07492385,  0.11452383,  0.18732952,  0.24919578,
         0.29099314,  0.30041138, -0.09146679, -0.30648073, -0.33537911,
@@ -7075,5 +7099,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([7.67466736,
         [0., 0.]],
 
        [[0., 0.],
-        [0., 0.]]]), scale=0.767466736238823, shift=array([7.67466736, 0.963682  ])), candidate_index=113, candidate_x=array([5.85233461, 1.01245231]), index=101, x=array([5.8523293, 1.0124295]), fval=1.2316612185957008, rho=-1.2036698647176887, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([101, 111, 112]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0.]]]), scale=0.767466736238823, shift=array([7.67466736, 0.963682  ])), candidate_index=113, candidate_x=array([5.85233461, 1.01245231]), index=101, x=array([5.8523293, 1.0124295]), fval=1.2316612185957008, rho=-1.2036698647176887, accepted=False, new_indices=array([], dtype=int32), old_indices_used=array([101, 111, 112]), old_indices_discarded=array([], dtype=int32), step_length=0.0, relative_step_length=0.0, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

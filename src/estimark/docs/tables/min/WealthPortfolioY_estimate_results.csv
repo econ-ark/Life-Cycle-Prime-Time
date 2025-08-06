@@ -1,27 +1,51 @@
-CRRA,3.6733548448502975
-DiscFac,0.9322335742074318
-WealthShare,0.39795813393194795
-time_to_estimate,601.727778673172
-params,"{'CRRA': 3.6733548448502975, 'DiscFac': 0.9322335742074318, 'WealthShare': 0.39795813393194795}"
-fun,0.27043129145555456
-start_fun,5.593023520490638
-start_params,"{'CRRA': 2.0, 'DiscFac': 1.0, 'WealthShare': 0.05}"
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,3
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 3.082128634886618e-05, 'relative_params_change': 0.002760317538282767, 'absolute_criterion_change': 8.335040271645333e-06, 'absolute_params_change': 0.005896449640137942}, 'five_steps': {'relative_criterion_change': 0.00021768249849534813, 'relative_params_change': 0.011232442903453408, 'absolute_criterion_change': 5.886815919536881e-05, 'absolute_params_change': 0.019376969516853845}}"
+CRRA,3.6733548448502975
+
+DiscFac,0.9322335742074318
+
+WealthShare,0.39795813393194795
+
+time_to_estimate,601.727778673172
+
+params,"{'CRRA': 3.6733548448502975, 'DiscFac': 0.9322335742074318, 'WealthShare': 0.39795813393194795}"
+
+fun,0.27043129145555456
+
+start_fun,5.593023520490638
+
+start_params,"{'CRRA': 2.0, 'DiscFac': 1.0, 'WealthShare': 0.05}"
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,3
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 3.082128634886618e-05, 'relative_params_change': 0.002760317538282767, 'absolute_criterion_change': 8.335040271645333e-06, 'absolute_params_change': 0.005896449640137942}, 'five_steps': {'relative_criterion_change': 0.00021768249849534813, 'relative_params_change': 0.011232442903453408, 'absolute_criterion_change': 5.886815919536881e-05, 'absolute_params_change': 0.019376969516853845}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 4.506213794695473, 'DiscFac': 0.9551693727890795, 'WealthShare': 0.314018154907542}, {'CRRA': 3.7807173937762606, 'DiscFac': 0.8923192273139446, 'WealthShare': 0.4440697436916936}, {'CRRA': 3.2665367923827304, 'DiscFac': 0.9555094073815295, 'WealthShare': 0.3389578427947553}, {'CRRA': 5.8637893770665155, 'DiscFac': 0.9665980293130916, 'WealthShare': 0.34150965604132827}, {'CRRA': 2.712694671846453, 'DiscFac': 0.7531888236302084, 'WealthShare': 0.5851926986312818}], local_optima=[Minimize with 3 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 3 free parameters terminated.
@@ -106,7 +130,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
        9.28719855e+01, 9.49444212e+01, 9.72690491e+01, 1.01814847e+02,
        1.11579923e+02, 1.23524082e+02, 1.35602640e+02, 1.45194589e+02,
        1.58480311e+02, 1.78306483e+02, 1.79862607e+02, 2.07932639e+02,
-       2.30832448e+02, 3.62857270e+02, 4.06102400e+02, 5.06314085e+02]))"
+       2.30832448e+02, 3.62857270e+02, 4.06102400e+02, 5.06314085e+02]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([2.71269467, 0.75318882, 0.5851927 ]), radius=0.27126946718464534, bounds=Bounds(lower=array([1.1 , 0.5 , 0.01]), upper=array([20.  ,  1.1 ,  0.99]))), model_indices=[0], model=ScalarModel(intercept=0.5197401783625767, linear_terms=array([0., 0., 0.]), square_terms=array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.]]), scale=0.27126946718464534, shift=array([2.71269467, 0.75318882, 0.5851927 ])), vector_model=VectorModel(intercepts=array([ 0.09497295,  0.18048065,  0.17405945,  0.16584238,  0.13019912,
@@ -5437,5 +5462,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([2.71269467,
 
        [[0., 0., 0.],
         [0., 0., 0.],
-        [0., 0., 0.]]]), scale=0.27126946718464534, shift=array([2.71269467, 0.75318882, 0.5851927 ])), candidate_index=121, candidate_x=array([3.67335484, 0.93223357, 0.39795813]), index=121, x=array([3.67335484, 0.93223357, 0.39795813]), fval=0.27043129145555456, rho=0.34806088277385744, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([102, 108, 110, 111, 112, 113, 115, 116, 117, 118, 119, 120]), old_indices_discarded=array([107, 109, 114]), step_length=4.139243578912458e-06, relative_step_length=1.0000000000109173, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+        [0., 0., 0.]]]), scale=0.27126946718464534, shift=array([2.71269467, 0.75318882, 0.5851927 ])), candidate_index=121, candidate_x=array([3.67335484, 0.93223357, 0.39795813]), index=121, x=array([3.67335484, 0.93223357, 0.39795813]), fval=0.27043129145555456, rho=0.34806088277385744, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([102, 108, 110, 111, 112, 113, 115, 116, 117, 118, 119, 120]), old_indices_discarded=array([107, 109, 114]), step_length=4.139243578912458e-06, relative_step_length=1.0000000000109173, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

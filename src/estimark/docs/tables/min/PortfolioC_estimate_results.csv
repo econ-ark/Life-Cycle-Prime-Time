@@ -1,25 +1,47 @@
-CRRA,6.477747007551802
-time_to_estimate,165.86772799491882
-params,{'CRRA': 6.477747007551802}
-fun,1.2563322610425147
-start_fun,6.818558123019295
-start_params,{'CRRA': 2.0}
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,1
-message,Absolute criterion change smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,"{'one_step': {'relative_criterion_change': 8.323226476704156e-06, 'relative_params_change': 0.00041556238157457203, 'absolute_criterion_change': 1.0456737938646654e-05, 'absolute_params_change': 0.002691907973695784}, 'five_steps': {'relative_criterion_change': 8.323226476704156e-06, 'relative_params_change': 0.00041556238157457203, 'absolute_criterion_change': 1.0456737938646654e-05, 'absolute_params_change': 0.002691907973695784}}"
+CRRA,6.477747007551802
+
+time_to_estimate,165.86772799491882
+
+params,{'CRRA': 6.477747007551802}
+
+fun,1.2563322610425147
+
+start_fun,6.818558123019295
+
+start_params,{'CRRA': 2.0}
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,1
+
+message,Absolute criterion change smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,"{'one_step': {'relative_criterion_change': 8.323226476704156e-06, 'relative_params_change': 0.00041556238157457203, 'absolute_criterion_change': 1.0456737938646654e-05, 'absolute_params_change': 0.002691907973695784}, 'five_steps': {'relative_criterion_change': 8.323226476704156e-06, 'relative_params_change': 0.00041556238157457203, 'absolute_criterion_change': 1.0456737938646654e-05, 'absolute_params_change': 0.002691907973695784}}"
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 6.474584466044261}, {'CRRA': 6.480020875485975}], local_optima=[Minimize with 1 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Absolute criterion change smaller than tolerance., Minimize with 1 free parameters terminated.
@@ -43,7 +65,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
        3.41035809, 3.422303  , 3.45860034, 3.47317686, 3.49996016,
        3.52670452, 3.59940227, 3.70313529, 4.27970081, 4.52010958,
        4.85706848, 5.17462475, 5.9059673 , 6.79390927, 6.7940324 ,
-       6.79494179, 6.79550473, 6.81102922, 6.82340957, 6.8285947 ]))"
+       6.79494179, 6.79550473, 6.81102922, 6.82340957, 6.8285947 ]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([6.48002088]), radius=0.6480020875485976, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=[0], model=ScalarModel(intercept=1.2563650545402139, linear_terms=array([0.]), square_terms=array([[0.]]), scale=0.6480020875485976, shift=array([6.48002088])), vector_model=VectorModel(intercepts=array([ 0.01558387,  0.08175736,  0.13353522,  0.21998026,  0.29743548,
         0.35942061,  0.39029122,  0.06905976, -0.15273937, -0.20533453,
        -0.59218738, -0.61592886, -0.10143298, -0.04753023, -0.01729362,
@@ -1064,5 +1087,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([6.48002088]
 
        [[0.]],
 
-       [[0.]]]), scale=0.6480020875485976, shift=array([6.48002088])), candidate_index=34, candidate_x=array([6.47774701]), index=34, x=array([6.47774701]), fval=1.2563322610425147, rho=2.2802702629032416, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([23, 28, 30, 31, 32, 33]), old_indices_discarded=array([], dtype=int32), step_length=7.91018173273983e-05, relative_step_length=0.9999999999960637, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+       [[0.]]]), scale=0.6480020875485976, shift=array([6.48002088])), candidate_index=34, candidate_x=array([6.47774701]), index=34, x=array([6.47774701]), fval=1.2563322610425147, rho=2.2802702629032416, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([23, 28, 30, 31, 32, 33]), old_indices_discarded=array([], dtype=int32), step_length=7.91018173273983e-05, relative_step_length=0.9999999999960637, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

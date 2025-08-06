@@ -1,25 +1,47 @@
-CRRA,9.411025434730309
-time_to_estimate,183.31752824783325
-params,{'CRRA': 9.411025434730309}
-fun,1.106189262932828
-start_fun,8.058334020566969
-start_params,{'CRRA': 2.0}
-algorithm,multistart_tranquilo_ls
-direction,minimize
-n_free,1
-message,Relative gradient norm smaller than tolerance.
-success,
-n_fun_evals,
-n_jac_evals,
-n_hess_evals,
-n_iterations,
-status,
-jac,
-hess,
-hess_inv,
-max_constraint_violation,
-history,
-convergence_report,
+CRRA,9.411025434730309
+
+time_to_estimate,183.31752824783325
+
+params,{'CRRA': 9.411025434730309}
+
+fun,1.106189262932828
+
+start_fun,8.058334020566969
+
+start_params,{'CRRA': 2.0}
+
+algorithm,multistart_tranquilo_ls
+
+direction,minimize
+
+n_free,1
+
+message,Relative gradient norm smaller than tolerance.
+
+success,
+
+n_fun_evals,
+
+n_jac_evals,
+
+n_hess_evals,
+
+n_iterations,
+
+status,
+
+jac,
+
+hess,
+
+hess_inv,
+
+max_constraint_violation,
+
+history,
+
+convergence_report,
+
 multistart_info,"MultistartInfo(start_parameters=[{'CRRA': 9.421315127628045}, {'CRRA': 9.488406198925762}], local_optima=[Minimize with 1 free parameters terminated.
 
 The tranquilo_ls algorithm reported: Relative gradient norm smaller than tolerance., Minimize with 1 free parameters terminated.
@@ -43,7 +65,8 @@ The tranquilo_ls algorithm reported: Absolute criterion change smaller than tole
        2.01824346, 2.05256398, 2.07202438, 2.12223461, 2.14290063,
        2.41253381, 2.69837697, 3.79220691, 3.87397916, 3.99500726,
        4.78669183, 5.87363148, 7.07485836, 7.24519231, 7.52320859,
-       7.87770435, 8.05810857, 8.06199188, 8.07328834, 8.07817553]))"
+       7.87770435, 8.05810857, 8.06199188, 8.07328834, 8.07817553]))"
+
 algorithm_output,"{'states': [State(trustregion=Region(center=array([9.42131513]), radius=0.9421315127628045, bounds=Bounds(lower=array([1.1]), upper=array([20.]))), model_indices=[0], model=ScalarModel(intercept=1.1063443325640188, linear_terms=array([0.]), square_terms=array([[0.]]), scale=0.9421315127628045, shift=array([9.42131513])), vector_model=VectorModel(intercepts=array([ 0.0603113 ,  0.15950243,  0.19338385,  0.23347778,  0.24847716,
         0.24164354,  0.22243706, -0.0073477 , -0.20854712, -0.23260963,
        -0.58921388, -0.58897725, -0.12017873, -0.06949276, -0.04668762,
@@ -1319,5 +1342,6 @@ algorithm_output,"{'states': [State(trustregion=Region(center=array([9.42131513]
 
        [[0.]],
 
-       [[0.]]]), scale=0.9421315127628045, shift=array([9.42131513])), candidate_index=36, candidate_x=array([9.41102543]), index=36, x=array([9.41102543]), fval=1.106189262932828, rho=1.0000753949808854, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([28, 34, 35]), old_indices_discarded=array([], dtype=int32), step_length=3.5939465057310827e-06, relative_step_length=1.000000000037749, n_evals_per_point=1, n_evals_acceptance=1)]}"
-logger,
+       [[0.]]]), scale=0.9421315127628045, shift=array([9.42131513])), candidate_index=36, candidate_x=array([9.41102543]), index=36, x=array([9.41102543]), fval=1.106189262932828, rho=1.0000753949808854, accepted=True, new_indices=array([], dtype=int32), old_indices_used=array([28, 34, 35]), old_indices_discarded=array([], dtype=int32), step_length=3.5939465057310827e-06, relative_step_length=1.000000000037749, n_evals_per_point=1, n_evals_acceptance=1)]}"
+
+logger,

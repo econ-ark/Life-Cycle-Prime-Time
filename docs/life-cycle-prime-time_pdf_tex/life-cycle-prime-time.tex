@@ -541,7 +541,7 @@ This ensures that our estimation process puts even weight on the two sets of mom
 
 Having chosen the moments we are interested in matching and their respective weights, we can now proceed to a discussion of estimating the parameters of our various models.
 We use the \texttt{Econ-ARK} project's \texttt{HARK} package to solve and estimate the models, and \texttt{optimagic} (\cite{Gabler2022}, formerly \texttt{estimagic}) to perform the estimation process.
-Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the \texttt{LCP+WarmGlow} model, so we develop a robust and efficient estimation process that can handle a varying number of parameters. 
+Our exercise consists of estimating one parameter (the coefficient of relative risk aversion) for the Life Cycle Portfolio Choice Model and up to three parameters (CRRA, the weight of the bequest motive, and the wealth shifter of the bequest motive) for the \texttt{LCP+WarmGlow} model, so we develop a robust and efficient estimation process that can handle a varying number of parameters.
 %  % We call the merging of features from the `HARK` and `estimagic` packages `Estim-ARK`.
 
 Our estimation process is computationally expensive, requiring the solving and simulation of the model given a parameter set many times.\footnote{Because our moments require simulation, our moment generating functions $\hat{q}_i(\theta)$ have no analytical derivatives with respect to the parameters, so we must rely on numeric differentiation and clever optimization algorithms to find the optimal parameter set.

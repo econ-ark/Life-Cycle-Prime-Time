@@ -26,10 +26,10 @@ from HARK.core import AgentType
 
 
 class TempConsumerType(AgentType):
-    def check_restrictions(self):
+    def check_restrictions(self) -> None:
         return None
 
-    def sim_birth(self, which_agents):
+    def sim_birth(self, which_agents) -> None:
         """Alternate method for simulating initial states for simulated agents, drawing from a finite
         distribution.  Used to overwrite IndShockConsumerType.simBirth, which uses lognormal distributions.
 
@@ -71,7 +71,7 @@ class PortfolioLifeCycleConsumerType(TempConsumerType, PortfolioConsumerType):
     consumers and specifies DiscFac as being age-dependent.  Called "temp" because only used here.
     """
 
-    def post_solve(self):
+    def post_solve(self) -> None:
         for solution in self.solution:
             solution.cFunc = solution.cFuncAdj
 
@@ -93,7 +93,7 @@ class BequestWarmGlowLifeCyclePortfolioType(
     consumers and specifies DiscFac as being age-dependent.  Called "temp" because only used here.
     """
 
-    def post_solve(self):
+    def post_solve(self) -> None:
         for solution in self.solution:
             solution.cFunc = solution.cFuncAdj
 
