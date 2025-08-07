@@ -626,3 +626,5 @@ Not only would academics have the satisfaction of knowing that they had finally 
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving were what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world.
 
+```{include} solution_appendix.md
+

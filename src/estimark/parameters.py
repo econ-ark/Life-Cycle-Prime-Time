@@ -1,10 +1,6 @@
 """Specifies the full set of calibrated values required to estimate the Life-Cycle-Prime-Time
 model.  The empirical data is stored in a separate csv file and is loaded in setup_scf_data.
 """
-
-# Discount Factor of 1.0 always
-# income uncertainty doubles at retirement
-# only estimate CRRA, Bequest params
 from __future__ import annotations
 
 import warnings
@@ -15,6 +11,7 @@ import numpy as np
 from HARK.Calibration.Income.IncomeTools import Cagetti_income, CGM_income, parse_income_spec
 from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
 from HARK.distributions import DiscreteDistribution
+from income_process import construct_lognormal_income_process_with_retirement_expense_shocks
 
 # ---------------------------------------------------------------------------------
 # - Define all of the model parameters for Life-Cycle-Prime-Time and ConsumerExamples -
@@ -42,11 +39,15 @@ PermShkCount = 7
 # Number of points in discrete approximation to transitory income shocks
 TranShkCount = 7
 UnempPrb = 0.05  # Probability of unemployment while working
-UnempPrbRet = 0.005  # Probability of "unemployment" while retired
 IncUnemp = 0.3  # Unemployment benefits replacement rate
-IncUnempRet = 0.0  # "Unemployment" benefits when retired
 ss_variances = False  # Use the Sabelhaus-Song variance profiles
 education = "College"  # Education level for income process
+
+# Expense shock distribution parameters (for retired agents); taken from Fulford & Low (2025)
+ExpShkProb = 0.591
+ExpShkMean = -2.62
+ExpShkStd = 2.23
+ExpShkCount = 25
 
 # Population age parameters
 final_age = 120  # Age at which the problem ends (die with certainty)
@@ -209,6 +210,8 @@ init_calibration = {
     "CRRA": init_CRRA,
     "DiscFac": init_DiscFac,
     "Rfree": terminal_t*[Rfree],
+    "RiskyAvg": Rfree + Eq_prem,
+    "RiskyStd": RiskyStd,
     "PermGroFac": inc_calib["PermGroFac"],
     "PermGroFacAgg": 1.0,
     "BoroCnstArt": BoroCnstArt,
@@ -222,7 +225,11 @@ init_calibration = {
     "T_sim": terminal_t+1,
     "UnempPrb": UnempPrb,
     "UnempPrbRet": UnempPrbRet,
-    "T_retire": 0,#retirement_t,
+    "ExpShkProb": ExpShkProb,
+    "ExpShkMean": ExpShkMean,
+    "ExpShkStd": ExpShkStd,
+    "ExpShkCount": ExpShkCount,
+    "T_retire": retirement_t,
     "T_age": terminal_t+1,
     "IncUnemp": IncUnemp,
     "IncUnempRet": IncUnempRet,
@@ -244,11 +251,9 @@ init_calibration = {
     "BeqInt" : init_BeqInt,
     "ChiFromOmega_N": 501,  # Number of gridpoints in chi-from-omega function
     "ChiFromOmega_bound": 15,  # Highest gridpoint to use for it
+    "constructors" : {"IncShkDstn" : construct_lognormal_income_process_with_retirement_expense_shocks},
 }
 
-
-init_calibration["RiskyAvg"] = Rfree + Eq_prem
-init_calibration["RiskyStd"] = RiskyStd
 
 # from Mateo's JMP for College Educated
 ElnR_nom = 0.020
