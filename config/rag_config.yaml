@@ -1,0 +1,96 @@
+careful_processing: {}
+elasticsearch:
+  index:
+    mappings:
+      properties:
+        content:
+          analyzer: math_analyzer
+          type: text
+        file_extension:
+          type: keyword
+        file_path:
+          type: keyword
+        is_master_file:
+          type: boolean
+        priority_score:
+          type: integer
+        repository:
+          type: keyword
+    name: econ-ark-rag
+    number_of_replicas: 0
+    number_of_shards: 1
+    settings:
+      analysis:
+        analyzer:
+          math_analyzer:
+            filter:
+            - lowercase
+            - math_symbols
+            tokenizer: standard
+            type: custom
+        filter:
+          math_symbols:
+            pattern: "([\u03B1-\u03C9\u0391-\u03A9\u2211\u220F\u222B\u2202\u2207\u2206\
+              \u221A\u221E\u2260\u2264\u2265\xB1\xD7\xF7])"
+            replacement: ' $1 '
+            type: pattern_replace
+faiss:
+  batch_size: 64
+  chunk_overlap: 200
+  chunk_size: 1000
+  master_chunk_overlap: 100
+  master_chunk_size: 500
+  max_search_results: 50
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  similarity_threshold: 0.7
+  temp_dir: temp_build
+ignore_patterns:
+- '*.pdf'
+- '*.tex'
+- '*.docx'
+- tools/local-shortcuts.sty
+- tools/local-shortcuts.yml
+- .git/
+- __pycache__/
+- '*.pyc'
+- .DS_Store
+- '*.log'
+master_files:
+- '*.md'
+- tools/math-macros.yml
+metadata:
+  compatible_backends:
+  - faiss
+  - elasticsearch
+  created: '2025-01-22'
+  description: Converted from .ragignore format
+  migration:
+    from_ragignore: /Volumes/Sync/GitHub/econ-ark/Life-Cycle-Prime-Time/.ragignore
+    notes: Converted from .ragignore format
+  validation:
+    max_priority_score: 10
+    min_priority_score: 1
+    required_sections:
+    - source_priority
+    - ignore_patterns
+    - master_files
+  version: 1.0.0
+source_priority:
+- .md
+- .ipynb
+- .py
+- .yml
+- .yaml
+- .tex
+- .txt
+- .json
+source_relationships:
+- generates:
+  - '*.pdf'
+  - '*.tex'
+  - '*.docx'
+  source: '*.md'
+- generates:
+  - tools/local-shortcuts.sty
+  - tools/local-shortcuts.yml
+  source: tools/math-macros.yml
