@@ -280,8 +280,9 @@ While we do not believe that values of $\DiscFac < 1$ are "ethically indefensibl
 This also serves to constrain the model's ability to fit the data by declining to include an additional "free" parameter in the estimations.
 
 Beyond those basic assumptions, we calibrate the model to include uncertainty after retirement.
-Specifically, we assume that there are "ordinary" expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from @flExpShocks), generating the possibility of periods with much lower *disposable* income than usual.
+Specifically, we assume that there are expenditure shocks in retirement that can reduce *disposable* income net of exogenous expenditures by maintaining transitory income shocks at their age-64 variance (while zeroing out permanent income shocks); see also @flExpShocks for a recent estimation of expense shocks.
 This assumption acts as a kind of shorthand for other modeling assumptions that focus on modeling the dynamics of medical and nursing home expenses in old age, e.g. @ameriks2011joy and @DeNardi2010.
+Even if old age medical expenses were incorporated into the model more realistically, this feature *cannot* be the primary explanation for the drawdown failure, as the phenomenon has been documented even in countries with much more robust public health insurance than the United States (e.g., see @Hattrem2022 for wealth accumulation among retired Norwegians).
 In principle, the presence of such shocks provides a precautionary motive to draw down wealth more slowly.
 However, our estimation results show that even when we include this calibration of expense shocks, the model still predicts much more drawdown of wealth than the data show.
 
