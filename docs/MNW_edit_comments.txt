@@ -27,7 +27,11 @@ U: CGM income, 3.0% EqPrem, 1% risk free rate, SabelhausSong
 V: Cagetti income w/ 15% drop, 3.0% EqPrem, 1% risk free rate, SabelhausSong, trans retired shocks
 W: Cagetti income w/ 15% drop, 3.0% EqPrem, 1% risk free rate
 
+ExpShk: same as W, but with Fulford & Low expense shocks
+ExpShkBeta: same as prior, but estimate DiscFac as well
+ExpShkAlt: same as W, but with Mateo's expense shocks
+ExpShkAltX: same as prior, but capping shock at 0.5
+ExpShkAltY: same as prior, but also remove "retirement fix"
+ExpShkA: same as ExpShk, but re-adjust TranShk to be mean 1
 
-
-
-
+G: same as W, "expense shocks" as ordinary transitory shocks in retirement

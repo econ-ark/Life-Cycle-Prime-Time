@@ -280,8 +280,9 @@ While we do not believe that values of $\DiscFac < 1$ are "ethically indefensibl
 This also serves to constrain the model's ability to fit the data by declining to include an additional "free" parameter in the estimations.
 
 Beyond those basic assumptions, we calibrate the model to include uncertainty after retirement.
-Specifically, we assume that there are "ordinary" expenditure shocks in retirement that are of similar magnitude to income shocks during working life (following recent estimates from @flExpShocks), generating the possibility of periods with much lower *disposable* income than usual.
+Specifically, we assume that there are expenditure shocks in retirement that can reduce *disposable* income net of exogenous expenditures by maintaining transitory income shocks at their age-64 variance (while zeroing out permanent income shocks); see also @flExpShocks for a recent estimation of expense shocks.
 This assumption acts as a kind of shorthand for other modeling assumptions that focus on modeling the dynamics of medical and nursing home expenses in old age, e.g. @ameriks2011joy and @DeNardi2010.
+Even if old age medical expenses were incorporated into the model more realistically, this feature *cannot* be the primary explanation for the drawdown failure, as the phenomenon has been documented even in countries with much more robust public health insurance than the United States (e.g., see @Hattrem2022 for wealth accumulation among retired Norwegians).
 In principle, the presence of such shocks provides a precautionary motive to draw down wealth more slowly.
 However, our estimation results show that even when we include this calibration of expense shocks, the model still predicts much more drawdown of wealth than the data show.
 
@@ -418,7 +419,7 @@ The Cobb-Douglas functional form is commonly used in other contexts, but does no
 % AL: Add citation to the 1998 paper you found
 
 The upshot is that if we credit the proposition that the ownership of wealth yields utility, then there is good precedent for the functional form of [](doi:10.2139/ssrn.4693176).
-Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function. This functional form is attractive because it maintains the homotheticity required for normalization and treats wealth and consumption as complements; the utility gained from holding wealth is greater when consumption is higher, and vice-versa, capturing a nuanced view of financial well-being.
+Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function. This functional form is attractive because it maintains the homotheticity required for normalization; moreover, the marginal utility gained from holding additional wealth is greater when consumption is higher, and vice-versa, capturing a nuanced view of financial well-being.
 It is a relatively simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised utility and value functions of the problem are:
 \begin{align}
     \uFunc_t(\cNrm_t, \aNrm_t) & = \frac{\left(\cNrm_t^{1-\delta}\aNrm_t^{\delta}\right)^{1-\CRRA}}{1-\CRRA}, \\
@@ -516,7 +517,7 @@ The `tranquilo` optimizer has many attractive features, such as being able to ev
 ```{include} parameters.tex
 ```
 
-For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from holding excessively risky portfolios (often 100% equities) early in life.
+For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from holding excessively risky portfolios (often 100% equities).
 In general, "typical" values for the CRRA coefficient (from experimental evidence and other contexts) are considered to be between 1 and 5.
 The "criterion" column of @parameters lists the minimum value that the objective function achieves for each model-- the smallest weighted squared distance between simulated moments and empirical moments.
 The LCP model performs poorly by this measure, as illustrated in the figures.
@@ -532,10 +533,10 @@ Median Wealth to Income Ratio for different portfolio models. The red line indic
 ```
 
 As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
-The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA = 4.61$.
+The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA \approx 4.6$.
 With a strong bequest motive, the Warm-Glow model is able to match the high levels of wealth observed deep into retirement.
 That is, these consumers do not quickly draw down their assets because they take great pleasure in passing their estate on to their heirs.
-Under our parameterization, we estimate that consumers act *as if* they will experience a final "consumption at death" of $\cNrm = 0.11 \aNrm + 0.33$;
+Under our parameterization, we estimate that consumers act *as if* they will experience a final "consumption at death" of $\cNrm = 0.11 \aNrm + 0.32$;
 this implies that if they were faced with guaranteed, imminent death (at some very old age), consumers would allocate to their heirs 89\% of any resources in excess of one-third of their permanent income-- most of their wealth.
 
 This strong bequest motive at the very end of life propagates backward to more reasonable ages (albeit not as directly interpretable), and ultimately it applies for essentially *everyone*.[^bequestlitcontrast]
@@ -556,7 +557,7 @@ Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid 
 Unsurprisingly, the drawdown failure returns in @nobequest because retirees have no incentive to retain wealth as the likelihood of mortality rises.
 However, agents *also* drastically reduce their saving behavior in their working years and don't build nearly as large a nest egg for retirement.
 This is what we mean by an "implausibly strong" bequest motive: it drives wealth accumulation even in middle age, not just among the elderly.
-Recall from the discussion of the [Survey of Consumer Finances](https://doi.org/10.17016/8799) and @jaherGilded that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of *40 year olds* driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown data, it does so for the wrong reasons.
+Recall from the discussion of the [Survey of Consumer Finances](https://doi.org/10.17016/8799) and @jaherGilded that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of *40 year olds* driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown pattern in the data, it does so for the wrong reasons.
 Even if a model can *mechanically* reproduce observed data features or hit empirical targets, that does not make it "right" or "true," especially if its underlying logic is implausible and contradictory to qualitative evidence.
 And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty *to the client*.
 We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are *multiple ways* for life-cycle models to generate more realistic wealth trajectories in retirement.
@@ -569,15 +570,16 @@ Median Portfolio Share for different portfolio models. The red line shows the ta
 ```
 
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
-The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.18 and a wealth share of utility $\delta$ coefficient of 0.25.
+The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.14 and a wealth share of utility $\delta$ coefficient of 0.25.
 This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower, and thus more plausible, than that of the standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature. In the LCP model, high risk aversion is the primary tool to prevent excessive investment in risky assets. In the WIUF model, however, the direct utility from wealth provides an additional motive to hold safe assets (to ensure a minimum level of wealth utility), reducing the need for extreme risk aversion to match the observed portfolio shares.
 As seen in @medwealth, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly. While the WIUF model still predicts a faster drawdown in late retirement than observed in the SCF data, it represents a substantial improvement over the standard LCP model and avoids the behavioral implausibility required by the Warm-Glow model.
 Compared to the Warm-Glow model, the WIUF / TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity *now*, rather than saving at age 35 to leave a large bequest at age 85.
 
-Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can somewhat better match the target risky assets share moments (red dashed line in @medshare), which come from @Aboagye2024.
+Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can somewhat better match the target risky assets share moments (red dashed line in @medshare).
 That paper presents the typical glidepath of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
 While the whole life-cycle glidepath is provided in @Aboagye2024, here we only target (and plot) those moments starting at age 70.
 The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.
+
 
 ## The Role of Subjective Beliefs
 
@@ -590,7 +592,7 @@ That is, for any level of risk aversion, agents that subjectively believe that s
 The analysis in @velasquezgiraldoJMP is quite rich and incorporates heterogeneous beliefs within and across demographic groups, but we need only perform a relatively straightforward exercise to illustrate our point.
 We repeat the estimation procedure from above, but have the agents *solve* their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08\%$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
 When the agents live out the model in simulation, the "true" stock return distribution is used ($\eprem = 0.03$ and $\sigma_\risky = 0.2$).
-To best fit the target moments, we estimate $\CRRA = 3.20$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.[^othersubjectiveestimates]
+To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.[^othersubjectiveestimates]
 
 [^othersubjectiveestimates]: The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,gamma)$ are comparable to their original values. The basic Life-Cycle Portfolio model even more poorly fits the target moments at its estimated $\CRRA$.
 
@@ -625,3 +627,5 @@ It would be a better world if financial advice could be justified as reflecting 
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving were what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world by combining computational rigor with practical insight.
+
+```{include} solution_appendix.md
