@@ -103,6 +103,9 @@ def construct_lognormal_income_process_with_retirement_expense_shocks(
     TranShkDstnRet = deepcopy(ExpShkDstn)
     TranShkDstnRet.atoms -= 1.
     TranShkDstnRet.atoms *= -1.
+    #AvgNetIncRet = np.dot(TranShkDstnRet.atoms[0,:], TranShkDstnRet.pmv)
+    #TranShkDstnRet.atoms /= AvgNetIncRet
+    TranShkDstnRet.atoms = np.abs(TranShkDstnRet.atoms)
     
     # Combine that transitory shock distribution with a trivial permanent shock dstn
     PermShkDstnRet = DiscreteDistribution(pmv=np.array([1.0]), atoms=np.array([1.0]))

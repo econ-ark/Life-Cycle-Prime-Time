@@ -11,7 +11,7 @@ import numpy as np
 from HARK.Calibration.Income.IncomeTools import Cagetti_income, CGM_income, parse_income_spec
 from HARK.Calibration.life_tables.us_ssa.SSATools import parse_ssa_life_table
 from HARK.distributions import DiscreteDistribution
-from income_process import construct_lognormal_income_process_with_mateos_expense_shocks
+from .income_process import construct_lognormal_income_process_with_retirement_expense_shocks, construct_lognormal_income_process_with_mateos_expense_shocks
 
 # ---------------------------------------------------------------------------------
 # - Define all of the model parameters for Life-Cycle-Prime-Time and ConsumerExamples -
@@ -201,9 +201,9 @@ minimize_options = {
 # -----------------------------------------------------------------------------
 
 retired_PermShkStd = 0.0
-retired_TranShkStd = 0.0
+#retired_TranShkStd = 0.0
 #retired_PermShkStd = inc_calib["PermShkStd"][retirement_t]
-#retired_TranShkStd = inc_calib["TranShkStd"][retirement_t]
+retired_TranShkStd = inc_calib["TranShkStd"][retirement_t]
 
 # Dictionary that can be passed to ConsumerType to instantiate
 init_calibration = {
@@ -224,11 +224,11 @@ init_calibration = {
     "T_cycle": terminal_t,
     "T_sim": terminal_t+1,
     "UnempPrb": UnempPrb,
-    #"ExpShkProb": ExpShkProb,
-    #"ExpShkMean": ExpShkMean,
-    #"ExpShkStd": ExpShkStd,
-    #"ExpShkCount": ExpShkCount,
-    "T_retire": retirement_t,
+    "ExpShkProb": ExpShkProb,
+    "ExpShkMean": ExpShkMean,
+    "ExpShkStd": ExpShkStd,
+    "ExpShkCount": ExpShkCount,
+    "T_retire": 0*retirement_t,
     "T_age": terminal_t+1,
     "IncUnemp": IncUnemp,
     "aXtraMin": aXtraMin,
@@ -249,7 +249,7 @@ init_calibration = {
     "BeqInt" : init_BeqInt,
     "ChiFromOmega_N": 501,  # Number of gridpoints in chi-from-omega function
     "ChiFromOmega_bound": 15,  # Highest gridpoint to use for it
-    "constructors" : {"IncShkDstn" : construct_lognormal_income_process_with_mateos_expense_shocks},
+    #"constructors" : {"IncShkDstn" : construct_lognormal_income_process_with_retirement_expense_shocks},
 }
 
 

@@ -532,10 +532,10 @@ Median Wealth to Income Ratio for different portfolio models. The red line indic
 ```
 
 As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
-The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA = 4.61$.
+The Warm-Glow Portfolio model (orange lines on figures) estimates a much more realistic CRRA coefficient of $\CRRA \approx 4.6$.
 With a strong bequest motive, the Warm-Glow model is able to match the high levels of wealth observed deep into retirement.
 That is, these consumers do not quickly draw down their assets because they take great pleasure in passing their estate on to their heirs.
-Under our parameterization, we estimate that consumers act *as if* they will experience a final "consumption at death" of $\cNrm = 0.11 \aNrm + 0.33$;
+Under our parameterization, we estimate that consumers act *as if* they will experience a final "consumption at death" of $\cNrm = 0.11 \aNrm + 0.32$;
 this implies that if they were faced with guaranteed, imminent death (at some very old age), consumers would allocate to their heirs 89\% of any resources in excess of one-third of their permanent income-- most of their wealth.
 
 This strong bequest motive at the very end of life propagates backward to more reasonable ages (albeit not as directly interpretable), and ultimately it applies for essentially *everyone*.[^bequestlitcontrast]
@@ -569,15 +569,16 @@ Median Portfolio Share for different portfolio models. The red line shows the ta
 ```
 
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
-The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.18 and a wealth share of utility $\delta$ coefficient of 0.25.
+The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.14 and a wealth share of utility $\delta$ coefficient of 0.25.
 This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower, and thus more plausible, than that of the standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature. In the LCP model, high risk aversion is the primary tool to prevent excessive investment in risky assets. In the WIUF model, however, the direct utility from wealth provides an additional motive to hold safe assets (to ensure a minimum level of wealth utility), reducing the need for extreme risk aversion to match the observed portfolio shares.
 As seen in @medwealth, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly. While the WIUF model still predicts a faster drawdown in late retirement than observed in the SCF data, it represents a substantial improvement over the standard LCP model and avoids the behavioral implausibility required by the Warm-Glow model.
 Compared to the Warm-Glow model, the WIUF / TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity *now*, rather than saving at age 35 to leave a large bequest at age 85.
 
-Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can somewhat better match the target risky assets share moments (red dashed line in @medshare), which come from @Aboagye2024.
+Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can somewhat better match the target risky assets share moments (red dashed line in @medshare).
 That paper presents the typical glidepath of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
 While the whole life-cycle glidepath is provided in @Aboagye2024, here we only target (and plot) those moments starting at age 70.
 The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.
+
 
 ## The Role of Subjective Beliefs
 
@@ -590,7 +591,7 @@ That is, for any level of risk aversion, agents that subjectively believe that s
 The analysis in @velasquezgiraldoJMP is quite rich and incorporates heterogeneous beliefs within and across demographic groups, but we need only perform a relatively straightforward exercise to illustrate our point.
 We repeat the estimation procedure from above, but have the agents *solve* their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08\%$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
 When the agents live out the model in simulation, the "true" stock return distribution is used ($\eprem = 0.03$ and $\sigma_\risky = 0.2$).
-To best fit the target moments, we estimate $\CRRA = 3.20$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.[^othersubjectiveestimates]
+To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.[^othersubjectiveestimates]
 
 [^othersubjectiveestimates]: The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,gamma)$ are comparable to their original values. The basic Life-Cycle Portfolio model even more poorly fits the target moments at its estimated $\CRRA$.
 
