@@ -418,7 +418,7 @@ The Cobb-Douglas functional form is commonly used in other contexts, but does no
 % AL: Add citation to the 1998 paper you found
 
 The upshot is that if we credit the proposition that the ownership of wealth yields utility, then there is good precedent for the functional form of [](doi:10.2139/ssrn.4693176).
-Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function. This functional form is attractive because it maintains the homotheticity required for normalization and treats wealth and consumption as complements; the utility gained from holding wealth is greater when consumption is higher, and vice-versa, capturing a nuanced view of financial well-being.
+Henceforth we will call this the Tzitzouris-Rotemberg-Poterba or "TRP" utility function. This functional form is attractive because it maintains the homotheticity required for normalization; moreover, the marginal utility gained from holding additional wealth is greater when consumption is higher, and vice-versa, capturing a nuanced view of financial well-being.
 It is a relatively simple matter to solve the revised problem with wealth in the utility function using the TRP utility specification. The revised utility and value functions of the problem are:
 \begin{align}
     \uFunc_t(\cNrm_t, \aNrm_t) & = \frac{\left(\cNrm_t^{1-\delta}\aNrm_t^{\delta}\right)^{1-\CRRA}}{1-\CRRA}, \\
@@ -516,7 +516,7 @@ The `tranquilo` optimizer has many attractive features, such as being able to ev
 ```{include} parameters.tex
 ```
 
-For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from holding excessively risky portfolios (often 100% equities) early in life.
+For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA $\CRRA$ coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from holding excessively risky portfolios (often 100% equities).
 In general, "typical" values for the CRRA coefficient (from experimental evidence and other contexts) are considered to be between 1 and 5.
 The "criterion" column of @parameters lists the minimum value that the objective function achieves for each model-- the smallest weighted squared distance between simulated moments and empirical moments.
 The LCP model performs poorly by this measure, as illustrated in the figures.
@@ -556,7 +556,7 @@ Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid 
 Unsurprisingly, the drawdown failure returns in @nobequest because retirees have no incentive to retain wealth as the likelihood of mortality rises.
 However, agents *also* drastically reduce their saving behavior in their working years and don't build nearly as large a nest egg for retirement.
 This is what we mean by an "implausibly strong" bequest motive: it drives wealth accumulation even in middle age, not just among the elderly.
-Recall from the discussion of the [Survey of Consumer Finances](https://doi.org/10.17016/8799) and @jaherGilded that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of *40 year olds* driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown data, it does so for the wrong reasons.
+Recall from the discussion of the [Survey of Consumer Finances](https://doi.org/10.17016/8799) and @jaherGilded that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of *40 year olds* driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown pattern in the data, it does so for the wrong reasons.
 Even if a model can *mechanically* reproduce observed data features or hit empirical targets, that does not make it "right" or "true," especially if its underlying logic is implausible and contradictory to qualitative evidence.
 And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty *to the client*.
 We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are *multiple ways* for life-cycle models to generate more realistic wealth trajectories in retirement.
