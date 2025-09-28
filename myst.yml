@@ -32,9 +32,12 @@ project:
     - name: Alan Lujan
       email: alujan@jhu.edu
       affiliations:
-        - institution: Johns Hopkins University AAP
-          department: Department of Applied Economics
+        - institution: Johns Hopkins University 
+          department: Krieger School of Arts and Sciences
           url: https://advanced.jhu.edu
+        - econ-ark
+    - name: Matthew N. White
+      affiliations:
         - econ-ark
   github: https://github.com/alanlujan91/TRP-wealth-in-utility
   bibliography: docs/references.bib

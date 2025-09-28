@@ -100,10 +100,14 @@ Consider the first order condition for optimality by taking the derivative of th
 
 We can substitute the final form of the marginal return to consumption, move the second term to the right-hand side, and then rearrange slightly to get:
 
-\begin{align}\label{eq:FOC-WIU}
+```{math}
+:label: eq:FOC-WIU
+
+\begin{align}
 \left[ (1-\delta) \chi_t^{-\delta} - \delta \chi_t^{1-\delta} \right] \cdot \left( \aNrm_t \chi_t^{1-\delta}  \right)^{-\CRRA} &= \bar{\mathfrak{v}}'_t(\aNrm_t) \\
 \left[ (1-\delta) \chi_t^{-\delta} - \delta \chi_t^{1-\delta} \right]^{-1/\CRRA} \cdot \chi_t^{1-\delta}  &= \underbrace{\bar{\mathfrak{v}}'_t(\aNrm_t)^{-1/\CRRA} / \aNrm_t}_{\equiv ~ \omega_t}.
 \end{align}
+```
 
 Note that the left-hand side of the rearranged FOC is monotonically increasing with respect to $\chi = \cNrm/\aNrm > 0$, starting from zero and growing without bound. Moreover, the RHS (which uses *only* information about the continuation value through $\aNrm_t$) must be strictly positive, as both marginal value and end-of-period assets are strictly positive (the consumer will never choose $\aNrm=0$ with these preferences because it would yield infinitely negative utility). Hence the first order condition has a unique solution in $\chi_t$ for each $\aNrm_t$. 
 
