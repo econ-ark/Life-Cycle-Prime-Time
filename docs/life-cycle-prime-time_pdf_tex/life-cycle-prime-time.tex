@@ -1,4 +1,4 @@
-% Created with jtex v.1.0.20
+% Created with jtex v.1.0.18
 \documentclass{article}
 \usepackage{arxiv}
 
@@ -63,7 +63,7 @@ anchorcolor = black}
 
 \title{Life Cycle Modeling is \\ Ready for Prime Time}
 
-\newdate{articleDate}{28}{9}{2025}
+\newdate{articleDate}{29}{9}{2025}
 \date{\displaydate{articleDate}}
 
 \makeatletter
@@ -599,7 +599,7 @@ Even then, the wealth drawdown is so rapid that the best the LCP model can achie
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.7\linewidth]{files/WealthMomentFit-c69965a6e7d123345378d895b8f0b2a6.pdf}
+\includegraphics[width=0.7\linewidth]{files/WealthMomentFit-86bf7f8de1e4e0cab6323cbc126e3f54.pdf}
 \caption[]{Median Wealth to Income Ratio for different portfolio models. The red line indicates median wealth-to-income ratios for college-educated households in the Survey of Consumer Finances. Wealth is \texttt{networth} and income consists of wages, social security, and retirement income.}
 \label{medwealth}
 \end{figure}
@@ -619,7 +619,7 @@ That is, we maintain the \textit{same} $\CRRA$ as estimated, but set $\kappa=100
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.7\linewidth]{files/StrongBequestMotive-2e332800a111f44825a86e123f53185a.pdf}
+\includegraphics[width=0.7\linewidth]{files/StrongBequestMotive-58abbedde72fa1826117fe13ba12e73a.pdf}
 \caption[]{Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid orange) versus with the bequest motive turned off (dashed orange), as compared to college-educated households in the SCF (red). The bequest motive is (implausibly) a strong motivator of wealth accumulation among working age agents.}
 \label{nobequest}
 \end{figure}
@@ -634,7 +634,7 @@ We include the Warm-Glow model in our presentation not to advocate for it, but m
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.7\linewidth]{files/ShareMomentFit-a67cc0c97284fd1fa5f88739da90a8d8.pdf}
+\includegraphics[width=0.7\linewidth]{files/ShareMomentFit-e25041a5096dcf653d7bf43566eb63ba.pdf}
 \caption[]{Median Portfolio Share for different portfolio models. The red line shows the target moments from \cite{Aboagye2024}.}
 \label{medshare}
 \end{figure}
@@ -661,11 +661,11 @@ That is, for any level of risk aversion, agents that subjectively believe that s
 The analysis in \cite{velasquezgiraldoJMP} is quite rich and incorporates heterogeneous beliefs within and across demographic groups, but we need only perform a relatively straightforward exercise to illustrate our point.
 We repeat the estimation procedure from above, but have the agents \textit{solve} their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08\%$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
 When the agents live out the model in simulation, the ``true'' stock return distribution is used ($\eprem = 0.03$ and $\sigma_\risky = 0.2$).
-To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.\footnote{The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,gamma)$ are comparable to their original values. The basic Life-Cycle Portfolio model even more poorly fits the target moments at its estimated $\CRRA$.}
+To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.\footnote{The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,\gamma)$ are comparable to their original values. The basic Life-Cycle Portfolio model even more poorly fits the target moments at its estimated $\CRRA$.}
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.7\linewidth]{files/StockBeliefsShare-2e873b7c6e2985ba497973cccbbffc8b.pdf}
+\includegraphics[width=0.7\linewidth]{files/StockBeliefsShare-90d1b934c6651f923a0447d115e40327.pdf}
 \caption[]{Median Risky Asset Share under parameter estimates with incorrect subjective beliefs about stock returns. Solid lines show fitted portfolio shares if agents \textit{believe} stocks are much riskier; dash-dot lines show portfolio shares with same estimated preferences but \textit{correct} beliefs about stock returns. The red dashed line shows the target moments from \cite{Aboagye2024}.}
 \label{subjbeliefs}
 \end{figure}
@@ -721,7 +721,11 @@ The left-hand side is monotone in $\varsigma$ and thus the FOC has at most one i
 
 \begin{enumerate}
 \item Fix an exogenous grid of $\aNrm_t$ values from 0 to a large value (say, a wealth-to-income ratio of 100).
+
+
 \item For each $\aNrm$ in that grid, evaluate the left-hand side of the FOC above. If it is less than or equal to zero, then $\varsigma = 1$ for that gridpoint. Otherwise, continue.
+
+
 \item Solve the FOC for $\varsigma$ using a standard numeric rootfinder (e.g., Brent's method), bounded above by 1 and below by the Samuelson risky asset share.
 \end{enumerate}
 
@@ -756,9 +760,17 @@ The algorithm for solving for optimal consumption is thus:
 
 \begin{enumerate}
 \item Fix an exogenous grid of $\aNrm_t$ values from 0 to a large value (say, a wealth-to-income ratio of 100); this can be the same or a different grid from above.
+
+
 \item For each $\aNrm$ in the grid, evaluate the right-hand side of (\ref{eq:EGM-FOC}), yielding the $\cNrm_t$ consistent with this level of end-of-period assets.
+
+
 \item Find the associated decision-time state by inverting the intraperiod budget: $\mNrm_t = \aNrm_t + \cNrm_t$.
+
+
 \item Construct the consumption function as a linear interpolant over those $(\mNrm_t, \cNrm_t)$ pairs, adding a point at $(0,0)$ to incorporate the liquidity-constrained portion of the consumption function.
+
+
 \item Construct the marginal value function $\vFunc'_t(\mNrm_t)$ as the composition of the marginal utility function and the consumption function.
 \end{enumerate}
 
@@ -795,10 +807,13 @@ Consider the first order condition for optimality by taking the derivative of th
 
 We can substitute the final form of the marginal return to consumption, move the second term to the right-hand side, and then rearrange slightly to get:
 
-\begin{align}
-\left[ (1-\delta) \chi_t^{-\delta} - \delta \chi_t^{1-\delta} \right] \cdot \left( \aNrm_t \chi_t^{1-\delta}  \right)^{-\CRRA} &= \bar{\mathfrak{v}}'_t(\aNrm_t) \\
+\begin{equation*}
+\left[ (1-\delta) \chi_t^{-\delta} - \delta \chi_t^{1-\delta} \right] \cdot \left( \aNrm_t \chi_t^{1-\delta}  \right)^{-\CRRA} &= \bar{\mathfrak{v}}'_t(\aNrm_t) \Longrightarrow
+\end{equation*}
+\begin{equation}
+\label{eq:FOC-WIU}
 \left[ (1-\delta) \chi_t^{-\delta} - \delta \chi_t^{1-\delta} \right]^{-1/\CRRA} \cdot \chi_t^{1-\delta}  &= \underbrace{\bar{\mathfrak{v}}'_t(\aNrm_t)^{-1/\CRRA} / \aNrm_t}_{\equiv ~ \omega_t}.
-\end{align}
+\end{equation}
 
 Note that the left-hand side of the rearranged FOC is monotonically increasing with respect to $\chi = \cNrm/\aNrm > 0$, starting from zero and growing without bound. Moreover, the RHS (which uses \textit{only} information about the continuation value through $\aNrm_t$) must be strictly positive, as both marginal value and end-of-period assets are strictly positive (the consumer will never choose $\aNrm=0$ with these preferences because it would yield infinitely negative utility). Hence the first order condition has a unique solution in $\chi_t$ for each $\aNrm_t$.
 
@@ -821,9 +836,17 @@ The domain of the function we want to approximate is $\omega > 0$ or $\omega \in
 
 \begin{enumerate}
 \item Fix a grid of $z$ values centered around zero; we use a uniformly spaced grid with 301 gridpoints between $\pm 15$.
+
+
 \item For each $z$ in the grid, calculate the corresponding $\chi$ using (\ref{eq:zToChi}). With our $z$ grid, this spans the inner 99.99994\% of the feasible range of $\chi$.
+
+
 \item For each $\chi$ in that grid, calculate $\omega$ using (\ref{eq:FOC-WIU}), then compute $\log(\omega)$.
+
+
 \item Construct a linear spline interpolant that maps from the vector of $\log(\omega)$ values to the grid of $z$, with linear extrapolation above and below; call this function $g(\cdot)$.
+
+
 \item Define function $f(\cdot)$ as the composition of (\ref{eq:zToChi}), $g$, and $\log$.
 \end{enumerate}
 
@@ -833,10 +856,20 @@ With the mapping $f : \omega \rightarrow \chi$ in hand, we can now describe our 
 
 \begin{enumerate}
 \item Fix an exogenous grid of $\aNrm_t$ values from 0 to a large value (say, a wealth-to-income ratio of 100); this can be the same or a different grid from above.
+
+
 \item For each $\aNrm$ in the grid, evaluate $\bar{\mathfrak{v}}'_t(\aNrm_t)$, then raise it to the $-1/\CRRA$ power and divide by $\aNrm$, yielding a vector of $\omega$ values.
+
+
 \item For each $\omega$ in that vector, compute $\chi = f(\omega)$, then multiply by $\aNrm$ to recover the optimal $\cNrm$.
+
+
 \item Find the associated decision-time state by inverting the intraperiod budget: $\mNrm_t = \aNrm_t + \cNrm_t$.
+
+
 \item Construct the consumption function as a linear interpolant over those $(\mNrm_t, \cNrm_t)$ pairs, adding a point at $(0,0)$ to incorporate the liquidity-constrained portion of the consumption function.
+
+
 \item Construct the marginal value function $\vFunc'_t(\mNrm_t)$ as the composition of the marginal utility function and the consumption function.
 \end{enumerate}
 
