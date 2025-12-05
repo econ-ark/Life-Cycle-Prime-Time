@@ -21,6 +21,7 @@
 	\usepackage{xcolor}
 	\usepackage{setspace}
 	\usepackage{graphicx} %draft option suppresses graphics dvi display
+	\usepackage{newfloat} % make new floating environments
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
@@ -44,6 +45,7 @@
 	\clubpenalty 5000
 	\widowpenalty 5000
 	\renewcommand{\baselinestretch}{1.25}
+	\DeclareFloatingEnvironment[fileext=loe,listname={List of Exhibits},name=Exhibit,placement=tbh]{exhibit}
 	
 
 	%%%%%%%%%%%%%%%%%  math commands  %%%%%%%%%%%%%%%%
@@ -106,7 +108,33 @@
 \begin{document}
 \begin{singlespace}
 	
-\maketitle
+\begin{center}
+	\huge Life-Cycle Modeling is Ready for Prime Time \\ \LARGE \today
+\end{center}
+
+\large
+
+\vspace{2cm}
+
+Christopher Carroll (\texttt{ccarroll@jhu.edu}) is a Professor of Economics at the Krieger School of Arts and Sciences, Johns Hopkins University (Baltimore, MD)
+
+\vspace{1cm}
+
+Alan Lujan (\texttt{alujan@jhu.edu}) is a Lecturer and Program Coordinator for Advanced Academic Programs, Johns Hopkins University (Washington, DC)
+
+\vspace{1cm}
+
+Matthew N. White (\texttt{mnwhite@gmail.com}) is the Primary Developer for Econ-ARK (Baltimore, MD) and the corresponding author for this paper
+
+\thispagestyle{empty}
+
+\newpage
+
+\begin{center}
+	\huge Life-Cycle Modeling is Ready for Prime Time \\ \LARGE \today
+\end{center}
+
+\vspace{1cm}
 
 \begin{abstract}
 The ``life-cycle model'' of optimal saving for retirement is familiar to anyone who has taken an intermediate economics class.
@@ -119,16 +147,30 @@ We provide an example of a simple model that can solve a number of problems by p
 
 \end{singlespace}
 
+\vspace{0.5cm}
+
+\noindent \textbf{Key Takeaways:}
+
+\begin{itemize}
+	\item Several different model features could be added to traditional life-cycle models to ameliorate their poor advice for saving in old age. However, some of those features are inconsistent with other data or incompatible with financial advisers' legal requirements.
+	
+	\item Accounting for ``soft data'' from surveys about consumer preferences and expectations is critical for building a quantitative model that gives creditable advice. Likewise, advisers must consider whether the model should optimize on clients' subjective beliefs or their own expert knowledge.
+	
+	\item Including wealth as a direct input to the utility function, separately from precautionary and life-cycle motives, allows consumption-saving models to match empirical evidence about wealth holding in later life as well as retirees' stated motivations for saving.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{JEL Classification:} D14, D15, G51
+
 \vspace{1cm}
 
-\textbf{JEL Classification:} XXX, XXX
-
-\vspace{1cm}
-
-\textbf{Keywords:} \textit{words words words}
+\textbf{Keywords:} \textit{life-cycle model, consumption-saving, drawdown failure, bequest motive, structural estimation, simulated method of moments, subjective expectations}
 
 
 \thispagestyle{empty}
+
+\setcounter{page}{0}
 
 \newpage
 
@@ -339,7 +381,7 @@ Suppose the consumer can invest their assets in a risk-free asset with return fa
 That is, we make the standard assumption that returns are lognormally distributed with an expected equity premium of $\eprem$.
 The portfolio return the consumer earns will depend on the \textit{share} $\varsigma_t$ of their assets that they invest in the risky asset:
 \begin{align}
-    \Rport_{t+1} & = \Rfree + (\Risky_{t+1}-\Rfree)\varsigma
+    \Rport_{t+1} & = \Rfree + (\Risky_{t+1}-\Rfree)\varsigma.
 \end{align}
 
 Now the consumer makes \textit{two} choices in each period $t$: how much to consume $\cNrm_t$ and the share $\varsigma_t$ of his assets to put into the risky asset.
@@ -350,7 +392,7 @@ The consumer makes the optimal choice of portfolio share, so we redefine the ``G
 \end{align}
 A split second before choosing the risky share, the consumer's objective in the consumption stage of the problem is exactly the same as the Bellman form above, but with the redefined continuation value that accounts for optimal portfolio choice.
 
-\begin{table}
+\begin{exhibit}[t!]
 \centering
 \caption{Summary of Life-Cycle Model Notation}
 \begin{tabular}{ll}
@@ -365,7 +407,7 @@ $\vFunc_{t}(\mNrm)$ & normalized value function when consumption decision is mad
 $\mathfrak{v}_{t}(\aNrm)$ & normalized value function when portfolio decision is made \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{exhibit}
 
 \subsubsection{Calibration}
 
@@ -438,9 +480,9 @@ The consumer's new value function is therefore:
     }^{\text{future}}.
 \end{align}
 
-The literature has commonly used a ``warm glow from bequests'' motive of the form:
+The literature has commonly used a ``warm glow from bequests'' motive of the form
 \begin{align}
-    \bqstNrm(a) & = \alpha\frac{(a+\underline{a})^{1-\CRRA}}{1-\CRRA}
+    \bqstNrm(a) & = \alpha\frac{(a+\underline{a})^{1-\CRRA}}{1-\CRRA},
 \end{align}
 where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., \cite{deNardiBequest}), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption. To aid in both estimating and interpreting these parameters, we use an alternative parameterization that preserves the form of the bequest motive, similar to \cite{Love2009}:
 \begin{align}
@@ -452,7 +494,7 @@ According to the evidence from historian Fredrick Cople \cite{jaherGilded}'s chr
 Jaher presents a feast of quotations articulating a host of motivations for extreme wealth accumulation; but among their many explanations of their behavior, almost none of the tycoons under study mention anything resembling the bequest motive as formulated in the standard academic life cycle literature.
 Andrew Carnegie was most explicit: ``I would rather leave my son a curse than the almighty dollar.''\footnote{To the astonishment of skeptics, he gave away more than 90 percent of his wealth before he died.}
 
-As mentioned above, the Fed has for many years asked respondents a question about their motivations for saving.\footnote{See \cite{FRB2023}, and specifically the material starting at line 848 in \href{https://www.federalreserve.gov/econres/files/bulletin.macro.txt}{the documentation}.}
+As mentioned above, the SCF has for many years asked respondents a question about their motivations for saving.\footnote{See \cite{FRB2023}, as well as the material starting at line 848 in \href{https://www.federalreserve.gov/econres/files/bulletin.macro.txt}{the documentation}.}
 While respondents' answers are fairly heterogeneous, the SCF has a suggested aggregation of the many different answers into categories that correspond approximately to some of the motivations that the academic literature has considered.
 The category that best matches the ``bequest'' motivation is ``family,'' which includes ``to help the kids out'' and ``to leave an estate'' but also includes saving for ``weddings and other ceremonies'' and ``to have children / a family.''
 
@@ -465,7 +507,7 @@ Table~\ref{most-important-reason} presents the responses to this question for co
 If bequests were a primary motivation for saving for most (college-educated) people, it would be surprising for them to mention this motivation so rarely. The ``Family'' motivation, which includes bequests, accounts for only 6\% of responses.
 Given these (and other) objections to the bequest motive, as well as the problems of the model without a bequest motive, it is natural to consider alternative modifications to the framework.
 
-\begin{table}
+\begin{exhibit}
 \centering
 \caption{Most Important Reason for Saving, 1995-2022 SCF Waves}\label{most-important-reason}
 \begin{tabular}{lcl}
@@ -480,7 +522,7 @@ Reason & Proportion & Explanation \\
 Other & 0.08 &  \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{exhibit}
 
 
 \subsection{Wealth in the Utility Function}
@@ -607,7 +649,7 @@ The \texttt{tranquilo} optimizer has many attractive features, such as being abl
 
 Table~\ref{parameters} shows the results of our estimation exercise, and the fit of the three estimated models is plotted below, in Figure~\ref{medwealth} and Figure~\ref{medshare}.
 
-\begin{table}[t!]
+\begin{exhibit}[t!]
 \centering
 \caption{Estimated Parameter Values}\label{parameters}
 \begin{tabular}{lccccc}
@@ -620,7 +662,7 @@ Model & Criterion & CRRA & Wealth & Bequest  & Bequest \\
 TRP / WIUF LC Portfolio & 0.306 & 5.136 & 0.248 &  &  \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{exhibit}
 
 For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from holding excessively risky portfolios (often 100\% equities).
 In general, ``typical'' values for the CRRA coefficient (from experimental evidence and other contexts) are considered to be between 1 and 5.
@@ -637,12 +679,12 @@ That is, these consumers do not quickly draw down their assets because they take
 Under our parameterization, we estimate that consumers act \textit{as if} they will experience a final ``consumption at death'' of $\cNrm = 0.11 \aNrm + 0.32$;
 this implies that if they were faced with guaranteed, imminent death (at some very old age), consumers would allocate to their heirs 89\% of any resources in excess of one-third of their permanent income-- most of their wealth.
 
-\begin{figure}[t!]
+\begin{exhibit}[t!]
 	\centering
-	\includegraphics[scale=0.7]{WealthMomentFit.pdf}
+	\includegraphics[scale=0.6]{WealthMomentFit.pdf}
 	\caption{Median Wealth to Income Ratio for different portfolio models. Red dashed line indicates median wealth-to-income ratios for college-educated households in the SCF.}
 	\label{medwealth}
-\end{figure}
+\end{exhibit}
 
 This strong bequest motive at the very end of life propagates backward to more reasonable ages (albeit not as directly interpretable), and ultimately it applies for essentially \textit{everyone}.\footnote{In contrast, the literature has generally found (e.g. \cite{deNardiBequest}) that the bequest motive comes into play only for relatively wealthy households, and is mostly inoperative around median wealth.
 This discrepancy might arise because of the simplified approach we have used here, matching \textit{only} the median wealth-to-income ratio by age, rather than wealth levels conditional on income.}
@@ -658,12 +700,12 @@ Even if a model can \textit{mechanically} reproduce observed data features or hi
 And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty \textit{to the client}.
 We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are \textit{multiple ways} for life-cycle models to generate more realistic wealth trajectories in retirement.
 
-\begin{figure}[t!]
+\begin{exhibit}[t!]
 	\centering
-	\includegraphics[scale=0.7]{StrongBequestMotive.pdf}
+	\includegraphics[scale=0.6]{StrongBequestMotive.pdf}
 	\caption[]{Median Wealth to Income Ratio in the estimated Warm-Glow Portfolio model (solid orange) vs with bequest motive turned off (dashed orange), as compared to college-educated households in the SCF (red). The bequest motive is (implausibly) a strong motivator of wealth accumulation among working age agents.}
 	\label{nobequest}
-\end{figure}
+\end{exhibit}
 
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
 The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.14 and a wealth share of utility $\delta$ coefficient of 0.25.
@@ -676,12 +718,12 @@ That paper presents the typical glidepath of target-date funds (TDFs) which prov
 While the whole life-cycle glidepath is provided in \cite{Aboagye2024}, here we only target (and plot) those moments starting at age 70.
 The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.
 
-\begin{figure}[t!]
+\begin{exhibit}[t!]
 	\centering
-	\includegraphics[scale=0.7]{ShareMomentFit.pdf}
+	\includegraphics[scale=0.6]{ShareMomentFit.pdf}
 	\caption[]{Median Portfolio Share for different portfolio models. The red line shows the target moments from \cite{Aboagye2024}.}
 	\label{medshare}
-\end{figure}
+\end{exhibit}
 
 
 \subsection{The Role of Subjective Beliefs}
@@ -695,14 +737,14 @@ That is, for any level of risk aversion, agents that subjectively believe that s
 The analysis in \cite{velasquezgiraldoJMP} is quite rich and incorporates heterogeneous beliefs within and across demographic groups, but we need only perform a relatively straightforward exercise to illustrate our point.
 We repeat the estimation procedure from above, but have the agents \textit{solve} their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08\%$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
 When the agents live out the model in simulation, the ``true'' stock return distribution is used ($\eprem = 0.03$ and $\sigma_\risky = 0.2$).
-To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.\footnote{The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,\gamma)$ are comparable to their original values. The basic Life-Cycle Portfolio model even more poorly fits the target moments at its estimated $\CRRA$.}
+To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.\footnote{The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,\gamma)$ are comparable to their original values. The basic LCP model even more poorly fits the target moments at its estimated $\CRRA$.}
 
-\begin{figure}[t!]
+\begin{exhibit}[t!]
 \centering
-\includegraphics[scale=0.7]{StockBeliefsShare.pdf}
+\includegraphics[scale=0.6]{StockBeliefsShare.pdf}
 \caption[]{Median risky asset share under parameter estimates with incorrect subjective beliefs about stock returns. Solid lines show fitted portfolio shares if agents \textit{believe} stocks are much riskier; dash-dot lines show portfolio shares with same estimated preferences but \textit{correct} beliefs about stock returns. Red dashed line is target moments from \cite{Aboagye2024}.}
 \label{subjbeliefs}
-\end{figure}
+\end{exhibit}
 
 If agents have incorrect subjective beliefs, it's reasonable to ask what the model predicts they would do if they knew the \textit{true} distribution of stock returns.
 That is, use the preference parameters estimated under subjective stock returns, but give the agents correct beliefs as in the original estimation.
