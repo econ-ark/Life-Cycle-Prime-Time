@@ -503,7 +503,7 @@ For example, one might find that for people who have just entered the labor mark
 In order for a model to be credible, its implications would need to comport with the survey data.
 Our aim here is to take a first step in that direction, by constructing a model that is at least consistent with the responses of retirees.
 
-Table~\ref{most-important-reason} presents the responses to this question for college-educated households older than age 70 from the 1995 to the 2022 waves of the SCF.
+Exhibit~\ref{most-important-reason} presents the responses to this question for college-educated households older than age 70 from the 1995 to the 2022 waves of the SCF.
 If bequests were a primary motivation for saving for most (college-educated) people, it would be surprising for them to mention this motivation so rarely. The ``Family'' motivation, which includes bequests, accounts for only 6\% of responses.
 Given these (and other) objections to the bequest motive, as well as the problems of the model without a bequest motive, it is natural to consider alternative modifications to the framework.
 
@@ -647,7 +647,7 @@ The \texttt{tranquilo} optimizer has many attractive features, such as being abl
 
 \subsection{Indirect Inference Results}
 
-Table~\ref{parameters} shows the results of our estimation exercise, and the fit of the three estimated models is plotted below, in Figure~\ref{medwealth} and Figure~\ref{medshare}.
+Exhibit~\ref{parameters} shows the results of our estimation exercise, and the fit of the three estimated models is plotted below, in Exhibit~\ref{medwealth} and Exhibit~\ref{medshare}.
 
 \begin{exhibit}[t!]
 \centering
@@ -666,10 +666,10 @@ TRP / WIUF LC Portfolio & 0.306 & 5.136 & 0.248 &  &  \\
 
 For the standard Life-Cycle Portfolio (LCP) model, we estimate a CRRA coefficient of over 9, which lines up with the literature finding that portfolio choice models require a very high $\CRRA$ in order to prevent agents from holding excessively risky portfolios (often 100\% equities).
 In general, ``typical'' values for the CRRA coefficient (from experimental evidence and other contexts) are considered to be between 1 and 5.
-The ``criterion'' column of Table~\ref{parameters} lists the minimum value that the objective function achieves for each model-- the smallest weighted squared distance between simulated and empirical moments.
+The ``criterion'' column of Exhibit~\ref{parameters} lists the minimum value that the objective function achieves for each model-- the smallest weighted squared distance between simulated and empirical moments.
 The LCP model performs poorly by this measure, as illustrated in the figures.
 LCP consumers want to quickly run down their wealth at older ages, as the probability of death increases with age and they know that they ``can't take it with them.''
-To try to match the empirical wealth trend (red dashed line in Figure~\ref{medwealth}), which holds steady at a high wealth-to-income ratio at older ages, the LCP model (solid blue line) exceeds observed wealth accumulation through the working life.
+To try to match the empirical wealth trend (red dashed line in Exhibit~\ref{medwealth}), which holds steady at a high wealth-to-income ratio at older ages, the LCP model (solid blue line) exceeds observed wealth accumulation through the working life.
 Even then, the wealth drawdown is so rapid that the best the LCP model can achieve is to overshoot wealth significantly before age 65, and then vastly undershoot it in retirement.
 
 As discussed above, there are multiple model features that can ameliorate or eliminate the wealth drawdown problem, beginning with a simple bequest motive.
@@ -689,10 +689,10 @@ this implies that if they were faced with guaranteed, imminent death (at some ve
 This strong bequest motive at the very end of life propagates backward to more reasonable ages (albeit not as directly interpretable), and ultimately it applies for essentially \textit{everyone}.\footnote{In contrast, the literature has generally found (e.g. \cite{deNardiBequest}) that the bequest motive comes into play only for relatively wealthy households, and is mostly inoperative around median wealth.
 This discrepancy might arise because of the simplified approach we have used here, matching \textit{only} the median wealth-to-income ratio by age, rather than wealth levels conditional on income.}
 Indeed, the Warm-Glow model predicts that saving behavior \textit{when young} is strongly motivated by the bequest motive.
-In Figure~\ref{nobequest}, we reproduce the median wealth moment fit for the Warm-Glow Portfolio model from Figure~\ref{medwealth} and add a new model moment plot for agents whose bequest motive has been turned off.
+In Exhibit~\ref{nobequest}, we reproduce the median wealth moment fit for the Warm-Glow Portfolio model from Exhibit~\ref{medwealth} and add a new model moment plot for agents whose bequest motive has been turned off.
 That is, we maintain the \textit{same} $\CRRA$ as estimated, but set $\kappa=1000$ so that marginally allocating resources to bequests has (essentially) no effect on expected utility-- the agents are already almost satiated in this dimension.
 
-Unsurprisingly, the drawdown failure returns in Figure~\ref{nobequest} because retirees have no incentive to retain wealth as the likelihood of mortality rises.
+Unsurprisingly, the drawdown failure returns in Exhibit~\ref{nobequest} because retirees have no incentive to retain wealth as the likelihood of mortality rises.
 However, agents \textit{also} drastically reduce their saving behavior in their working years and don't build nearly as large a nest egg for retirement.
 This is what we mean by an ``implausibly strong'' bequest motive: it drives wealth accumulation even in middle age, not just among the elderly.
 Recall from the discussion of \cite{FRB2023} and \cite{jaherGilded} that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of \textit{40 year olds} driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown pattern in the data, it does so for the wrong reasons.
@@ -710,10 +710,10 @@ We include the Warm-Glow model in our presentation not to advocate for it, but m
 Our preferred specification also has the agents value wealth itself as a motivation to retain assets later in life, but in a way that is more consistent with qualitative responses.
 The Wealth-in-Utility-Function (WIUF) / TRP Portfolio model estimates a CRRA $\CRRA$ coefficient of about 5.14 and a wealth share of utility $\delta$ coefficient of 0.25.
 This result is significant because the CRRA $\CRRA$ coefficient required to match the wealth accumulation patterns is significantly lower, and thus more plausible, than that of the standard Life-Cycle Portfolio choice model, whose high CRRA $\CRRA$ has long been a puzzle in the literature. In the LCP model, high risk aversion is the primary tool to prevent excessive investment in risky assets. In the WIUF model, however, the direct utility from wealth provides an additional motive to hold safe assets (to ensure a minimum level of wealth utility), reducing the need for extreme risk aversion to match the observed portfolio shares.
-As seen in Figure~\ref{medwealth}, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly. While the WIUF model still predicts a faster drawdown in late retirement than observed in the SCF data, it represents a substantial improvement over the standard LCP model and avoids the behavioral implausibility required by the Warm-Glow model.
+As seen in Exhibit~\ref{medwealth}, the WIUF / TRP model (green line) does not need to overshoot wealth accumulation in early life by nearly as much as the basic LCP model, as agents want to retain assets in retirement to generate utility directly. While the WIUF model still predicts a faster drawdown in late retirement than observed in the SCF data, it represents a substantial improvement over the standard LCP model and avoids the behavioral implausibility required by the Warm-Glow model.
 Compared to the Warm-Glow model, the WIUF / TRP specification does predict more wealth accumulation early in life, but for more immediate reasons: young consumers value money and liquidity \textit{now}, rather than saving at age 35 to leave a large bequest at age 85.
 
-Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can somewhat better match the target risky assets share moments (red dashed line in Figure~\ref{medshare}).
+Moreover, because the CRRA parameter doesn't need to be so high, the WIUF model can somewhat better match the target risky assets share moments (red dashed line in Exhibit~\ref{medshare}).
 That paper presents the typical glidepath of target-date funds (TDFs) which provide a basis for much of commercial financial advice.
 While the whole life-cycle glidepath is provided in \cite{Aboagye2024}, here we only target (and plot) those moments starting at age 70.
 The model fit with respect to risky asset share is comparable for the Warm-Glow model, generally matching the level and recommended shallow downward slope.
@@ -748,7 +748,7 @@ To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Por
 
 If agents have incorrect subjective beliefs, it's reasonable to ask what the model predicts they would do if they knew the \textit{true} distribution of stock returns.
 That is, use the preference parameters estimated under subjective stock returns, but give the agents correct beliefs as in the original estimation.
-Risky asset shares for both sets of beliefs are plotted on Figure~\ref{subjbeliefs}.
+Risky asset shares for both sets of beliefs are plotted on Exhibit~\ref{subjbeliefs}.
 Unsurprisingly, agents would want to hold a considerably greater share of their wealthy in risky assets if they learned that stock returns have much lower variance than they previously believed.
 The upshot is that if financial advisers want to use life-cycle models to provide normative advice to their clients for how ``best'' to allocate their wealth over time, and to inform those models with inferences about preferences from empirical observations, they must think carefully about the beliefs that generated the observed behavior. This suggests a crucial role for advisors not just in optimization, but also in educating clients about realistic expectations, as optimal advice depends heavily on the client's beliefs about risk and return.
 
