@@ -616,7 +616,7 @@ By solving and simulating our structural model with different $\theta$ parameter
 The method of simulated moments then consists of searching for the parameter set $\theta$ that minimizes the distance between the simulated versus empirical moments.
 This is done by minimizing the objective function:
 \begin{equation}
-\min_{\theta} \sum_{i=1}^{N}  \left( \omega_i [q_i - \hat{q}_i(\theta) ] \right)^2
+\min_{\theta} \sum_{i=1}^{N}  \left( \omega_i [q_i - \hat{q}_i(\theta) ] \right)^2.
 \end{equation}
 Here, $\omega_i$ is the weight of each moment in the objective function, representing the relative importance of each moment in the estimation process.
 For example, we might be more interested in matching the median wealth than the median portfolio share, and thus assign a higher weight to the former.
@@ -776,7 +776,7 @@ The time seems ripe for a much closer collaboration between academia and the fin
 \newpage
 
 \appendix
-\section{Appendix: Solution Methods}
+\section{Online Appendix: Solution Methods}
 
 In this appendix, we provide additional details for how the intertemporal optimization problems in our life-cycle models are solved. The method for finding consumption in the basic life-cycle and warm-glow bequest models is taken directly from \cite{CarrollEGM}, and the method for finding optimal portfolio shares (in all models) uses standard techniques. The wealth-in-utility model has a novel solution method.
 
@@ -867,9 +867,9 @@ With a standard CRRA utility function over consumption, marginal utility of cons
 Fixing market resources $\mNrm_t$ at some value of interest, the marginal return to utility from consumption is:
 
 \begin{align}
-\frac{\text{d}}{\text{d} \cNrm} \uFunc(\cNrm, \mNrm-\cNrm) &= \left[ (1-\delta) \cNrm^{-\delta} (\mNrm - \cNrm)^\delta - \delta \cNrm^{1-\delta}(\mNrm - \cNrm)^{\delta-1} \right] \cdot \left( (\mNrm - \cNrm)^\delta \cNrm^{1-\delta}  \right)^{-\CRRA} \\
- &= \left[ (1-\delta) \left(\frac{\cNrm}{\mNrm-\cNrm}\right)^{-\delta} - \delta \left(\frac{\cNrm}{\mNrm - \cNrm} \right)^{1-\delta} \right] \cdot \left( (\mNrm - \cNrm)^\delta \cNrm^{1-\delta}  \right)^{-\CRRA} \\
- &= \left[ (1-\delta) \left(\frac{\cNrm}{\aNrm}\right)^{-\delta} - \delta \left(\frac{\cNrm}{\aNrm} \right)^{1-\delta} \right] \cdot \left( \aNrm \aNrm^{\delta-1} \cNrm^{1-\delta}  \right)^{-\CRRA} \\
+\frac{\text{d}}{\text{d} \cNrm} \uFunc(\cNrm, \mNrm-\cNrm) &= \left[ (1-\delta) \cNrm^{-\delta} (\mNrm - \cNrm)^\delta - \delta \cNrm^{1-\delta}(\mNrm - \cNrm)^{\delta-1} \right] \cdot \left( (\mNrm - \cNrm)^\delta \cNrm^{1-\delta}  \right)^{-\CRRA} \nonumber\\
+ &= \left[ (1-\delta) \left(\frac{\cNrm}{\mNrm-\cNrm}\right)^{-\delta} - \delta \left(\frac{\cNrm}{\mNrm - \cNrm} \right)^{1-\delta} \right] \cdot \left( (\mNrm - \cNrm)^\delta \cNrm^{1-\delta}  \right)^{-\CRRA} \nonumber\\
+ &= \left[ (1-\delta) \left(\frac{\cNrm}{\aNrm}\right)^{-\delta} - \delta \left(\frac{\cNrm}{\aNrm} \right)^{1-\delta} \right] \cdot \left( \aNrm \aNrm^{\delta-1} \cNrm^{1-\delta}  \right)^{-\CRRA} \nonumber \\
  &= \left[ (1-\delta) \chi^{-\delta} - \delta \chi^{1-\delta} \right] \cdot \left( \aNrm \chi^{1-\delta}  \right)^{-\CRRA}, ~~~~ \chi \equiv (\cNrm/\aNrm).
 \end{align}
 
