@@ -139,7 +139,7 @@
 \begin{abstract}
 The ``life-cycle model'' of optimal saving for retirement is familiar to anyone who has taken an intermediate economics class.
 When hiring a financial advisor, such people probably think the advisor's job is to tailor optimal life-cycle model choices to their particular circumstances.
-But academics and advisors know that the advice about both saving and portfolio choice provided by standard academic life-cycle models is deeply problematic.
+But academics and advisors know that the advice about both saving and portfolio choice provided by standard life-cycle models is deeply problematic.
 In particular, most such models imply that retirees should plan to run their wealth down to nearly zero and then live pension-check to pension-check in their old age.
 This paper makes the case that recent developments in the economics literature have finally given us the tools and insights required to construct rigorous life-cycle models whose advice is sensible.
 We provide an example of a simple model that can solve a number of problems by putting wealth in the utility function, which captures the intuitive desire for liquidity and security that standard models often overlook.
@@ -177,7 +177,7 @@ We provide an example of a simple model that can solve a number of problems by p
 \section{Introduction}
 
 \cite{modigliani1954} were the first to propose trying to understand consumer financial choices as optimal responses to the paths of income and of spending needs over the lifetime.
-An enormous academic literature has followed their pioneering work (see the \href{/lit-review}{literature appendix} for an expansive summary),
+An enormous academic literature has followed their pioneering work,
 but it has proven difficult to build rational optimizing models that give sensible advice about both life-cycle saving choices and investment decisions.
 That is, the models yield implausible answers to questions about how much wealth should be retained later in life, and how much of one's retirement savings should be invested in the stock market.
 Indeed, the subtitle of a recent paper by \cite{Daga_2023} captures the current state of affairs nicely: ``Why Practitioners Have Not Adopted the Lifecyle Model -- Yet''; see also \cite{Idzorek_2024}, who comment on practitioners' disconnect between intratemporal portfolio optimization and intertemporal life-cycle planning.
@@ -186,26 +186,32 @@ In this paper, we argue that the elements are already available to construct a m
 All that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients, particularly their understanding that clients often resist aggressive drawdowns of wealth late in life.
 Our paper's central contribution is to provide a small \href{https://github.com/econ-ark/life-cycle-prime-time}{open-source computational model} that incorporates some of the features that make it possible to build rigorous optimizing life cycle models whose advice is not obviously wrong.
 
-We begin with a (very) brief literature synopsis, then present a set of models that illustrate the difficulty of matching empirical facts with the life-cycle approach.
-We end with our proposed solution, which involves a small twist to the old idea (\cite{WhyDoTheRich}) of incorporating wealth directly in the utility function.
+Consumers face many uncertainties: about their own income, stock returns, interest rates, health expenditures, mortality, and much more;
+further complications arise because of liquidity constraints and other financial frictions.
+The incorporation of realistic descriptions of these complexities makes computation of the mathematically optimal solution to the consumer's problem surprisingly difficult.
+Each new aspect of risk introduced to the model increases the burden of computing expectations of the future, while each added dimension of agent choice or personal circumstances expands the problem size (literally) exponentially.
+Modelers thus face a difficult tradeoff in designing their framework to be sufficiently realistic to serve as a plausible representation of the problem actual people face, while maintaining a degree of tractability to stay within the bounds of computational feasibility.
+
+Our proposed solution to this conundrum involves a small twist to the old idea (from \cite{WhyDoTheRich}) of incorporating wealth \textit{directly} in the utility function.
+Rather than indirectly valuing wealth because it will finance future consumption and act as a buffer against risks both known and unknown, consumers in this model derive utility from the mere fact that they hold wealth.
+This modeling choice could represent a reduced form for other motivations--- indeed, that was the thesis of \cite{WhyDoTheRich}.
+As we discuss further below, when queried by the Survey of Consumer Finances about the most important reason to save, ``Liquidity / The Future'' is the most popular answer among retirees.
+These responses might signal that the forms of uncertainty that we can measure -- such as actuarial calculations about nursing home expense risks -- constitute only a fraction of the risks retirees might worry about.
+Maintaining a buffer stock of wealth to protect oneself against ``unknown unknowns'' is plainly reasonable, but also nearly impossible to calibrate in a quantitative model.
+That is, we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of ``unknown unknowns''.
+Indeed, even if you knew those answers, they would be, at best, ``known unknowns.''
+Directly incorporating wealth into the utility function may serve as a tractable proxy for this profound uncertainty aversion.
+
 
 \section{Recent Developments in the Literature}
 
-\subsection{Computation, Complexity, and Uncertainty}
-
-Consumers face many uncertainties: about their own income, stock returns, interest rates, health expenditures, mortality, and much more.
-Further complications arise because of liquidity constraints and other financial frictions.
-
-The incorporation of realistic descriptions of these complexities makes computation of the mathematically optimal solution to the consumer's problem is surprisingly difficult.
-Each new aspect of risk introduced to the model increases the burden of computing expectations of the future, while each added dimension of agent choice or personal circumstances expands the problem size (literally) exponentially.
-Modelers thus face a difficult tradeoff in designing their framework to be sufficiently realistic to serve as a plausible representation of the problem actual people face, while maintaining a degree of tractability to stay within the bounds of computational feasibility.
-The remarkable advance of computational power has now finally made it possible to compute a credible answer to the question, ``What saving and portfolio choices are truly mathematically optimal?'' in a context in which the key complexities are properly represented.
+We begin with a brief literature synopsis before proceeding in Section~\ref{models} to a set of models that illustrate the difficulty of matching empirical facts with the life-cycle approach.
 
 \subsection{Survey Data on Expectations and Preferences}
 
-Another academic development has been a new openness to the idea that people's beliefs and preferences can be probed by \textit{asking them} about their beliefs and preferences.
-In the context of motivations for saving, this leads us to take seriously the answers to a survey question about their `most important' reason for saving that respondents to the Federal Reserve's \href{https://www.federalreserve.gov/econres/scfindex.htm}{Survey of Consumer Finances (SCF)} have been asked for many years.
-Among retirees, one answer dominates the rest: ``Liquidity / The Future.''  (See discussion below.)
+A key academic development has been a new openness to the idea that people's beliefs and preferences can be probed by \textit{asking them} about their beliefs and preferences.
+In the context of motivations for saving, this leads us to take seriously the answers to a survey question about their ``most important'' reason for saving that respondents to the Federal Reserve's \href{https://www.federalreserve.gov/econres/scfindex.htm}{Survey of Consumer Finances (SCF)} have been asked for many years.
+Among retirees, one answer dominates the rest: ``Liquidity / The Future.''
 
 A natural interpretation of the importance consumers put on ``liquidity'' is that precautionary saving motives matter for many households, highlighting the need for the aforementioned computational advancements.
 The traditional approach to constructing such models has been for economists to try to measure the necessary inputs (income uncertainty, e.g.), and to assume that agents' beliefs incorporate whatever it is that the economist has measured.
@@ -215,7 +221,7 @@ Moreover, there is now considerable evidence that the decisions people make refl
 Some recent work suggests that taking beliefs data into account could resolve many of the problems that have long beset the life cycle modeling literature.
 For example, \cite{velasquezgiraldoJMP} shows that even college-educated people systematically have held beliefs about stock market returns that are pessimistic compared to what the market has historically delivered.
 He argues that this explains why people have been less eager to invest in stocks than would be predicted by models calibrated with economists' more optimistic expectations, and that the portfolio investment behavior of college-educated people over most of their lives is reasonably consistent with \textit{subjectively} rational decision-making (i.e. given their beliefs).
-Concretely, many people think that investment in stocks is a lousy deal, yielding a low return with high risk, so it's no mystery why such people do not invest.\footnote{If the modeler is willing to assert that consumers have mistaken beliefs that cause them to make suboptimal choices, the advice the model gives will differ from the pattern of measured behavior. This could justify the model in recommending, for example, greater investment in risky assets than consumers tend to choose on their own. We compromise by adopting a believed equity premium of 0.03, which is lower than the historical average. Even lower beliefs would reduce the estimated risk aversion coefficient.}
+Concretely, many people think that investment in stocks is a lousy deal, yielding a low return with high risk, so it's no mystery why such people do not invest.\footnote{If the modeler is willing to assert that consumers have mistaken beliefs that cause them to make suboptimal choices, the advice the model gives will differ from the pattern of measured behavior. This could justify the model in recommending, for example, greater investment in risky assets than consumers tend to choose on their own. We compromise by adopting a believed equity premium of 0.03, which is lower than the historical average. Even lower beliefs would reduce the estimated risk aversion coefficient. Alternatively, incorporating plausible estimates of behavioral frictions of equity market participation can also explain low rates of stock-holding, as in \cite{Choukhmane2024}.}
 
 It is not astonishing to discover that many people hold beliefs that differ from those of experts, especially on subjects whose mastery requires considerable domain-specific education, like the returns and risk of stock investments.
 Indeed, the existence of a large industry offering financial advice is \textit{prima facie} evidence that many people are not confident that they understand everything necessary to make good financial choices on their own.
@@ -226,14 +232,15 @@ If the advice is consistent with the model, and the model can be checked both fo
 
 \subsection{Model Specification and Estimation}
 
-In Section~\ref{models}, we provide a formal description of the mathematical and computational structure of our optimizing models, beginning with the Life~Cycle~Portfolio model, which calculates optimal saving and optimal portfolio shares over the life cycle.
+The remarkable advance of computational power has made it possible to compute a credible answer to the question, ``What saving and portfolio choices are truly mathematically optimal?'' in a context in which (at least some of) the key complexities are properly represented.
+In Section~\ref{models}, we provide a formal description of the mathematical and computational structure of such optimizing models, beginning with the Life~Cycle~Portfolio model, which calculates optimal saving and optimal portfolio shares over the life cycle.
 In Section~\ref{estimation}, we report that the model implies a rapid drawdown of wealth after retirement that is simply not observed in empirical observations, renewing attention to a longstanding problem with life cycle models (see, e.g., \cite{hurd1987savings}, \cite{HEIMER_2019}).\footnote{Some impressive recent work by Ameriks, Caplin, and coauthors (\cite{ameriks2011joy}, \cite{Ameriks2020jpe}) has argued that concerns about the possibility of extremely large medical costs (e.g. nursing home or other long term care) may be behind the drawdown failure for some people (see \cite{DeNardi2016d}) for a survey).
 It would be interesting to see how our results might change if we were to include such shocks, but the inexorable logic behind the model's prediction of a rapid drawdown of wealth should still apply as the threat of mortality grows with age.
 Furthermore, the drawdown failure is also present in other countries whose social insurance systems are much more generous than the U.S., so it seems unlikely that uninsurable medical risk is a sufficient explanation.}
 We call this the ``drawdown failure,'' which has been the subject of a large literature with both U.S. evidence (see, e.g., \cite{Hurd_1989}, \cite{DeNardi2016d}, \cite{Kopecky_2014}, \cite{Mortenson_2019}, \cite{Poterba_2018}) and international evidence (see, e.g., \cite{Christensen_2022}, \cite{Ventura_2020}).
 
 We next modify the model by adding a bequest motive, because the literature has extensively explored whether such a motive could explain the drawdown failure (see \cite{DeNardi2016d}).
-In Section~\ref{estimation} we find that in order for the bequest motive to explain the drawdown failure, the strength of that motive has to be extremely and implausibly strong--- so much so that even early in their working lives, the primary motivation for saving is the accumulation of a bequest (rather than, say, to sustain one's own consumption in retirement).
+In Section~\ref{estimation}, we find that in order for the bequest motive to explain the drawdown failure, the strength of that motive has to be implausibly strong--- so much so that even early in their working lives, the primary motivation for saving is the accumulation of a bequest (rather than, say, to sustain one's own consumption in retirement).
 %(Note that \cite{Hendricks_2002} finds that for the great majority of households, bequests amount to less than 2 percent of lifetime resources).
 
 This leads us into more speculative territory.
@@ -250,7 +257,7 @@ But the broad purpose of our exercise is not to defend any particular modeling s
 
 \section{Models}\label{models}
 
-The academic literature on life-cycle modeling is vast, and we cannot hope to do it justice (even in the broader sampling in the \href{/lit-review}{literature appendix}).
+The academic literature on life-cycle modeling is vast, and we cannot hope to do it justice.
 But the intrinsic nature of papers in any academic literature is to focus narrowly on one specific question at a time.
 Here, our goal is to examine the ``big picture'' question of what elements are needed to craft a model that can provide credible advice to retirees about spending and portfolio choices, while remaining reasonably consistent with the relevant well-established facts from the academic literature, as well as one new kind of further evidence that we view as vital: the experience of financial advisors themselves in interactions with their clients. This practitioner perspective helps ground the optimization problem in the realities of client preferences.
 We have been told,\footnote{Personal communication, James Tzitzouris with Christopher Carroll, 2024-05-15.} for example, that a good way to get fired as a financial advisor is to recommend the LCP model's conclusion that it is optimal for retirees to plan to run their wealth down to zero and then live pension-check to pension-check.
@@ -332,7 +339,7 @@ Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (
     \tranShkEmp_{t} = &
     \begin{cases}
         0\phantom{/\pZero} & \text{with probability $\pZero>0$}
-        \\ \xi_{t}/(1-\pZero) & \text{with probability $(1-\pZero)$}
+        \\ \xi_{t}/(1-\pZero) & \text{with probability $(1-\pZero)$}.
     \end{cases}
 \end{align}
 
@@ -507,7 +514,7 @@ Exhibit~\ref{most-important-reason} presents the responses to this question for 
 If bequests were a primary motivation for saving for most (college-educated) people, it would be surprising for them to mention this motivation so rarely. The ``Family'' motivation, which includes bequests, accounts for only 6\% of responses.
 Given these (and other) objections to the bequest motive, as well as the problems of the model without a bequest motive, it is natural to consider alternative modifications to the framework.
 
-\begin{exhibit}
+\begin{exhibit}[t!]
 \centering
 \caption{Most Important Reason for Saving, 1995-2022 SCF Waves}\label{most-important-reason}
 \begin{tabular}{lcl}
@@ -563,12 +570,6 @@ It is a relatively simple matter to solve the revised problem with wealth in the
     \uFunc_t(\cNrm_t, \aNrm_t) & = \frac{\left(\cNrm_t^{1-\delta}\aNrm_t^{\delta}\right)^{1-\CRRA}}{1-\CRRA}, \\
     {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t}, \aNrm_{t})+\Alive_{t+1}\mathfrak{v}_{t}(a_{t}).
 \end{align}
-
-We are open to the possibility that wealth in the utility function is a reduced form for other motivations--- indeed, that was the thesis of \cite{WhyDoTheRich}.
-In particular, the fact that in our SCF table above, ``Liquidity / The Future'' is the most popular answer among retirees for the most important reason to save might signal that the forms of uncertainty that we can measure -- like the \cite{Ameriks2020jpe} calculations about nursing home expense risks -- constitute only a fraction of the risks retirees might worry about.
-Maintaining a buffer stock of wealth to protect oneself against ``unknown unknowns'' is plainly reasonable, but also nearly impossible to calibrate in a quantitative model.
-That is, we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of ``unknown unknowns''.
-Indeed, even if you knew those answers, they would be, at best, ``known unknowns.'' Directly incorporating wealth into the utility function may serve as a tractable proxy for this profound uncertainty aversion.
 
 
 \subsection{Comparisons to Other Models Familiar to Practitioners}
@@ -697,7 +698,7 @@ However, agents \textit{also} drastically reduce their saving behavior in their 
 This is what we mean by an ``implausibly strong'' bequest motive: it drives wealth accumulation even in middle age, not just among the elderly.
 Recall from the discussion of \cite{FRB2023} and \cite{jaherGilded} that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of \textit{40 year olds} driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown pattern in the data, it does so for the wrong reasons.
 Even if a model can \textit{mechanically} reproduce observed data features or hit empirical targets, that does not make it ``right'' or ``true,'' especially if its underlying logic is implausible and contradictory to qualitative evidence.
-And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty \textit{to the client}.
+And as discussed above, the bequest motive is inconsistent with an investment manager's fiduciary duty to the client, as in the case of (e.g.) the sponsor of a 401(k) plan.
 We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are \textit{multiple ways} for life-cycle models to generate more realistic wealth trajectories in retirement.
 
 \begin{exhibit}[t!]
@@ -758,12 +759,12 @@ To thoughtful academics, it has long been disturbing that the financial advice i
 Those of us with a bit of humility have always suspected that the failure has been on our side: If all we could offer was models that produced risible advice like ``everyone should spend down their wealth to zero and live pension-check to pension-check,'' while financial analysts' real world experience told them that such advice would get them fired, then it was reasonable to disregard the academic literature.
 
 The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.
+We argue that including wealth directly in consumers' utility function can serve as a computationally tractable shorthand for the unenumerable risks that retirees might be concerned about.
 
-Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of nonfinancial (principally, housing) wealth for optimal financial choice.
-Because homeownership is such a complex phenomenon, the academic literature is only now reaching the point at which it may be possible to answer questions like, ``If I own a house, how should I modify my spending and portfolio plans to take that into account?''
-We do know the \textit{direction} of the effect.
-\cite{kimballStandardRA} shows that the addition of a new uncontrollable risk reduces the optimal choice of exposure to controllable risks like the stock market.
-But \textit{by how much} one's stock exposure should be reduced because of house-price risk can only be answered by solving a quantitatively plausible model.
+Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of non-financial (principally, housing) wealth for optimal financial choice.
+The academic literature is only now reaching the point at which it may be possible to answer questions like, ``If I own a house, how should I modify my spending and portfolio plans to take that into account?''
+We do know the \textit{direction} of the effect (\cite{kimballStandardRA}),
+but \textit{by how much} one's stock exposure should be reduced because of house-price risk can only be answered by solving a quantitatively plausible model.
 
 It would be a better world if financial advice could be justified as reflecting the mathematically optimal solution to a well-defined problem.
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
@@ -790,7 +791,7 @@ Each of our models has two control variables-- consumption $\cNrm_t$ and the ris
 
 Note that the survival probability $\Alive_{t+1}$ is \textit{not} included in this problem because it is a constant scaling factor that cannot affect the optimal choice of $\varsigma_t$. Likewise, the warm-glow bequest motive $e(\aNrm_t)$ is also irrelevant because it is constant with respect to $\varsigma$.
 
-We will not reproduce the proof here, but it can be shown that the first order condition is necessary and sufficient to characterize the optimal risky portfolio share as long as $\vFunc_{t+1}$ is strictly concave (which can also be proven). Taking the derivative of the maximand with respect to $\varsigma$ and equating it to zero yields:
+We will not reproduce the proof here, but it can be shown that the first order condition has at most one solution, so it is sufficient to characterize the optimal risky portfolio share as long as $\vFunc_{t+1}$ is strictly concave (which can also be proven). Taking the derivative of the maximand with respect to $\varsigma$ and equating it to zero yields:
 
 \begin{equation}
 \label{eq:foc-share}
