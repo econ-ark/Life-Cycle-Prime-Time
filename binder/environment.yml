@@ -1,0 +1,16 @@
+name: life-cycle-prime-time
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - estimagic=0.4.7
+  - statsmodels
+  - dask
+  - openpyxl
+  - pip
+  - pip:
+      - git+https://github.com/econ-ark/HARK@master
+      - DFO-LS
+      - tranquilo
+      - black[jupyter]
+      - -e .

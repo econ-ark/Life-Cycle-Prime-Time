@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Life-Cycle-Prime-Time"
+abstract: "Reproducible research repository for life-cycle portfolio choice models with method of simulated moments estimation"
+authors:
+  - family-names: Lujan
+    given-names: Alan
+    email: alanlujan91@gmail.com
+  - family-names: White
+    given-names: Matthew N.
+version: "0.1.0"
+date-released: 2024-01-01
+doi: ""
+url: "https://github.com/econ-ark/Life-Cycle-Prime-Time"
+repository-code: "https://github.com/econ-ark/Life-Cycle-Prime-Time"
+license: MIT
+keywords:
+  - economics
+  - life-cycle models
+  - portfolio choice
+  - method of simulated moments
+  - dynamic stochastic optimization

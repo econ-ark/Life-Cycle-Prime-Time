@@ -495,3 +495,9 @@ Thumbs.db
 
 # MyST build outputs
 _build
+
+# Cursor artifacts
+.cursorindexingignore
+
+# Specstory artifacts
+.specstory/
