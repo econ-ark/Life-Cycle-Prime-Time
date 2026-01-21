@@ -1,8 +1,8 @@
 
 	\documentclass[12pt,letterpaper]{article}
-	
+
 	%%%%%%%%%%%%%%%%%%%%  imports  %%%%%%%%%%%%%%%%%%%
-	
+
 	\usepackage[utf8]{inputenc} % allow utf-8 input
 	\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
 	\usepackage{hyperref}       % hyperlinks
@@ -22,12 +22,12 @@
 	\usepackage{setspace}
 	\usepackage{graphicx} %draft option suppresses graphics dvi display
 	\usepackage{newfloat} % make new floating environments
-	
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+
 	\setlength{\textwidth}{6.5in}
 	\setlength{\textheight}{9in}
-	\addtolength{\topmargin}{-\topmargin} 
+	\addtolength{\topmargin}{-\topmargin}
 	\setlength{\oddsidemargin}{0in}
 	\setlength{\evensidemargin}{0in}
 	\addtolength{\headsep}{-\headsep}
@@ -46,10 +46,10 @@
 	\widowpenalty 5000
 	\renewcommand{\baselinestretch}{1.25}
 	\DeclareFloatingEnvironment[fileext=loe,listname={List of Exhibits},name=Exhibit,placement=tbh]{exhibit}
-	
+
 
 	%%%%%%%%%%%%%%%%%  math commands  %%%%%%%%%%%%%%%%
-	
+
 	\newcommand{\N}{\mathbb{N}}
 	\newcommand{\R}{\mathbb{R}}
 	\newcommand{\E}{\mathbb{E}}
@@ -87,27 +87,27 @@
 	\newcommand{\kap}{k}
 	\newcommand{\lqdt}{\ell}
 	\newcommand{\h}{h}
-	
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	
+
+
 	\hypersetup{colorlinks = true,
 	linkcolor = purple,
 	urlcolor  = blue,
 	citecolor = cyan,
 	anchorcolor = black}
-	
+
 	\title{Life-Cycle Modeling is Ready for Prime Time}
-	
+
 	\date{\today}
-	
-	\author{Christopher Carroll\footnote{\texttt{ccarroll@llorracc.org}}\\\small{Professor of Economics,}\\\small{Krieger School of Arts \& Sciences,}\\\small{Johns Hopkins University} \and 
+
+	\author{Christopher Carroll\footnote{\texttt{ccarroll@llorracc.org}}\\\small{Professor of Economics,}\\\small{Krieger School of Arts \& Sciences,}\\\small{Johns Hopkins University} \and
 	Alan Lujan\footnote{\texttt{alujan@jhu.edu}}\\\small{Program Coordinator \& Lecturer,}\\\small{Advanced Academic Programs,}\\\small{Johns Hopkins University} \and Matthew N. White\footnote{\texttt{mnwhite@gmail.com}}\\\small{Primary Developer,}\\\small{Econ-ARK}}
-	
+
 
 \begin{document}
 \begin{singlespace}
-	
+
 \begin{center}
 	\huge Life-Cycle Modeling is Ready for Prime Time \\ \LARGE \today
 \end{center}
@@ -153,9 +153,9 @@ We provide an example of a simple model that can solve a number of problems by p
 
 \begin{itemize}
 	\item Several different model features could be added to traditional life-cycle models to ameliorate their poor advice for saving in old age. However, some of those features are inconsistent with other data or incompatible with financial advisers' legal requirements.
-	
+
 	\item Accounting for ``soft data'' from surveys about consumer preferences and expectations is critical for building a quantitative model that gives creditable advice. Likewise, advisers must consider whether the model should optimize on clients' subjective beliefs or their own expert knowledge.
-	
+
 	\item Including wealth as a direct input to the utility function, separately from precautionary and life-cycle motives, allows consumption-saving models to match empirical evidence about wealth holding in later life as well as retirees' stated motivations for saving.
 \end{itemize}
 
@@ -195,7 +195,7 @@ Modelers thus face a difficult tradeoff in designing their framework to be suffi
 Our proposed solution to this conundrum involves a small twist to the old idea (from \cite{WhyDoTheRich}) of incorporating wealth \textit{directly} in the utility function.
 Rather than indirectly valuing wealth because it will finance future consumption and act as a buffer against risks both known and unknown, consumers in this model derive utility from the mere fact that they hold wealth.
 This modeling choice could represent a reduced form for other motivations--- indeed, that was the thesis of \cite{WhyDoTheRich}.
-As we discuss further below, when queried by the Survey of Consumer Finances about the most important reason to save, ``Liquidity / The Future'' is the most popular answer among retirees.
+As we discuss further below, retirees responding to the Survey of Consumer Finances most commonly cite ``Liquidity / The Future'' as their most important reason for saving.
 These responses might signal that the forms of uncertainty that we can measure -- such as actuarial calculations about nursing home expense risks -- constitute only a fraction of the risks retirees might worry about.
 Maintaining a buffer stock of wealth to protect oneself against ``unknown unknowns'' is plainly reasonable, but also nearly impossible to calibrate in a quantitative model.
 That is, we would need to have an accurate representation of people's beliefs about the magnitude, frequency, and persistence of ``unknown unknowns''.
@@ -213,7 +213,7 @@ A key academic development has been a new openness to the idea that people's bel
 In the context of motivations for saving, this leads us to take seriously the answers to a survey question about their ``most important'' reason for saving that respondents to the Federal Reserve's \href{https://www.federalreserve.gov/econres/scfindex.htm}{Survey of Consumer Finances (SCF)} have been asked for many years.
 Among retirees, one answer dominates the rest: ``Liquidity / The Future.''
 
-A natural interpretation of the importance consumers put on ``liquidity'' is that precautionary saving motives matter for many households, highlighting the need for the aforementioned computational advancements.
+A natural interpretation of the importance consumers put on ``liquidity'' is that precautionary saving motives matter for many households, highlighting the need for computational advancements in solving such models.
 The traditional approach to constructing such models has been for economists to try to measure the necessary inputs (income uncertainty, e.g.), and to assume that agents' beliefs incorporate whatever it is that the economist has measured.
 However, the newly collected survey data on consumer expectations show that the beliefs that many people \textit{actually} hold differ substantially from what economists postulate they ``should'' believe based on empirical measurements.
 Moreover, there is now considerable evidence that the decisions people make reflect their actual beliefs rather than whatever it is that economists think they \textit{should} believe.\footnote{A particularly troubling possibility is raised by the work of \cite{gabaix2010age}, who point out that at least some elderly decision-makers (say, those with dementia) may be beyond the ``age of reason.''}
@@ -230,7 +230,7 @@ Financial advice, however, is fraught with potential conflicts of interest.
 That is one reason that justifying such advice with an explicit and transparent modeling framework is so attractive.
 If the advice is consistent with the model, and the model can be checked both for mathematical correctness and conceptual soundness (by outside experts), then it is reasonable for a client hiring an advisor to trust the advice.
 
-\subsection{Model Specification and Estimation}
+\subsection{Outline of Our Approach}
 
 The remarkable advance of computational power has made it possible to compute a credible answer to the question, ``What saving and portfolio choices are truly mathematically optimal?'' in a context in which (at least some of) the key complexities are properly represented.
 In Section~\ref{models}, we provide a formal description of the mathematical and computational structure of such optimizing models, beginning with the Life~Cycle~Portfolio model, which calculates optimal saving and optimal portfolio shares over the life cycle.
@@ -658,7 +658,7 @@ Exhibit~\ref{parameters} shows the results of our estimation exercise, and the f
 Model & Criterion & CRRA & Wealth & Bequest  & Bequest \\
  & & ($\CRRA$) & Share ($\delta$) & MPC ($\gamma$) & Intercept ($\kappa$) \\
 \midrule
-\vspace{0.25cm} Life-Cycle Portfolio & 1.049 & 9.195 &  &  &  \\ 
+\vspace{0.25cm} Life-Cycle Portfolio & 1.049 & 9.195 &  &  &  \\
 \vspace{0.25cm} Warm-Glow LC Portfolio & 0.104 & 4.594 &  & 0.112 & 0.321 \\
 TRP / WIUF LC Portfolio & 0.306 & 5.136 & 0.248 &  &  \\
 \bottomrule
@@ -698,7 +698,7 @@ However, agents \textit{also} drastically reduce their saving behavior in their 
 This is what we mean by an ``implausibly strong'' bequest motive: it drives wealth accumulation even in middle age, not just among the elderly.
 Recall from the discussion of \cite{FRB2023} and \cite{jaherGilded} that very few older people ascribe their wealth-holding behavior to a bequest motive, and yet the Warm-Glow model has the saving choices of \textit{40 year olds} driven by the urge to bequeath. This suggests that while the bequest model can match the drawdown pattern in the data, it does so for the wrong reasons.
 Even if a model can \textit{mechanically} reproduce observed data features or hit empirical targets, that does not make it ``right'' or ``true,'' especially if its underlying logic is implausible and contradictory to qualitative evidence.
-And as discussed above, the bequest motive is inconsistent with an investment manager's fiduciary duty to the client, as in the case of (e.g.) the sponsor of a 401(k) plan.
+And as discussed above, the bequest motive is inconsistent with an investment advisor's fiduciary duty \textit{to the client}, as in the case of (e.g.) the sponsor of a 401(k) plan.
 We include the Warm-Glow model in our presentation not to advocate for it, but merely to demonstrate that there are \textit{multiple ways} for life-cycle models to generate more realistic wealth trajectories in retirement.
 
 \begin{exhibit}[t!]
