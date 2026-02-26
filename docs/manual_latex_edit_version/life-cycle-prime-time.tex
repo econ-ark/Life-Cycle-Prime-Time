@@ -1,5 +1,5 @@
 
-	\documentclass[12pt,letterpaper]{article}
+	\documentclass[12pt,letterpaper, fleqn]{article}
 
 	%%%%%%%%%%%%%%%%%%%%  imports  %%%%%%%%%%%%%%%%%%%
 
@@ -22,9 +22,11 @@
 	\usepackage{setspace}
 	\usepackage{graphicx} %draft option suppresses graphics dvi display
 	\usepackage{newfloat} % make new floating environments
+	\usepackage{parskip}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+	
+	\setlength{\parindent}{0.35in}
 	\setlength{\textwidth}{6.5in}
 	\setlength{\textheight}{9in}
 	\addtolength{\topmargin}{-\topmargin}
@@ -33,6 +35,7 @@
 	\addtolength{\headsep}{-\headsep}
 	\addtolength{\topskip}{-\topskip}
 	\addtolength{\headheight}{-\headheight}
+	\setlength{\mathindent}{0pt}
 	\setcounter{secnumdepth}{3}
 	% \renewcommand{\thesection}{\arabic{section}}
 	% \renewcommand{\footnote}{\endnote}
@@ -306,7 +309,6 @@ A consumer's ``value'' of having a given amount of market resources $\mLvl_{t}$ 
 Potential future utility flows matter only to the extent that the agent expects to survive to that period, and might be further discounted due to placing more weight on the present than the future.
 
 Mathematically, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than some terminal period $T$:
-
 \begin{equation}
 \label{eq:lifecyclemax}
 \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\pmb{\cFunc}\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right].
@@ -353,7 +355,6 @@ It is conventional to assume that shocks to permanent income and to the transito
 \subsubsection{Reducing Perceived Model Complexity}
 
 Following the standard Bellman representation, if the agent assumes that they \textit{will} act optimally in all future periods, then their future expectations of discounted utility flows in (\ref{eq:lifecyclemax}) are their value function one period ahead. Defining $\Alive_t \equiv \Alive_t^{t+1}$ to reduce notation, this is:
-
 \begin{equation}
 \label{eq:bellman}
 \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\pmb{\cFunc}_{t}} ~ \uFunc(\cLvl_{t}) + \Alive_t \DiscFac  \Ex_{t}\left[ \pmb{\vFunc}_{t+1}(\mLvl_{t+1},\pLvl_{t+1}) \right].
@@ -363,7 +364,6 @@ Under the assumptions we have made about the structure of the utility function (
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see \cite{BufferStockTheory} for the math). This normalization is crucial because it reduces the complexity of the problem; instead of tracking both resources and income levels, we only need to track their ratio.
 The solution is thus homothetic with respect to permanent income level: $\pmb{\cFunc}_t(\mLvl_t, \pLvl_t) = \pLvl_t \cFunc_t(\mNrm_t)$.
 Normalizing the Bellman value function by $\pLvl_t$ requires dividing by $\pLvl^{1 -\CRRA}$, yielding:
-
 \begin{equation}
 \label{eq:normbellman}
 \vFunc_{t}(\mNrm_{t}) \equiv \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) / \pLvl_t^{1-\CRRA} = \max_{\cFunc_{t}} ~ \uFunc(\cNrm_{t}) + \Alive_t \DiscFac  \Ex_{t}\left[ (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA} \vFunc_{t+1}(\mNrm_{t+1}) \right].
@@ -804,7 +804,6 @@ Each of our models has two control variables-- consumption $\cNrm_t$ and the ris
 Note that the survival probability $\Alive_{t+1}$ is \textit{not} included in this problem because it is a constant scaling factor that cannot affect the optimal choice of $\varsigma_t$. Likewise, the warm-glow bequest motive $e(\aNrm_t)$ is also irrelevant because it is constant with respect to $\varsigma$.
 
 We will not reproduce the proof here, but it can be shown that the first order condition has at most one solution, so it is sufficient to characterize the optimal risky portfolio share as long as $\vFunc_{t+1}$ is strictly concave (which can also be proven). Taking the derivative of the maximand with respect to $\varsigma$ and equating it to zero yields:
-
 \begin{equation}
 \label{eq:foc-share}
 \Ex_{t}\left[ \pmb{\beta}_{t+1} (\Risky_{t+1}-\Rfree) \aNrm_t \vFunc'_{t+1}((\Rfree + (\Risky_{t+1}-\Rfree)\varsigma) \aNrm_t + \theta_{t+1}) \right] = 0.
@@ -829,7 +828,6 @@ As discussed further below, marginal value $\vFunc'_{t+1}(\mNrm_{t+1})$ in all o
 \subsection{Optimal Consumption in Baseline and Warm-Glow Bequest Models}
 
 Stepping back within the period, we can now consider the choice of optimal consumption, taking as given that the agent will optimally allocate their assets between the risky and risk-free assets. For our first two models, we express the \textit{continuation value} over $\aNrm_t$ as:
-
 \begin{equation}
 \bar{\mathfrak{v}}_t(\aNrm_t) = \begin{cases}
 \Alive_{t+1} \mathfrak{v}_t(\aNrm_t) & \text{in baseline life-cycle model} \\
@@ -893,13 +891,11 @@ These algebraic manipulations will prove useful when we solve the first order co
 \end{align}
 
 Consider the first order condition for optimality by taking the derivative of the maximand with respect to $\cNrm$ and equating it to zero:
-
 \begin{equation}
 \frac{\text{d}}{\text{d} \cNrm} \uFunc(\cNrm_t, \mNrm_t-\cNrm_t) - \bar{\mathfrak{v}}'_t(\mNrm_t - \cNrm_t) = 0.
 \end{equation}
 
 We can substitute the final form of the marginal return to consumption, move the second term to the right-hand side, and then rearrange slightly to get:
-
 \begin{equation*}
 \left[ (1-\delta) \chi_t^{-\delta} - \delta \chi_t^{1-\delta} \right] \cdot \left( \aNrm_t \chi_t^{1-\delta}  \right)^{-\CRRA} = \bar{\mathfrak{v}}'_t(\aNrm_t) \Longrightarrow
 \end{equation*}
@@ -913,13 +909,11 @@ Note that the left-hand side of the rearranged FOC is monotonically increasing w
 Unlike with basic CRRA utility, there is no closed form solution for (\ref{eq:FOC-WIU}) to recover $\chi_t$ from $\omega_t$. While it would be possible to use a rootfinder to solve (\ref{eq:FOC-WIU}) for each value of $\omega_t$ as it comes up during the solution process, it is more efficient to pre-compute a function that accurately maps from $\omega$ to $\chi$. We now describe a method for constructing such a function by working with the inverse relationship.
 
 First, note that the expression in square brackets is not positive for all values of $\chi > 0$, with the bounding condition defined by:
-
 \begin{equation}
 (1-\delta) \chi^{-\delta} - \delta \chi^{1-\delta} > 0 \Longrightarrow (1-\delta) \chi^{-\delta} > \delta \chi^{1-\delta} \Longrightarrow \frac{1-\delta}{\delta} >\chi.
 \end{equation}
 
 The expression in square brackets is raised to a negative power, hence we need only to consider values of $\chi \in (0, (1 -\delta)/\delta)$. These $\chi$ values represent the \textit{range} of the function that maps from $\omega$ to $\chi$, and we want our constructed approximation to cover as much of that range as possible. To do so, we will use the logit transformation to map from an auxiliary variable $z \in \R$ to $\chi \in (0, (1 -\delta)/\delta)$:
-
 \begin{equation}
 \label{eq:zToChi}
 \chi = \frac{\exp(z)}{1 + \exp(z)} \cdot \frac{1-\delta}{\delta}.
