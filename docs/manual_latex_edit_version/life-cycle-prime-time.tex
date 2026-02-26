@@ -156,7 +156,7 @@ We provide an example of a simple model that can solve a number of problems by p
 
 	\item Accounting for ``soft data'' from surveys about consumer preferences and expectations is critical for building a quantitative model that gives creditable advice. Likewise, advisers must consider whether the model should optimize on clients' subjective beliefs or their own expert knowledge.
 
-	\item Including wealth as a direct input to the utility function, separately from precautionary and life-cycle motives, allows consumption-saving models to match empirical evidence about wealth holding in later life as well as retirees' stated motivations for saving.
+	\item Including wealth as a direct input to the utility function, separately from precautionary and life-cycle motives, allows consumption-saving models to match empirical evidence about wealth-holding in later life as well as retirees' stated motivations for saving.
 \end{itemize}
 
 \vspace{0.5cm}
@@ -184,6 +184,7 @@ Indeed, the subtitle of a recent paper by \cite{Daga_2023} captures the current 
 
 In this paper, we argue that the elements are already available to construct a model that ``practitioners can adopt.''
 All that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients, particularly their understanding that clients often resist aggressive drawdowns of wealth late in life.
+Using life-cycle models to inform their advice is not wholly foreign to financial advisers,\footnote{E.g.,\ \cite{Lanski2022} provide a case study for their experience in developing and iterating on a life-cycle model to design a target date glidepath.} but it is not yet commonplace.
 Our paper's central contribution is to provide a small \href{https://github.com/econ-ark/life-cycle-prime-time}{open-source computational model} that incorporates some of the features that make it possible to build rigorous optimizing life cycle models whose advice is not obviously wrong.
 
 Consumers face many uncertainties: about their own income, stock returns, interest rates, health expenditures, mortality, and much more;
@@ -590,7 +591,12 @@ Moreover, each goal has an allocation coefficient (relative importance) that is 
 However, the model uses Epstein-Zin preferences (see our above objections to this feature).
 Their model also assumes that there is no uncertainty (except for mortality) in the post-retirement period, because that assumption has the convenient implication that the post-retirement period is extremely simple; the portfolio share, in particular, should remain constant at the infinite-horizon Merton-Samuelson solution.
 
-\cite{Lanski_2022} uses a life-cycle consumption and portfolio choice model without any consideration of bequests like the one discussed above (although other aspects of the model are simpler than our specification).
+\cite{Lanski2022} describes how the authors used the canonical life-cycle consumption and portfolio-choice model to improve their target date fund's glidepath.
+Their article focuses on the iterative process and challenges faced by investment advisors when using the model, rather than trying to rectify the drawdown failure.
+
+\cite{Choi2025} use the solution to the life-cycle problem for a wide array of parameters to produce \textit{approximately optimal} rules for allocating one's wealth between risky and riskless assets.
+That is, each individual has their own unique preferences, expected income growth profile, income risk, etc, but the solution to the life-cycle problem applies to only \textit{one} particular set of such parameters-- and the vast majority of people are not equipped to solve the intertemporal optimization problem for their own circumstances.
+Their ``practical finance'' approach makes it reasonably feasible for an ordinary person to calculate an asset allocation very close to the model's optimum, at least with the aid of spreadsheet software.
 
 There have also been publications that partake of the mathematical flavor of life cycle modeling but do not use the intertemporal choice framework.
 \cite{Idzorek_2023} uses a static model of portfolio optimization, where the objective is to maximize the mean-variance trade off of a portfolio position with additional features such as non-pecuniary benefits.
@@ -770,6 +776,12 @@ It would be a better world if financial advice could be justified as reflecting 
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving were what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world by combining computational rigor with practical insight.
+
+For financial advisers who want to begin exploring life-cycle modeling and how they can incorporate it into their own advice, we humbly suggest looking into \href{http://www.github.com/econ-ark/HARK}{\texttt{HARK}}, our open source toolkit for solving and simulating dynamic stochastic optimization problems.
+\texttt{HARK} uses Python, and the latest version of the package can be installed using \texttt{pip} or \texttt{conda}.
+We are constantly developing and improving our software, and have composed helpful documentation and tutorials, which can be installed locally using \texttt{HARK} or viewed through our \href{http://www.econ-ark.org}{website}.
+The \href{http://www.github.com/econ-ark/life-cycle-prime-time}{GitHub repository} for this paper also includes the particular code we used to perform the estimations here, as well as an interactive Jupyter notebook to explore our results.
+
 
 \bibliographystyle{mnwteststyle}
 \bibliography{main}
