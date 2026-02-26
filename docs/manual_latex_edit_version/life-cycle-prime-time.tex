@@ -38,7 +38,7 @@
 	% \renewcommand{\footnote}{\endnote}
 	\newtheorem{proposition}{Proposition}
 	\newtheorem{definition}{Definition}
-	\newtheorem{lemma}{lemma}
+	\newtheorem{lemma}{Lemma}
 	\newtheorem{corollary}{Corollary}
 	\newtheorem{assumption}{Assumption}
 	\newcommand{\Prob}{\operatorname{Prob}}
@@ -154,7 +154,7 @@ We provide an example of a simple model that can solve a number of problems by p
 \begin{itemize}
 	\item Several different model features could be added to traditional life-cycle models to ameliorate their poor advice for saving in old age. However, some of those features are inconsistent with other data or incompatible with financial advisers' legal requirements.
 
-	\item Accounting for ``soft data'' from surveys about consumer preferences and expectations is critical for building a quantitative model that gives creditable advice. Likewise, advisers must consider whether the model should optimize on clients' subjective beliefs or their own expert knowledge.
+	\item Accounting for ``soft data'' from surveys about consumer preferences and expectations is critical for building a quantitative model that gives credible advice. Likewise, advisers must consider whether the model should optimize on clients' subjective beliefs or their own expert knowledge.
 
 	\item Including wealth as a direct input to the utility function, separately from precautionary and life-cycle motives, allows consumption-saving models to match empirical evidence about wealth holding in later life as well as retirees' stated motivations for saving.
 \end{itemize}
@@ -409,7 +409,7 @@ Object & Meaning \\
 $\Alive_{t+1} \equiv \Alive_{t}^{t+1}$ & probability that a person alive at age $t$ survives to age $t+1$ \\
 $\mNrm$ & market resources normalized by permanent income\\
 $\cNrm$ & consumption normalized by permanent income \\
-$\aNrm$ & end-of-period assets normalizedby permanent income \\
+$\aNrm$ & end-of-period assets normalized by permanent income \\
 $\vFunc_{t}(\mNrm)$ & normalized value function when consumption decision is made \\
 $\mathfrak{v}_{t}(\aNrm)$ & normalized value function when portfolio decision is made \\
 \bottomrule
@@ -425,7 +425,7 @@ We set the unemployment probability to a fairly standard value of $\pZero = 5\%$
 model agents begin their ``lifetime'' at age 25 with no wealth.
 
 We assume that annual returns on the risk free asset are $\Rfree = 1.01$, and that the equity premium is $\eprem = 0.03$.
-These values are somewhat low compare to the economics literature (in which $\Rfree = 1.02$ and $\eprem = 0.06$ are common), but from personal correspondence with financial planners, our understanding is that the profession tries to be conservative about projections of their clients' portfolio returns.
+These values are somewhat low compared to the economics literature (in which $\Rfree = 1.02$ and $\eprem = 0.06$ are common), but from personal correspondence with financial planners, our understanding is that the profession tries to be conservative about projections of their clients' portfolio returns.
 
 While we do not believe that values of $\DiscFac < 1$ are ``ethically indefensible'' as claimed in \cite{Ramsey1928}, we nevertheless set the ``pure'' rate of time preference to $\DiscFac=1$, so that agents care exactly as much about their future self as their present self (conditional on surviving into the future).
 This also serves to constrain the model's ability to fit the data by declining to include an additional ``free'' parameter in the estimations.
@@ -552,7 +552,7 @@ The structure of their utility function is
         \cNrm^{1-\delta}\lqdt^{\delta}
         \right)^{1-\CRRA}}{1-\CRRA}
 \end{align}
-where $\lqdt$ captures the the $\lqdt$iquidity services provided by money-holding.
+where $\lqdt$ captures the $\lqdt$iquidity services provided by money-holding.
 
 To be clear, the aim of that literature was to explain the holding of $\lqdt$ defined as dollar cash holdings, to study questions like the ``velocity'' of money and the role of money supply and money demand in determining interest rates-- \textit{not} to explain saving behavior of individual households.
 
@@ -586,7 +586,7 @@ The multigoal framework additionally disaggregates consumption expenses into dif
 This reduces the effect of the diminishing marginal utility of consumption, such that the sum of utilities of consumption is greater than the utility of the sums of consumption.
 Moreover, each goal has an allocation coefficient (relative importance) that is set subjectively by the researchers.
 
-\cite{O_Hara_2015} incorporate an additively separable utilty of bequest like the one described above, and like our models it incorporates both permanent and transitory shocks to income.
+\cite{O_Hara_2015} incorporate an additively separable utility of bequest like the one described above, and like our models it incorporates both permanent and transitory shocks to income.
 However, the model uses Epstein-Zin preferences (see our above objections to this feature).
 Their model also assumes that there is no uncertainty (except for mortality) in the post-retirement period, because that assumption has the convenient implication that the post-retirement period is extremely simple; the portfolio share, in particular, should remain constant at the infinite-horizon Merton-Samuelson solution.
 
@@ -736,7 +736,7 @@ If people \textit{actually} believe that stocks are much riskier, then they woul
 That is, for any level of risk aversion, agents that subjectively believe that stocks are riskier will want to hold a lower share of risky assets, so risk aversion must decrease to raise risky asset holdings back to the empirical target.
 
 The analysis in \cite{velasquezgiraldoJMP} is quite rich and incorporates heterogeneous beliefs within and across demographic groups, but we need only perform a relatively straightforward exercise to illustrate our point.
-We repeat the estimation procedure from above, but have the agents \textit{solve} their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08\%$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
+We repeat the estimation procedure from above, but have the agents \textit{solve} their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
 When the agents live out the model in simulation, the ``true'' stock return distribution is used ($\eprem = 0.03$ and $\sigma_\risky = 0.2$).
 To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.\footnote{The re-estimated Cobb-Douglas share for wealth $\delta$ and bequest motive parameters $(\kappa,\gamma)$ are comparable to their original values. The basic LCP model even more poorly fits the target moments at its estimated $\CRRA$.}
 
@@ -750,7 +750,7 @@ To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Por
 If agents have incorrect subjective beliefs, it's reasonable to ask what the model predicts they would do if they knew the \textit{true} distribution of stock returns.
 That is, use the preference parameters estimated under subjective stock returns, but give the agents correct beliefs as in the original estimation.
 Risky asset shares for both sets of beliefs are plotted on Exhibit~\ref{subjbeliefs}.
-Unsurprisingly, agents would want to hold a considerably greater share of their wealthy in risky assets if they learned that stock returns have much lower variance than they previously believed.
+Unsurprisingly, agents would want to hold a considerably greater share of their wealth in risky assets if they learned that stock returns have much lower variance than they previously believed.
 The upshot is that if financial advisers want to use life-cycle models to provide normative advice to their clients for how ``best'' to allocate their wealth over time, and to inform those models with inferences about preferences from empirical observations, they must think carefully about the beliefs that generated the observed behavior. This suggests a crucial role for advisors not just in optimization, but also in educating clients about realistic expectations, as optimal advice depends heavily on the client's beliefs about risk and return.
 
 \section{Conclusion}
@@ -767,8 +767,8 @@ We do know the \textit{direction} of the effect (\cite{kimballStandardRA}),
 but \textit{by how much} one's stock exposure should be reduced because of house-price risk can only be answered by solving a quantitatively plausible model.
 
 It would be a better world if financial advice could be justified as reflecting the mathematically optimal solution to a well-defined problem.
-Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modligliani and Brumberg 70 years ago.
-Financial analysts could also sleep more soundly in the knowledge that the advice they were giving were what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
+Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modigliani and Brumberg 70 years ago.
+Financial analysts could also sleep more soundly in the knowledge that the advice they were giving was what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world by combining computational rigor with practical insight.
 
 \bibliographystyle{mnwteststyle}
@@ -798,7 +798,7 @@ We will not reproduce the proof here, but it can be shown that the first order c
 \Ex_{t}\left[ \pmb{\beta}_{t+1} (\Risky_{t+1}-\Rfree) \aNrm_t \vFunc'_{t+1}((\Rfree + (\Risky_{t+1}-\Rfree)\varsigma) \aNrm_t + \theta_{t+1}) \right] = 0.
 \end{equation}
 
-The left-hand side is monotone in $\varsigma$ and thus the FOC has at most one interior solution. The constraint that the consumer cannot short the risky asset ($\varsigma \geq 0$) is never binding as long as mean risky return exceeds the risk-free return. However, the constraint that they cannot short the risk-free asset to buy even more of the risky asset ($\varsigma \leq 1$) \textit{does} sometimes bind. Our algorithm for find the optimal $\varsigma$ is as follows:
+The left-hand side is monotone in $\varsigma$ and thus the FOC has at most one interior solution. The constraint that the consumer cannot short the risky asset ($\varsigma \geq 0$) is never binding as long as mean risky return exceeds the risk-free return. However, the constraint that they cannot short the risk-free asset to buy even more of the risky asset ($\varsigma \leq 1$) \textit{does} sometimes bind. Our algorithm for finding the optimal $\varsigma$ is as follows:
 
 \begin{enumerate}
 \item Fix an exogenous grid of $\aNrm_t$ values from 0 to a large value (say, a wealth-to-income ratio of 100).
