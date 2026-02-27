@@ -767,10 +767,13 @@ Those of us with a bit of humility have always suspected that the failure has be
 
 The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.
 We argue that including wealth directly in consumers' utility function can serve as a computationally tractable shorthand for the unenumerable risks that retirees might be concerned about.
+This same reasoning speaks to the long-standing ``annuity puzzle'': consumers who value their wealth stock will naturally resist converting it entirely into an income stream, however actuarially favorable.
+The wealth-in-utility framework can help determine not \textit{whether} to annuitize, but \textit{how much}.
 
 Modelers must always make difficult choices about which features to include to bolster a model's realism and which to forgo to limit computational burden.
 In the context of providing advice as a financial planner, we recommend thinking carefully about the simplifying assumptions that your model makes, including those that were made ``silently'' or by defaulting to what you have seen or done before.
 In particular, it is critical to be wary of assumptions that lead a model to recommend that wealth be drawn down to zero.
+Likewise, it is worth examining whether clients have adequate access to \textit{liquid} wealth; a model that tracks only total net worth may recommend a spending path that is infeasible given the actual composition of the balance sheet.
 If your clients would resist this consumption advice later in life, then the portfolio allocations your model provided earlier in life were \textit{also incorrect}.
 
 Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of non-financial (principally, housing) wealth for optimal financial choice.
@@ -783,6 +786,7 @@ Not only would academics have the satisfaction of knowing that they had finally 
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving was what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world by combining computational rigor with practical insight.
 
+Because the wealth-in-utility parameter $\delta$ can be informed by asking clients directly about their comfort with drawing down savings, the framework lends itself naturally to personalized advice-- whether delivered by a human planner or an automated tool.
 For financial advisers who want to begin exploring life-cycle modeling and how they can incorporate it into their own advice, we humbly suggest looking into \href{https://github.com/econ-ark/HARK}{\texttt{HARK}}, our open source toolkit for solving and simulating dynamic stochastic optimization problems.
 %\texttt{HARK} uses Python, and the latest version of the package can be installed using \texttt{pip} or \texttt{conda}.
 We are constantly developing and improving our software, and have composed helpful documentation and tutorials, which can be installed locally with \texttt{HARK} or viewed through our \href{https://econ-ark.org}{website}.
