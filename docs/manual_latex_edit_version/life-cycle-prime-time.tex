@@ -27,6 +27,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	\setlength{\parindent}{0.35in}
+	\setlength{\parskip}{6pt}
 	\setlength{\textwidth}{6.5in}
 	\setlength{\textheight}{9in}
 	\addtolength{\topmargin}{-\topmargin}
@@ -767,6 +768,11 @@ Those of us with a bit of humility have always suspected that the failure has be
 The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.
 We argue that including wealth directly in consumers' utility function can serve as a computationally tractable shorthand for the unenumerable risks that retirees might be concerned about.
 
+Modelers must always make difficult choices about which features to include to bolster its realism and which to forgo for the sake of computational burden.
+In the context of providing advice as a financial planner, we recommend thinking carefully about the simplifying assumptions that your model makes, including those that were made ``silently'' or by defaulting to what you have seen or done before.
+In particular, it is critical to be wary of assumptions that lead a model to recommend that wealth be drawn down to zero.
+If your clients would resist this consumption advice later in life, then the portfolio allocations your model provided earlier in life were \textit{also incorrect}.
+
 Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of non-financial (principally, housing) wealth for optimal financial choice.
 The academic literature is only now reaching the point at which it may be possible to answer questions like, ``If I own a house, how should I modify my spending and portfolio plans to take that into account?''
 We do know the \textit{direction} of the effect (\cite{kimballStandardRA}),
@@ -778,8 +784,8 @@ Financial analysts could also sleep more soundly in the knowledge that the advic
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world by combining computational rigor with practical insight.
 
 For financial advisers who want to begin exploring life-cycle modeling and how they can incorporate it into their own advice, we humbly suggest looking into \href{http://www.github.com/econ-ark/HARK}{\texttt{HARK}}, our open source toolkit for solving and simulating dynamic stochastic optimization problems.
-\texttt{HARK} uses Python, and the latest version of the package can be installed using \texttt{pip} or \texttt{conda}.
-We are constantly developing and improving our software, and have composed helpful documentation and tutorials, which can be installed locally using \texttt{HARK} or viewed through our \href{http://www.econ-ark.org}{website}.
+%\texttt{HARK} uses Python, and the latest version of the package can be installed using \texttt{pip} or \texttt{conda}.
+We are constantly developing and improving our software, and have composed helpful documentation and tutorials, which can be installed locally with \texttt{HARK} or viewed through our \href{http://www.econ-ark.org}{website}.
 The \href{http://www.github.com/econ-ark/life-cycle-prime-time}{GitHub repository} for this paper also includes the particular code we used to perform the estimations here, as well as an interactive Jupyter notebook to explore our results.
 
 
