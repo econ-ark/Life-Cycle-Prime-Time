@@ -55,6 +55,38 @@ from estimark.options import (
     medium_resource,
 )
 
+MODEL_CHOICES = {
+    "1": "IndShock",
+    "": "IndShock",
+    "2": "Portfolio",
+    "3": "WarmGlow",
+    "4": "WarmGlowPortfolio",
+    "5": "WealthPortfolio",
+}
+
+REPLICATION_CHOICES = {
+    "1": ("low-resource", low_resource),
+    "": ("low-resource", low_resource),
+    "2": ("medium-resource", medium_resource),
+    "3": ("high-resource", high_resource),
+    "4": ("all replications", all_replications),
+}
+
+
+def _build_agent_name(base_name, subjective_markets):
+    """Append subjective-belief suffixes to the base agent name."""
+    if subjective_markets in ("", "1"):
+        return base_name
+
+    name = base_name + "Sub"
+    if subjective_markets in ("2", "4"):
+        name += "(Stock)"
+        print("Adding subjective stock market beliefs...")
+    if subjective_markets in ("3", "4"):
+        name += "(Labor)"
+        print("Adding subjective labor market beliefs...")
+    return name + "Market"
+
 
 # Ask the user which replication to run, and run it:
 def run_replication():
@@ -98,64 +130,23 @@ def run_replication():
          4  Both\n\n""",
     )
 
-    replication_specs = {}
-
-    if which_model == "1" or which_model == "":
-        agent_name = "IndShock"
-    elif which_model == "2":
-        agent_name = "Portfolio"
-    elif which_model == "3":
-        agent_name = "WarmGlow"
-    elif which_model == "4":
-        agent_name = "WarmGlowPortfolio"
-    elif which_model == "5":
-        agent_name = "WealthPortfolio"
-    else:
+    if which_model not in MODEL_CHOICES:
         print("Invalid model choice.")
         return
 
     if which_replication == "q":
         return
 
-    if which_replication == "1" or which_replication == "":
-        print("Running low-resource replication...")
-        replication_specs.update(**low_resource)
-
-    elif which_replication == "2":
-        print("Running medium-resource replication...")
-        replication_specs.update(**medium_resource)
-
-    elif which_replication == "3":
-        print("Running high-resource replication...")
-        replication_specs.update(**high_resource)
-
-    elif which_replication == "4":
-        print("Running all replications...")
-        replication_specs.update(**all_replications)
-
-    else:
+    if which_replication not in REPLICATION_CHOICES:
         print("Invalid replication choice.")
         return
 
-    if subjective_markets == "":
-        subjective_markets = "1"
-    if int(subjective_markets) > 1:
-        agent_name += "Sub"
+    replication_label, replication_specs = REPLICATION_CHOICES[which_replication]
+    print(f"Running {replication_label} replication...")
 
-        if subjective_markets == "2" or subjective_markets == "4":
-            agent_name += "(Stock)"
-            print("Adding subjective stock market beliefs...")
+    agent_name = _build_agent_name(MODEL_CHOICES[which_model], subjective_markets)
 
-        if subjective_markets == "3" or subjective_markets == "4":
-            agent_name += "(Labor)"
-            print("Adding subjective labor market beliefs...")
-
-        agent_name += "Market"
-
-    replication_specs["agent_name"] = agent_name
-    replication_specs["save_dir"] = "docs/tables/min"
-
-    estimate(**replication_specs)
+    estimate(**replication_specs, agent_name=agent_name, save_dir="docs/tables/min")
 
 
 if __name__ == "__main__":

@@ -42,9 +42,9 @@ from estimark.parameters import (
     init_params_options,
     init_subjective_labor,
     init_subjective_stock,
-    true_stock_params,
     minimize_options,
     sim_mapping,
+    true_stock_params,
 )
 
 # SCF 2004 data on household wealth
@@ -69,28 +69,28 @@ def make_agent(agent_name):
     Construct an instance of an AgentType subclass that can be used in the structural
     estimation. The specific class used, as well as some of the exogenously calibrated
     parameters, depend on whether certain strings appear in the input to the function:
-    
+
     NAME --> AgentType subclass
     "IndShock" --> IndShkLifeCycleConsumerType
     "Portfolio" --> PortfolioLifeCycleConsumerType
     "WarmGlow" --> BequestWarmGlowLifeCycleConsumerType
     "WarmGlowPortfolio" --> BequestWarmGlowLifeCyclePortfolioType
     "WealthPortfolio" --> WealthPortfolioLifeCycleConsumerType
-    
+
     If (Stock) appears in agent_name, then the agent will solve its problem using
     parameters estimated from subjective beliefs about stock return (but simulate
     using values from empirical observations).
-    
+
     If (Labor) appears in agent_name, then the agent will solve its problem using
     parameters estimated from subjective beliefs about labor income risk (but sim-
     ulate using values from empirical observations).
-    
+
     Parameters
     ----------
     agent_name : str
         Name of the agent specification, which determines details of its type
         and exogenous parameters.
-        
+
     Returns
     -------
     agent : AgentType
@@ -112,7 +112,7 @@ def make_agent(agent_name):
     # Make a lifecycle consumer to be used for estimation
     agent = agent_type(**calibration)
     agent.name = agent_name
-    
+
     # Choose to track bank balances as wealth, and track risky asset share if needed
     track_vars = ["bNrm"]
     if "Portfolio" in agent_name:
@@ -147,7 +147,7 @@ def get_weighted_moments(
     Make a dictionary that maps from moment names to moments used in the SMM
     objective function, generating medians of some variable conditional on
     being within particular values for some data grouping.
-    
+
     Parameters
     ----------
     data : dict ?
@@ -161,7 +161,7 @@ def get_weighted_moments(
         Name of the variable to condition the medians on.
     mapping : iterable or None
         List or dictionary of values that the variable named in groups can have.
-        
+
     Returns
     -------
     emp_moments : dict
@@ -193,12 +193,11 @@ def get_weighted_moments(
                 )
         # else:
         #     print(f"Warning: Group {key} does not have any data.")
-    
+
     return emp_moments, weight_sum
 
 
 def get_moments_cov(agent_name, emp_moments):
-    #TODO: WRITE DOCSTRING
     moments_cov = em.get_moments_cov(
         scf_data,
         get_weighted_moments,
@@ -211,22 +210,12 @@ def get_moments_cov(agent_name, emp_moments):
     )
 
     if "Port" in agent_name:
+        # Fill in identity-diagonal entries for any moment keys missing from the
+        # covariance matrix (portfolio share moments are not in SCF wealth data).
         for key1 in emp_moments:
-            # Check if key1 exists in moments_cov dictionary
-            if key1 not in moments_cov:
-                # If it doesn't exist, create a new dictionary for this key
-                moments_cov[key1] = {}
-
+            moments_cov.setdefault(key1, {})
             for key2 in emp_moments:
-                # Check if key2 exists in the nested dictionary under key1
-                if key2 not in moments_cov[key1]:
-                    # If it doesn't exist, we need to add it
-                    if key1 == key2:
-                        # If key1 is equal to key2, set the value to 1.0
-                        moments_cov[key1][key2] = 1.0
-                    else:
-                        # Otherwise, set the value to 0.0
-                        moments_cov[key1][key2] = 0.0
+                moments_cov[key1].setdefault(key2, 1.0 if key1 == key2 else 0.0)
 
     return moments_cov
 
@@ -236,12 +225,12 @@ def get_empirical_moments(agent_name):
     Construct a dictionary of empirical moments for this specification. This
     always includes age-conditional median wealth values, and also includes
     risky portfolio shares if the specification name includes "Portfolio".
-    
+
     Parameters
     ----------
     agent_name : str
         Name of the current specification.
-        
+
     Returns
     -------
     emp_moments : dict
@@ -282,7 +271,7 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     Generate an initial guess of the parameters to be estimated by looking for
     prior estimates of the same specification, or defaulting to values specified
     in the parameters file.
-    
+
     Parameters
     ----------
     agent : AgentType
@@ -293,7 +282,7 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     save_dir : str
         Directory where estimation output will be stored, and maybe has already
         been stored. Used to check whether this specification has already been run.
-        
+
     Returns
     -------
     initial_guess : dict
@@ -325,6 +314,49 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     return initial_guess
 
 
+def _apply_subjective_beliefs(agent):
+    """Configure subjective beliefs for solving the agent's problem."""
+    if "(Stock)" in agent.name and "Portfolio" in agent.name:
+        agent.assign_parameters(**init_subjective_stock)
+        agent.construct("RiskyDstn", "ShockDstn")
+    if "(Labor)" in agent.name:
+        agent.assign_parameters(**init_subjective_labor)
+        agent.update_income_process()
+
+
+def _apply_true_beliefs(agent):
+    """Override subjective beliefs with true parameters for simulation."""
+    if "(Stock)" in agent.name and "Portfolio" in agent.name:
+        agent.assign_parameters(**true_stock_params)
+        agent.construct("RiskyDstn", "ShockDstn")
+    if "(Labor)" in agent.name:
+        agent.TranShkStd = init_subjective_labor["TranShkStd"]
+        agent.PermShkStd = init_subjective_labor["PermShkStd"]
+        agent.update_income_process()
+
+
+def _collect_sim_moments(agent, emp_moments):
+    """Extract simulated median moments from agent history."""
+    sim_w_history = agent.history["bNrm"]
+    sim_moments = {
+        key: np.median(sim_w_history[cohort_idx])
+        for key, cohort_idx in sim_mapping.items()
+        if key in emp_moments
+    }
+
+    if "Portfolio" in agent.name:
+        sim_share_history = agent.history["Share"]
+        sim_moments.update(
+            {
+                key + "_port": np.median(sim_share_history[cohort_idx])
+                for key, cohort_idx in sim_mapping.items()
+                if key + "_port" in emp_moments
+            }
+        )
+
+    return sim_moments
+
+
 # Define the function that generates simulated moments
 def simulate_moments(params, agent, emp_moments):
     """
@@ -339,79 +371,41 @@ def simulate_moments(params, agent, emp_moments):
         Instance of some AgentType subclass, representing the model to be solved
         and simulated to generate moments.
     emp_moments : dict
-        Mapping from moment names to empirical moments. Used for ????
+        Mapping from moment names to empirical moments.
 
     Returns
     -------
     sim_moments : dict
         Dictionary that maps from moment names to simulated moments.
     """
-    
     # Update the agent with new parameters
     agent.assign_parameters(**params)
     if hasattr(agent, "BeqCRRA"):
         agent.BeqCRRA = agent.CRRA
 
-    # ensure subjective beliefs are used for solution
-    if "(Stock)" in agent.name and "Portfolio" in agent.name:
-        agent.assign_parameters(**init_subjective_stock)
-        agent.construct('RiskyDstn','ShockDstn')
-    if "(Labor)" in agent.name:
-        agent.assign_parameters(**init_subjective_labor)
-        agent.update_income_process()
+    _apply_subjective_beliefs(agent)
 
-    # Update parameters on the agent / construct them
     agent.update()
     if "WarmGlow" in agent.name:
         agent.BeqFac = agent.BeqMPC ** (-agent.CRRA)
         agent.BeqShift = agent.BeqInt / agent.BeqMPC
 
-    # Solve the model for these parameters, then simulate wealth data
-    agent.solve()  # Solve the microeconomic model
+    agent.solve()
 
-    # simulate with true parameters (override subjective beliefs)
-    if "(Stock)" in agent.name and "Portfolio" in agent.name:
-        agent.assign_parameters(**true_stock_params)
-        agent.construct('RiskyDstn','ShockDstn')
-    # for labor keep same process as subjective beliefs
-    if "(Labor)" in agent.name:
-        agent.TranShkStd = init_subjective_labor["TranShkStd"]
-        agent.PermShkStd = init_subjective_labor["PermShkStd"]
-        agent.update_income_process()
-
+    _apply_true_beliefs(agent)
     agent.update()
 
-    max_sim_age = agent.T_cycle + 1
-    # Initialize the simulation by clearing histories, resetting initial values
     agent.initialize_sim()
-    agent.simulate(max_sim_age)  # Simulate histories of consumption and wealth
-    # Take "wealth" to mean bank balances before receiving labor income
-    sim_w_history = agent.history["bNrm"]
+    agent.simulate(agent.T_cycle + 1)
 
-    # Find the distance between empirical data and simulated medians for each age group
-    sim_moments = {
-        key: np.median(sim_w_history[cohort_idx])
-        for key, cohort_idx in sim_mapping.items()
-        if key in emp_moments
-    }
-
-    if "Portfolio" in agent.name:
-        sim_share_history = agent.history["Share"]
-        share_moments = {}
-        for key, cohort_idx in sim_mapping.items():
-            key_port = key + "_port"
-            if key_port in emp_moments:
-                share_moments[key_port] = np.median(sim_share_history[cohort_idx])
-        sim_moments.update(share_moments)
-
-    return sim_moments
+    return _collect_sim_moments(agent, emp_moments)
 
 
 def calculate_weights(emp_moments, weight_sum):
     """
     Generate a dictionary of all moment weights, loading both median wealth-to-
     income ratios and risky asset shares into a single object.
-    
+
     Parameters
     ----------
     emp_moments : dict
@@ -420,25 +414,29 @@ def calculate_weights(emp_moments, weight_sum):
     weight_sum: dict
         Mapping from moment names to total empirical weight from the dataset.
         This *can* be used to make weights using a different scheme.
-        
+
     Returns
     -------
     weights : dict
         Mapping from moment names to weights.
-    
+
     """
     n_port_stats = np.sum([1 for k in emp_moments if "_port" in k])
     n_wealth_stats = len(emp_moments) - n_port_stats
     max_w_stat = float(max(emp_moments.values()))
-    W_total = np.sum([np.sqrt(weight_sum[k]) for k in weight_sum if not "_port" in k])
+    W_total = np.sum([np.sqrt(weight_sum[k]) for k in weight_sum if "_port" not in k])
     W_avg = W_total / n_wealth_stats
 
     port_fac = np.sqrt(n_wealth_stats / n_port_stats) if n_port_stats != 0 else 1.0
-    #port_fac = 1.0
+    # port_fac = 1.0
 
     # Using dictionary comprehension to create weights
     weights = {
-        k: ((np.sqrt(weight_sum[k])/W_avg)**0. / max_w_stat if "_port" not in k else port_fac)
+        k: (
+            (np.sqrt(weight_sum[k]) / W_avg) ** 0.0 / max_w_stat
+            if "_port" not in k
+            else port_fac
+        )
         for k, v in emp_moments.items()
     }
 
@@ -496,7 +494,7 @@ def calculate_se_bootstrap(
     seed=0,
     verbose=False,
 ):
-    #TODO: WRITE DOCSTRING
+    # TODO: WRITE DOCSTRING
     t_0 = time()
 
     # Generate a list of seeds for generating bootstrap samples
@@ -551,6 +549,65 @@ def calculate_se_bootstrap(
 # TODO: What?! ^^ Is this in the wrong place?
 
 
+def _get_bounds(initial_guess):
+    """Extract upper/lower bounds for parameters in initial_guess."""
+    return {
+        bound: {
+            k: v for k, v in init_params_options[bound].items() if k in initial_guess
+        }
+        for bound in ("upper_bounds", "lower_bounds")
+    }
+
+
+def _print_banner(lines):
+    """Print centered lines between dashes."""
+    width = max(len(line) for line in lines)
+    print("-" * width)
+    for line in lines:
+        print(f"{line:^{width}}")
+    print("-" * width)
+
+
+_ESTIMATORS = {
+    "min": lambda agent,
+    initial_guess,
+    emp_moments,
+    moments_cov,
+    minimize_options,
+    criterion_kwargs,
+    estimagic_options: (
+        estimate_min(
+            agent,
+            msm_criterion,
+            initial_guess,
+            emp_moments,
+            minimize_options,
+            criterion_kwargs=criterion_kwargs,
+            estimagic_options=estimagic_options,
+        ),
+        "params",
+    ),
+    "msm": lambda agent,
+    initial_guess,
+    emp_moments,
+    moments_cov,
+    minimize_options,
+    criterion_kwargs,
+    estimagic_options: (
+        estimate_msm(
+            agent,
+            simulate_moments,
+            emp_moments,
+            moments_cov,
+            initial_guess,
+            minimize_options,
+            estimagic_options=estimagic_options,
+        ),
+        "_params",
+    ),
+}
+
+
 def do_estimate_model(
     agent,
     initial_guess,
@@ -561,95 +618,50 @@ def do_estimate_model(
     criterion_kwargs=None,
     save_dir=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
-    fmt_init_guess = [f"{key} = {value:.3f}" for key, value in initial_guess.items()]
+    fmt_init_guess = ", ".join(f"{k} = {v:.3f}" for k, v in initial_guess.items())
     multistart_text = " with multistart" if minimize_options.get("multistart") else ""
-    statement1 = f"Estimating model using {minimize_options['algorithm']}{multistart_text} from an initial guess of"
-    statement2 = ", ".join(fmt_init_guess)
-    max_len = max(len(statement1), len(statement2))
-    dash_line = "-" * max_len
+    _print_banner(
+        [
+            f"Estimating model using {minimize_options['algorithm']}{multistart_text} from an initial guess of",
+            fmt_init_guess,
+        ]
+    )
 
-    # Use f-string for padding
-    statement1 = f"{statement1:^{max_len}}"
-    statement2 = f"{statement2:^{max_len}}"
+    estimagic_options = _get_bounds(initial_guess)
 
-    print(dash_line)
-    print(statement1)
-    print(statement2)
-    print(dash_line)
-
-    upper_bounds = {
-        key: value
-        for key, value in init_params_options["upper_bounds"].items()
-        if key in initial_guess
-    }
-
-    lower_bounds = {
-        key: value
-        for key, value in init_params_options["lower_bounds"].items()
-        if key in initial_guess
-    }
-
-    estimagic_options = {"upper_bounds": upper_bounds, "lower_bounds": lower_bounds}
-
-    if estimate_method == "min":
-        res, time_to_estimate = estimate_min(
-            agent,
-            msm_criterion,
-            initial_guess,
-            emp_moments,
-            minimize_options,
-            criterion_kwargs=criterion_kwargs,
-            estimagic_options=estimagic_options,
-        )
-
-        model_estimate = res.params
-
-    elif estimate_method == "msm":
-        res, time_to_estimate = estimate_msm(
-            agent,
-            simulate_moments,
-            emp_moments,
-            moments_cov,
-            initial_guess,
-            minimize_options,
-            estimagic_options=estimagic_options,
-        )
-
-        model_estimate = res._params
-
-    else:
+    if estimate_method not in _ESTIMATORS:
         raise ValueError(f"Invalid estimate_method: {estimate_method}")
 
-    # Calculate minutes and remaining seconds
+    (res, time_to_estimate), params_attr = _ESTIMATORS[estimate_method](
+        agent,
+        initial_guess,
+        emp_moments,
+        moments_cov,
+        minimize_options,
+        criterion_kwargs,
+        estimagic_options,
+    )
+    model_estimate = getattr(res, params_attr)
+
     minutes, seconds = divmod(time_to_estimate, 60)
-    statement1 = f"Estimated model: {agent.name}"
-    statement2 = f"Time to estimate: {int(minutes)} min, {int(seconds)} sec."
-    estimates = [f"{key} = {value:.3f}" for key, value in model_estimate.items()]
-    statement3 = "Estimated values: " + ", ".join(estimates)
-    dash_len = max(len(statement1), len(statement2), len(statement3))
-    print(statement1)
-    print(statement2)
-    print(statement3)
-    print("-" * dash_len)
+    estimates = ", ".join(f"{k} = {v:.3f}" for k, v in model_estimate.items())
+    _print_banner(
+        [
+            f"Estimated model: {agent.name}",
+            f"Time to estimate: {int(minutes)} min, {int(seconds)} sec.",
+            f"Estimated values: {estimates}",
+        ]
+    )
 
-    # Create the simple estimate table
+    # Save estimate results
     estimate_results_file = save_dir / (agent.name + "_estimate_results.csv")
-
-    keys_to_save = vars(res)
-
     with open(estimate_results_file, "w") as f:
         writer = csv.writer(f)
-
         for key in model_estimate:
             writer.writerow([key, model_estimate[key]])
-
         writer.writerow(["time_to_estimate", time_to_estimate])
-
-        if keys_to_save is not None:
-            for key in keys_to_save:
-                writer.writerow([key, getattr(res, key)])
+        for key, value in vars(res).items():
+            writer.writerow([key, value])
 
     return model_estimate, res, time_to_estimate
 
@@ -662,8 +674,8 @@ def do_compute_se_boostrap(
     seed=0,
     save_dir=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     # Estimate the model:
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print(
@@ -711,8 +723,8 @@ def do_compute_se_boostrap(
 
 
 def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     print("``````````````````````````````````````````````````````````````````````")
     print("Computing sensitivity measure.")
     print("``````````````````````````````````````````````````````````````````````")
@@ -759,8 +771,8 @@ def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
 
 
 def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     print("``````````````````````````````````````````````````````````````````````")
     print("Creating the contour plot.")
     print("``````````````````````````````````````````````````````````````````````")
@@ -813,8 +825,8 @@ def estimate_msm(
     simulate_moments_kwargs=None,
     estimagic_options=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     t0 = time()
 
     simulate_moments_kwargs = simulate_moments_kwargs or {}
@@ -845,8 +857,8 @@ def estimate_min(
     criterion_kwargs=None,
     estimagic_options=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     t0 = time()
 
     criterion_kwargs = criterion_kwargs or {}
@@ -966,7 +978,7 @@ def estimate(
             emp_moments,
             save_dir=save_dir,
         )
-        
+
 
 def prepare_model(agent_name, params_to_estimate):
     """
@@ -1005,16 +1017,18 @@ def prepare_model(agent_name, params_to_estimate):
     estimation_agents = make_agent(agent_name)
     empirical_moments, weight_sum = get_empirical_moments(agent_name)
     moment_weights = calculate_weights(empirical_moments, weight_sum)
-    
+
     # Make a local function that can return the objective function value or the
     # dictionary of simulated moments, or plot the moment fit
     def temp_func(param_vec, return_moments=False, plot_moments=False):
-        params = {params_to_estimate[j] : param_vec[j] for j in range(len(params_to_estimate))}
+        params = {
+            params_to_estimate[j]: param_vec[j] for j in range(len(params_to_estimate))
+        }
         emp_moments = empirical_moments.copy()
         sim_moments = simulate_moments(params, estimation_agents, emp_moments)
-        
+
         if plot_moments:
-            wealth_keys = [key for key in sim_moments if not "_port" in key]
+            wealth_keys = [key for key in sim_moments if "_port" not in key]
             port_keys = [key for key in sim_moments if "_port" in key]
             wealth_emp = np.array([emp_moments[k] for k in wealth_keys])
             wealth_sim = np.array([sim_moments[k] for k in wealth_keys])
@@ -1022,27 +1036,27 @@ def prepare_model(agent_name, params_to_estimate):
             port_sim = np.array([sim_moments[k] for k in port_keys])
             wealth_labels = [x[1:3] for x in wealth_keys]
             port_labels = [x[1:3] for x in port_keys]
-            
-            plt.plot(wealth_emp, '.k', ms=10)
-            plt.plot(wealth_sim, '-b')
+
+            plt.plot(wealth_emp, ".k", ms=10)
+            plt.plot(wealth_sim, "-b")
             plt.xticks(np.arange(wealth_emp.size), labels=wealth_labels)
-            plt.xlabel('Age group')
-            plt.ylabel('Wealth/income ratio')
+            plt.xlabel("Age group")
+            plt.ylabel("Wealth/income ratio")
             plt.tight_layout()
-            plt.ylim(0.,14.)
+            plt.ylim(0.0, 14.0)
             plt.show()
-            
-            plt.plot(port_emp, '.k', ms=10)
-            plt.plot(port_sim, '-r')
+
+            plt.plot(port_emp, ".k", ms=10)
+            plt.plot(port_sim, "-r")
             plt.xticks(np.arange(port_emp.size), labels=port_labels)
-            plt.xlabel('Age group')
-            plt.ylabel('Risky asset share')
-            plt.ylim(0.,1.)
+            plt.xlabel("Age group")
+            plt.ylabel("Risky asset share")
+            plt.ylim(0.0, 1.0)
             plt.tight_layout()
             plt.show()
-            
-            return
-            
+
+            return None
+
         if return_moments:
             return sim_moments
 
@@ -1054,23 +1068,29 @@ def prepare_model(agent_name, params_to_estimate):
         )
         sse = np.sum(errors**2)
         return sse
-    
+
     # Make two versions of that temporary function: one for the objective function
     # and the other that just produces moments
-    objective_function = lambda x : temp_func(x, False, False)
-    sim_moment_function = lambda x : temp_func(x, True, False)
-    plot_moment_function = lambda x : temp_func(x, False, True)
-    
-    # Return all of the useful things
-    return estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function
+    objective_function = lambda x: temp_func(x, False, False)
+    sim_moment_function = lambda x: temp_func(x, True, False)
+    plot_moment_function = lambda x: temp_func(x, False, True)
 
+    # Return all of the useful things
+    return (
+        estimation_agents,
+        empirical_moments,
+        moment_weights,
+        objective_function,
+        sim_moment_function,
+        plot_moment_function,
+    )
 
 
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
     local_agent_name = "WarmGlowPortfolioG(Stock)"
-    local_params_to_estimate = ["CRRA","BeqMPC","BeqInt"]
+    local_params_to_estimate = ["CRRA", "BeqMPC", "BeqInt"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
     local_compute_se_bootstrap = False
@@ -1079,8 +1099,15 @@ if __name__ == "__main__":
     # Whether to make a contour map of the objective function
     local_make_contour_plot = False
     local_save_dir = "docs/tables/min"
-    
-    estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
+
+    (
+        estimation_agents,
+        empirical_moments,
+        moment_weights,
+        objective_function,
+        sim_moment_function,
+        plot_moment_function,
+    ) = prepare_model(local_agent_name, local_params_to_estimate)
 
     estimate(
         agent_name=local_agent_name,
@@ -1091,4 +1118,3 @@ if __name__ == "__main__":
         make_contour_plot=local_make_contour_plot,
         save_dir=local_save_dir,
     )
-    
