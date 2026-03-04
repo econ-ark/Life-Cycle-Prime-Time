@@ -53,9 +53,9 @@ def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
     axs[1].set_ylabel("Sensitivity")
     axs[1].set_xlabel("Median W/Y Ratio")
 
-    plt.savefig(save_dir + agent.name + "Sensitivity.pdf")
-    plt.savefig(save_dir + agent.name + "Sensitivity.png")
-    plt.savefig(save_dir + agent.name + "Sensitivity.svg")
+    plt.savefig(save_dir / (agent.name + "Sensitivity.pdf"))
+    plt.savefig(save_dir / (agent.name + "Sensitivity.png"))
+    plt.savefig(save_dir / (agent.name + "Sensitivity.svg"))
 
     plt.show()
 
@@ -99,7 +99,7 @@ def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
     plt.plot(model_estimate[1], model_estimate[0], "*r", ms=15)
     plt.xlabel(r"coefficient of relative risk aversion $\rho$", fontsize=14)
     plt.ylabel(r"discount factor adjustment $\beth$", fontsize=14)
-    plt.savefig(save_dir + agent.name + "SMMcontour.pdf")
-    plt.savefig(save_dir + agent.name + "SMMcontour.png")
-    plt.savefig(save_dir + agent.name + "SMMcontour.svg")
+    plt.savefig(save_dir / (agent.name + "SMMcontour.pdf"))
+    plt.savefig(save_dir / (agent.name + "SMMcontour.png"))
+    plt.savefig(save_dir / (agent.name + "SMMcontour.svg"))
     plt.show()

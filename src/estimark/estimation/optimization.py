@@ -75,7 +75,6 @@ def calculate_se_bootstrap(
 
     # Generate a list of seeds for generating bootstrap samples
     RNG = np.random.default_rng(seed)
-    seed_list = RNG.integers(2**31 - 1, size=n_draws)
 
     # Estimate the model N times, recording each set of estimated parameters
     estimate_list = []
@@ -86,7 +85,7 @@ def calculate_se_bootstrap(
         bootstrap_data = get_bootstrap_samples(data=scf_data, rng=RNG)
 
         # Find moments with bootstrapped sample
-        bootstrap_moments, trash = get_weighted_moments(
+        bootstrap_moments, _trash = get_weighted_moments(
             data=bootstrap_data,
             variable="wealth_income_ratio",
             weights="weight",
@@ -104,11 +103,10 @@ def calculate_se_bootstrap(
         estimate_list.append(this_estimate)
         t_now = time()
 
-        # Report progress of the bootstrap
-    if verbose:
-        print(
-            f"Finished bootstrap estimation #{n + 1} of {n_draws} in {t_now - t_start} seconds ({t_now - t_0} cumulative)",
-        )
+        if verbose:
+            print(
+                f"Finished bootstrap estimation #{n + 1} of {n_draws} in {t_now - t_start} seconds ({t_now - t_0} cumulative)",
+            )
 
     # Calculate the standard errors for each parameter
     estimate_array = (np.array(estimate_list)).T
@@ -208,7 +206,7 @@ _ESTIMATORS = {
     minimize_options,
     criterion_kwargs,
     estimagic_options: (
-        estimate_min(
+        *estimate_min(
             agent,
             msm_criterion,
             initial_guess,
@@ -226,7 +224,7 @@ _ESTIMATORS = {
     minimize_options,
     criterion_kwargs,
     estimagic_options: (
-        estimate_msm(
+        *estimate_msm(
             agent,
             simulate_moments,
             emp_moments,
@@ -264,7 +262,7 @@ def do_estimate_model(
     if estimate_method not in _ESTIMATORS:
         raise ValueError(f"Invalid estimate_method: {estimate_method}")
 
-    (res, time_to_estimate), params_attr = _ESTIMATORS[estimate_method](
+    res, time_to_estimate, params_attr = _ESTIMATORS[estimate_method](
         agent,
         initial_guess,
         emp_moments,
@@ -337,7 +335,7 @@ def do_compute_se_boostrap(
     print(f"Standard errors: DiscFac--> {std_errors[0]}, CRRA--> {std_errors[1]}")
 
     # Create the simple bootstrap table
-    bootstrap_results_file = save_dir + agent.name + "_bootstrap_results.csv"
+    bootstrap_results_file = save_dir / (agent.name + "_bootstrap_results.csv")
 
     with open(bootstrap_results_file, "w") as f:
         writer = csv.writer(f)

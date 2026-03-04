@@ -71,9 +71,12 @@ def make_agent(agent_name):
         Instance of some AgentType subclass, which can be used in the estimation.
         It will have default parameters until set otherwise.
     """
+    agent_type = None
     for key, value in agent_types.items():
         if key in agent_name:
             agent_type = value
+    if agent_type is None:
+        raise ValueError(f"No agent type found for name: {agent_name!r}")
 
     calibration = init_calibration.copy()
 
@@ -175,6 +178,8 @@ def estimate(
     if emp_moments is None:
         emp_moments, weight_sum = get_empirical_moments(agent_name)
         print("Calculated empirical moments.")
+    else:
+        _, weight_sum = get_empirical_moments(agent_name)
 
     weights = calculate_weights(emp_moments, weight_sum)
 
