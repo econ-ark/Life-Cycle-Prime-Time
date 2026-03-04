@@ -1,5 +1,5 @@
 
-	\documentclass[12pt,letterpaper]{article}
+	\documentclass[12pt,letterpaper, fleqn]{article}
 
 	%%%%%%%%%%%%%%%%%%%%  imports  %%%%%%%%%%%%%%%%%%%
 
@@ -22,9 +22,12 @@
 	\usepackage{setspace}
 	\usepackage{graphicx} %draft option suppresses graphics dvi display
 	\usepackage{newfloat} % make new floating environments
+	\usepackage{parskip}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+	\setlength{\parindent}{0.35in}
+	\setlength{\parskip}{6pt}
 	\setlength{\textwidth}{6.5in}
 	\setlength{\textheight}{9in}
 	\addtolength{\topmargin}{-\topmargin}
@@ -33,6 +36,7 @@
 	\addtolength{\headsep}{-\headsep}
 	\addtolength{\topskip}{-\topskip}
 	\addtolength{\headheight}{-\headheight}
+	\setlength{\mathindent}{0pt}
 	\setcounter{secnumdepth}{3}
 	% \renewcommand{\thesection}{\arabic{section}}
 	% \renewcommand{\footnote}{\endnote}
@@ -156,7 +160,7 @@ We provide an example of a simple model that can solve a number of problems by p
 
 	\item Accounting for ``soft data'' from surveys about consumer preferences and expectations is critical for building a quantitative model that gives credible advice. Likewise, advisers must consider whether the model should optimize on clients' subjective beliefs or their own expert knowledge.
 
-	\item Including wealth as a direct input to the utility function, separately from precautionary and life-cycle motives, allows consumption-saving models to match empirical evidence about wealth holding in later life as well as retirees' stated motivations for saving.
+	\item Including wealth as a direct input to the utility function, separately from precautionary and life-cycle motives, allows consumption-saving models to match empirical evidence about wealth-holding in later life as well as retirees' stated motivations for saving.
 \end{itemize}
 
 \vspace{0.5cm}
@@ -184,6 +188,7 @@ Indeed, the subtitle of a recent paper by \cite{Daga_2023} captures the current 
 
 In this paper, we argue that the elements are already available to construct a model that ``practitioners can adopt.''
 All that is needed is to combine the relevant academic contributions with some wisdom from practitioners' own experience of advising clients, particularly their understanding that clients often resist aggressive drawdowns of wealth late in life.
+Using life-cycle models to inform their advice is not wholly foreign to financial advisers,\footnote{E.g.,\ \cite{Lanski2022} provide a case study for their experience in developing and iterating on a life-cycle model to design a target date glidepath.} but it is not yet commonplace.
 Our paper's central contribution is to provide a small \href{https://github.com/econ-ark/life-cycle-prime-time}{open-source computational model} that incorporates some of the features that make it possible to build rigorous optimizing life cycle models whose advice is not obviously wrong.
 
 Consumers face many uncertainties: about their own income, stock returns, interest rates, health expenditures, mortality, and much more;
@@ -305,7 +310,6 @@ A consumer's ``value'' of having a given amount of market resources $\mLvl_{t}$ 
 Potential future utility flows matter only to the extent that the agent expects to survive to that period, and might be further discounted due to placing more weight on the present than the future.
 
 Mathematically, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than some terminal period $T$:
-
 \begin{equation}
 \label{eq:lifecyclemax}
 \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\pmb{\cFunc}\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right].
@@ -352,7 +356,6 @@ It is conventional to assume that shocks to permanent income and to the transito
 \subsubsection{Reducing Perceived Model Complexity}
 
 Following the standard Bellman representation, if the agent assumes that they \textit{will} act optimally in all future periods, then their future expectations of discounted utility flows in (\ref{eq:lifecyclemax}) are their value function one period ahead. Defining $\Alive_t \equiv \Alive_t^{t+1}$ to reduce notation, this is:
-
 \begin{equation}
 \label{eq:bellman}
 \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\pmb{\cFunc}_{t}} ~ \uFunc(\cLvl_{t}) + \Alive_t \DiscFac  \Ex_{t}\left[ \pmb{\vFunc}_{t+1}(\mLvl_{t+1},\pLvl_{t+1}) \right].
@@ -362,7 +365,6 @@ Under the assumptions we have made about the structure of the utility function (
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see \cite{BufferStockTheory} for the math). This normalization is crucial because it reduces the complexity of the problem; instead of tracking both resources and income levels, we only need to track their ratio.
 The solution is thus homothetic with respect to permanent income level: $\pmb{\cFunc}_t(\mLvl_t, \pLvl_t) = \pLvl_t \cFunc_t(\mNrm_t)$.
 Normalizing the Bellman value function by $\pLvl_t$ requires dividing by $\pLvl^{1 -\CRRA}$, yielding:
-
 \begin{equation}
 \label{eq:normbellman}
 \vFunc_{t}(\mNrm_{t}) \equiv \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) / \pLvl_t^{1-\CRRA} = \max_{\cFunc_{t}} ~ \uFunc(\cNrm_{t}) + \Alive_t \DiscFac  \Ex_{t}\left[ (\permShk_{t+1} \permGroFac_{t+1})^{1-\CRRA} \vFunc_{t+1}(\mNrm_{t+1}) \right].
@@ -590,7 +592,12 @@ Moreover, each goal has an allocation coefficient (relative importance) that is 
 However, the model uses Epstein-Zin preferences (see our above objections to this feature).
 Their model also assumes that there is no uncertainty (except for mortality) in the post-retirement period, because that assumption has the convenient implication that the post-retirement period is extremely simple; the portfolio share, in particular, should remain constant at the infinite-horizon Merton-Samuelson solution.
 
-\cite{Lanski_2022} uses a life-cycle consumption and portfolio choice model without any consideration of bequests like the one discussed above (although other aspects of the model are simpler than our specification).
+\cite{Lanski2022} describes how the authors used the canonical life-cycle consumption and portfolio-choice model to improve their target date fund's glidepath.
+Their article focuses on the iterative process and challenges faced by investment advisors when using the model, rather than trying to rectify the drawdown failure.
+
+\cite{Choi2025} use the solution to the life-cycle problem for many parameter combinations to produce \textit{approximately optimal} rules for allocating one's wealth between risky and riskless assets.
+That is, each individual has their own unique preferences, expected income growth profile, income risk, etc, but the solution to the life-cycle problem applies to only \textit{one} particular set of such parameters-- and the vast majority of people are not equipped to solve the intertemporal optimization problem for their own circumstances.
+Their ``practical finance'' approach makes it reasonably feasible for an ordinary person to calculate an asset allocation very close to the model's optimum, at least with the aid of spreadsheet software.
 
 There have also been publications that partake of the mathematical flavor of life cycle modeling but do not use the intertemporal choice framework.
 \cite{Idzorek_2023} uses a static model of portfolio optimization, where the objective is to maximize the mean-variance trade off of a portfolio position with additional features such as non-pecuniary benefits.
@@ -760,6 +767,14 @@ Those of us with a bit of humility have always suspected that the failure has be
 
 The thesis of this paper, however, is that a confluence of factors has now finally brought us to a point where state-of-the-art mathematical/computational life-cycle optimization models can provide advice that makes sense-- so long as the model assumptions are also disciplined by survey data and the practical knowledge of financial advisors.
 We argue that including wealth directly in consumers' utility function can serve as a computationally tractable shorthand for the unenumerable risks that retirees might be concerned about.
+This same reasoning speaks to the long-standing ``annuity puzzle'': consumers who value their wealth stock will naturally resist converting it entirely into an income stream, however actuarially favorable.
+The wealth-in-utility framework can help determine not \textit{whether} to annuitize, but \textit{how much}.
+
+Modelers must always make difficult choices about which features to include to bolster a model's realism and which to forgo to limit computational burden.
+In the context of providing advice as a financial planner, we recommend thinking carefully about the simplifying assumptions that your model makes, including those that were made ``silently'' or by defaulting to what you have seen or done before.
+In particular, it is critical to be wary of assumptions that lead a model to recommend that wealth be drawn down to zero.
+Likewise, practitioners should ask whether clients have adequate access to \textit{liquid} wealth; a model that tracks only total net worth may recommend a spending path that is infeasible given the actual composition of the balance sheet.
+If your clients would resist this consumption advice later in life, then the portfolio allocations your model provided earlier in life were \textit{also incorrect}.
 
 Much more remains to be done to improve the models further; for example, a question of great practical importance that is now just at the edge of possibility of being computationally solved is to calculate the implications of non-financial (principally, housing) wealth for optimal financial choice.
 The academic literature is only now reaching the point at which it may be possible to answer questions like, ``If I own a house, how should I modify my spending and portfolio plans to take that into account?''
@@ -770,6 +785,13 @@ It would be a better world if financial advice could be justified as reflecting 
 Not only would academics have the satisfaction of knowing that they had finally come close to fulfilling the vision of Modigliani and Brumberg 70 years ago.
 Financial analysts could also sleep more soundly in the knowledge that the advice they were giving was what many people probably think it already is: The adaptation to the client's particular circumstances of the advice that is the best that can be delivered by the latest high-tech computational optimization tools.
 The time seems ripe for a much closer collaboration between academia and the financial industry in building this better world by combining computational rigor with practical insight.
+
+Because the wealth-in-utility parameter $\delta$ governs the trade-off between utility from consumption and utility from holding wealth, it can be calibrated by asking clients directly about their comfort with drawing down savings.
+Advisers and automated tools alike could use this as a lever for personalized advice, tailoring the model to each client's preference for maintaining a buffer stock.
+For financial advisers who want to begin exploring life-cycle modeling and how they can incorporate it into their own advice, we humbly suggest looking into \href{https://github.com/econ-ark/HARK}{\texttt{HARK}}, our open source toolkit for solving and simulating dynamic stochastic optimization problems.
+%\texttt{HARK} uses Python, and the latest version of the package can be installed using \texttt{pip} or \texttt{conda}.
+We are constantly developing and improving our software, and have composed helpful documentation and tutorials, which can be installed locally with \texttt{HARK} or viewed through our \href{https://econ-ark.org}{website}.
+The \href{https://github.com/econ-ark/life-cycle-prime-time}{GitHub repository} for this paper also includes the particular code we used to perform the estimations here, as well as an interactive Jupyter notebook to explore our results.
 
 \bibliographystyle{mnwteststyle}
 \bibliography{main}
@@ -792,7 +814,6 @@ Each of our models has two control variables-- consumption $\cNrm_t$ and the ris
 Note that the survival probability $\Alive_{t+1}$ is \textit{not} included in this problem because it is a constant scaling factor that cannot affect the optimal choice of $\varsigma_t$. Likewise, the warm-glow bequest motive $e(\aNrm_t)$ is also irrelevant because it is constant with respect to $\varsigma$.
 
 We will not reproduce the proof here, but it can be shown that the first order condition has at most one solution, so it is sufficient to characterize the optimal risky portfolio share as long as $\vFunc_{t+1}$ is strictly concave (which can also be proven). Taking the derivative of the maximand with respect to $\varsigma$ and equating it to zero yields:
-
 \begin{equation}
 \label{eq:foc-share}
 \Ex_{t}\left[ \pmb{\beta}_{t+1} (\Risky_{t+1}-\Rfree) \aNrm_t \vFunc'_{t+1}((\Rfree + (\Risky_{t+1}-\Rfree)\varsigma) \aNrm_t + \theta_{t+1}) \right] = 0.
@@ -817,7 +838,6 @@ As discussed further below, marginal value $\vFunc'_{t+1}(\mNrm_{t+1})$ in all o
 \subsection{Optimal Consumption in Baseline and Warm-Glow Bequest Models}
 
 Stepping back within the period, we can now consider the choice of optimal consumption, taking as given that the agent will optimally allocate their assets between the risky and risk-free assets. For our first two models, we express the \textit{continuation value} over $\aNrm_t$ as:
-
 \begin{equation}
 \bar{\mathfrak{v}}_t(\aNrm_t) = \begin{cases}
 \Alive_{t+1} \mathfrak{v}_t(\aNrm_t) & \text{in baseline life-cycle model} \\
@@ -881,13 +901,11 @@ These algebraic manipulations will prove useful when we solve the first order co
 \end{align}
 
 Consider the first order condition for optimality by taking the derivative of the maximand with respect to $\cNrm$ and equating it to zero:
-
 \begin{equation}
 \frac{\text{d}}{\text{d} \cNrm} \uFunc(\cNrm_t, \mNrm_t-\cNrm_t) - \bar{\mathfrak{v}}'_t(\mNrm_t - \cNrm_t) = 0.
 \end{equation}
 
 We can substitute the final form of the marginal return to consumption, move the second term to the right-hand side, and then rearrange slightly to get:
-
 \begin{equation*}
 \left[ (1-\delta) \chi_t^{-\delta} - \delta \chi_t^{1-\delta} \right] \cdot \left( \aNrm_t \chi_t^{1-\delta}  \right)^{-\CRRA} = \bar{\mathfrak{v}}'_t(\aNrm_t) \Longrightarrow
 \end{equation*}
@@ -901,13 +919,11 @@ Note that the left-hand side of the rearranged FOC is monotonically increasing w
 Unlike with basic CRRA utility, there is no closed form solution for (\ref{eq:FOC-WIU}) to recover $\chi_t$ from $\omega_t$. While it would be possible to use a rootfinder to solve (\ref{eq:FOC-WIU}) for each value of $\omega_t$ as it comes up during the solution process, it is more efficient to pre-compute a function that accurately maps from $\omega$ to $\chi$. We now describe a method for constructing such a function by working with the inverse relationship.
 
 First, note that the expression in square brackets is not positive for all values of $\chi > 0$, with the bounding condition defined by:
-
 \begin{equation}
 (1-\delta) \chi^{-\delta} - \delta \chi^{1-\delta} > 0 \Longrightarrow (1-\delta) \chi^{-\delta} > \delta \chi^{1-\delta} \Longrightarrow \frac{1-\delta}{\delta} >\chi.
 \end{equation}
 
 The expression in square brackets is raised to a negative power, hence we need only to consider values of $\chi \in (0, (1 -\delta)/\delta)$. These $\chi$ values represent the \textit{range} of the function that maps from $\omega$ to $\chi$, and we want our constructed approximation to cover as much of that range as possible. To do so, we will use the logit transformation to map from an auxiliary variable $z \in \R$ to $\chi \in (0, (1 -\delta)/\delta)$:
-
 \begin{equation}
 \label{eq:zToChi}
 \chi = \frac{\exp(z)}{1 + \exp(z)} \cdot \frac{1-\delta}{\delta}.
