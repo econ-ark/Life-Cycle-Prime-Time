@@ -40,11 +40,16 @@ uv run pytest tests/test_package.py -v
 echo ""
 
 # Step 3: Run a single low-resource estimation (~90 seconds)
-echo "Step 3/3: Running single low-resource estimation..."
+echo "Step 3/3: Running single low-resource estimation (Portfolio model)..."
 uv run python -c "
-from estimark.min import estimate_min
+from estimark.estimation import estimate
 from estimark.options import low_resource
-estimate_min(**low_resource)
+
+specs = low_resource.copy()
+specs['agent_name'] = 'Portfolio'
+specs['save_dir'] = 'docs/tables/TRP'
+print('Model:', specs['agent_name'])
+estimate(**specs)
 print('Low-resource estimation completed successfully.')
 "
 echo ""
