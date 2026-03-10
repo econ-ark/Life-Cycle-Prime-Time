@@ -38,10 +38,10 @@ Runs MSM estimation for all three agent models and generates all tables.
 bash reproduce.sh
 ```
 
-**Estimated runtime**: The `low_resource` setting takes approximately 90
+**Estimated runtime**: The `low_resource` setting takes approximately 20
 seconds per agent model on a 2014-era laptop (Intel Core i7-4700MQ @ 2.40GHz,
 8GB RAM, Ubuntu 14.04). Total runtime for all three models: approximately
-5--10 minutes on modern hardware, longer with higher-resource settings.
+20--60 minutes on modern hardware, longer with higher-resource settings.
 
 ### Quick Validation (`reproduce_min.sh`)
 
@@ -52,7 +52,7 @@ environment is correctly configured.
 bash reproduce_min.sh
 ```
 
-**Estimated runtime**: Under 3 minutes on modern hardware.
+**Estimated runtime**: Under 25 minutes on modern hardware.
 
 ## Environment
 

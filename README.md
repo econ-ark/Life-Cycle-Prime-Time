@@ -80,8 +80,8 @@ browser for exploring the notebooks.
 
 | Script | What it does | Estimated time |
 |---|---|---|
-| `reproduce_min.sh` | Test suite + single low-resource estimation | < 3 minutes |
-| `reproduce.sh` | Full MSM estimation for 3 agent models | 5--10 minutes |
+| `reproduce_min.sh` | Test suite + single low-resource estimation | ~25 minutes |
+| `reproduce.sh` | Full MSM estimation for 3 agent models | 20--60 minutes |
 
 Reference machine for timing estimates: Intel Core i7-4700MQ @ 2.40GHz,
 8GB RAM, Ubuntu 14.04. Modern hardware should be comparable or faster.
