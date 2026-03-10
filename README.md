@@ -1,6 +1,7 @@
 # Life-Cycle-Prime-Time
 
-A reproducible research repository for life-cycle portfolio choice models with method of simulated moments (MSM) estimation.
+A reproducible research repository for life-cycle consumption and portfolio
+choice models estimated via the method of simulated moments (MSM).
 
 **Documentation**: https://econ-ark.github.io/Life-Cycle-Prime-Time/
 
@@ -8,7 +9,16 @@ A reproducible research repository for life-cycle portfolio choice models with m
 
 ## Overview
 
-This repository contains code, data, and documentation to reproduce results for life-cycle consumption and portfolio choice models. The project uses method of simulated moments (MSM) estimation to match model predictions with empirical data from the Survey of Consumer Finances.
+This repository contains code, data, and documentation to reproduce results
+for life-cycle consumption and portfolio choice models. The project uses the
+method of simulated moments (MSM) to estimate model parameters by matching
+model predictions with empirical data from the Survey of Consumer Finances.
+
+Three model variants are estimated:
+
+- **Portfolio** -- life-cycle portfolio choice
+- **WealthPortfolio** -- portfolio model with wealth-in-utility
+- **WarmGlowPortfolio** -- portfolio model with warm-glow bequest motive
 
 ## Key Features
 
@@ -20,86 +30,102 @@ This repository contains code, data, and documentation to reproduce results for 
 
 ## Installation
 
-To reproduce all the results in the repository, first clone this repository locally:
+Clone this repository:
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/econ-ark/Life-Cycle-Prime-Time
-
-# Change working directory to Life-Cycle-Prime-Time
-$ cd Life-Cycle-Prime-Time
+git clone https://github.com/econ-ark/Life-Cycle-Prime-Time
+cd Life-Cycle-Prime-Time
 ```
 
-## Reproduction Methods
+## Reproduction
 
-You can reproduce results using either a local conda environment or Docker-based tools:
-
-### Method 1: Local Conda Environment
-
-Create a conda environment and execute the reproduction script:
+### Quick Validation (< 5 minutes)
 
 ```bash
-$ conda env create -f binder/environment.yml
-$ conda activate life-cycle-prime-time
-$ bash reproduce.sh
+bash reproduce_min.sh
 ```
 
-Alternatively, you can run the main script directly:
+This runs the test suite and a single low-resource estimation to verify
+the environment is correctly configured.
+
+### Full Reproduction
 
 ```bash
-$ conda activate life-cycle-prime-time
-$ python src/do_all.py
+bash reproduce.sh
 ```
 
-### Method 2: Docker (Recommended for Reproducibility)
+This runs MSM estimation for all three agent models and generates all
+result tables.
 
-Use Docker to run the reproduction in a containerized environment:
+Both scripts use [uv](https://docs.astral.sh/uv/) to manage dependencies
+from `pyproject.toml` and `uv.lock`. If `uv` is not already installed, the
+scripts will install it automatically.
+
+### Docker (Recommended for Reproducibility)
+
+Build and run the reproduction in a containerized environment:
 
 ```bash
-$ docker build -t life-cycle-prime-time .
-$ docker run -it life-cycle-prime-time bash reproduce.sh
+docker build -t life-cycle-prime-time .
+docker run -it --rm life-cycle-prime-time bash reproduce_min.sh
+docker run -it --rm life-cycle-prime-time bash reproduce.sh
 ```
 
-### Method 3: nbreproduce (Requires Docker)
+### Binder
 
-Use the `nbreproduce` tool for automated reproduction:
+Click the Binder badge above to launch an interactive environment in your
+browser for exploring the notebooks.
 
-```bash
-# Install nbreproduce
-$ pip install nbreproduce
+## Reproduction Time
 
-# Reproduce all results using nbreproduce
-$ nbreproduce
-```
+| Script | What it does | Estimated time |
+|---|---|---|
+| `reproduce_min.sh` | Test suite + single low-resource estimation | < 3 minutes |
+| `reproduce.sh` | Full MSM estimation for 3 agent models | 5--10 minutes |
 
-### Method 4: Binder
+Reference machine for timing estimates: Intel Core i7-4700MQ @ 2.40GHz,
+8GB RAM, Ubuntu 14.04. Modern hardware should be comparable or faster.
 
-Click the Binder badge above to launch an interactive environment in your browser.
+The `medium_resource` and `high_resource` settings in `src/estimark/options.py`
+take approximately 7 minutes and 1+ hours respectively.
 
 ## Project Structure
 
 ```
 Life-Cycle-Prime-Time/
 ├── binder/
-│   └── environment.yml      # Conda environment specification
+│   ├── environment.yml      # Minimal conda env (Python 3.12 + uv)
+│   ├── postBuild            # Binder dependency installer
+│   └── apt.txt              # System dependencies
 ├── docs/                    # Documentation and results
-│   ├── figures/            # Generated figures
-│   └── tables/             # Generated tables
+│   ├── tables/              # Generated estimation tables
+│   └── manual_latex_edit_version/  # Manuscript source
 ├── src/                     # Source code
-│   ├── estimark/           # Main estimation package
-│   ├── notebooks/          # Jupyter notebooks
-│   └── run_all.py          # Main reproduction script
-├── Dockerfile              # Docker container definition
-├── reproduce.sh            # Reproduction script
-└── README.md               # This file
+│   ├── estimark/            # Main estimation package
+│   ├── notebooks/           # Jupyter notebooks
+│   ├── msm_notebooks/       # MSM-specific notebooks
+│   └── run_all.py           # Main reproduction entry point
+├── tests/                   # Test suite
+├── reproduce/
+│   └── docker/
+│       └── setup.sh         # Docker environment setup
+├── Dockerfile               # Docker container definition
+├── reproduce.sh             # Full reproduction script
+├── reproduce_min.sh         # Quick validation script
+├── pyproject.toml           # Python package configuration
+├── uv.lock                  # Locked dependency versions
+├── CITATION.cff             # Citation metadata
+├── REMARK.md                # REMARK tier and metadata
+├── LICENSE                  # MIT license
+└── README.md                # This file
 ```
 
 ## Requirements
 
 - Python 3.12
-- See `binder/environment.yml` for complete dependency list
+- Dependencies managed via `pyproject.toml` + `uv.lock`
 - Key dependencies:
-  - econ-ark/HARK (from GitHub master branch)
+  - [econ-ark/HARK](https://github.com/econ-ark/HARK) (from GitHub master branch)
   - estimagic==0.4.7
   - statsmodels
   - dask
@@ -107,22 +133,33 @@ Life-Cycle-Prime-Time/
 
 ## Outputs
 
-Running the reproduction script generates:
-- Figures in `docs/figures/` (PDF, PNG, SVG formats)
-- Tables in `docs/tables/` (CSV format)
-- Model estimation results and parameter estimates
+Running the full reproduction script generates:
+
+- Estimation result tables in `docs/tables/TRP/`
+- Model parameter estimates for each agent variant
+
+Interactive Jupyter notebooks in `src/notebooks/` and `src/msm_notebooks/`
+allow exploration of the estimation results.
 
 ## REMARK Compliance
 
-This repository complies with REMARK (Reproducible Explorations Made using ARK) standards:
+This repository complies with [REMARK](https://github.com/econ-ark/REMARK)
+(Reproducible Explorations Made using ARK) standards:
 
 - **Tier**: 2 (Reproducible REMARK)
 - Dockerfile for containerized execution
-- `reproduce.sh` script for automated reproduction
-- `binder/environment.yml` for reproducible environments
-- Comprehensive documentation
+- `reproduce.sh` and `reproduce_min.sh` for automated reproduction
+- `binder/environment.yml` for Binder and REMARK cli.py compatibility
+- `CITATION.cff` for citation metadata
+- `REMARK.md` for REMARK tier and project metadata
 
-See `REMARK.md` for detailed metadata and compliance information.
+See [REMARK.md](REMARK.md) for detailed metadata.
+
+## Authors
+
+- Christopher D. Carroll (Johns Hopkins University)
+- Alan Lujan (Johns Hopkins University)
+- Matthew N. White (Econ-ARK)
 
 ## References
 

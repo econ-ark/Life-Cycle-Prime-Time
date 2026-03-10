@@ -1,16 +1,26 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "Life-Cycle-Prime-Time"
-abstract: "Reproducible research repository for life-cycle portfolio choice models with method of simulated moments estimation"
+abstract: >-
+  Estimating life-cycle consumption and portfolio choice models using the
+  method of simulated moments. Uses the Econ-ARK/HARK toolkit to solve and
+  estimate dynamic stochastic optimization problems with heterogeneous agents.
 authors:
+  - family-names: Carroll
+    given-names: Christopher D.
+    email: ccarroll@llorracc.org
+    affiliation: Johns Hopkins University
+    orcid: "https://orcid.org/0000-0003-3732-9312"
   - family-names: Lujan
     given-names: Alan
-    email: alanlujan91@gmail.com
+    email: alujan@jhu.edu
+    affiliation: Johns Hopkins University
   - family-names: White
     given-names: Matthew N.
+    email: mnwhite@gmail.com
+    affiliation: Econ-ARK
 version: "0.1.0"
-date-released: 2024-01-01
-doi: ""
+date-released: 2024-01-17
 url: "https://github.com/econ-ark/Life-Cycle-Prime-Time"
 repository-code: "https://github.com/econ-ark/Life-Cycle-Prime-Time"
 license: MIT
@@ -20,3 +30,6 @@ keywords:
   - portfolio choice
   - method of simulated moments
   - dynamic stochastic optimization
+  - heterogeneous agents
+  - HARK
+  - Econ-ARK

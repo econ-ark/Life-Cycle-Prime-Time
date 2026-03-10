@@ -1,53 +1,89 @@
 # REMARK Metadata
 
-**Tier**: 2 (Reproducible REMARK)
+- **Tier**: 2 (Reproducible REMARK)
+- **Type**: Reproduction
 
 ## Project Information
 
 - **Title**: Life-Cycle-Prime-Time
-- **Purpose**: Reproducible research repository for life-cycle portfolio choice models with method of simulated moments estimation
+- **Authors**: Christopher D. Carroll, Alan Lujan, Matthew N. White
 - **Repository**: https://github.com/econ-ark/Life-Cycle-Prime-Time
 - **Documentation**: https://econ-ark.github.io/Life-Cycle-Prime-Time/
+- **License**: MIT
 
-## Authors
+## Abstract
 
-- Alan Lujan (alanlujan91@gmail.com)
-- Matthew N. White
+This REMARK reproduces results for life-cycle consumption and portfolio
+choice models estimated via the method of simulated moments (MSM). It uses
+the Econ-ARK/HARK toolkit to solve and estimate dynamic stochastic
+optimization problems with heterogeneous agents.
 
-## Key Components
+## Models Estimated
 
-This REMARK reproduces results for:
-- Life-cycle consumption and portfolio choice models
-- Method of simulated moments (MSM) estimation
-- Sensitivity analysis and parameter estimation
-- Portfolio share functions and consumption functions
+The full reproduction (`reproduce.sh`) estimates three agent model variants:
+
+1. **Portfolio** -- life-cycle portfolio choice model
+2. **WealthPortfolio** -- portfolio model with wealth-in-utility
+3. **WarmGlowPortfolio** -- portfolio model with warm-glow bequest motive
+
+Each model is estimated using MSM with low-resource settings by default.
 
 ## Reproduction
 
-All results can be reproduced by running:
+### Full Reproduction (`reproduce.sh`)
+
+Runs MSM estimation for all three agent models and generates all tables.
 
 ```bash
 bash reproduce.sh
 ```
 
-This script:
-1. Creates/updates the conda environment from `binder/environment.yml`
-2. Executes the main reproduction script `src/run_all.py`
+**Estimated runtime**: The `low_resource` setting takes approximately 90
+seconds per agent model on a 2014-era laptop (Intel Core i7-4700MQ @ 2.40GHz,
+8GB RAM, Ubuntu 14.04). Total runtime for all three models: approximately
+5--10 minutes on modern hardware, longer with higher-resource settings.
 
-## Environment Requirements
+### Quick Validation (`reproduce_min.sh`)
 
-- Python 3.12
-- See `binder/environment.yml` for complete dependency list
-- Key dependencies: econ-ark/HARK, estimagic, statsmodels, dask
+Runs the test suite and a single low-resource estimation to verify the
+environment is correctly configured.
+
+```bash
+bash reproduce_min.sh
+```
+
+**Estimated runtime**: Under 3 minutes on modern hardware.
+
+## Environment
+
+- **Python**: 3.12
+- **Package manager**: uv (installed via `binder/environment.yml`)
+- **Dependencies**: Defined in `pyproject.toml`, locked in `uv.lock`
+- **Key packages**: econ-ark/HARK, estimagic==0.4.7, statsmodels, dask, openpyxl
 
 ## Outputs
 
-The reproduction script generates:
-- Figures in `docs/figures/`
-- Tables in `docs/tables/`
-- Model estimation results
+The reproduction generates:
 
-## Notes
+- **Tables**: `docs/tables/TRP/` -- estimation results for each agent model
+- **Notebooks**: `src/notebooks/` and `src/msm_notebooks/` -- interactive
+  exploration of results
 
-- Full reproduction may take significant time depending on hardware
-- The repository includes notebooks in `src/notebooks/` for interactive exploration
+## File Structure
+
+```
+.
+|-- Dockerfile              # Docker container definition
+|-- reproduce.sh            # Full reproduction script
+|-- reproduce_min.sh        # Quick validation script
+|-- README.md               # Project documentation (109+ non-empty lines)
+|-- LICENSE                 # MIT license
+|-- CITATION.cff            # Citation metadata
+|-- REMARK.md               # This file
+|-- pyproject.toml          # Python package configuration
+|-- uv.lock                 # Locked dependency versions
+`-- binder/
+    |-- environment.yml     # Minimal conda env (Python 3.12 + uv)
+    |-- postBuild           # Binder dependency installation script
+    `-- apt.txt             # System dependencies
+```

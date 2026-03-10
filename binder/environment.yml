@@ -1,8 +1,10 @@
 # Binder environment configuration
-# Single Source of Truth: pyproject.toml + uv.lock (dependencies installed via uv in postBuild)
+# Single Source of Truth: pyproject.toml + uv.lock (dependencies installed via uv)
 #
-# This minimal conda environment provides Python 3.12 and pip.
+# This minimal conda environment provides Python 3.12, pip, and uv.
 # All project dependencies are installed from pyproject.toml using uv.
+# This follows the REMARK STANDARD.md guidance for minimal environment.yml
+# files that install a chosen environment manager.
 
 name: life-cycle-prime-time
 channels:
@@ -12,3 +14,5 @@ channels:
 dependencies:
   - python=3.12
   - pip
+  - pip:
+    - "uv>=0.5,<1.0"
