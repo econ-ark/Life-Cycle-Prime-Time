@@ -1,16 +1,14 @@
+# Binder environment configuration
+# Single Source of Truth: pyproject.toml + uv.lock (dependencies installed via uv in postBuild)
+#
+# This minimal conda environment provides Python 3.12 and pip.
+# All project dependencies are installed from pyproject.toml using uv.
+
 name: life-cycle-prime-time
 channels:
   - conda-forge
+  - defaults
+
 dependencies:
   - python=3.12
-  - estimagic=0.4.7
-  - statsmodels
-  - dask
-  - openpyxl
   - pip
-  - pip:
-      - git+https://github.com/econ-ark/HARK@master
-      - DFO-LS
-      - tranquilo
-      - black[jupyter]
-      - -e .
