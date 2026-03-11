@@ -5,6 +5,7 @@ choice models estimated via the method of simulated moments (MSM).
 
 **Documentation**: https://econ-ark.github.io/Life-Cycle-Prime-Time/
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/econ-ark/Life-Cycle-Prime-Time/HEAD)
 
 ## Overview
@@ -61,6 +62,11 @@ Both scripts use [uv](https://docs.astral.sh/uv/) to manage dependencies
 from `pyproject.toml` and `uv.lock`. If `uv` is not already installed, the
 scripts will install it automatically.
 
+On success, both scripts automatically write a benchmark JSON file to
+`reproduce/benchmarks/results/` capturing system characteristics, timing,
+package versions, and git state. See [reproduce/README.md](reproduce/README.md)
+for details.
+
 ### Docker (Recommended for Reproducibility)
 
 Build and run the reproduction in a containerized environment:
@@ -107,6 +113,13 @@ Life-Cycle-Prime-Time/
 │   └── run_all.py           # Main reproduction entry point
 ├── tests/                   # Test suite
 ├── reproduce/
+│   ├── reproduce_utils.sh   # Shared logging, benchmarking utilities
+│   ├── capture_system_info.py # System info capture for benchmarks
+│   ├── check_dependencies.sh  # Dependency verification
+│   ├── logs/                # Timestamped run logs (gitignored)
+│   ├── benchmarks/          # Benchmark results and tooling
+│   │   ├── results/         # Auto-generated and saved benchmarks
+│   │   └── benchmark_results.sh  # Display results table
 │   └── docker/
 │       └── setup.sh         # Docker environment setup
 ├── Dockerfile               # Docker container definition

@@ -1,7 +1,8 @@
 # REMARK Metadata
 
-- **Tier**: 2 (Reproducible REMARK)
+- **Tier**: 3 (Published REMARK)
 - **Type**: Reproduction
+- **Archived**: Zenodo DOI (see CITATION.cff); tag `v0.1.0`
 
 ## Project Information
 
@@ -68,6 +69,9 @@ The reproduction generates:
 - **Tables**: `docs/tables/TRP/` -- estimation results for each agent model
 - **Notebooks**: `src/notebooks/` and `src/msm_notebooks/` -- interactive
   exploration of results
+- **Benchmarks**: `reproduce/benchmarks/results/` -- JSON files capturing
+  timing, system characteristics, package versions, and git state for each
+  successful run. See `reproduce/README.md` for details.
 
 ## File Structure
 
@@ -76,7 +80,16 @@ The reproduction generates:
 |-- Dockerfile              # Docker container definition
 |-- reproduce.sh            # Full reproduction script
 |-- reproduce_min.sh        # Quick validation script
-|-- README.md               # Project documentation (109+ non-empty lines)
+|-- reproduce/
+|   |-- README.md           # Reproduction infrastructure docs
+|   |-- reproduce_utils.sh  # Shared logging, error handling, benchmarking
+|   |-- capture_system_info.py  # System info capture
+|   |-- check_dependencies.sh   # Dependency verification
+|   |-- logs/               # Timestamped run logs (gitignored)
+|   |-- benchmarks/         # Benchmark results and tooling
+|   `-- docker/
+|       `-- setup.sh        # Docker environment setup
+|-- README.md               # Project documentation
 |-- LICENSE                 # MIT license
 |-- CITATION.cff            # Citation metadata
 |-- REMARK.md               # This file

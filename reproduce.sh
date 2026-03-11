@@ -8,38 +8,44 @@
 #   3. REMARK cli.py conda path (via conda env update + this script)
 #
 # Dependencies are managed via pyproject.toml + uv.lock using uv.
+#
+# On success, a benchmark JSON is written to reproduce/benchmarks/results/
+# capturing system characteristics and timing. See reproduce/README.md.
 
-set -e
+set -eo pipefail
+
+# Ensure we are in the repository root
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# Source shared utilities (logging, error handling, benchmarking)
+# shellcheck source=reproduce/reproduce_utils.sh
+source "$SCRIPT_DIR/reproduce/reproduce_utils.sh"
+
+init_logging "full"
+benchmark_start "full"
 
 echo "=========================================="
 echo "Life-Cycle-Prime-Time - Full Reproduction"
 echo "=========================================="
 echo ""
 
-# Ensure we are in the repository root
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
-cd "$SCRIPT_DIR"
-
 # Step 1: Ensure uv is available
-echo "Step 1/2: Installing dependencies..."
+log STEP "Step 1/2: Installing dependencies..."
 if ! command -v uv &> /dev/null; then
-    echo "  uv not found, installing..."
+    log INFO "uv not found, installing..."
     pip install "uv>=0.5,<1.0"
 fi
-echo "  uv $(uv --version)"
+log INFO "uv $(uv --version)"
 
-# Install/sync all dependencies from pyproject.toml + uv.lock
 uv sync
-echo "  Dependencies installed."
+log SUCCESS "Dependencies installed."
 echo ""
 
 # Step 2: Run the full reproduction
-echo "Step 2/2: Running full estimation (3 agent models)..."
-echo "  This may take a long time depending on hardware."
+log STEP "Step 2/2: Running full estimation (3 agent models)..."
+log INFO "This may take a long time depending on hardware."
 echo ""
 uv run python src/run_all.py
 
-echo ""
-echo "=========================================="
-echo "Reproduction complete!"
-echo "=========================================="
+log SUCCESS "All estimations completed."
