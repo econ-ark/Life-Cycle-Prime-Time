@@ -1,0 +1,101 @@
+#!/bin/bash
+# Post-build script for Binder
+# Single Source of Truth: pyproject.toml + uv.lock (dependencies)
+#
+# This script mirrors the setup from reproduce/docker/setup.sh but adapted for Binder's
+# conda-based environment where we install into the system Python rather than a venv.
+
+set -e
+
+echo "🚀 Setting up Life-Cycle-Prime-Time Binder environment..."
+
+# Binder clones the repo to the user's home directory
+REPO_DIR="${HOME}"
+
+# ============================================================================
+# Install uv package manager (pinned for reproducibility)
+# ============================================================================
+echo "📦 Installing uv..."
+
+# Pin uv version for reproducible builds
+# Update this version periodically to get bug fixes and new features
+pip install "uv>=0.5,<1.0"
+
+echo "✓ uv $(uv --version)"
+
+# ============================================================================
+# Install dependencies from pyproject.toml using locked versions
+# ============================================================================
+echo "🐍 Installing Python dependencies from pyproject.toml..."
+
+cd "${REPO_DIR}"
+
+# Export locked dependencies to requirements.txt format
+# This respects [tool.uv.sources] and ensures reproducible builds
+uv export --frozen --no-hashes --no-dev -o /tmp/requirements.txt
+
+# Install the exported requirements into the system Python
+uv pip install --system -r /tmp/requirements.txt
+
+# Install the project in editable mode
+uv pip install --system -e .
+
+rm /tmp/requirements.txt
+
+# ============================================================================
+# Configure environment
+# ============================================================================
+echo "⚙️ Configuring environment..."
+
+# Set PYTHONPATH to include src/ directory
+# This is added to the kernel's environment
+mkdir -p ~/.ipython/profile_default/startup
+cat > ~/.ipython/profile_default/startup/00-pythonpath.py << 'PYEOF'
+import os
+import sys
+
+# Add src/ directory to Python path (Binder clones to home directory)
+repo_dir = os.environ.get('HOME', '/home/jovyan')
+src_dir = os.path.join(repo_dir, 'src')
+if os.path.isdir(src_dir) and src_dir not in sys.path:
+    sys.path.insert(0, src_dir)
+PYEOF
+
+# Also set for shell sessions
+# shellcheck disable=SC2016  # Single quotes are intentional - variables expand at runtime
+echo 'export PYTHONPATH="${HOME}/src:${PYTHONPATH}"' >> ~/.bashrc
+
+# ============================================================================
+# Warm up caches (non-critical, failures are logged but don't stop the build)
+# ============================================================================
+echo "🔥 Warming up caches..."
+
+# Generate matplotlib font cache
+if python -c "import matplotlib as mpl; mpl.use('Agg'); import pylab as plt; fig, ax = plt.subplots(); fig.savefig('/tmp/test.png')" 2>&1; then
+    echo "✓ Matplotlib font cache generated"
+else
+    echo "⚠️ Matplotlib cache warmup failed (non-critical, first plot may be slow)"
+fi
+rm -f /tmp/test.png
+
+# ============================================================================
+# Verify installation
+# ============================================================================
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ Binder environment ready!"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "   Python:  $(python --version)"
+
+# List key packages (show warning if imports fail - these are critical)
+if ! python -c "
+import HARK; print(f'   HARK:    {HARK.__version__}')
+import numpy; print(f'   NumPy:   {numpy.__version__}')
+import statsmodels; print(f'   Statsmodels: {statsmodels.__version__}')
+import estimagic; print(f'   Estimagic: {estimagic.__version__}')
+" 2>&1; then
+    echo "   ⚠️ WARNING: Some packages failed to import - check installation"
+fi
+
+echo ""

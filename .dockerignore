@@ -1,0 +1,45 @@
+# Life-Cycle-Prime-Time Docker ignore file
+# Prevents local development artifacts from being copied into the Docker build
+
+# Virtual environments (all platform-specific variants)
+.venv/
+.venv-*/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Git
+.gitignore
+
+# IDE/Editor
+.cursor*/
+.specstory/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Local cache
+.cache/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Docker (prevent recursive copies)
+.dockerignore
+
+# REMARK symlink (points to external repo)
+REMARK
