@@ -5,7 +5,6 @@ choice models estimated via the method of simulated moments (MSM).
 
 **Documentation**: https://econ-ark.github.io/Life-Cycle-Prime-Time/
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/econ-ark/Life-Cycle-Prime-Time/HEAD)
 
 ## Overview

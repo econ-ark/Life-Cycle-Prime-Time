@@ -1,8 +1,7 @@
 # REMARK Metadata
 
-- **Tier**: 3 (Published REMARK)
+- **Tier**: 2 (Reproducible REMARK)
 - **Type**: Reproduction
-- **Archived**: Zenodo DOI (see CITATION.cff); tag `v0.1.0`
 
 ## Project Information
 

@@ -94,7 +94,7 @@ ensure_uv_in_path
 # Install uv if not present
 if ! command -v uv &> /dev/null; then
     echo "📦 Installing uv..."
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    curl -LsSf https://astral.sh/uv/0.8.13/install.sh | sh
     # shellcheck disable=SC1091
     source "$HOME/.local/bin/env" 2>/dev/null || export PATH="$HOME/.local/bin:$PATH"
 fi
@@ -113,7 +113,7 @@ echo "🐍 Setting up Python environment at $VENV_NAME..."
 
 # Use UV_PROJECT_ENVIRONMENT to specify the venv location
 export UV_PROJECT_ENVIRONMENT="$VENV_PATH"
-uv sync --all-groups
+uv sync --all-groups --locked
 
 # Verify virtual environment
 if [ ! -f "$VENV_PATH/bin/activate" ]; then

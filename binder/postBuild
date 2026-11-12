@@ -19,7 +19,7 @@ echo "📦 Installing uv..."
 
 # Pin uv version for reproducible builds
 # Update this version periodically to get bug fixes and new features
-pip install "uv>=0.5,<1.0"
+pip install "uv==0.8.13"
 
 echo "✓ uv $(uv --version)"
 

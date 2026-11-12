@@ -34,11 +34,11 @@ echo ""
 log STEP "Step 1/2: Installing dependencies..."
 if ! command -v uv &> /dev/null; then
     log INFO "uv not found, installing..."
-    pip install "uv>=0.5,<1.0"
+    pip install "uv==0.8.13"
 fi
 log INFO "uv $(uv --version)"
 
-uv sync
+uv sync --locked
 log SUCCESS "Dependencies installed."
 echo ""
 
