@@ -356,7 +356,7 @@ wheels = [
 [[package]]
 name = "econ-ark"
 version = "0.16.0"
-source = { git = "https://github.com/econ-ark/HARK?rev=master#845fdb56f7e7b88b3df4e12fd378daf23992a681" }
+source = { git = "https://github.com/econ-ark/HARK?rev=845fdb56f7e7b88b3df4e12fd378daf23992a681#845fdb56f7e7b88b3df4e12fd378daf23992a681" }
 dependencies = [
     { name = "interpolation" },
     { name = "joblib" },
@@ -433,7 +433,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "econ-ark", git = "https://github.com/econ-ark/HARK?rev=master" },
+    { name = "econ-ark", git = "https://github.com/econ-ark/HARK?rev=845fdb56f7e7b88b3df4e12fd378daf23992a681" },
     { name = "estimagic", specifier = "==0.4.7" },
     { name = "furo", marker = "extra == 'docs'", specifier = ">=2023.8.17" },
     { name = "myst-parser", marker = "extra == 'docs'", specifier = ">=0.13" },

@@ -161,4 +161,4 @@ messages_control.disable = [
 ]
 
 [tool.uv.sources]
-econ-ark = { git = "https://github.com/econ-ark/HARK", rev = "master" }
+econ-ark = { git = "https://github.com/econ-ark/HARK", rev = "845fdb56f7e7b88b3df4e12fd378daf23992a681" }  # HARK main, 2025-07-24 (HARK renamed master to main)

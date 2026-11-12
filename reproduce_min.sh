@@ -40,7 +40,7 @@ if ! command -v uv &> /dev/null; then
     pip install "uv==0.8.13"
 fi
 log INFO "uv $(uv --version)"
-uv sync --locked
+uv sync --locked --extra test   # pytest, for step 2, is in the test extra
 log SUCCESS "Dependencies installed."
 echo ""
 

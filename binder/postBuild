@@ -38,7 +38,7 @@ uv export --frozen --no-hashes --no-dev -o /tmp/requirements.txt
 uv pip install --system -r /tmp/requirements.txt
 
 # Install the project in editable mode
-uv pip install --system -e .
+uv pip install --system --no-deps -e .   # dependencies come only from uv.lock, above
 
 rm /tmp/requirements.txt
 
