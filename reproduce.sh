@@ -1,7 +1,9 @@
 #!/bin/bash
 # Life-Cycle-Prime-Time REMARK - Full Reproduction Script
 #
-# This script reproduces all results in the repository.
+# This script reproduces the paper's table of estimated parameters
+# (docs/parameters.tex): it repeats the three estimations behind it as they were
+# run, and prints the results beside the paper's (see reproduce/paper_table.py).
 # It works in all three REMARK execution contexts:
 #   1. Docker container (via Dockerfile)
 #   2. Binder (via binder/environment.yml + postBuild)
@@ -39,13 +41,13 @@ fi
 log INFO "uv $(uv --version)"
 
 uv sync --locked
+use_optimagic_copy_of_estimagic
 log SUCCESS "Dependencies installed."
 echo ""
 
-# Step 2: Run the full reproduction
-log STEP "Step 2/2: Running full estimation (3 agent models)..."
-log INFO "This may take a long time depending on hardware."
+# Step 2: Reproduce the paper's table of estimated parameters
+log STEP "Step 2/2: Reproducing the paper's estimates (3 models)..."
 echo ""
-uv run python src/run_all.py
+uv run python reproduce/paper_table.py
 
 log SUCCESS "All estimations completed."

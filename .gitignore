@@ -505,3 +505,6 @@ _build
 # Local symlinks to sibling repos
 REMARK
 method-of-moderation
+
+# Output of reproduce.sh / reproduce_min.sh (reproduce/paper_table.py)
+docs/tables/reproduced/

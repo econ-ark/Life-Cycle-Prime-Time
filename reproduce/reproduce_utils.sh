@@ -240,3 +240,35 @@ _reproduce_exit_handler() {
     benchmark_end $exit_code
 }
 trap '_reproduce_exit_handler' EXIT
+
+# ============================================================================
+# ESTIMAGIC: ONE COPY, ALWAYS OPTIMAGIC'S
+# ============================================================================
+# estimagic 0.4.7 (pinned in pyproject.toml; tranquilo needs it) and optimagic
+# 0.5.2 (HARK needs it) both install 25 files into site-packages/estimagic/,
+# __init__.py among them. uv installs packages in parallel, so which package's
+# copy of each shared file survives varies from one install to the next, and
+# with it which estimagic.minimize the estimation calls. The paper's estimates
+# were made with optimagic's copies (their output files have optimagic's
+# fields), and only optimagic's minimize accepts the recorded exploration
+# samples that reproduce/paper_table.py replays. So reinstall optimagic, at the
+# version uv.lock records, after every sync: its copies then win every time.
+#
+# Usage: use_optimagic_copy_of_estimagic [python]   (default: .venv/bin/python)
+# The python is named explicitly because, run inside a conda environment (as
+# the REMARK tooling does), uv pip would otherwise install into that one.
+use_optimagic_copy_of_estimagic() {
+    local python="${1:-${UV_PROJECT_ENVIRONMENT:-.venv}/bin/python}"
+    local pin
+    pin=$(uv export --frozen --no-hashes 2>/dev/null | grep -E '^optimagic==' | head -1)
+    if [[ -z "$pin" ]]; then
+        log ERROR "uv.lock records no optimagic version"
+        return 1
+    fi
+    uv pip install --quiet --python "$python" --reinstall --no-deps "$pin"
+    if ! "$python" -c "import estimagic, optimagic, sys; sys.exit(estimagic.__version__ != optimagic.__version__)"; then
+        log ERROR "estimagic is still not optimagic's copy after reinstalling $pin"
+        return 1
+    fi
+    log INFO "estimagic is optimagic's copy ($pin)"
+}

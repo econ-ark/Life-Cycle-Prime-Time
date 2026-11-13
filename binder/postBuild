@@ -40,6 +40,11 @@ uv pip install --system -r /tmp/requirements.txt
 # Install the project in editable mode
 uv pip install --system --no-deps -e .   # dependencies come only from uv.lock, above
 
+# estimagic and optimagic both install files into estimagic/, and which copy survives
+# varies from install to install; make optimagic's win (see use_optimagic_copy_of_estimagic
+# in reproduce/reproduce_utils.sh for why).
+uv pip install --system --reinstall --no-deps "$(grep -E '^optimagic==' /tmp/requirements.txt)"
+
 rm /tmp/requirements.txt
 
 # ============================================================================

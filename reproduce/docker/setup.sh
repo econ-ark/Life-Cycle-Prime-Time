@@ -114,6 +114,10 @@ echo "🐍 Setting up Python environment at $VENV_NAME..."
 # Use UV_PROJECT_ENVIRONMENT to specify the venv location
 export UV_PROJECT_ENVIRONMENT="$VENV_PATH"
 uv sync --all-groups --locked
+# estimagic and optimagic both install files into estimagic/, and which copy survives
+# varies from install to install; make optimagic's win (see use_optimagic_copy_of_estimagic
+# in reproduce/reproduce_utils.sh for why).
+uv pip install --python "$VENV_PATH/bin/python" --reinstall --no-deps "$(uv export --frozen --no-hashes | grep -E '^optimagic==')"
 
 # Verify virtual environment
 if [ ! -f "$VENV_PATH/bin/activate" ]; then
