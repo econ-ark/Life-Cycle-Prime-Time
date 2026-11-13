@@ -39,23 +39,31 @@ cd Life-Cycle-Prime-Time
 
 ## Reproduction
 
-### Quick Validation (< 5 minutes)
+### Quick Validation (about 3 minutes)
 
 ```bash
 bash reproduce_min.sh
 ```
 
-This runs the test suite and a single low-resource estimation to verify
-the environment is correctly configured.
+This runs the test suite and reproduces the Life-Cycle Portfolio row of the
+paper's table of estimated parameters.
 
-### Full Reproduction
+### Full Reproduction (about 11 minutes)
 
 ```bash
 bash reproduce.sh
 ```
 
-This runs MSM estimation for all three agent models and generates all
-result tables.
+This reproduces the paper's table of estimated parameters
+(`docs/parameters.tex`). It repeats the three estimations behind the table as
+they were made: from the same initial guesses, estimating the same
+parameters, with the same multistart exploration samples. It prints the
+results beside the paper's and writes them to `docs/tables/reproduced/`.
+
+The Life-Cycle Portfolio estimate reproduces to 13 significant digits. The
+Warm-Glow and TRP / WIUF estimates can differ from the paper's in the third
+decimal on another platform. [REMARK.md](REMARK.md#agreement-with-the-paper)
+gives the reproduced values, the ranges to expect, and why.
 
 Both scripts use [uv](https://docs.astral.sh/uv/) to manage dependencies
 from `pyproject.toml` and `uv.lock`. If `uv` is not already installed, the
@@ -83,13 +91,13 @@ browser for exploring the notebooks.
 
 ## Reproduction Time
 
-| Script | What it does | Estimated time |
+| Script | What it does | Measured time |
 |---|---|---|
-| `reproduce_min.sh` | Test suite + single low-resource estimation | ~25 minutes |
-| `reproduce.sh` | Full MSM estimation for 3 agent models | 20--60 minutes |
+| `reproduce_min.sh` | Test suite + the Life-Cycle Portfolio estimate | 157 seconds |
+| `reproduce.sh` | The paper's three estimates | 676 seconds |
 
-Reference machine for timing estimates: Intel Core i7-4700MQ @ 2.40GHz,
-8GB RAM, Ubuntu 14.04. Modern hardware should be comparable or faster.
+Measured in the REMARK container (Docker, linux/arm64) on an Apple M4 Max
+with 12 CPUs and 31 GB given to Docker, including installing dependencies.
 
 The `medium_resource` and `high_resource` settings in `src/estimark/options.py`
 take approximately 7 minutes and 1+ hours respectively.
@@ -109,9 +117,10 @@ Life-Cycle-Prime-Time/
 │   ├── estimark/            # Main estimation package
 │   ├── notebooks/           # Jupyter notebooks
 │   ├── msm_notebooks/       # MSM-specific notebooks
-│   └── run_all.py           # Main reproduction entry point
+│   └── run_all.py           # Estimates the models from the results in docs/tables/TRP
 ├── tests/                   # Test suite
 ├── reproduce/
+│   ├── paper_table.py       # Repeats the runs behind the paper's table
 │   ├── reproduce_utils.sh   # Shared logging, benchmarking utilities
 │   ├── capture_system_info.py # System info capture for benchmarks
 │   ├── check_dependencies.sh  # Dependency verification
@@ -137,18 +146,20 @@ Life-Cycle-Prime-Time/
 - Python 3.12
 - Dependencies managed via `pyproject.toml` + `uv.lock`
 - Key dependencies:
-  - [econ-ark/HARK](https://github.com/econ-ark/HARK) (from GitHub master branch)
-  - estimagic==0.4.7
+  - [econ-ark/HARK](https://github.com/econ-ark/HARK) at commit `845fdb5` (2025-07-24)
+  - estimagic 0.4.7 and optimagic 0.5.2 (see [REMARK.md](REMARK.md#environment)
+    for how the two are installed)
+  - tranquilo 0.0.5
   - statsmodels
   - dask
   - openpyxl
 
 ## Outputs
 
-Running the full reproduction script generates:
+Running the full reproduction script generates, in `docs/tables/reproduced/`:
 
-- Estimation result tables in `docs/tables/TRP/`
-- Model parameter estimates for each agent variant
+- one `<run>_estimate_results.csv` per model of the paper's table
+- `comparison.csv`, the reproduced estimates beside the paper's
 
 Interactive Jupyter notebooks in `src/notebooks/` and `src/msm_notebooks/`
 allow exploration of the estimation results.

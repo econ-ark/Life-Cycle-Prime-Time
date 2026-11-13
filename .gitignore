@@ -508,3 +508,4 @@ method-of-moderation
 
 # Output of reproduce.sh / reproduce_min.sh (reproduce/paper_table.py)
 docs/tables/reproduced/
+reproduce/benchmarks/results/latest.json
