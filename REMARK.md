@@ -87,10 +87,12 @@ paper's table:
 | | criterion | 0.104 | 0.103988 | 0.104074 |
 | TRP / WIUF LC Portfolio | CRRA | 5.136 | 5.1358 | 5.1346 |
 | | wealth share | 0.248 | 0.24790 | 0.24798 |
-| | criterion | 0.306 | 0.303572 | 0.303574 |
+| | criterion | 0.304 | 0.303572 | 0.303574 |
 
-The run behind the table recorded a TRP / WIUF criterion of 0.3036; the
-table's 0.306 appears to be a transcription error.
+The table's TRP / WIUF criterion read 0.306 until 2026-11-12, a
+transcription error: the run behind it recorded 0.3036. The LaTeX sources
+are corrected; `docs/life-cycle-prime-time.pdf` and `.docx` still say
+0.306 until they are rebuilt.
 
 **What to expect.**
 
