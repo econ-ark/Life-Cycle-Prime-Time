@@ -254,11 +254,11 @@ trap '_reproduce_exit_handler' EXIT
 # samples that reproduce/paper_table.py replays. So reinstall optimagic, at the
 # version uv.lock records, after every sync: its copies then win every time.
 #
-# Usage: use_optimagic_copy_of_estimagic [python]   (default: .venv/bin/python)
-# The python is named explicitly because, run inside a conda environment (as
-# the REMARK tooling does), uv pip would otherwise install into that one.
+# Acts on the project environment (.venv, or $UV_PROJECT_ENVIRONMENT). Its
+# python is named explicitly because, run inside a conda environment (as the
+# REMARK tooling does), uv pip would otherwise install into that one.
 use_optimagic_copy_of_estimagic() {
-    local python="${1:-${UV_PROJECT_ENVIRONMENT:-.venv}/bin/python}"
+    local python="${UV_PROJECT_ENVIRONMENT:-.venv}/bin/python"
     local pin
     pin=$(uv export --frozen --no-hashes 2>/dev/null | grep -E '^optimagic==' | head -1)
     if [[ -z "$pin" ]]; then

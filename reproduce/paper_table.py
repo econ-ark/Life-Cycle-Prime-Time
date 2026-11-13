@@ -20,6 +20,9 @@ Usage, from the repository root:
     uv run python reproduce/paper_table.py --models PortfolioG  # one model
 """
 
+# A command-line script: printing is its output.
+# ruff: noqa: T201
+
 from __future__ import annotations
 
 import argparse
@@ -48,8 +51,10 @@ PAPER_RUNS = Path("src/estimark/docs/tables/min")
 
 def read_results(path: Path) -> dict[str, str]:
     """An estimate_results.csv as {row name: value}."""
-    with open(path, newline="") as f:
-        return {row[0]: (row[1] if len(row) > 1 else "") for row in csv.reader(f) if row}
+    with path.open(newline="") as f:
+        return {
+            row[0]: (row[1] if len(row) > 1 else "") for row in csv.reader(f) if row
+        }
 
 
 def recorded_sample(multistart_info: str) -> list[dict[str, float]]:
@@ -60,12 +65,15 @@ def recorded_sample(multistart_info: str) -> list[dict[str, float]]:
         depth += {"[": 1, "]": -1}.get(multistart_info[end], 0)
         if depth == 0:
             return ast.literal_eval(multistart_info[start : end + 1])
-    raise ValueError("no complete exploration_sample in multistart_info")
+    msg = "no complete exploration_sample in multistart_info"
+    raise ValueError(msg)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--models", nargs="+", choices=list(MODELS), default=list(MODELS))
+    parser.add_argument(
+        "--models", nargs="+", choices=list(MODELS), default=list(MODELS)
+    )
     parser.add_argument("--out", type=Path, default=Path("docs/tables/reproduced"))
     args = parser.parse_args()
 
@@ -77,8 +85,9 @@ def main() -> int:
             f"{optimagic.__version__}); run this through reproduce.sh or reproduce_min.sh."
         )
 
+    # An empty folder: every run starts from the default initial guess.
     if args.out.exists():
-        shutil.rmtree(args.out)  # empty: every run starts from the default initial guess
+        shutil.rmtree(args.out)
     args.out.mkdir(parents=True)
 
     base_options = dict(est.minimize_options)
@@ -89,7 +98,10 @@ def main() -> int:
         sample = recorded_sample(paper["multistart_info"])
         est.minimize_options = {**base_options, "multistart": {"sample": sample}}
 
-        print(f"\n=== {label} ({name}): {len(sample)} recorded exploration points", flush=True)
+        print(
+            f"\n=== {label} ({name}): {len(sample)} recorded exploration points",
+            flush=True,
+        )
         specs = low_resource.copy()
         specs.update(agent_name=name, params_to_estimate=params, save_dir=str(args.out))
         est.estimate(**specs)
@@ -100,13 +112,17 @@ def main() -> int:
             rows.append((label, "criterion" if key == "fun" else key, p, o, o - p))
     est.minimize_options = base_options
 
-    with open(args.out / "comparison.csv", "w", newline="") as f:
+    with (args.out / "comparison.csv").open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["model", "quantity", "paper_run", "reproduced", "difference"])
         writer.writerows(rows)
 
-    print("\nReproduced estimates beside the paper's (the runs behind docs/parameters.tex):\n")
-    print(f"{'model':26s} {'quantity':12s} {'paper':>14s} {'reproduced':>14s} {'difference':>12s}")
+    print(
+        "\nReproduced estimates beside the paper's (the runs behind docs/parameters.tex):\n"
+    )
+    print(
+        f"{'model':26s} {'quantity':12s} {'paper':>14s} {'reproduced':>14s} {'difference':>12s}"
+    )
     for label, key, p, o, d in rows:
         print(f"{label:26s} {key:12s} {p:14.6f} {o:14.6f} {d:+12.2e}")
     print(f"\nWritten to {args.out}/. REMARK.md says how closely these should agree.")
