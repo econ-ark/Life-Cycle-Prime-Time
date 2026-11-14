@@ -784,34 +784,80 @@ def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
     return sensitivity
 
 
-def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
-    # TODO: WRITE DOCSTRING
+def do_make_contour_plot(agent, model_estimate, emp_moments, weights, save_dir=None):
+    """Plot the estimation's objective function near the estimate.
 
+    With two or more estimated parameters, a contour plot over the first two, the
+    others held at their estimates; with one, the objective along it. Each plotted
+    parameter spans its estimate plus or minus a quarter of the width of its
+    estimation bounds, within those bounds, on a grid of 20 values.
+
+    Parameters
+    ----------
+    agent : AgentType
+        The estimated model's agent.
+    model_estimate : dict
+        Mapping from each estimated parameter to its estimate.
+    emp_moments : dict
+        Mapping from moment names to empirical moments.
+    weights : dict
+        The moment weights the estimation used.
+    save_dir : str or Path, optional
+        Where the figures are saved; the current directory if None.
+    """
     print("``````````````````````````````````````````````````````````````````````")
     print("Creating the contour plot.")
     print("``````````````````````````````````````````````````````````````````````")
     t_start_contour = time()
-    DiscFac_star, CRRA_star = model_estimate
+    save_dir = Path(save_dir) if save_dir is not None else Path.cwd()
     grid_density = 20  # Number of parameter values in each dimension
     level_count = 100  # Number of contour levels to plot
-    DiscFac_list = np.linspace(
-        max(DiscFac_star - 0.25, 0.5),
-        min(DiscFac_star + 0.25, 1.05),
-        grid_density,
-    )
-    CRRA_list = np.linspace(max(CRRA_star - 5, 2), min(CRRA_star + 5, 8), grid_density)
-    CRRA_mesh, DiscFac_mesh = np.meshgrid(CRRA_list, DiscFac_list)
-    smm_obj_levels = np.empty([grid_density, grid_density])
-    for j in range(grid_density):
-        DiscFac = DiscFac_list[j]
-        for k in range(grid_density):
-            CRRA = CRRA_list[k]
-            smm_obj_levels[j, k] = msm_criterion(
-                np.array([DiscFac, CRRA]),
-                agent=agent,
-                emp_moments=emp_moments,
-            )
-    smm_contour = plt.contourf(CRRA_mesh, DiscFac_mesh, smm_obj_levels, level_count)
+
+    def grid(name):
+        lower = init_params_options["lower_bounds"][name]
+        upper = init_params_options["upper_bounds"][name]
+        half_width = (upper - lower) / 4
+        return np.linspace(
+            max(model_estimate[name] - half_width, lower),
+            min(model_estimate[name] + half_width, upper),
+            grid_density,
+        )
+
+    def objective(**values):
+        params = {**model_estimate, **values}
+        return msm_criterion(
+            params, agent=agent, emp_moments=emp_moments, weights=weights
+        )["value"]
+
+    param_names = list(model_estimate)
+    fig, ax = plt.subplots()
+    if len(param_names) >= 2:
+        x_name, y_name = param_names[:2]
+        x_list, y_list = grid(x_name), grid(y_name)
+        x_mesh, y_mesh = np.meshgrid(x_list, y_list)
+        objective_levels = np.empty([grid_density, grid_density])
+        for j, y_value in enumerate(y_list):
+            for k, x_value in enumerate(x_list):
+                objective_levels[j, k] = objective(**{x_name: x_value, y_name: y_value})
+        # The objective spans orders of magnitude over the grid, so plot its log.
+        contour = ax.contourf(x_mesh, y_mesh, np.log10(objective_levels), level_count)
+        fig.colorbar(contour, label="log10 of the objective")
+        ax.plot(model_estimate[x_name], model_estimate[y_name], "*r", ms=15)
+        ax.set_ylabel(y_name, fontsize=14)
+    else:
+        (x_name,) = param_names
+        x_list = grid(x_name)
+        ax.plot(x_list, [objective(**{x_name: x_value}) for x_value in x_list], "-b")
+        ax.axvline(model_estimate[x_name], color="r", linestyle="--")
+        ax.set_ylabel("Objective", fontsize=14)
+    ax.set_xlabel(x_name, fontsize=14)
+    if len(param_names) > 2:
+        held = ", ".join(
+            f"{name} = {model_estimate[name]:.3f}" for name in param_names[2:]
+        )
+        ax.set_title(f"Holding {held}")
+    fig.set_tight_layout(True)
+
     t_end_contour = time()
     time_to_contour = t_end_contour - t_start_contour
 
@@ -819,13 +865,9 @@ def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
     minutes, seconds = divmod(time_to_contour, 60)
     print(f"Time to contour: {int(minutes)} min, {int(seconds)} sec.")
 
-    plt.colorbar(smm_contour)
-    plt.plot(model_estimate[1], model_estimate[0], "*r", ms=15)
-    plt.xlabel(r"coefficient of relative risk aversion $\rho$", fontsize=14)
-    plt.ylabel(r"discount factor adjustment $\beth$", fontsize=14)
-    plt.savefig(save_dir + agent.name + "SMMcontour.pdf")
-    plt.savefig(save_dir + agent.name + "SMMcontour.png")
-    plt.savefig(save_dir + agent.name + "SMMcontour.svg")
+    for suffix in ("pdf", "png", "svg"):
+        fig.savefig(save_dir / f"{agent.name}SMMcontour.{suffix}")
+
     plt.show()
 
 
@@ -990,6 +1032,7 @@ def estimate(
             agent,
             model_estimate,
             emp_moments,
+            weights,
             save_dir=save_dir,
         )
 
