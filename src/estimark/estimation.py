@@ -119,6 +119,14 @@ def make_agent(agent_name):
         track_vars += ["Share"]
     agent.track_vars = track_vars
 
+    # Solve and simulate once, discarding the result. Building the agent draws the
+    # seeds of its distributions from its random number generator, and HARK resets
+    # that generator only when a simulation starts. simulate_moments rebuilds the
+    # distributions before simulating, so without this its first call would draw
+    # different random numbers from every later call, and give a different value
+    # at the same parameters.
+    simulate_moments({}, agent, {})
+
     return agent
 
 
