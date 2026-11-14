@@ -5,8 +5,16 @@ jobs:
   Create-MyBinderOrg-Cache:
     runs-on: ubuntu-latest
     steps:
-    - name: cache binder build on mybinder.org
+    - name: Build the Binder image, as mybinder.org would
       uses: jupyterhub/repo2docker-action@master
       with:
         NO_PUSH: true
-        MYBINDERORG_TAG: ${{ github.event.ref }} # This builds the container on mybinder.org with the branch that was pushed on.
+
+    - name: Start a build on mybinder.org for the branch that was pushed, to warm its cache
+      # The action's own trigger (its MYBINDERORG_TAG input) calls gke.mybinder.org, which now
+      # serves a self-signed certificate (jupyterhub/repo2docker-action#136), so call mybinder.org
+      # directly. It redirects to a federation member and requires the event-stream header.
+      # curl's exit code 28 means --max-time ran out with the build still going, which is fine.
+      run: |
+        curl -sS -L -N -H 'Accept: text/event-stream' --connect-timeout 20 --max-time 900 \
+          "https://mybinder.org/build/gh/${GITHUB_REPOSITORY}/${GITHUB_REF_NAME}" || [ "$?" -eq 28 ]
