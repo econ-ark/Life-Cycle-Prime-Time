@@ -6,6 +6,8 @@ Captures system, environment, and git information for reproducible
 benchmark reporting. Adapted from HAFiscal's capture_system_info.py.
 """
 
+from __future__ import annotations
+
 import json
 import os
 import platform
@@ -18,7 +20,7 @@ def run_command(cmd, fallback="unknown"):
     """Run a shell command and return output, or fallback on error."""
     try:
         result = subprocess.run(
-            cmd, shell=True, capture_output=True, text=True, timeout=5
+            cmd, shell=True, capture_output=True, text=True, timeout=5, check=False
         )
         return result.stdout.strip() if result.returncode == 0 else fallback
     except (subprocess.TimeoutExpired, Exception):
@@ -54,9 +56,7 @@ def get_cpu_info():
                 "cat /proc/cpuinfo | grep 'model name' | head -1 | cut -d ':' -f 2"
             ).strip()
 
-        physical = run_command(
-            "lscpu | grep 'Core(s) per socket' | awk '{print $NF}'"
-        )
+        physical = run_command("lscpu | grep 'Core(s) per socket' | awk '{print $NF}'")
         sockets = run_command("lscpu | grep 'Socket(s)' | awk '{print $NF}'")
         if physical.isdigit() and sockets.isdigit():
             cpu_info["cores_physical"] = int(physical) * int(sockets)
@@ -82,17 +82,13 @@ def get_memory_info():
             "vm_stat | grep 'Pages free' | awk '{print $3}' | sed 's/\\.//'"
         )
         if available.isdigit():
-            memory_info["available_gb"] = round(
-                int(available) * 4096 / (1024**3), 2
-            )
+            memory_info["available_gb"] = round(int(available) * 4096 / (1024**3), 2)
 
     elif system == "Linux":
         total = run_command("grep MemTotal /proc/meminfo | awk '{print $2}'")
         if total.isdigit():
             memory_info["total_gb"] = round(int(total) / (1024**2), 2)
-        available = run_command(
-            "grep MemAvailable /proc/meminfo | awk '{print $2}'"
-        )
+        available = run_command("grep MemAvailable /proc/meminfo | awk '{print $2}'")
         if available.isdigit():
             memory_info["available_gb"] = round(int(available) / (1024**2), 2)
 
@@ -109,9 +105,7 @@ def get_disk_info(path="/"):
         system = platform.system()
 
         if system == "Darwin":
-            dt = run_command(
-                "diskutil info / | grep 'Solid State' | awk '{print $3}'"
-            )
+            dt = run_command("diskutil info / | grep 'Solid State' | awk '{print $3}'")
             disk_type = "SSD" if dt == "Yes" else ("HDD" if dt == "No" else "unknown")
         elif system == "Linux":
             rotational = run_command(
@@ -160,7 +154,7 @@ def get_git_info(repo_path=None):
     if repo_path is None:
         repo_path = Path(__file__).parent.parent
 
-    original_dir = os.getcwd()
+    original_dir = Path.cwd()
     try:
         os.chdir(repo_path)
 
@@ -239,7 +233,7 @@ def main():
     output = json.dumps(info, indent=indent)
 
     if args.output:
-        with open(args.output, "w") as f:
+        with Path(args.output).open("w") as f:
             f.write(output)
         print(f"System information saved to: {args.output}", file=sys.stderr)
     else:

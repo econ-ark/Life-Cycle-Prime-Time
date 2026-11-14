@@ -144,6 +144,17 @@ isort.required-imports = ["from __future__ import annotations"]
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 "noxfile.py" = ["T20"]
+# Scripts whose printed output is their purpose.
+"reproduce/**" = ["T20"]
+"src/*.py" = ["T20"]
+# The research code behind the paper's estimates. These findings are left as they are because
+# changing them could change results or the authors' workflow: estimation.py's unused
+# `seed_list` still advances the random number generator the bootstrap draws from, and
+# parameters.py sets a warnings filter before its imports on purpose. The rest are style only.
+"src/do_all.py" = ["PLR1714"]
+"src/estimark/estimation.py" = ["T20", "B006", "B007", "B023", "E731", "EM102", "F841", "PTH123", "RET504"]
+"src/estimark/income_process.py" = ["B007"]
+"src/estimark/parameters.py" = ["E402"]
 
 
 [tool.pylint]
@@ -153,6 +164,7 @@ reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 messages_control.disable = [
   "design",
+  "invalid-name",  # HARK's naming convention (IncShkDstn, aNrmInit, ...) is not snake_case
   "fixme",
   "line-too-long",
   "missing-module-docstring",

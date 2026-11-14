@@ -32,7 +32,7 @@ project:
     - name: Alan Lujan
       email: alujan@jhu.edu
       affiliations:
-        - institution: Johns Hopkins University 
+        - institution: Johns Hopkins University
           department: Krieger School of Arts and Sciences
           url: https://advanced.jhu.edu
         - econ-ark
