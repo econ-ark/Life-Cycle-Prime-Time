@@ -715,51 +715,73 @@ def do_compute_se_boostrap(
 
 
 def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
-    # TODO: WRITE DOCSTRING
+    """Plot how sensitive each estimated parameter is to each moment.
 
+    The sensitivity matrix is (J'J)^(-1) J', where J is the Jacobian of the
+    simulated moments with respect to the estimated parameters at the estimate,
+    by forward differences with a step of 0.01; all moments are weighted equally.
+
+    Parameters
+    ----------
+    agent : AgentType
+        The estimated model's agent.
+    model_estimate : dict
+        Mapping from each estimated parameter to its estimate.
+    emp_moments : dict
+        Mapping from moment names to empirical moments.
+    save_dir : str or Path, optional
+        Where the figures are saved; the current directory if None.
+
+    Returns
+    -------
+    sensitivity : np.ndarray
+        One row per estimated parameter, one column per moment.
+    """
     print("``````````````````````````````````````````````````````````````````````")
     print("Computing sensitivity measure.")
     print("``````````````````````````````````````````````````````````````````````")
 
-    # Find the Jacobian of the function that simulates moments
+    save_dir = Path(save_dir) if save_dir is not None else Path.cwd()
+    param_names = list(model_estimate)
+    moment_names = list(emp_moments)
 
-    n_moments = len(emp_moments)
-    jac = np.array(
-        [
-            approx_fprime(
-                model_estimate,
-                lambda params: simulate_moments(params, agent=agent)[j],
-                epsilon=0.01,
-            )
-            for j in range(n_moments)
-        ],
-    )
+    def simulated_moment_vector(param_vec):
+        params = dict(zip(param_names, param_vec, strict=True))
+        sim_moments = simulate_moments(params, agent=agent, emp_moments=emp_moments)
+        return np.array([sim_moments[name] for name in moment_names])
+
+    # Jacobian of the simulated moments: one row per moment, one column per parameter.
+    # A single call gives every column, from one simulation per parameter plus one at
+    # the estimate.
+    estimate_vec = np.array([model_estimate[name] for name in param_names], dtype=float)
+    jac = approx_fprime(estimate_vec, simulated_moment_vector, 0.01)
+    jac = np.reshape(jac, (len(moment_names), len(param_names)))
 
     # Compute sensitivity measure. (all moments weighted equally)
-    sensitivity = np.dot(np.linalg.inv(np.dot(jac.T, jac)), jac.T)
+    sensitivity = np.linalg.inv(jac.T @ jac) @ jac.T
 
-    # Create lables for moments in the plots
-    moment_labels = emp_moments.keys()
-
-    # Plot
-    fig, axs = plt.subplots(len(model_estimate))
+    # One panel per estimated parameter
+    fig, axs = plt.subplots(
+        len(param_names),
+        1,
+        squeeze=False,
+        figsize=(max(6.4, 0.3 * len(moment_names)), 3.2 * len(param_names)),
+    )
+    for row, name in enumerate(param_names):
+        ax = axs[row, 0]
+        ax.bar(range(len(moment_names)), sensitivity[row, :], tick_label=moment_names)
+        ax.set_title(name)
+        ax.set_ylabel("Sensitivity")
+        ax.set_xlabel("Moment")
+        ax.tick_params(axis="x", labelrotation=90)
     fig.set_tight_layout(True)
 
-    axs[0].bar(range(n_moments), sensitivity[0, :], tick_label=moment_labels)
-    axs[0].set_title("DiscFac")
-    axs[0].set_ylabel("Sensitivity")
-    axs[0].set_xlabel("Median W/Y Ratio")
-
-    axs[1].bar(range(n_moments), sensitivity[1, :], tick_label=moment_labels)
-    axs[1].set_title("CRRA")
-    axs[1].set_ylabel("Sensitivity")
-    axs[1].set_xlabel("Median W/Y Ratio")
-
-    plt.savefig(save_dir + agent.name + "Sensitivity.pdf")
-    plt.savefig(save_dir + agent.name + "Sensitivity.png")
-    plt.savefig(save_dir + agent.name + "Sensitivity.svg")
+    for suffix in ("pdf", "png", "svg"):
+        fig.savefig(save_dir / f"{agent.name}Sensitivity.{suffix}")
 
     plt.show()
+
+    return sensitivity
 
 
 def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
@@ -958,7 +980,7 @@ def estimate(
         do_compute_sensitivity(
             agent,
             model_estimate,
-            initial_guess,
+            emp_moments,
             save_dir=save_dir,
         )
 
