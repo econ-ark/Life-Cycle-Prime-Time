@@ -1,0 +1,7 @@
+# System dependencies for Life-Cycle-Prime-Time
+# These are installed via apt-get before the Python environment is set up
+
+# Build tools
+curl
+git
+make

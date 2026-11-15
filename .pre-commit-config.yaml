@@ -2,7 +2,18 @@ ci:
   autoupdate_commit_msg: "chore: update pre-commit hooks"
   autofix_commit_msg: "style: pre-commit fixes"
 
-exclude: ^.cruft.json|.copier-answers.yml$
+# Check code and configuration only. Recorded results (the CSV tables, including the paper's runs
+# that reproduce.sh compares against), figures, notebooks, data and the paper's sources stay
+# byte-for-byte as their authors left them.
+exclude: |
+  (?x)^(
+    \.cruft\.json
+    | \.copier-answers\.yml
+    | docs/.*
+    | src/estimark/docs/.*
+    | src/data/.*
+    | .*\.(csv|svg|ipynb)
+  )$
 
 repos:
   - repo: https://github.com/adamchainz/blacken-docs

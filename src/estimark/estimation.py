@@ -42,9 +42,9 @@ from estimark.parameters import (
     init_params_options,
     init_subjective_labor,
     init_subjective_stock,
-    true_stock_params,
     minimize_options,
     sim_mapping,
+    true_stock_params,
 )
 
 # SCF 2004 data on household wealth
@@ -69,28 +69,28 @@ def make_agent(agent_name):
     Construct an instance of an AgentType subclass that can be used in the structural
     estimation. The specific class used, as well as some of the exogenously calibrated
     parameters, depend on whether certain strings appear in the input to the function:
-    
+
     NAME --> AgentType subclass
     "IndShock" --> IndShkLifeCycleConsumerType
     "Portfolio" --> PortfolioLifeCycleConsumerType
     "WarmGlow" --> BequestWarmGlowLifeCycleConsumerType
     "WarmGlowPortfolio" --> BequestWarmGlowLifeCyclePortfolioType
     "WealthPortfolio" --> WealthPortfolioLifeCycleConsumerType
-    
+
     If (Stock) appears in agent_name, then the agent will solve its problem using
     parameters estimated from subjective beliefs about stock return (but simulate
     using values from empirical observations).
-    
+
     If (Labor) appears in agent_name, then the agent will solve its problem using
     parameters estimated from subjective beliefs about labor income risk (but sim-
     ulate using values from empirical observations).
-    
+
     Parameters
     ----------
     agent_name : str
         Name of the agent specification, which determines details of its type
         and exogenous parameters.
-        
+
     Returns
     -------
     agent : AgentType
@@ -112,12 +112,20 @@ def make_agent(agent_name):
     # Make a lifecycle consumer to be used for estimation
     agent = agent_type(**calibration)
     agent.name = agent_name
-    
+
     # Choose to track bank balances as wealth, and track risky asset share if needed
     track_vars = ["bNrm"]
     if "Portfolio" in agent_name:
         track_vars += ["Share"]
     agent.track_vars = track_vars
+
+    # Solve and simulate once, discarding the result. Building the agent draws the
+    # seeds of its distributions from its random number generator, and HARK resets
+    # that generator only when a simulation starts. simulate_moments rebuilds the
+    # distributions before simulating, so without this its first call would draw
+    # different random numbers from every later call, and give a different value
+    # at the same parameters.
+    simulate_moments({}, agent, {})
 
     return agent
 
@@ -147,7 +155,7 @@ def get_weighted_moments(
     Make a dictionary that maps from moment names to moments used in the SMM
     objective function, generating medians of some variable conditional on
     being within particular values for some data grouping.
-    
+
     Parameters
     ----------
     data : dict ?
@@ -161,7 +169,7 @@ def get_weighted_moments(
         Name of the variable to condition the medians on.
     mapping : iterable or None
         List or dictionary of values that the variable named in groups can have.
-        
+
     Returns
     -------
     emp_moments : dict
@@ -193,12 +201,12 @@ def get_weighted_moments(
                 )
         # else:
         #     print(f"Warning: Group {key} does not have any data.")
-    
+
     return emp_moments, weight_sum
 
 
 def get_moments_cov(agent_name, emp_moments):
-    #TODO: WRITE DOCSTRING
+    # TODO: WRITE DOCSTRING
     moments_cov = em.get_moments_cov(
         scf_data,
         get_weighted_moments,
@@ -236,12 +244,12 @@ def get_empirical_moments(agent_name):
     Construct a dictionary of empirical moments for this specification. This
     always includes age-conditional median wealth values, and also includes
     risky portfolio shares if the specification name includes "Portfolio".
-    
+
     Parameters
     ----------
     agent_name : str
         Name of the current specification.
-        
+
     Returns
     -------
     emp_moments : dict
@@ -282,7 +290,7 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     Generate an initial guess of the parameters to be estimated by looking for
     prior estimates of the same specification, or defaulting to values specified
     in the parameters file.
-    
+
     Parameters
     ----------
     agent : AgentType
@@ -293,7 +301,7 @@ def get_initial_guess(agent, params_to_estimate, save_dir):
     save_dir : str
         Directory where estimation output will be stored, and maybe has already
         been stored. Used to check whether this specification has already been run.
-        
+
     Returns
     -------
     initial_guess : dict
@@ -346,7 +354,7 @@ def simulate_moments(params, agent, emp_moments):
     sim_moments : dict
         Dictionary that maps from moment names to simulated moments.
     """
-    
+
     # Update the agent with new parameters
     agent.assign_parameters(**params)
     if hasattr(agent, "BeqCRRA"):
@@ -355,7 +363,7 @@ def simulate_moments(params, agent, emp_moments):
     # ensure subjective beliefs are used for solution
     if "(Stock)" in agent.name and "Portfolio" in agent.name:
         agent.assign_parameters(**init_subjective_stock)
-        agent.construct('RiskyDstn','ShockDstn')
+        agent.construct("RiskyDstn", "ShockDstn")
     if "(Labor)" in agent.name:
         agent.assign_parameters(**init_subjective_labor)
         agent.update_income_process()
@@ -372,7 +380,7 @@ def simulate_moments(params, agent, emp_moments):
     # simulate with true parameters (override subjective beliefs)
     if "(Stock)" in agent.name and "Portfolio" in agent.name:
         agent.assign_parameters(**true_stock_params)
-        agent.construct('RiskyDstn','ShockDstn')
+        agent.construct("RiskyDstn", "ShockDstn")
     # for labor keep same process as subjective beliefs
     if "(Labor)" in agent.name:
         agent.TranShkStd = init_subjective_labor["TranShkStd"]
@@ -411,7 +419,7 @@ def calculate_weights(emp_moments, weight_sum):
     """
     Generate a dictionary of all moment weights, loading both median wealth-to-
     income ratios and risky asset shares into a single object.
-    
+
     Parameters
     ----------
     emp_moments : dict
@@ -420,25 +428,29 @@ def calculate_weights(emp_moments, weight_sum):
     weight_sum: dict
         Mapping from moment names to total empirical weight from the dataset.
         This *can* be used to make weights using a different scheme.
-        
+
     Returns
     -------
     weights : dict
         Mapping from moment names to weights.
-    
+
     """
     n_port_stats = np.sum([1 for k in emp_moments if "_port" in k])
     n_wealth_stats = len(emp_moments) - n_port_stats
     max_w_stat = float(max(emp_moments.values()))
-    W_total = np.sum([np.sqrt(weight_sum[k]) for k in weight_sum if not "_port" in k])
+    W_total = np.sum([np.sqrt(weight_sum[k]) for k in weight_sum if "_port" not in k])
     W_avg = W_total / n_wealth_stats
 
     port_fac = np.sqrt(n_wealth_stats / n_port_stats) if n_port_stats != 0 else 1.0
-    #port_fac = 1.0
+    # port_fac = 1.0
 
     # Using dictionary comprehension to create weights
     weights = {
-        k: ((np.sqrt(weight_sum[k])/W_avg)**0. / max_w_stat if "_port" not in k else port_fac)
+        k: (
+            (np.sqrt(weight_sum[k]) / W_avg) ** 0.0 / max_w_stat
+            if "_port" not in k
+            else port_fac
+        )
         for k, v in emp_moments.items()
     }
 
@@ -496,7 +508,7 @@ def calculate_se_bootstrap(
     seed=0,
     verbose=False,
 ):
-    #TODO: WRITE DOCSTRING
+    # TODO: WRITE DOCSTRING
     t_0 = time()
 
     # Generate a list of seeds for generating bootstrap samples
@@ -561,8 +573,8 @@ def do_estimate_model(
     criterion_kwargs=None,
     save_dir=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     fmt_init_guess = [f"{key} = {value:.3f}" for key, value in initial_guess.items()]
     multistart_text = " with multistart" if minimize_options.get("multistart") else ""
     statement1 = f"Estimating model using {minimize_options['algorithm']}{multistart_text} from an initial guess of"
@@ -662,8 +674,8 @@ def do_compute_se_boostrap(
     seed=0,
     save_dir=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     # Estimate the model:
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print(
@@ -711,81 +723,149 @@ def do_compute_se_boostrap(
 
 
 def do_compute_sensitivity(agent, model_estimate, emp_moments, save_dir=None):
-    #TODO: WRITE DOCSTRING
-    
+    """Plot how sensitive each estimated parameter is to each moment.
+
+    The sensitivity matrix is (J'J)^(-1) J', where J is the Jacobian of the
+    simulated moments with respect to the estimated parameters at the estimate,
+    by forward differences with a step of 0.01; all moments are weighted equally.
+
+    Parameters
+    ----------
+    agent : AgentType
+        The estimated model's agent.
+    model_estimate : dict
+        Mapping from each estimated parameter to its estimate.
+    emp_moments : dict
+        Mapping from moment names to empirical moments.
+    save_dir : str or Path, optional
+        Where the figures are saved; the current directory if None.
+
+    Returns
+    -------
+    sensitivity : np.ndarray
+        One row per estimated parameter, one column per moment.
+    """
     print("``````````````````````````````````````````````````````````````````````")
     print("Computing sensitivity measure.")
     print("``````````````````````````````````````````````````````````````````````")
 
-    # Find the Jacobian of the function that simulates moments
+    save_dir = Path(save_dir) if save_dir is not None else Path.cwd()
+    param_names = list(model_estimate)
+    moment_names = list(emp_moments)
 
-    n_moments = len(emp_moments)
-    jac = np.array(
-        [
-            approx_fprime(
-                model_estimate,
-                lambda params: simulate_moments(params, agent=agent)[j],
-                epsilon=0.01,
-            )
-            for j in range(n_moments)
-        ],
-    )
+    def simulated_moment_vector(param_vec):
+        params = dict(zip(param_names, param_vec, strict=True))
+        sim_moments = simulate_moments(params, agent=agent, emp_moments=emp_moments)
+        return np.array([sim_moments[name] for name in moment_names])
+
+    # Jacobian of the simulated moments: one row per moment, one column per parameter.
+    # A single call gives every column, from one simulation per parameter plus one at
+    # the estimate.
+    estimate_vec = np.array([model_estimate[name] for name in param_names], dtype=float)
+    jac = approx_fprime(estimate_vec, simulated_moment_vector, 0.01)
+    jac = np.reshape(jac, (len(moment_names), len(param_names)))
 
     # Compute sensitivity measure. (all moments weighted equally)
-    sensitivity = np.dot(np.linalg.inv(np.dot(jac.T, jac)), jac.T)
+    sensitivity = np.linalg.inv(jac.T @ jac) @ jac.T
 
-    # Create lables for moments in the plots
-    moment_labels = emp_moments.keys()
-
-    # Plot
-    fig, axs = plt.subplots(len(model_estimate))
+    # One panel per estimated parameter
+    fig, axs = plt.subplots(
+        len(param_names),
+        1,
+        squeeze=False,
+        figsize=(max(6.4, 0.3 * len(moment_names)), 3.2 * len(param_names)),
+    )
+    for row, name in enumerate(param_names):
+        ax = axs[row, 0]
+        ax.bar(range(len(moment_names)), sensitivity[row, :], tick_label=moment_names)
+        ax.set_title(name)
+        ax.set_ylabel("Sensitivity")
+        ax.set_xlabel("Moment")
+        ax.tick_params(axis="x", labelrotation=90)
     fig.set_tight_layout(True)
 
-    axs[0].bar(range(n_moments), sensitivity[0, :], tick_label=moment_labels)
-    axs[0].set_title("DiscFac")
-    axs[0].set_ylabel("Sensitivity")
-    axs[0].set_xlabel("Median W/Y Ratio")
-
-    axs[1].bar(range(n_moments), sensitivity[1, :], tick_label=moment_labels)
-    axs[1].set_title("CRRA")
-    axs[1].set_ylabel("Sensitivity")
-    axs[1].set_xlabel("Median W/Y Ratio")
-
-    plt.savefig(save_dir + agent.name + "Sensitivity.pdf")
-    plt.savefig(save_dir + agent.name + "Sensitivity.png")
-    plt.savefig(save_dir + agent.name + "Sensitivity.svg")
+    for suffix in ("pdf", "png", "svg"):
+        fig.savefig(save_dir / f"{agent.name}Sensitivity.{suffix}")
 
     plt.show()
 
+    return sensitivity
 
-def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
-    #TODO: WRITE DOCSTRING
-    
+
+def do_make_contour_plot(agent, model_estimate, emp_moments, weights, save_dir=None):
+    """Plot the estimation's objective function near the estimate.
+
+    With two or more estimated parameters, a contour plot over the first two, the
+    others held at their estimates; with one, the objective along it. Each plotted
+    parameter spans its estimate plus or minus a quarter of the width of its
+    estimation bounds, within those bounds, on a grid of 20 values.
+
+    Parameters
+    ----------
+    agent : AgentType
+        The estimated model's agent.
+    model_estimate : dict
+        Mapping from each estimated parameter to its estimate.
+    emp_moments : dict
+        Mapping from moment names to empirical moments.
+    weights : dict
+        The moment weights the estimation used.
+    save_dir : str or Path, optional
+        Where the figures are saved; the current directory if None.
+    """
     print("``````````````````````````````````````````````````````````````````````")
     print("Creating the contour plot.")
     print("``````````````````````````````````````````````````````````````````````")
     t_start_contour = time()
-    DiscFac_star, CRRA_star = model_estimate
+    save_dir = Path(save_dir) if save_dir is not None else Path.cwd()
     grid_density = 20  # Number of parameter values in each dimension
     level_count = 100  # Number of contour levels to plot
-    DiscFac_list = np.linspace(
-        max(DiscFac_star - 0.25, 0.5),
-        min(DiscFac_star + 0.25, 1.05),
-        grid_density,
-    )
-    CRRA_list = np.linspace(max(CRRA_star - 5, 2), min(CRRA_star + 5, 8), grid_density)
-    CRRA_mesh, DiscFac_mesh = np.meshgrid(CRRA_list, DiscFac_list)
-    smm_obj_levels = np.empty([grid_density, grid_density])
-    for j in range(grid_density):
-        DiscFac = DiscFac_list[j]
-        for k in range(grid_density):
-            CRRA = CRRA_list[k]
-            smm_obj_levels[j, k] = msm_criterion(
-                np.array([DiscFac, CRRA]),
-                agent=agent,
-                emp_moments=emp_moments,
-            )
-    smm_contour = plt.contourf(CRRA_mesh, DiscFac_mesh, smm_obj_levels, level_count)
+
+    def grid(name):
+        lower = init_params_options["lower_bounds"][name]
+        upper = init_params_options["upper_bounds"][name]
+        half_width = (upper - lower) / 4
+        return np.linspace(
+            max(model_estimate[name] - half_width, lower),
+            min(model_estimate[name] + half_width, upper),
+            grid_density,
+        )
+
+    def objective(**values):
+        params = {**model_estimate, **values}
+        return msm_criterion(
+            params, agent=agent, emp_moments=emp_moments, weights=weights
+        )["value"]
+
+    param_names = list(model_estimate)
+    fig, ax = plt.subplots()
+    if len(param_names) >= 2:
+        x_name, y_name = param_names[:2]
+        x_list, y_list = grid(x_name), grid(y_name)
+        x_mesh, y_mesh = np.meshgrid(x_list, y_list)
+        objective_levels = np.empty([grid_density, grid_density])
+        for j, y_value in enumerate(y_list):
+            for k, x_value in enumerate(x_list):
+                objective_levels[j, k] = objective(**{x_name: x_value, y_name: y_value})
+        # The objective spans orders of magnitude over the grid, so plot its log.
+        contour = ax.contourf(x_mesh, y_mesh, np.log10(objective_levels), level_count)
+        fig.colorbar(contour, label="log10 of the objective")
+        ax.plot(model_estimate[x_name], model_estimate[y_name], "*r", ms=15)
+        ax.set_ylabel(y_name, fontsize=14)
+    else:
+        (x_name,) = param_names
+        x_list = grid(x_name)
+        ax.plot(x_list, [objective(**{x_name: x_value}) for x_value in x_list], "-b")
+        ax.axvline(model_estimate[x_name], color="r", linestyle="--")
+        ax.set_ylabel("Objective", fontsize=14)
+    ax.set_xlabel(x_name, fontsize=14)
+    if len(param_names) > 2:
+        held = ", ".join(
+            f"{name} = {model_estimate[name]:.3f}" for name in param_names[2:]
+        )
+        ax.set_title(f"Holding {held}")
+    fig.set_tight_layout(True)
+
     t_end_contour = time()
     time_to_contour = t_end_contour - t_start_contour
 
@@ -793,13 +873,9 @@ def do_make_contour_plot(agent, model_estimate, emp_moments, save_dir=None):
     minutes, seconds = divmod(time_to_contour, 60)
     print(f"Time to contour: {int(minutes)} min, {int(seconds)} sec.")
 
-    plt.colorbar(smm_contour)
-    plt.plot(model_estimate[1], model_estimate[0], "*r", ms=15)
-    plt.xlabel(r"coefficient of relative risk aversion $\rho$", fontsize=14)
-    plt.ylabel(r"discount factor adjustment $\beth$", fontsize=14)
-    plt.savefig(save_dir + agent.name + "SMMcontour.pdf")
-    plt.savefig(save_dir + agent.name + "SMMcontour.png")
-    plt.savefig(save_dir + agent.name + "SMMcontour.svg")
+    for suffix in ("pdf", "png", "svg"):
+        fig.savefig(save_dir / f"{agent.name}SMMcontour.{suffix}")
+
     plt.show()
 
 
@@ -813,8 +889,8 @@ def estimate_msm(
     simulate_moments_kwargs=None,
     estimagic_options=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     t0 = time()
 
     simulate_moments_kwargs = simulate_moments_kwargs or {}
@@ -845,8 +921,8 @@ def estimate_min(
     criterion_kwargs=None,
     estimagic_options=None,
 ):
-    #TODO: WRITE DOCSTRING
-    
+    # TODO: WRITE DOCSTRING
+
     t0 = time()
 
     criterion_kwargs = criterion_kwargs or {}
@@ -954,7 +1030,7 @@ def estimate(
         do_compute_sensitivity(
             agent,
             model_estimate,
-            initial_guess,
+            emp_moments,
             save_dir=save_dir,
         )
 
@@ -964,9 +1040,10 @@ def estimate(
             agent,
             model_estimate,
             emp_moments,
+            weights,
             save_dir=save_dir,
         )
-        
+
 
 def prepare_model(agent_name, params_to_estimate):
     """
@@ -1005,16 +1082,18 @@ def prepare_model(agent_name, params_to_estimate):
     estimation_agents = make_agent(agent_name)
     empirical_moments, weight_sum = get_empirical_moments(agent_name)
     moment_weights = calculate_weights(empirical_moments, weight_sum)
-    
+
     # Make a local function that can return the objective function value or the
     # dictionary of simulated moments, or plot the moment fit
     def temp_func(param_vec, return_moments=False, plot_moments=False):
-        params = {params_to_estimate[j] : param_vec[j] for j in range(len(params_to_estimate))}
+        params = {
+            params_to_estimate[j]: param_vec[j] for j in range(len(params_to_estimate))
+        }
         emp_moments = empirical_moments.copy()
         sim_moments = simulate_moments(params, estimation_agents, emp_moments)
-        
+
         if plot_moments:
-            wealth_keys = [key for key in sim_moments if not "_port" in key]
+            wealth_keys = [key for key in sim_moments if "_port" not in key]
             port_keys = [key for key in sim_moments if "_port" in key]
             wealth_emp = np.array([emp_moments[k] for k in wealth_keys])
             wealth_sim = np.array([sim_moments[k] for k in wealth_keys])
@@ -1022,27 +1101,27 @@ def prepare_model(agent_name, params_to_estimate):
             port_sim = np.array([sim_moments[k] for k in port_keys])
             wealth_labels = [x[1:3] for x in wealth_keys]
             port_labels = [x[1:3] for x in port_keys]
-            
-            plt.plot(wealth_emp, '.k', ms=10)
-            plt.plot(wealth_sim, '-b')
+
+            plt.plot(wealth_emp, ".k", ms=10)
+            plt.plot(wealth_sim, "-b")
             plt.xticks(np.arange(wealth_emp.size), labels=wealth_labels)
-            plt.xlabel('Age group')
-            plt.ylabel('Wealth/income ratio')
+            plt.xlabel("Age group")
+            plt.ylabel("Wealth/income ratio")
             plt.tight_layout()
-            plt.ylim(0.,14.)
+            plt.ylim(0.0, 14.0)
             plt.show()
-            
-            plt.plot(port_emp, '.k', ms=10)
-            plt.plot(port_sim, '-r')
+
+            plt.plot(port_emp, ".k", ms=10)
+            plt.plot(port_sim, "-r")
             plt.xticks(np.arange(port_emp.size), labels=port_labels)
-            plt.xlabel('Age group')
-            plt.ylabel('Risky asset share')
-            plt.ylim(0.,1.)
+            plt.xlabel("Age group")
+            plt.ylabel("Risky asset share")
+            plt.ylim(0.0, 1.0)
             plt.tight_layout()
             plt.show()
-            
-            return
-            
+
+            return None
+
         if return_moments:
             return sim_moments
 
@@ -1054,23 +1133,29 @@ def prepare_model(agent_name, params_to_estimate):
         )
         sse = np.sum(errors**2)
         return sse
-    
+
     # Make two versions of that temporary function: one for the objective function
     # and the other that just produces moments
-    objective_function = lambda x : temp_func(x, False, False)
-    sim_moment_function = lambda x : temp_func(x, True, False)
-    plot_moment_function = lambda x : temp_func(x, False, True)
-    
-    # Return all of the useful things
-    return estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function
+    objective_function = lambda x: temp_func(x, False, False)
+    sim_moment_function = lambda x: temp_func(x, True, False)
+    plot_moment_function = lambda x: temp_func(x, False, True)
 
+    # Return all of the useful things
+    return (
+        estimation_agents,
+        empirical_moments,
+        moment_weights,
+        objective_function,
+        sim_moment_function,
+        plot_moment_function,
+    )
 
 
 if __name__ == "__main__":
     # Set booleans to determine which tasks should be done
     # Which agent type to estimate ("IndShock" or "Portfolio")
     local_agent_name = "WarmGlowPortfolioG(Stock)"
-    local_params_to_estimate = ["CRRA","BeqMPC","BeqInt"]
+    local_params_to_estimate = ["CRRA", "BeqMPC", "BeqInt"]
     local_estimate_model = True  # Whether to estimate the model
     # Whether to get standard errors via bootstrap
     local_compute_se_bootstrap = False
@@ -1079,8 +1164,15 @@ if __name__ == "__main__":
     # Whether to make a contour map of the objective function
     local_make_contour_plot = False
     local_save_dir = "docs/tables/min"
-    
-    estimation_agents, empirical_moments, moment_weights, objective_function, sim_moment_function, plot_moment_function = prepare_model(local_agent_name, local_params_to_estimate)
+
+    (
+        estimation_agents,
+        empirical_moments,
+        moment_weights,
+        objective_function,
+        sim_moment_function,
+        plot_moment_function,
+    ) = prepare_model(local_agent_name, local_params_to_estimate)
 
     estimate(
         agent_name=local_agent_name,
@@ -1091,4 +1183,3 @@ if __name__ == "__main__":
         make_contour_plot=local_make_contour_plot,
         save_dir=local_save_dir,
     )
-    

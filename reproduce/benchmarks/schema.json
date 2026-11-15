@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/econ-ark/Life-Cycle-Prime-Time/schemas/benchmark.json",
+  "title": "Life-Cycle-Prime-Time Benchmark Result",
+  "description": "Schema for Life-Cycle-Prime-Time reproduction benchmark results",
+  "type": "object",
+  "required": [
+    "benchmark_version",
+    "benchmark_id",
+    "timestamp",
+    "reproduction_kind",
+    "exit_status",
+    "duration_seconds"
+  ],
+  "properties": {
+    "benchmark_version": {
+      "type": "string",
+      "description": "Schema version for forward compatibility"
+    },
+    "benchmark_id": {
+      "type": "string",
+      "description": "Unique identifier for this benchmark run"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 start time (UTC)"
+    },
+    "timestamp_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 end time (UTC)"
+    },
+    "reproduction_kind": {
+      "type": "string",
+      "enum": ["full", "min"],
+      "description": "Which reproduction script was run"
+    },
+    "exit_status": {
+      "type": "integer",
+      "description": "Process exit code (0 = success)"
+    },
+    "duration_seconds": {
+      "type": "integer",
+      "description": "Wall-clock duration in seconds"
+    },
+    "system": {
+      "type": "object",
+      "description": "Hardware and OS information",
+      "properties": {
+        "os": { "type": "string" },
+        "os_version": { "type": "string" },
+        "kernel": { "type": "string" },
+        "hostname": { "type": "string" },
+        "cpu": {
+          "type": "object",
+          "properties": {
+            "model": { "type": "string" },
+            "architecture": { "type": "string" },
+            "cores_physical": { "type": ["integer", "null"] },
+            "cores_logical": { "type": ["integer", "null"] },
+            "frequency_mhz": { "type": ["number", "null"] }
+          }
+        },
+        "memory": {
+          "type": "object",
+          "properties": {
+            "total_gb": { "type": ["number", "null"] },
+            "available_gb": { "type": ["number", "null"] }
+          }
+        },
+        "disk": {
+          "type": "object",
+          "properties": {
+            "type": { "type": "string" },
+            "free_gb": { "type": ["number", "null"] }
+          }
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "description": "Python and package environment",
+      "properties": {
+        "python_version": { "type": "string" },
+        "environment_type": { "type": "string" },
+        "virtual_env": { "type": ["string", "null"] },
+        "key_packages": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "git": {
+      "type": "object",
+      "description": "Git repository state at time of run",
+      "properties": {
+        "commit": { "type": "string" },
+        "branch": { "type": "string" },
+        "dirty": { "type": "boolean" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Run metadata",
+      "properties": {
+        "user": { "type": "string" },
+        "session_id": { "type": "string" },
+        "ci": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
