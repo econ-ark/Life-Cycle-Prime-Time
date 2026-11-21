@@ -5,6 +5,9 @@ on:
   push:
     # Runs on pushes targeting the default branch
     branches: [main]
+  # Pull requests build the site but do not deploy it, so that a broken build shows up before the merge
+  pull_request:
+    branches: [main]
 env:
   # `BASE_URL` determines the website is served from, including CSS & JS assets
   # You may need to change this to `BASE_URL: ''`
@@ -15,32 +18,41 @@ permissions:
   contents: read
   pages: write
   id-token: write
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          # MyST 1.13 requires Node 22 or later
+          node-version: 22.x
       - name: Install MyST Markdown
-        run: npm install -g mystmd
+        # Pinned, so that a new MyST release cannot outgrow the Node version above unnoticed
+        run: npm install -g mystmd@1.13.0
       - name: Build HTML Assets
         run: myst build --html
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./_build/html"
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
