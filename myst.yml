@@ -2,7 +2,9 @@
 version: 1
 
 site:
-  template: article-theme
+  # Pinned: the 2.x article theme (released 2026-11-10) crashes while rendering these pages,
+  # and the unpinned name follows the newest release
+  template: https://github.com/jupyter-book/myst-theme/releases/download/myst-to-react%401.4.1/article-theme.zip
   # title: Life Cycle Modeling is Finally Ready for Prime Time
   # options:
   #   logo: site_logo.png
