@@ -1,5 +1,5 @@
 ---
-title: Life Cycle Modeling is \\ Ready for Prime Time
+title: Life Cycle Modeling is Ready for Prime Time
 exports:
     - format: tex+pdf
       template: arxiv_nips
@@ -590,7 +590,7 @@ If people *actually* believe that stocks are much riskier, then they would not n
 That is, for any level of risk aversion, agents that subjectively believe that stocks are riskier will want to hold a lower share of risky assets, so risk aversion must decrease to raise risky asset holdings back to the empirical target.
 
 The analysis in @velasquezgiraldoJMP is quite rich and incorporates heterogeneous beliefs within and across demographic groups, but we need only perform a relatively straightforward exercise to illustrate our point.
-We repeat the estimation procedure from above, but have the agents *solve* their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08\%$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
+We repeat the estimation procedure from above, but have the agents *solve* their problem as if the equity premium were $\widetilde{\eprem} \approx 0.08$ and the standard deviation of log stock returns were $\widetilde{\sigma_{\risky}} \approx 0.48$-- higher return but with massively greater risk.
 When the agents live out the model in simulation, the "true" stock return distribution is used ($\eprem = 0.03$ and $\sigma_\risky = 0.2$).
 To best fit the target moments, we estimate $\CRRA = 3.26$ for the Warm-Glow Portfolio model and $\CRRA = 2.84$ for the Wealth-in-Utility Portfolio model, right in the middle of the typical range of risk aversion.[^othersubjectiveestimates]
 
