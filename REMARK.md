@@ -91,8 +91,8 @@ paper's table:
 
 The table's TRP / WIUF criterion read 0.306 until 2026-11-12, a
 transcription error: the run behind it recorded 0.3036. The LaTeX sources
-are corrected; `docs/life-cycle-prime-time.pdf` and `.docx` still say
-0.306 until they are rebuilt.
+were corrected on 2026-11-12, and `docs/life-cycle-prime-time.pdf` and
+`.docx` on 2026-11-22.
 
 **What to expect.**
 
